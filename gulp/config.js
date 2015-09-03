@@ -45,5 +45,9 @@ module.exports = {
 
     stubby: {
         src: ['api_mocks/*.{json,yaml,js}']
+    },
+
+    browsersync: {
+        baseDir: dest
     }
 };
