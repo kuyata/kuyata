@@ -49,5 +49,9 @@ module.exports = {
 
     browsersync: {
         baseDir: dest
+    },
+
+    serve: {
+        watchDir: './www/**/*'
     }
 };
