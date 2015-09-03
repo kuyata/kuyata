@@ -27,6 +27,8 @@ export default function HelloworldDirective(){
  * @constructor
  * @ngInject
  */
-function HelloworldController(){
-
+class HelloworldController {
+    constructor(){
+        this.target = 'World';
+    }
 }
