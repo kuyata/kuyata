@@ -1,20 +1,22 @@
 export default class ItemDetailsController {
+
 	constructor (items, $stateParams, $state) {
+		this.$stateParams = $stateParams;
+		this.$state = $state;
 
-		function returnToItemList () {
-			$state.go("app.categories.itemList", {
-				category: $stateParams.category
-			})
-		}
-
-		items.getItemById($stateParams.id).then(item => {
-
+		items.getItemById(this.$stateParams.id).then(item => {
 			if(item) {
 				this.itemDetailed = item;
 			}
 			else {
-				returnToItemList();
+				this.returnToItemList();
 			}
+		});
+	}
+
+	returnToItemList () {
+		this.$state.go("app.categories.itemList", {
+			category: this.$stateParams.category
 		});
 	}
 }

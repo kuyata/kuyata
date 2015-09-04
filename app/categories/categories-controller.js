@@ -1,5 +1,5 @@
 export default class CategoriesController {
-	constructor(categories, items, $stateParams) {
+	constructor(categories, items) {
 
 		categories.getCategories()
 			.then( result => {
@@ -10,10 +10,5 @@ export default class CategoriesController {
 			.then(result => {
 				this.items = result;
 			});
-
-		this.getCurrentCategorySlug = categories.getCurrentCategorySlug;
 	}
 }
-
-
-
