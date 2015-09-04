@@ -1,5 +1,5 @@
 export default class ItemDetailsController {
-	constructor ($stateParams, items, $state) {
+	constructor (items, $stateParams, $state) {
 
 		function returnToItemList () {
 			$state.go("app.categories.itemList", {
