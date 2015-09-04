@@ -1,22 +1,21 @@
 <ul id="accordion" class="nav-levels">
-	<!--ul ng-controller="Sites as vm" class="nav navbar-nav"><li ng-repeat="site in vm.sites"><a ui-sref=".categories({site:site.slug})">{{ site.name }}</a></li></ul-->
 	<li ng-repeat="category in vm.categories" class="nav-levels-1 panel panel-category">
 		<a ui-sref=".itemList({category:category.slug})" class="" data-toggle="collapse" data-parent="#accordion" data-target="{{ '#' + category.slug }}">
-			<!--span class="badge">{{ (vm.items | filter:{category:category.slug}).length }}</span-->
+			<span class="badge">{{ (vm.items | filter:{category:category.slug}).length }}</span>
 
 			<p class="nav-levels-title">{{ category.name }}</p>
 		</a>
 		<ul id="{{ category.slug }}" class="collapse">
 			<li ng-repeat="subcat1 in category.subcat1" class="nav-levels-1 panel panel-category-sub">
 				<a ui-sref=".itemListSubcat1({category:category.slug, subcat1:subcat1.slug})" class="accordion-toggle" data-toggle="collapse" data-parent="{{ '#' + category.slug }}" data-target="{{ '#' + subcat1.slug }}">
-					<!--span class="badge">{{ (vm.items | filter:{subcat1:subcat1.slug}).length }}</span-->
+					<span class="badge">{{ (vm.items | filter:{subcat1:subcat1.slug}).length }}</span>
 					<p class="nav-levels-title">{{ subcat1.name }}</p>
 				</a>
 				<ul class="nav-levels-2 collapse" id="{{ subcat1.slug }}">
 					<li ng-repeat="subcat2 in subcat1.subcat2">
 						<a ui-sref=".itemListSubcat2({category:category.slug, subcat1:subcat1.slug, subcat2:subcat2.slug})">
 							{{ subcat2.name }}
-							<!--span class="badge">{{ (vm.items | filter:{subcat2:subcat2.slug}).length }}</span-->
+							<span class="badge">{{ (vm.items | filter:{subcat2:subcat2.slug}).length }}</span>
 						</a>
 					</li>
 				</ul>
