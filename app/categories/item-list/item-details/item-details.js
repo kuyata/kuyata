@@ -1,6 +1,6 @@
 import angular from 'angular';
 import iuRouter from 'angular-ui-router';
-import items from './../../../components/common/models/items-model';
+import items from './../../../components/items/items';
 import ItemDetailsController from './item-details-controller'
 
 export default angular.module('app.categories.itemList.details', [
