@@ -1,0 +1,99 @@
+.app-search {
+  height: @base-col-height;
+  padding: (@base-col-height - @browse-form-controls-col-height)/2;
+
+  .app-brand, .app-search-form, .form-control, button {
+    height: 30px;
+  }
+}
+
+.app-search {
+  color: #fafafa;
+
+  label {
+    font-weight: normal;
+  }
+
+  .app-brand {
+    width: @static-left-width - 5px;
+    .pull-left();
+
+    .app-brand-img {
+      width: 30px;
+      margin-top: -10px;
+    }
+
+    .app-brand-name {
+      line-height: 30px;
+      padding: 0;
+      font-size: 25px;
+      margin-left: 5px;
+      letter-spacing: 1px;
+
+      .app-brand-name-lite {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .app-search-form {
+    .form-inline;
+
+    .form-group {
+      display: inline-block;
+      margin-bottom: 0;
+      vertical-align: middle;
+      margin-right: 10px;
+
+      input {
+        padding: 6px 6px;
+      }
+    }
+
+    label {
+      font-size: 12px;
+    }
+
+    .form-query {
+      width: 150px;
+      @media(min-width: @md-app-width){width: 300px;}
+    }
+
+    .form-province {
+      width: 120px;
+      @media(min-width: @md-app-width){width: 150px;}
+    }
+
+    .form-prize {
+      width: 45px;
+      display: inline-block;
+    }
+
+    .form-separator {
+      font-size: 5px;
+      line-height: 30px;
+    }
+
+    .form-order {
+      display: inline-block;
+      width: auto;
+    }
+
+    .app-search-form-submit {
+      width: auto;
+      margin-left: 15px;
+    }
+
+    .btn.btn-main {
+      padding: 4px 12px;
+      .button-variant(white; @col-bg-color; darken(@col-bg-color,20%));
+      #gradient > .vertical();
+
+      &:hover, &:focus {
+        .transition(all 300ms;);
+        #gradient > .vertical(@start-color: darken(@col-bg-color, 5%); @end-color: darken(@col-bg-color, 10%););
+        border-color: lighten(@col-bg-color, 20%);;
+      }
+    }
+  }
+}

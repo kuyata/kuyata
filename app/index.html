@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <title></title>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
     <script src="scripts/app.js"></script>
 </head>
 <body ng-app="app">
-    <helloworld></helloworld>
+    <!--helloworld></helloworld-->
+
+    <div class="container-fluid app-layout">
+        <div ui-view="header" class="app-up"></div>
+
+        <div class="app-main">
+            <div class="app-main-left">
+                <div ui-view="categories" class="app-main-left-1"></div>
+                <!--div ui-view="options" class="app-main-left-2"></div-->
+            </div>
+
+            <div id="v-handler" class="app-v-handler">
+                <div ui-view="itemList" id="app-main-middle" class="app-main-middle"></div>
+                <div ui-view="itemDetails" class="app-main-right"></div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
