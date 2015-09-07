@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {categoriesData} from './../common/data/categories';
 
 export default class CategoriesService {

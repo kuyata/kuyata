@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {itemsData} from './../common/data/items';
 
 export default class ItemsService {
