@@ -1,0 +1,45 @@
+.general-options {
+  color: @text-color;
+
+  > li > a {
+    padding: 10px;
+    color: @text-color;
+    border-radius: 0;
+  }
+
+  > li > a:hover, > li > a:focus{
+    background-color: @link-bg-hover;
+  }
+}
+
+.general-options {
+  .file-upload {
+    position: relative;
+    overflow: hidden;
+
+    .file-upload-item {
+      &:hover, &:focus {
+        background-color: @link-bg-hover;
+      }
+
+      .fa {
+        width: 100%;
+        padding: 10px;
+        height: 40px;
+        line-height: 20px;
+
+        .file-upload-input {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          margin: 0;
+          padding: 0;
+          font-size: 20px;
+          cursor: pointer;
+          .opacity(0);
+        }
+      }
+    }
+  }
+}

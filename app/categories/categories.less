@@ -1,0 +1,87 @@
+.nav-levels {
+  background-color: @panel-bg-color;
+
+  .nav;
+  .nav-pills;
+  .nav-stacked;
+
+  .nav-levels-1 {
+    border-radius: 0;
+    border-bottom: 1px dotted #cccccc;
+
+    &.panel-category {
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+
+      a {
+        border-radius: 0;
+      }
+
+      .panel-category-sub {
+        margin: 0;
+        padding-left: 5px;
+        padding-bottom: 5px;
+      }
+    }
+    
+    a {
+      color: @text-color;
+
+      .nav-levels-title {
+        .text-overflow();
+        padding-right: 5px;
+        margin: 0;
+        font-size: 0.9em;
+      }
+      .fa {
+        float: right;
+        color: @text-color;
+        font-size: 18px;
+        .transition(all 200ms ease;);
+      }
+
+      .badge {
+        float: right;
+        font-size: 0.8em;
+        font-weight: lighter;
+        margin-right: 5px;
+      }
+    }
+
+    .nav-levels-2 {
+
+      .nav;
+      .nav-pills;
+      .nav-stacked;
+
+      li > a {
+        font-size: 0.8em;
+        padding: 5px 5px 5px 20px;
+        .text-overflow();
+      }
+    }
+  }
+
+  .nav-levels-1:last-child {
+    border: 0;
+  }
+
+
+  & > .nav-levels-1 > a:hover,
+  & > .nav-levels-1 > a:focus,
+  & > .nav-levels-1 .nav-levels-2 > li > a:hover,
+  & > .nav-levels-1 .nav-levels-2 > li > a:focus {
+    background-color: @link-bg-hover;
+    border-radius: 0;
+  }
+
+  & > li > a.accordion-toggle:not(.collapsed) {
+    background-color: #bddfff;
+    border-radius: 0;
+  }
+
+  & > li > a.accordion-toggle:not(.collapsed) + ul {
+    background-color: #e3efff;
+  }
+}
