@@ -5,11 +5,13 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import header from './header/header'
+import options from './options/options'
 import categories from './categories/categories'
 
 export default angular.module('app', [
     uiRouter,
     header.name,
+    options.name,
     categories.name
 ])
 
@@ -22,10 +24,10 @@ export default angular.module('app', [
             views: {
                 'header@': {
                     templateUrl: 'header/header.html'
+                },
+                'options@': {
+                    templateUrl: 'options/options.html'
                 }
-                //'options@': {
-                //    templateUrl: 'options/options.html'
-                //}
             }
         })
 
