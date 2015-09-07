@@ -9,3 +9,4 @@ platforms/
 plugins/
 .allow-devtools-edit
 .idea/
+.DS_Store
