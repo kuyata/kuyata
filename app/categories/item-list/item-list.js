@@ -19,7 +19,7 @@ export default angular.module('app.categories.itemList', [
 			views: {
 				'itemList@': {
 					templateUrl: 'categories/item-list/item-list.html',
-					controller: 'ItemList as vm'
+					controller: 'ItemListController as vm'
 				}
 			}
 		})
@@ -29,7 +29,7 @@ export default angular.module('app.categories.itemList', [
 			views: {
 				'itemList@': {
 					templateUrl: 'categories/item-list/item-list.html',
-					controller: 'ItemList as vm'
+					controller: 'ItemListController as vm'
 				}
 			}
 		})
@@ -39,10 +39,10 @@ export default angular.module('app.categories.itemList', [
 			views: {
 				'itemList@': {
 					templateUrl: 'categories/item-list/item-list.html',
-					controller: 'ItemList as vm'
+					controller: 'ItemListController as vm'
 				}
 			}
 		})
 })
 
-.controller('ItemList', ItemListController);
+.controller('ItemListController', ItemListController);

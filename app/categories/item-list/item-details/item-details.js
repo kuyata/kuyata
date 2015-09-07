@@ -17,7 +17,7 @@ export default angular.module('app.categories.itemList.details', [
 			views: {
 				'itemDetails@': {
 					templateUrl: 'categories/item-list/item-details/item-details.html',
-					controller: 'ItemDetails as vm'
+					controller: 'ItemDetailsController as vm'
 				}
 			}
 		})
@@ -27,7 +27,7 @@ export default angular.module('app.categories.itemList.details', [
 			views: {
 				'itemDetails@': {
 					templateUrl: 'categories/item-list/item-details/item-details.html',
-					controller: 'ItemDetails as vm'
+					controller: 'ItemDetailsController as vm'
 				}
 			}
 		})
@@ -37,9 +37,9 @@ export default angular.module('app.categories.itemList.details', [
 			views: {
 				'itemDetails@': {
 					templateUrl: 'categories/item-list/item-details/item-details.html',
-					controller: 'ItemDetails as vm'
+					controller: 'ItemDetailsController as vm'
 				}
 			}
 		})
 })
-.controller("ItemDetails", ItemDetailsController);
+.controller("ItemDetailsController", ItemDetailsController);
