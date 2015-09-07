@@ -1,10 +1,10 @@
 import angular from 'angular';
-import iuRouter from 'angular-ui-router';
+import uiRouter from 'angular-ui-router';
 import items from './../../../components/items/items';
 import ItemDetailsController from './item-details-controller'
 
 export default angular.module('app.categories.itemList.details', [
-	iuRouter,
+	uiRouter,
 	items.name
 ])
 

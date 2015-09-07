@@ -3,12 +3,12 @@
  */
 
 import angular from 'angular';
-import iuRouter from 'angular-ui-router';
+import uiRouter from 'angular-ui-router';
 import header from './header/header'
 import categories from './categories/categories'
 
 export default angular.module('app', [
-    iuRouter,
+    uiRouter,
     header.name,
     categories.name
 ])
