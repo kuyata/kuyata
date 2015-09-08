@@ -1,4 +1,4 @@
-var itemsData = [
+let itemsData = [
 	{
 		"id": 0,
 		"category": "things",

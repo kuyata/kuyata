@@ -12,7 +12,7 @@ export default angular.module('app.categories', [
 	items.name
 ])
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(($stateProvider, $urlRouterProvider) => {
 
 	$stateProvider
 

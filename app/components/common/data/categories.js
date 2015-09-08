@@ -1,4 +1,4 @@
-var categoriesData = [
+let categoriesData = [
 	  {
 		"name": "Things",
 		"slug": "things",

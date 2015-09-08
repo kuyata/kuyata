@@ -19,15 +19,18 @@ export default class ItemsService {
 	};
 
 	getItemById (itemId) {
-		var deferred = this.$q.defer();
-		if (this.items) {
-			deferred.resolve(findItem(itemId, this.items))
-		} else {
-			itemsModel.getItems().then(function () {
-				deferred.resolve(findItem(itemId, this.items))
-			})
-		}
-		return deferred.promise;
+		let deferred = this.$q;
+
+		return deferred ( resolve => {
+				if (this.items) {
+					resolve(findItem(itemId, this.items))
+				} else {
+					itemsModel.getItems().then(() => {
+						resolve(findItem(itemId, this.items))
+					})
+				}
+			}
+		)
 	};
 
 	getItemsLengthByCategoryId (categoryId) {
@@ -45,7 +48,7 @@ function cacheItems(result) {
 }
 
 function findItem(itemId, items) {
-	return _.find(items, function (item) {
+	return _.find(items, (item) => {
 		return item.id === parseInt(itemId, 10);
 	})
 }

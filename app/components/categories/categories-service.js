@@ -33,15 +33,19 @@ export default class CategoriesService {
 	}
 
 	getCategoryById(categoryId) {
-		var deferred = this.$q.defer();
-		if (this.categories) {
-			deferred.resolve(findCategory(categoryId, this.categories))
-		} else {
-			this.getCategories().then(function () {
-				deferred.resolve(findCategory(categoryId, this.categories))
-			})
-		}
-		return deferred.promise;
+		let deferred = this.$q;
+
+		return deferred (
+			resolve => {
+				if (this.categories) {
+					resolve(findCategory(categoryId, this.categories))
+				} else {
+					this.getCategories().then( () => {
+						resolve(findCategory(categoryId, this.categories))
+					})
+				}
+			}
+		);
 	}
 }
 
@@ -58,7 +62,7 @@ function cacheCategories(result) {
 }
 
 function findCategory(categoryId, categories) {
-	return _.find(categories, function (category) {
+	return _.find(categories, category => {
 		return category.id === parseInt(categoryId, 10);
 	})
 }
