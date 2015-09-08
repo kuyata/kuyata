@@ -37,7 +37,7 @@ export default class CategoriesService {
 		if (this.categories) {
 			deferred.resolve(findCategory(categoryId, this.categories))
 		} else {
-			this.getCategories().then(function () {
+			this.getCategories().then( () => {
 				deferred.resolve(findCategory(categoryId, this.categories))
 			})
 		}
@@ -58,7 +58,7 @@ function cacheCategories(result) {
 }
 
 function findCategory(categoryId, categories) {
-	return _.find(categories, function (category) {
+	return _.find(categories, category => {
 		return category.id === parseInt(categoryId, 10);
 	})
 }

@@ -8,7 +8,7 @@ export default angular.module('app.categories.itemList.details', [
 	items.name
 ])
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(($stateProvider, $urlRouterProvider) => {
 
 	$stateProvider
 

@@ -23,7 +23,7 @@ export default class ItemsService {
 		if (this.items) {
 			deferred.resolve(findItem(itemId, this.items))
 		} else {
-			itemsModel.getItems().then(function () {
+			itemsModel.getItems().then(() => {
 				deferred.resolve(findItem(itemId, this.items))
 			})
 		}
@@ -45,7 +45,7 @@ function cacheItems(result) {
 }
 
 function findItem(itemId, items) {
-	return _.find(items, function (item) {
+	return _.find(items, (item) => {
 		return item.id === parseInt(itemId, 10);
 	})
 }
