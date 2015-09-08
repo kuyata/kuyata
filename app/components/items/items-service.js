@@ -19,7 +19,7 @@ export default class ItemsService {
 	};
 
 	getItemById (itemId) {
-		var deferred = this.$q.defer();
+		let deferred = this.$q.defer();
 		if (this.items) {
 			deferred.resolve(findItem(itemId, this.items))
 		} else {

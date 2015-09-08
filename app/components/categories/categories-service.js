@@ -33,7 +33,7 @@ export default class CategoriesService {
 	}
 
 	getCategoryById(categoryId) {
-		var deferred = this.$q.defer();
+		let deferred = this.$q.defer();
 		if (this.categories) {
 			deferred.resolve(findCategory(categoryId, this.categories))
 		} else {
