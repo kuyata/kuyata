@@ -19,15 +19,18 @@ export default class ItemsService {
 	};
 
 	getItemById (itemId) {
-		let deferred = this.$q.defer();
-		if (this.items) {
-			deferred.resolve(findItem(itemId, this.items))
-		} else {
-			itemsModel.getItems().then(() => {
-				deferred.resolve(findItem(itemId, this.items))
-			})
-		}
-		return deferred.promise;
+		let deferred = this.$q;
+
+		return deferred ( resolve => {
+				if (this.items) {
+					resolve(findItem(itemId, this.items))
+				} else {
+					itemsModel.getItems().then(() => {
+						resolve(findItem(itemId, this.items))
+					})
+				}
+			}
+		)
 	};
 
 	getItemsLengthByCategoryId (categoryId) {
