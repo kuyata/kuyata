@@ -4,6 +4,10 @@
 
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import jsData from 'js-data';
+import DSLocalStorageAdapter from 'js-data-localstorage';
+import jsDataAngular from 'js-data-angular';
+
 import header from './header/header'
 import options from './options/options'
 import categories from './categories/categories'
@@ -32,5 +36,11 @@ export default angular.module('app', [
         })
 
     $urlRouterProvider.otherwise("/");
+
+})
+
+.run((DS) => {
+
+    DS.registerAdapter('localstorage', new DSLocalStorageAdapter(), { default: true });
 
 });
