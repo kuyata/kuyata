@@ -38,11 +38,12 @@ describe("Service: utils", function(){
 
     describe('function: defineAngularDataResource()', function () {
         var DS;
-        beforeEach(function(){
+        beforeEach(() => {
             angular.mock.module('js-data');
             inject(function (_DS_) {
                 DS = _DS_;
             })
+
         });
         beforeEach(_setup);
         afterEach(_tearDown);
