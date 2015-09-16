@@ -28,6 +28,8 @@ describe("CategoryManager", () => {
             q = _$q_;
             DS = _DS_;
             Category = _Category_;
+
+            done();
         });
     }
 
@@ -44,5 +46,4 @@ describe("CategoryManager", () => {
 
     //Init angular data mocks
     beforeEach(() => angular.mock.module('js-data-mocks'));
-
 });
