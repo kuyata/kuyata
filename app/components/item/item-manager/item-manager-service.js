@@ -36,4 +36,38 @@ export default class ItemManager {
             return this.$q.when(this.data.list);
         }
     }
+
+    /**
+     * Get item by id. Find data from DB or use cache data
+     *
+     * @param itemId on INT format which to find,
+     * @returns {*}
+     */
+    getItemById (itemId) {
+        return this.$q ( resolve => {
+                if (_.isEmpty(this.data.list)) {
+                    this.findList().then(() => {
+                        resolve(findItem(itemId, this.data.list));
+                    })
+                }
+                else {
+                    resolve(findItem(itemId, this.data.list));
+                }
+            }
+        )
+    };
+
+}
+
+/**
+ * Private function to find item into items collection
+ *
+ * @param itemId on INT format which to find
+ * @param list array data of items
+ * @returns {*}
+ */
+function findItem(itemId, list) {
+    return _.find(list, (item) => {
+        return item.id === itemId
+    })
 }

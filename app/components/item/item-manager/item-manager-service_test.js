@@ -75,15 +75,50 @@ describe("ItemManager", () => {
         });
     });
 
-    //describe("createItems()", () => {
-    //
-    //    beforeEach(done => _setup(done));
-    //
-    //    it("should ... createItems", () => {
-    //
-    //        DS.expectCreate(Item.name, {"name":"Things","slug":"things"}).respond({});
-    //        ItemManager.createItems();
-    //        expect(true).toBe(true);
-    //    });
-    //});
+    describe("getItemById()", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should get data from cached data", () => {
+            ItemManager.data.list = itemsData;
+            let cachedItem = _.first(ItemManager.data.list);
+            ItemManager.getItemById(cachedItem.id).then(item => {
+                expect(item).toEqual(cachedItem);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+        });
+
+        it("should get data from database", () => {
+            let dbItem = _.first(itemsData);
+            DS.expectFindAll(Item.name, {}).respond(itemsData);
+            ItemManager.getItemById(dbItem.id).then(item => {
+                expect(item).toEqual(dbItem);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should fail on get data from cached data", () => {
+            let invalidItemId = -1;
+            ItemManager.data.list = itemsData;
+            ItemManager.getItemById(invalidItemId).then(item => {
+                expect(item).toBeUndefined();
+            });
+
+            DS.verifyNoOutstandingExpectation();
+        });
+
+        it("should fail on get data from dababase", () => {
+            let invalidItemId = -1;
+            DS.expectFindAll(Item.name, {}).respond(itemsData);
+            ItemManager.getItemById(invalidItemId).then(item => {
+                expect(item).toBeUndefined();
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+    });
 });
