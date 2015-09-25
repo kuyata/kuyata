@@ -31,22 +31,17 @@ export default function factory($q, DS, utils){
  * Properties: as is all dynamic this is to keep track of what properties we are using within this model
  *
  * {string}     id              id on our local DB
- * {string}     category_l1     level 1 category id
- * {string}     category_l2     level 2 category id
- * {string}     category_l3     level 3 category id
+ * {string}     feed            feed id on our DB
+ * {string}     category        level 1 category id on our DB
+ * {string}     subcategory     level 2 category id on our DB
  * {string}     title           item title
  * {string}     body            item body
  * {string}     author          item author
- * {string}     src_id          item id on source. For sync reasons
- * {boolean}    enabled         item status on local DB
- * {timestamp}  created_data    creation date on source
- * {timestamp}  modified_data   last modified date on source
- *
- *
- * ### for things ###
- * {string}     prize           item prize on things
- * {string}     phone           item phone on things
- * {string}     email           item email on things
+ * {string}     url             item url on source
+ * {string}     status          item status
+ * {date}       src_date        creation date on source
+ * {timestamp}  created_data    creation date on our DB
+ * {timestamp}  modified_data   last modified date on our DB
  *
  */
 class Item {
