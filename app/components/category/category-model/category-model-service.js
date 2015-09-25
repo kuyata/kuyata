@@ -30,7 +30,14 @@ export default function factory($q, DS, utils){
  *
  * Properties: as is all dynamic this is to keep track of what properties we are using within this model
  *
- * {string}  id            id on our local DB
+ * {string}     id              id on our local DB
+ * {string}     name            category name
+ * {string}     feed            feed id on DB
+ * {string}     parent_category parent category model id on local DB. 'null' for root categories
+ * {string}     src_id          category id on source. For sync reasons
+ * {string}     status          category status
+ * {timestamp}  created_on      creation date on our DB
+ * {timestamp}  updated_on      last modified date on our DB
  *
  */
 class Category {
