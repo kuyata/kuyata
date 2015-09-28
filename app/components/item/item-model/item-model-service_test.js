@@ -43,14 +43,4 @@ describe("Item model", () => {
 
     //Init angular data mocks
     beforeEach(() => angular.mock.module('js-data-mocks'));
-
-    describe("cloneDeviceItem()", () => {
-
-        beforeEach(done => _setup(done));
-
-        it("should populate the item object", () => {
-
-
-        });
-    });
 });
