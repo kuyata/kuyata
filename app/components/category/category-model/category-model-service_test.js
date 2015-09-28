@@ -43,14 +43,4 @@ describe("Category model", () => {
 
     //Init angular data mocks
     beforeEach(() => angular.mock.module('js-data-mocks'));
-
-    describe("cloneDeviceCategory()", () => {
-
-        beforeEach(done => _setup(done));
-
-        it("should populate the category object", () => {
-
-
-        });
-    });
 });
