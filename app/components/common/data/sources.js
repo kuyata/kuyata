@@ -4,7 +4,7 @@ let sourcesData = [
 		"name": "Things",
 		"src_id": "",
 		"status": "",
-		"url": "",
+		"url": "www.things.com",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -13,7 +13,7 @@ let sourcesData = [
 		"name": "Eatup",
 		"src_id": "",
 		"status": "",
-		"url": "",
+		"url": "http://www.eatup.com",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -22,7 +22,7 @@ let sourcesData = [
 		"name": "CNN",
 		"src_id": "",
 		"status": "",
-		"url": "",
+		"url": "www.cnn.com",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	}
