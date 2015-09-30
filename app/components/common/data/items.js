@@ -3,7 +3,7 @@ let itemsData = [
 		"id": "1",
 		"source": "1",
 		"category": "1",
-		"subcategory": "laptop",
+		"subcategory": "9",
 		"title": "Sell Toshiba",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
