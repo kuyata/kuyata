@@ -1,90 +1,204 @@
 let categoriesData = [
-	  {
-		"name": "Things",
-		"slug": "things",
-		"subcat1":
-		[
-		  {
-			"name": "Computer Components",
-			"slug": "computercomponents",
-			"subcat2":
-			[
-			  {"name":"Laptop", "slug":"laptop"},
-			  {"name":"Internet", "slug":"internet"}
-			]
-		  },
-		  {
-			"name": "Buy/Sell",
-			"slug": "buysell",
-			"subcat2":
-			[
-			  {"name":"TV", "slug":"tv"},
-			  {"name":"Currency", "slug":"currency"}
-			]
-		  },
-		  {
-			"name": "Services",
-			"slug": "services",
-			"subcat2":
-			[
-			  {"name":"Photo/Video", "slug":"photovideo"},
-			  {"name":"Others", "slug":"others"}
-			]
-		  },
-		  {
-			"name": "Cars",
-			"slug": "cars",
-			"subcat2":
-			[
-			  {"name":"Cars", "slug":"cars"},
-			  {"name":"Motorbikes", "slug":"motorbikes"}
-			]
-		  },
-		  {
-			"name": "Home",
-			"slug": "home",
-			"subcat2":
-			[
-			  {"name":"Exchange", "slug":"exchange"},
-			  {"name":"Rent", "slug":"rent"}
-			]
-		  },
-		  {
-			"name": "Job",
-			"slug": "job",
-			"subcat2":
-			[
-			  {"name":"Job offer", "slug":"joboffer"},
-			  {"name":"Looking for a job", "slug":"lookingforjob"}
-			]
-		  }
-		]
-	  },
-	  {
-		"name": "Eatup",
-		"slug": "eatup",
-		"subcat1":
-		[
-		  {
-			"name": "Starter",
-			"slug": "starter",
-			"subcat2":
-			[
-			  {"name":"Chips", "slug":"chips"},
-			  {"name":"Olives", "slug":"olives"}
-			]
-		  },
-		  {
-			"name": "Desserts",
-			"slug": "desserts",
-			"subcat2":
-			[
-			  {"name":"Cake", "slug":"Cake"},
-			  {"name":"Yogurt", "slug":"yogurt"}
-			]
-		  }
-		]
-	  }
-	];
+	{
+		"id": "1",
+		"name": "Computers",
+		"source": "1",
+		"parent_category": null,
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "9",
+		"name": "Laptop",
+		"source": "1",
+		"parent_category": "1",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "10",
+		"name": "Internet",
+		"source": "1",
+		"parent_category": "1",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "2",
+		"name": "Buy/Sell",
+		"source": "1",
+		"parent_category": null,
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "11",
+		"name": "TV",
+		"source": "1",
+		"parent_category": "2",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "12",
+		"name": "Currency",
+		"source": "1",
+		"parent_category": "2",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "3",
+		"name": "Services",
+		"source": "1",
+		"parent_category": null,
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "13",
+		"name": "Photo/Video",
+		"source": "1",
+		"parent_category": "3",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "14",
+		"name": "Others",
+		"source": "1",
+		"parent_category": "3",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "4",
+		"name": "Cars",
+		"source": "1",
+		"parent_category": null,
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "15",
+		"name": "Cars",
+		"source": "1",
+		"parent_category": "4",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "16",
+		"name": "Motorbikes",
+		"source": "1",
+		"parent_category": "4",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "5",
+		"name": "Home",
+		"source": "1",
+		"parent_category": null,
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "17",
+		"name": "Exchange",
+		"source": "1",
+		"parent_category": "5",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "18",
+		"name": "Rent",
+		"source": "1",
+		"parent_category": "5",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "6",
+		"name": "Job",
+		"source": "1",
+		"parent_category": null,
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "19",
+		"name": "Job offer",
+		"source": "1",
+		"parent_category": "6",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "20",
+		"name": "Looking for a job",
+		"source": "1",
+		"parent_category": "6",
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "7",
+		"name": "Starter",
+		"source": "2",
+		"parent_category": null,
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
+		"id": "8",
+		"name": "Desserts",
+		"source": "2",
+		"parent_category": null,
+		"src_id": "",
+		"status": "",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	}
+];
 
 export {categoriesData};
