@@ -53,19 +53,10 @@ describe("ItemManager", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should get cached data", () => {
-            ItemManager.data.list = itemsData;
-            ItemManager.findList({}, false).then(() => {
-                expect(ItemManager.data.list).toEqual(itemsData);
-            });
-
-            DS.verifyNoOutstandingExpectation();
-        });
-
         it("should get data from database", () => {
-            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]], "skip": 0, "limit": ItemManager.pageLength}).respond(itemsData);
-            ItemManager.findList().then(() => {
-                expect(ItemManager.data.list).toEqual(itemsData);
+            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]]}).respond(itemsData);
+            ItemManager.findList().then((items) => {
+                expect(items).toEqual(itemsData);
             });
 
             DS.verifyNoOutstandingExpectation();

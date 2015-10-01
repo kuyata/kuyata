@@ -29,31 +29,15 @@ export default class ItemManager {
      * Getter method to retrieve data from DB or use cached data if it already exists
      * OR if is wanted to force clear and get from database
      *
-     * @param params is an Object with any or all these properties: "query, source, category, skip, limit"
+     * @param params is an Object with any or all these properties: "query, source, category"
      * @returns a promise
      */
-    findList(params = {}, clear = true){
+    findList(params = {}){
         // if data.list is empty OR if is wanted to force clear and get from database
-        if(_.isEmpty(this.data.list) || clear) {
-            this.Item.ejectAll();
-            this.data.list = [];
-            let query = createQuery(params, 0, this.pageLength);
-
-            return this.Item.findAll(query).then((items) => {
-                this.currentPage = 0;
-                this.loadedPages = [0];
-                this.data.list = items;
-                return this.data.list;
-            });
-        }
-
-        // find on already cached data
-        else {
-            return this.$q.when(this.data.list);
-        }
+        this.Item.ejectAll();
+        let query = createQuery(params);
+        return this.Item.findAll(query);
     }
-
-
 
     /**
      * Retrieve a Item list as a paged segment on cached items or on DB
@@ -65,7 +49,6 @@ export default class ItemManager {
      * @returns a promise
      */
     findListPage(params = {}, page = false){
-
         this.currentPage = page;
 
         // if page is not false, is considered is trying to paginate
@@ -130,10 +113,7 @@ export default class ItemManager {
                 return this.data.list;
             });
         }
-
     }
-
-
 
     /**
      * Get item by id. Find data from DB or use cache data
@@ -154,8 +134,14 @@ export default class ItemManager {
  * @param params is an Object with any or all these properties: "title, source, category, skip, limit"
  * @returns a DS format params Object
  */
-function createQuery(params, skip, limit) {
-    let _params = {sort: [['src_date', 'DESC']], skip: skip, limit: limit};
+function createQuery(params, skip = false, limit = false) {
+    let _params = {sort: [['src_date', 'DESC']]};
+
+    if(skip !== false) {
+        _params.skip = skip;
+        _params.limit = limit;
+    }
+
     if(!_.isEmpty(params)){
         _params.where = {};
         if(params.title){
@@ -168,5 +154,6 @@ function createQuery(params, skip, limit) {
             _params.where.category = {'==': params.category};
         }
     }
+
     return _params;
 }
