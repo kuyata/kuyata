@@ -95,6 +95,23 @@ describe("ItemManager", () => {
             DS.flush();
         });
 
+        it("should get first find of db-items and initialize the cache. Being data length less than page length", () => {
+            let res = itemsData.slice(0,1); // result must be pages [0]
+            ItemManager.pageLength = 2;
+            DS.expectFindAll(Item.name, {
+                "sort":[["src_date","DESC"]],
+                "skip": 0,
+                "limit": ItemManager.pageLength})
+                .respond(itemsData.slice(0,1));
+
+            ItemManager.findListPage({}).then(() => {
+                expect(ItemManager.data.list).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
         it("should get second page of db-items and add to cache not full. final cache [0,1]", () => {
             let res = itemsData.slice(0,4); // result must be pages [0,1]
             let pageRequested = 1;
