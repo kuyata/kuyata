@@ -64,7 +64,7 @@ describe("ItemManager", () => {
         });
 
         it("should get data from database", () => {
-            DS.expectFindAll(Item.name, {}).respond(itemsData);
+            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]]}).respond(itemsData);
 
             ItemManager.findList().then(() => {
                 expect(ItemManager.data.list).toEqual(itemsData);
@@ -91,7 +91,7 @@ describe("ItemManager", () => {
 
         it("should get data from database", () => {
             let dbItem = _.first(itemsData);
-            DS.expectFindAll(Item.name, {}).respond(itemsData);
+            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]]}).respond(itemsData);
             ItemManager.getItemById(dbItem.id).then(item => {
                 expect(item).toEqual(dbItem);
             });
@@ -112,7 +112,7 @@ describe("ItemManager", () => {
 
         it("should fail on get data from dababase", () => {
             let invalidItemId = -1;
-            DS.expectFindAll(Item.name, {}).respond(itemsData);
+            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]]}).respond(itemsData);
             ItemManager.getItemById(invalidItemId).then(item => {
                 expect(item).toBeUndefined();
             });
