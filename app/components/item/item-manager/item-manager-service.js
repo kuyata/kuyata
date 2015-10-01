@@ -81,20 +81,37 @@ export default class ItemManager {
                 // if cache is full, remove last page saved
                 if(_.size(this.loadedPages) == this.maxPages) {
 
-                    // borrar el bloque de caché más antiguo
-                    this.loadedPages.shift();
-                    this.data.list.splice(0, this.pageLength);
+                    // if new current page is the highest, remove the left one
+                    if(this.currentPage > _.last(this.loadedPages)) {
+                        this.data.list.splice(0, this.pageLength);
+                        let query = createQuery(params, 0, this.pageLength);
+                        this.loadedPages.shift();
+                    }
 
-                    // eject del bloque que quitamos
-                    let query = createQuery(params, 0, this.pageLength);
+                    // if new current page is the lowest, remove the right one
+                    else {
+                        this.data.list.splice((this.loadedPages.length - 1) * this.pageLength, this.pageLength);
+                        let query = createQuery(params, (this.loadedPages.length - 1) * this.pageLength, this.pageLength);
+                        this.loadedPages.pop();
+                    }
+
                     this.Item.ejectAll(params);
                 }
+
                 // DB findAll for the requested page, to cache and to return it
                 let query = createQuery(params, this.currentPage*this.pageLength, this.pageLength);
                 return this.Item.findAll(query).then((items) => {
+
+                    // if new current page is the lowest, locate it on the left
+                    if(this.currentPage < _.last(this.loadedPages)){
+                        this.loadedPages.unshift(this.currentPage);
+                        this.data.list = items.concat(this.data.list);
+                        return items;
+                    }
+
+                    // if new current page is the highest, locate it on the right
                     this.loadedPages.push(this.currentPage);
                     this.data.list = this.data.list.concat(items);
-                    this.data.list.slice(_.indexOf(this.loadedPages, this.currentPage) * this.pageLength);
                     return items;
                 });
             }
