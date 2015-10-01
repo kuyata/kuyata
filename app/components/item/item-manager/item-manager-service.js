@@ -22,18 +22,24 @@ export default class ItemManager {
 
     /**
      * Getter method to retrieve data from DB or use cached data if it already exists
+     * OR if is wanted to force clear and get from database
      *
      * @param params is an Object with any or all these properties: "query, source, category, skip, limit"
      * @returns a promise
      */
-    findList(params = {}){
-        let query = createQuery(params);
-        if(_.isEmpty(this.data.list)){
+    findList(params = {}, clear = true){
+        // if data.list is empty OR if is wanted to force clear and get from database
+        if(clear || _.isEmpty(this.data.list)) {
+            this.Item.ejectAll();
+            this.data.list = [];
+            let query = createQuery(params);
+
             return this.Item.findAll(query).then((items) => {
                 this.data.list = items;
                 return this.data.list;
             });
         }
+
         else {
             return this.$q.when(this.data.list);
         }
@@ -41,50 +47,29 @@ export default class ItemManager {
 
     /**
      * Get item by id. Find data from DB or use cache data
-     *
+     * The item must be already cached. Single item only is requested through listed and cached items
      * @param itemId on INT format which to find,
-     * @returns {*}
+     * @returns Item Object
      */
     getItemById (itemId) {
-        return this.$q ( resolve => {
-                if (_.isEmpty(this.data.list)) {
-                    this.findList().then(() => {
-                        resolve(findItem(itemId, this.data.list));
-                    })
-                }
-                else {
-                    resolve(findItem(itemId, this.data.list));
-                }
-            }
-        )
+        return _.find(this.data.list, (item) => {
+            return item.id === itemId
+        })
     };
-}
-
-/**
- * Private function to find item into items collection
- *
- * @param itemId on INT format which to find
- * @param list array data of items
- * @returns item with id passed on 'itemId' param
- */
-function findItem(itemId, list) {
-    return _.find(list, (item) => {
-        return item.id === itemId
-    })
 }
 
 /**
  * Private function to generate JSON of params used on DS finds queries
  *
- * @param params is an Object with any or all these properties: "query, source, category, skip, limit"
+ * @param params is an Object with any or all these properties: "title, source, category, skip, limit"
  * @returns a DS format params Object
  */
 function createQuery(params) {
     let _params = {sort: [['src_date', 'DESC']]};
     if(params != {}){
-        if(params.query){
+        if(params.title){
             _params.where = {};
-            _params.where.title = {'in': params.query};
+            _params.where.title = {'in': params.title};
         }
         if(params.source){
             _params.where = {};

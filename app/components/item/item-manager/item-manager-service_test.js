@@ -49,18 +49,17 @@ describe("ItemManager", () => {
     //Init angular data mocks
     beforeEach(() => angular.mock.module('js-data-mocks'));
 
-    describe("findList()", () => {
+    describe("findList(params)", () => {
 
         beforeEach(done => _setup(done));
 
         it("should get cached data", () => {
             ItemManager.data.list = itemsData;
-            ItemManager.findList().then(() => {
+            ItemManager.findList({}, false).then(() => {
                 expect(ItemManager.data.list).toEqual(itemsData);
             });
 
             DS.verifyNoOutstandingExpectation();
-
         });
 
         it("should get data from database", () => {
@@ -79,46 +78,16 @@ describe("ItemManager", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should get data from cached data", () => {
+        it("should get item from cached data", () => {
             ItemManager.data.list = itemsData;
             let cachedItem = _.first(ItemManager.data.list);
-            ItemManager.getItemById(cachedItem.id).then(item => {
-                expect(item).toEqual(cachedItem);
-            });
-
-            DS.verifyNoOutstandingExpectation();
+            expect(ItemManager.getItemById(cachedItem.id)).toEqual(cachedItem);
         });
 
-        it("should get data from database", () => {
-            let dbItem = _.first(itemsData);
-            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]]}).respond(itemsData);
-            ItemManager.getItemById(dbItem.id).then(item => {
-                expect(item).toEqual(dbItem);
-            });
-
-            DS.verifyNoOutstandingExpectation();
-            DS.flush();
-        });
-
-        it("should fail on get data from cached data", () => {
+        it("should fail on get item from cached data", () => {
             let invalidItemId = -1;
             ItemManager.data.list = itemsData;
-            ItemManager.getItemById(invalidItemId).then(item => {
-                expect(item).toBeUndefined();
-            });
-
-            DS.verifyNoOutstandingExpectation();
-        });
-
-        it("should fail on get data from dababase", () => {
-            let invalidItemId = -1;
-            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]]}).respond(itemsData);
-            ItemManager.getItemById(invalidItemId).then(item => {
-                expect(item).toBeUndefined();
-            });
-
-            DS.verifyNoOutstandingExpectation();
-            DS.flush();
+            expect(ItemManager.getItemById(invalidItemId)).toBeUndefined();
         });
     });
 });
