@@ -53,6 +53,71 @@ export default class ItemManager {
         }
     }
 
+
+
+    /**
+     * Retrieve a Item list as a paged segment on cached items or on DB
+     * If page param is false, items segment is getted from DB
+     * else it try to find Items on cache or use DB and save into cache (with a size limit)
+     *
+     * @param params Object with any or all these properties: "title, source, category"
+     * @param page Int that indicate what items page it required
+     * @returns a promise
+     */
+    findListPage(params = {}, page = false){
+
+        this.currentPage = page;
+
+        // if page is not false, is considered is trying to paginate
+        if (this.currentPage) {
+            // if page requested is on cache, find and return it
+            if(_.include(this.loadedPages, this.currentPage)) {
+                let firstItemPage = _.indexOf(this.loadedPages, this.currentPage) * this.pageLength;
+                return this.$q.when(this.data.list.slice(firstItemPage, firstItemPage + this.pageLength));
+            }
+
+            // if page requested is not on cache
+            else {
+                // if cache is full, remove last page saved
+                if(_.size(this.loadedPages) == this.maxPages) {
+
+                    // borrar el bloque de caché más antiguo
+                    this.loadedPages.shift();
+                    this.data.list.splice(0, this.pageLength);
+
+                    // eject del bloque que quitamos
+                    let query = createQuery(params, 0, this.pageLength);
+                    this.Item.ejectAll(params);
+                }
+                // DB findAll for the requested page, to cache and to return it
+                let query = createQuery(params, this.currentPage*this.pageLength, this.pageLength);
+                return this.Item.findAll(query).then((items) => {
+                    this.loadedPages.push(this.currentPage);
+                    this.data.list = this.data.list.concat(items);
+                    this.data.list.slice(_.indexOf(this.loadedPages, this.currentPage) * this.pageLength);
+                    return items;
+                });
+            }
+        }
+
+        // if page is false, reset and find and cache firstpage
+        else {
+            this.Item.ejectAll();
+            this.data.list = [];
+            let query = createQuery(params, 0, this.pageLength);
+
+            return this.Item.findAll(query).then((items) => {
+                this.currentPage = 0;
+                this.loadedPages = [0];
+                this.data.list = items;
+                return this.data.list;
+            });
+        }
+
+    }
+
+
+
     /**
      * Get item by id. Find data from DB or use cache data
      * The item must be already cached. Single item only is requested through listed and cached items
