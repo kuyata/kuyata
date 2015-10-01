@@ -116,8 +116,9 @@ export default class ItemManager {
     }
 
     /**
-     * Get item by id. Find data from DB or use cache data
+     * Get item by id. Find items from cache data
      * The item must be already cached. Single item only is requested through listed and cached items
+     *
      * @param itemId on INT format which to find,
      * @returns Item Object
      */
