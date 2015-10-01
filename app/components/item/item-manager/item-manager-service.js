@@ -156,17 +156,15 @@ export default class ItemManager {
  */
 function createQuery(params, skip, limit) {
     let _params = {sort: [['src_date', 'DESC']], skip: skip, limit: limit};
-    if(params != {}){
+    if(!_.isEmpty(params)){
+        _params.where = {};
         if(params.title){
-            _params.where = {};
             _params.where.title = {'in': params.title};
         }
         if(params.source){
-            _params.where = {};
             _params.where.source = {'==': params.source};
         }
         if(params.category){
-            _params.where = {};
             _params.where.category = {'==': params.category};
         }
     }
