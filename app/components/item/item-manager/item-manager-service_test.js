@@ -63,8 +63,7 @@ describe("ItemManager", () => {
         });
 
         it("should get data from database", () => {
-            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]]}).respond(itemsData);
-
+            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]], "skip": 0, "limit": ItemManager.pageLength}).respond(itemsData);
             ItemManager.findList().then(() => {
                 expect(ItemManager.data.list).toEqual(itemsData);
             });

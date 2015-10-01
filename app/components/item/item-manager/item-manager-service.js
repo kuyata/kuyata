@@ -17,6 +17,11 @@ export default class ItemManager {
         this.$q = $q;
         this.Item = Item;
 
+        this.currentPage = 0;
+        this.loadedPages = [0];
+        this.pageLength = 50;
+        this.maxPages = 3;
+
         this.data = {list:[]};
     }
 
@@ -29,17 +34,20 @@ export default class ItemManager {
      */
     findList(params = {}, clear = true){
         // if data.list is empty OR if is wanted to force clear and get from database
-        if(clear || _.isEmpty(this.data.list)) {
+        if(_.isEmpty(this.data.list) || clear) {
             this.Item.ejectAll();
             this.data.list = [];
-            let query = createQuery(params);
+            let query = createQuery(params, 0, this.pageLength);
 
             return this.Item.findAll(query).then((items) => {
+                this.currentPage = 0;
+                this.loadedPages = [0];
                 this.data.list = items;
                 return this.data.list;
             });
         }
 
+        // find on already cached data
         else {
             return this.$q.when(this.data.list);
         }
@@ -64,8 +72,8 @@ export default class ItemManager {
  * @param params is an Object with any or all these properties: "title, source, category, skip, limit"
  * @returns a DS format params Object
  */
-function createQuery(params) {
-    let _params = {sort: [['src_date', 'DESC']]};
+function createQuery(params, skip, limit) {
+    let _params = {sort: [['src_date', 'DESC']], skip: skip, limit: limit};
     if(params != {}){
         if(params.title){
             _params.where = {};
@@ -78,12 +86,6 @@ function createQuery(params) {
         if(params.category){
             _params.where = {};
             _params.where.category = {'==': params.category};
-        }
-        if(params.skip){
-            _params.skip = params.skip;
-        }
-        if(params.limit){
-            _params.limit = params.limit;
         }
     }
     return _params;
