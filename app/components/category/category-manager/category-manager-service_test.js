@@ -80,23 +80,23 @@ describe("CategoryManager", () => {
         beforeEach(done => _setup(done));
 
         it("should create a multilevel tree when data is cached", () => {
-            CategoryManager.data.list = [{"id": "1","source": "1","parent_category": null},{"id": "4","source": "1","parent_category": "1"},{"id": "6","source": "2","parent_category": null},{"id": "2","source": "1","parent_category": "4"},{"id": "3","source": "2","parent_category": "6"}];
+            CategoryManager.data.list = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
 
             // expected result
             let res =
             {
                 "1":
                     [
-                        {"id":"1","source":"1","parent_category":null,"children":
-                            [{"id":"4","source":"1","parent_category":"1","children":[
-                                {"id":"2","source":"1","parent_category":"4"}]
+                        {"id":"1","source_id":"1","parent_category_id":null,"children":
+                            [{"id":"4","source_id":"1","parent_category_id":"1","children":[
+                                {"id":"2","source_id":"1","parent_category_id":"4"}]
                             }]
                         }
                     ],
                 "2":
                     [
-                        {"id":"6","source":"2","parent_category":null,"children":
-                            [{"id":"3","source":"2","parent_category":"6"}]
+                        {"id":"6","source_id":"2","parent_category_id":null,"children":
+                            [{"id":"3","source_id":"2","parent_category_id":"6"}]
                         }
                     ]
             };
@@ -109,23 +109,23 @@ describe("CategoryManager", () => {
         });
 
         it("should create a multilevel tree when data is not cached", () => {
-            DS.expectFindAll(Category.name, {}).respond([{"id": "1","source": "1","parent_category": null},{"id": "4","source": "1","parent_category": "1"},{"id": "6","source": "2","parent_category": null},{"id": "2","source": "1","parent_category": "4"},{"id": "3","source": "2","parent_category": "6"}]);
+            DS.expectFindAll(Category.name, {}).respond([{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}]);
 
             // expexted result
             let res =
             {
                 "1":
                     [
-                        {"id":"1","source":"1","parent_category":null,"children":
-                            [{"id":"4","source":"1","parent_category":"1","children":[
-                                {"id":"2","source":"1","parent_category":"4"}]
+                        {"id":"1","source_id":"1","parent_category_id":null,"children":
+                            [{"id":"4","source_id":"1","parent_category_id":"1","children":[
+                                {"id":"2","source_id":"1","parent_category_id":"4"}]
                             }]
                         }
                     ],
                 "2":
                     [
-                        {"id":"6","source":"2","parent_category":null,"children":
-                            [{"id":"3","source":"2","parent_category":"6"}]
+                        {"id":"6","source_id":"2","parent_category_id":null,"children":
+                            [{"id":"3","source_id":"2","parent_category_id":"6"}]
                         }
                     ]
             };
@@ -151,8 +151,8 @@ describe("CategoryManager", () => {
             let res = {
                 "id": "10",
                 "name": "Internet",
-                "source": "1",
-                "parent_category": "1",
+                "source_id": "1",
+                "parent_category_id": "1",
                 "src_id": "",
                 "status": "",
                 "created_on": "1430847165",

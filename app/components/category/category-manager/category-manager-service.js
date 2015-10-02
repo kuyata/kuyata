@@ -54,7 +54,7 @@ export default class CategoryManager {
 
             list.forEach(node => {
                 // add to parent
-                var parent = dataMap[node.parent_category];
+                var parent = dataMap[node.parent_category_id];
                 if (parent) {
                     // create child array if it doesn't exist
                     (parent.children || (parent.children = []))
@@ -67,7 +67,7 @@ export default class CategoryManager {
             });
 
             return _.groupBy(tree, item => {
-                return item.source;
+                return item.source_id;
             });
         })
     }

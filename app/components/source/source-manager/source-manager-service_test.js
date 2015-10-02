@@ -111,7 +111,7 @@ describe("SourceManager", () => {
         it("should create the sources tree when source data is cached", () => {
 
             SourceManager.data.list = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
-            CategoryManager.data.list = [{"id": "1","source": "1","parent_category": null},{"id": "4","source": "1","parent_category": "1"},{"id": "6","source": "2","parent_category": null},{"id": "2","source": "1","parent_category": "4"},{"id": "3","source": "2","parent_category": "6"}];
+            CategoryManager.data.list = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
 
             // expexted result
             let res =
@@ -120,9 +120,9 @@ describe("SourceManager", () => {
                         "id": "1",
                         "name": "Source 1",
                         "categories": [
-                            {"id":"1","source":"1","parent_category":null,"children":
-                                [{"id":"4","source":"1","parent_category":"1","children":[
-                                    {"id":"2","source":"1","parent_category":"4"}]
+                            {"id":"1","source_id":"1","parent_category_id":null,"children":
+                                [{"id":"4","source_id":"1","parent_category_id":"1","children":[
+                                    {"id":"2","source_id":"1","parent_category_id":"4"}]
                                 }]
                             }
                         ]
@@ -132,8 +132,8 @@ describe("SourceManager", () => {
                         "id": "2",
                         "name": "Source 2",
                         "categories": [
-                            {"id":"6","source":"2","parent_category":null,"children":
-                                [{"id":"3","source":"2","parent_category":"6"}]
+                            {"id":"6","source_id":"2","parent_category_id":null,"children":
+                                [{"id":"3","source_id":"2","parent_category_id":"6"}]
                             }
                         ]
                     }
