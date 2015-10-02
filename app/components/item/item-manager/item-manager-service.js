@@ -23,6 +23,7 @@ export default class ItemManager {
         this.maxPages = 3;
 
         this.data = {list:[]};
+        this.current = null;
     }
 
     /**
@@ -127,6 +128,24 @@ export default class ItemManager {
             return item.id === itemId
         })
     };
+
+    /**
+     * Get the id of the current item. To control the item selected
+     *
+     * @returns {*}
+     */
+        getCurrentItemId() {
+        return this.current;
+    }
+
+    /**
+     * Set the id of the current item. To control the selected
+     *
+     * @param newCurrent. The id of the new current item selected
+     */
+        setCurrentItemId(newCurrent) {
+        this.current = newCurrent;
+    }
 }
 
 /**

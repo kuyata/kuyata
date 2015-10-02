@@ -75,15 +75,93 @@ describe("CategoryManager", () => {
         });
     });
 
-    //describe("createCategories()", () => {
-    //
-    //    beforeEach(done => _setup(done));
-    //
-    //    it("should ... createCategories", () => {
-    //
-    //        DS.expectCreate(Category.name, {"name":"Things","slug":"things"}).respond({});
-    //        CategoryManager.createCategories();
-    //        expect(true).toBe(true);
-    //    });
-    //});
+    describe("getCategoriesTree()", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should create a multilevel tree when data is cached", () => {
+            CategoryManager.data.list = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
+
+            // expected result
+            let res =
+            {
+                "1":
+                    [
+                        {"id":"1","source_id":"1","parent_category_id":null,"children":
+                            [{"id":"4","source_id":"1","parent_category_id":"1","children":[
+                                {"id":"2","source_id":"1","parent_category_id":"4"}]
+                            }]
+                        }
+                    ],
+                "2":
+                    [
+                        {"id":"6","source_id":"2","parent_category_id":null,"children":
+                            [{"id":"3","source_id":"2","parent_category_id":"6"}]
+                        }
+                    ]
+            };
+
+            CategoryManager.getCategoriesTree().then((tree) => {
+                expect(JSON.stringify(tree)).toEqual(JSON.stringify(res));
+            });
+
+            DS.verifyNoOutstandingExpectation();
+        });
+
+        it("should create a multilevel tree when data is not cached", () => {
+            DS.expectFindAll(Category.name, {}).respond([{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}]);
+
+            // expexted result
+            let res =
+            {
+                "1":
+                    [
+                        {"id":"1","source_id":"1","parent_category_id":null,"children":
+                            [{"id":"4","source_id":"1","parent_category_id":"1","children":[
+                                {"id":"2","source_id":"1","parent_category_id":"4"}]
+                            }]
+                        }
+                    ],
+                "2":
+                    [
+                        {"id":"6","source_id":"2","parent_category_id":null,"children":
+                            [{"id":"3","source_id":"2","parent_category_id":"6"}]
+                        }
+                    ]
+            };
+
+            CategoryManager.getCategoriesTree().then((tree) => {
+                expect(JSON.stringify(tree)).toEqual(JSON.stringify(res));
+            });
+
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+    });
+
+    describe("getCategoryById(id)", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should get category item by id", () => {
+            CategoryManager.data.list = categoriesData;
+
+            // expexted result
+            let res = {
+                "id": "10",
+                "name": "Internet",
+                "source_id": "1",
+                "parent_category_id": "1",
+                "src_id": "",
+                "status": "",
+                "created_on": "1430847165",
+                "updated_on": "1430847165"
+            };
+
+            let cat = CategoryManager.getCategoryById("10");
+
+            expect(JSON.stringify(cat)).toEqual(JSON.stringify(res));
+        });
+    });
 });
