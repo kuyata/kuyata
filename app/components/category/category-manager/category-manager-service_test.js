@@ -79,7 +79,7 @@ describe("CategoryManager", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should create a multilevel tree", () => {
+        it("should create a multilevel tree when data is cached", () => {
             CategoryManager.data.list = [{"id": "1","source": "1","parent_category": null},{"id": "4","source": "1","parent_category": "1"},{"id": "6","source": "2","parent_category": null},{"id": "2","source": "1","parent_category": "4"},{"id": "3","source": "2","parent_category": "6"}];
 
             // expexted result
@@ -101,9 +101,42 @@ describe("CategoryManager", () => {
                     ]
             };
 
-            CategoryManager.createCategoriesTree();
+            CategoryManager.createCategoriesTree().then((tree) => {
+                expect(JSON.stringify(tree)).toEqual(JSON.stringify(res));
+            });
 
-            expect(JSON.stringify(CategoryManager.data.tree)).toEqual(JSON.stringify(res));
+            DS.verifyNoOutstandingExpectation();
+        });
+
+        it("should create a multilevel tree when data is not cached", () => {
+            DS.expectFindAll(Category.name, {}).respond([{"id": "1","source": "1","parent_category": null},{"id": "4","source": "1","parent_category": "1"},{"id": "6","source": "2","parent_category": null},{"id": "2","source": "1","parent_category": "4"},{"id": "3","source": "2","parent_category": "6"}]);
+
+            // expexted result
+            let res =
+            {
+                "1":
+                    [
+                        {"id":"1","source":"1","parent_category":null,"children":
+                            [{"id":"4","source":"1","parent_category":"1","children":[
+                                {"id":"2","source":"1","parent_category":"4"}]
+                            }]
+                        }
+                    ],
+                "2":
+                    [
+                        {"id":"6","source":"2","parent_category":null,"children":
+                            [{"id":"3","source":"2","parent_category":"6"}]
+                        }
+                    ]
+            };
+
+            CategoryManager.createCategoriesTree().then((tree) => {
+                expect(JSON.stringify(tree)).toEqual(JSON.stringify(res));
+            });
+
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
         });
     });
 
