@@ -18,6 +18,7 @@ export default class ItemManager {
         this.Item = Item;
 
         this.data = {list:[]};
+        this.current = null;
     }
 
     /**
@@ -55,8 +56,25 @@ export default class ItemManager {
                 }
             }
         )
-    };
+    }
 
+    /**
+     * Get the id of the current item. To control the item selected
+     *
+     * @returns {*}
+     */
+        getCurrentItemId() {
+        return this.current;
+    }
+
+    /**
+     * Set the id of the current item. To control the selected
+     *
+     * @param newCurrent. The id of the new current item selected
+     */
+        setCurrentItemId(newCurrent) {
+        this.current = newCurrent;
+    }
 }
 
 /**
