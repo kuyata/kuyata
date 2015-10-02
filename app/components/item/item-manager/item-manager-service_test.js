@@ -49,25 +49,14 @@ describe("ItemManager", () => {
     //Init angular data mocks
     beforeEach(() => angular.mock.module('js-data-mocks'));
 
-    describe("findList()", () => {
+    describe("findList(params)", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should get cached data", () => {
-            ItemManager.data.list = itemsData;
-            ItemManager.findList().then(() => {
-                expect(ItemManager.data.list).toEqual(itemsData);
-            });
-
-            DS.verifyNoOutstandingExpectation();
-
-        });
-
         it("should get data from database", () => {
-            DS.expectFindAll(Item.name, {}).respond(itemsData);
-
-            ItemManager.findList().then(() => {
-                expect(ItemManager.data.list).toEqual(itemsData);
+            DS.expectFindAll(Item.name, {"sort":[["src_date","DESC"]]}).respond(itemsData);
+            ItemManager.findList().then((items) => {
+                expect(items).toEqual(itemsData);
             });
 
             DS.verifyNoOutstandingExpectation();
@@ -75,50 +64,145 @@ describe("ItemManager", () => {
         });
     });
 
+
+    describe("findListPage(params, page)", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should get first find of db-items and initialize the cache. final cache [0]", () => {
+            let res = itemsData.slice(0,2); // result must be pages [0]
+            ItemManager.pageLength = 2;
+            DS.expectFindAll(Item.name, {
+                "sort":[["src_date","DESC"]],
+                "skip": 0,
+                "limit": ItemManager.pageLength})
+                    .respond(itemsData.slice(0,2));
+
+            ItemManager.findListPage({}).then(() => {
+                expect(ItemManager.data.list).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should get first find of db-items and initialize the cache. Being data length less than page length", () => {
+            let res = itemsData.slice(0,1); // result must be pages [0]
+            ItemManager.pageLength = 2;
+            DS.expectFindAll(Item.name, {
+                "sort":[["src_date","DESC"]],
+                "skip": 0,
+                "limit": ItemManager.pageLength})
+                .respond(itemsData.slice(0,1));
+
+            ItemManager.findListPage({}).then(() => {
+                expect(ItemManager.data.list).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should get second page of db-items and add to cache not full. final cache [0,1]", () => {
+            let res = itemsData.slice(0,4); // result must be pages [0,1]
+            let pageRequested = 1;
+            ItemManager.data.list = itemsData.slice(0,2);
+            ItemManager.currentPage = 0;
+            ItemManager.loadedPages = [0];
+            ItemManager.pageLength = 2;
+            DS.expectFindAll(Item.name, {
+                "sort":[["src_date","DESC"]],
+                "skip": pageRequested * ItemManager.pageLength,
+                "limit": ItemManager.pageLength})
+                    .respond(itemsData.slice(2,4));
+
+            ItemManager.findListPage({}, pageRequested).then(() => {
+                expect(ItemManager.data.list).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should get one page more of db-items and add to already full cache on the right. final cache [1,2,3]", () => {
+            let res = itemsData.slice(2,8); // result must be pages [1,2,3]
+            let pageRequested = 3;
+            ItemManager.data.list = itemsData.slice(0,6);
+            ItemManager.currentPage = 2;
+            ItemManager.loadedPages = [0,1,2];
+            ItemManager.pageLength = 2;
+            DS.expectFindAll(Item.name, {
+                "sort":[["src_date","DESC"]],
+                "skip": pageRequested * ItemManager.pageLength,
+                "limit": ItemManager.pageLength})
+                .respond(itemsData.slice(6,8));
+
+            ItemManager.findListPage({}, pageRequested).then(() => {
+                expect(ItemManager.data.list).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should get one page more of db-items and add to already full cache on the left. final cache [1,2,3] ", () => {
+            let res = itemsData.slice(2,8); // result must be pages [1,2,3]
+            let pageRequested = 1;
+            ItemManager.data.list = itemsData.slice(4,10);
+            ItemManager.currentPage = 2;
+            ItemManager.loadedPages = [2,3,4];
+            ItemManager.pageLength = 2;
+            DS.expectFindAll(Item.name, {
+                "sort":[["src_date","DESC"]],
+                "skip": pageRequested * ItemManager.pageLength,
+                "limit": ItemManager.pageLength})
+                .respond(itemsData.slice(2,4));
+
+            ItemManager.findListPage({}, pageRequested).then(() => {
+                expect(ItemManager.data.list).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should get one page more (not completely sized) of db-items and add to already full cache on the left. final cache [1,2,3] ", () => {
+            let res = itemsData.slice(2,8); // result must be pages [1,2,3]
+            let pageRequested = 1;
+            ItemManager.data.list = itemsData.slice(4,9);
+            ItemManager.currentPage = 2;
+            ItemManager.loadedPages = [2,3,4];
+            ItemManager.pageLength = 2;
+            DS.expectFindAll(Item.name, {
+                "sort":[["src_date","DESC"]],
+                "skip": pageRequested * ItemManager.pageLength,
+                "limit": ItemManager.pageLength})
+                .respond(itemsData.slice(2,4));
+
+            ItemManager.findListPage({}, pageRequested).then(() => {
+                expect(ItemManager.data.list).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+    });
+
+
     describe("getItemById()", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should get data from cached data", () => {
+        it("should get item from cached data", () => {
             ItemManager.data.list = itemsData;
             let cachedItem = _.first(ItemManager.data.list);
-            ItemManager.getItemById(cachedItem.id).then(item => {
-                expect(item).toEqual(cachedItem);
-            });
-
-            DS.verifyNoOutstandingExpectation();
+            expect(ItemManager.getItemById(cachedItem.id)).toEqual(cachedItem);
         });
 
-        it("should get data from database", () => {
-            let dbItem = _.first(itemsData);
-            DS.expectFindAll(Item.name, {}).respond(itemsData);
-            ItemManager.getItemById(dbItem.id).then(item => {
-                expect(item).toEqual(dbItem);
-            });
-
-            DS.verifyNoOutstandingExpectation();
-            DS.flush();
-        });
-
-        it("should fail on get data from cached data", () => {
+        it("should fail on get item from cached data", () => {
             let invalidItemId = -1;
             ItemManager.data.list = itemsData;
-            ItemManager.getItemById(invalidItemId).then(item => {
-                expect(item).toBeUndefined();
-            });
-
-            DS.verifyNoOutstandingExpectation();
-        });
-
-        it("should fail on get data from dababase", () => {
-            let invalidItemId = -1;
-            DS.expectFindAll(Item.name, {}).respond(itemsData);
-            ItemManager.getItemById(invalidItemId).then(item => {
-                expect(item).toBeUndefined();
-            });
-
-            DS.verifyNoOutstandingExpectation();
-            DS.flush();
+            expect(ItemManager.getItemById(invalidItemId)).toBeUndefined();
         });
     });
 });
