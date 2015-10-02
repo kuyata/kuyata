@@ -66,4 +66,17 @@ export default class CategoryManager {
             return item.source;
         });
     }
+
+
+    /**
+     * Get the category element by passed id
+     *
+     * @param id
+     * @returns a category element
+     */
+    getCategoryById(id){
+        return _.find(this.data.list, item => {
+            return item.id === id;
+        });
+    }
 }

@@ -106,4 +106,30 @@ describe("CategoryManager", () => {
             expect(JSON.stringify(CategoryManager.data.tree)).toEqual(JSON.stringify(res));
         });
     });
+
+
+    describe("getCategoryById(id)", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should get category item by id", () => {
+            CategoryManager.data.list = categoriesData;
+
+            // expexted result
+            let res = {
+                "id": "10",
+                "name": "Internet",
+                "source": "1",
+                "parent_category": "1",
+                "src_id": "",
+                "status": "",
+                "created_on": "1430847165",
+                "updated_on": "1430847165"
+            }
+
+            let cat = CategoryManager.getCategoryById("10");
+
+            expect(JSON.stringify(cat)).toEqual(JSON.stringify(res));
+        });
+    });
 });
