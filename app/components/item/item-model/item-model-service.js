@@ -68,4 +68,12 @@ class Item {
     category() {
         return this.Category.get(this.category_id);
     }
+
+    /**
+     * Get Category Object for the item subcategory
+     * @returns {*}
+     */
+    subcategory() {
+        return this.Category.get(this.subcategory_id);
+    }
 }
