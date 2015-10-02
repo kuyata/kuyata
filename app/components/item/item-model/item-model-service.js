@@ -5,6 +5,8 @@
  */
 
 import _ from 'lodash';
+import Source from '../../source/source-model/source-model';
+import Category from '../../category/category-model/category-model';
 
 /**
  *
@@ -15,9 +17,11 @@ import _ from 'lodash';
  * @ngInject
  *
  */
-export default function factory($q, DS, utils){
+export default function factory($q, DS, utils, Source, Category){
     Item.$q = $q;
     Item.utils = utils;
+    Item.Source = Source;
+    Item.Category = Category;
 
     return utils.defineAngularDataResource(DS, Item, {
         name: 'item'
@@ -31,9 +35,9 @@ export default function factory($q, DS, utils){
  * Properties: as is all dynamic this is to keep track of what properties we are using within this model
  *
  * {string}     id              id on our local DB
- * {string}     source          source id on our DB
- * {string}     category        level 1 category id on our DB
- * {string}     subcategory     level 2 category id on our DB
+ * {string}     source_id        source id on our DB
+ * {string}     category_id      level 1 category id on our DB
+ * {string}     subcategory_id   level 2 category id on our DB
  * {string}     title           item title
  * {string}     body            item body
  * {string}     author          item author
@@ -49,12 +53,27 @@ class Item {
     constructor() {
     }
 
-    instanceMethod(){
-        this.foo = 'bar';
-        return this.foo;
+    /**
+     * Get Source Object for the item source
+     * @returns {*}
+     */
+    source() {
+        return this.Source.get(this.source_id);
     }
 
-    static classMethod(){
+    /**
+     * Get Category Object for the item category
+     * @returns {*}
+     */
+    category() {
+        return this.Category.get(this.category_id);
+    }
 
+    /**
+     * Get Category Object for the item subcategory
+     * @returns {*}
+     */
+    subcategory() {
+        return this.Category.get(this.subcategory_id);
     }
 }

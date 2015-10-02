@@ -7,12 +7,16 @@
 import angular from 'angular';
 
 import Utils from '../../utils/utils';
-import Item from './item-model-service.js'
+import Item from './item-model-service.js';
+import Source from '../../source/source-model/source-model';
+import Category from '../../category/category-model/category-model';
 
 export default angular.module('app.models.item', [
     'js-data',
 
-    Utils.name
+    Utils.name,
+    Source.name,
+    Category.name
 ])
 
 .factory('Item', Item);
