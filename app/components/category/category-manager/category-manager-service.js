@@ -18,6 +18,7 @@ export default class CategoryManager {
         this.Category = Category;
 
         this.data = {list:[]};
+        this.current = null;
     }
 
     /**
@@ -81,5 +82,23 @@ export default class CategoryManager {
         return _.find(this.data.list, item => {
             return item.id === id;
         });
+    }
+
+    /**
+     * Get the id of the current category item. To control de category selected
+     *
+     * @returns {*}
+     */
+        getCurrentItemId() {
+        return this.current;
+    }
+
+    /**
+     * Set the id of the current category item. To control de category selected
+     *
+     * @param newCurrent. The id of the new current category item selected
+     */
+        setCurrentItemId(newCurrent) {
+        this.current = newCurrent;
     }
 }
