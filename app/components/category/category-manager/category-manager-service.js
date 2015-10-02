@@ -67,7 +67,6 @@ export default class CategoryManager {
         });
     }
 
-
     /**
      * Get the category element by passed id
      *

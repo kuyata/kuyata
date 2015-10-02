@@ -36,4 +36,16 @@ export default class SourceManager {
             return this.$q.when(this.data.list);
         }
     }
+
+    /**
+     * Get the source element by passed id
+     *
+     * @param id
+     * @returns a source element
+     */
+     getSourceById(id){
+        return _.find(this.data.list, item => {
+            return item.id === id;
+        });
+     }
 }

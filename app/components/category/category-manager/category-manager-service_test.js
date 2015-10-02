@@ -107,7 +107,6 @@ describe("CategoryManager", () => {
         });
     });
 
-
     describe("getCategoryById(id)", () => {
 
         beforeEach(done => _setup(done));
@@ -125,7 +124,7 @@ describe("CategoryManager", () => {
                 "status": "",
                 "created_on": "1430847165",
                 "updated_on": "1430847165"
-            }
+            };
 
             let cat = CategoryManager.getCategoryById("10");
 

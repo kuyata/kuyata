@@ -74,4 +74,28 @@ describe("SourceManager", () => {
             DS.flush();
         });
     });
+
+    describe("getCategoryById(id)", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should get source item by id", () => {
+            SourceManager.data.list = sourcesData;
+
+            // expexted result
+            let res = {
+                "id": "2",
+                "name": "Eatup",
+                "src_id": "",
+                "status": "",
+                "url": "http://www.eatup.com",
+                "created_on": "1430847165",
+                "updated_on": "1430847165"
+            };
+
+            let sou = SourceManager.getSourceById("2");
+
+            expect(JSON.stringify(sou)).toEqual(JSON.stringify(res));
+        });
+    });
 });
