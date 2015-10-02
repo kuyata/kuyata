@@ -75,7 +75,7 @@ describe("SourceManager", () => {
         });
     });
 
-    describe("getCategoryById(id)", () => {
+    describe("getSourceById(id)", () => {
 
         beforeEach(done => _setup(done));
 
