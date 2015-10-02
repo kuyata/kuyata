@@ -40,17 +40,18 @@ export default class CategoryManager {
     /**
      * Creates a multilevel categories array of object, starting with the source
      *
+     * @return a promise with the category tree
      */
-    createCategoriesTree() {
+    getCategoriesTree() {
         return this.findList().then(() => {
             let list = angular.copy(this.data.list);
             let tree = [];
             let dataMap = {};
-            list.forEach(function(node) {
+            list.forEach(node => {
                 dataMap[node.id] = node;
             });
 
-            list.forEach((node) => {
+            list.forEach(node => {
                 // add to parent
                 var parent = dataMap[node.parent_category];
                 if (parent) {

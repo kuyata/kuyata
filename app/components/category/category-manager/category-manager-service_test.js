@@ -75,14 +75,14 @@ describe("CategoryManager", () => {
         });
     });
 
-    describe("createCategoriesTree()", () => {
+    describe("getCategoriesTree()", () => {
 
         beforeEach(done => _setup(done));
 
         it("should create a multilevel tree when data is cached", () => {
             CategoryManager.data.list = [{"id": "1","source": "1","parent_category": null},{"id": "4","source": "1","parent_category": "1"},{"id": "6","source": "2","parent_category": null},{"id": "2","source": "1","parent_category": "4"},{"id": "3","source": "2","parent_category": "6"}];
 
-            // expexted result
+            // expected result
             let res =
             {
                 "1":
@@ -101,7 +101,7 @@ describe("CategoryManager", () => {
                     ]
             };
 
-            CategoryManager.createCategoriesTree().then((tree) => {
+            CategoryManager.getCategoriesTree().then((tree) => {
                 expect(JSON.stringify(tree)).toEqual(JSON.stringify(res));
             });
 
@@ -130,7 +130,7 @@ describe("CategoryManager", () => {
                     ]
             };
 
-            CategoryManager.createCategoriesTree().then((tree) => {
+            CategoryManager.getCategoriesTree().then((tree) => {
                 expect(JSON.stringify(tree)).toEqual(JSON.stringify(res));
             });
 

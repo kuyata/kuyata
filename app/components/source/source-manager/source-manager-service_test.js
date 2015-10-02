@@ -16,20 +16,22 @@ import jsDataNgMocks from 'js-data-angular-mocks';
 import utilsModule from '../../utils/utils'
 import sourceModelModule from '../source-model/source-model';
 import sourceManagerModule from './source-manager';
+import categoryManagerModule from '../../category/category-manager/category-manager.js'
 import {sourcesData} from './../../common/data/sources';
 
 describe("SourceManager", () => {
-    let rootScope, Source, utils, SourceManager, q, DS;
+    let rootScope, Source, utils, SourceManager, CategoryManager, q, DS;
 
     // Use to inject the code under test
     function _inject(done) {
-        inject((_utils_, _$rootScope_, _$q_, _Source_, _SourceManager_, _DS_) => {
+        inject((_utils_, _$rootScope_, _$q_, _Source_, _SourceManager_, _CategoryManager_, _DS_) => {
             utils = _utils_;
             rootScope = _$rootScope_;
             q = _$q_;
             DS = _DS_;
             Source = _Source_;
             SourceManager = _SourceManager_;
+            CategoryManager = _CategoryManager_;
 
             done();
         });
@@ -44,7 +46,10 @@ describe("SourceManager", () => {
     }
 
     // Init the module before each test case
-    beforeEach(() => angular.mock.module(sourceManagerModule.name));
+    beforeEach(() => {
+        angular.mock.module(sourceManagerModule.name)
+        angular.mock.module(categoryManagerModule.name)
+    });
 
     //Init angular data mocks
     beforeEach(() => angular.mock.module('js-data-mocks'));
@@ -98,4 +103,52 @@ describe("SourceManager", () => {
             expect(JSON.stringify(sou)).toEqual(JSON.stringify(res));
         });
     });
+
+    describe("setSourcesTree()", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should create the sources tree when source data is cached", () => {
+
+            SourceManager.data.list = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
+            CategoryManager.data.list = [{"id": "1","source": "1","parent_category": null},{"id": "4","source": "1","parent_category": "1"},{"id": "6","source": "2","parent_category": null},{"id": "2","source": "1","parent_category": "4"},{"id": "3","source": "2","parent_category": "6"}];
+
+            // expexted result
+            let res =
+                [
+                    {
+                        "id": "1",
+                        "name": "Source 1",
+                        "categories": [
+                            {"id":"1","source":"1","parent_category":null,"children":
+                                [{"id":"4","source":"1","parent_category":"1","children":[
+                                    {"id":"2","source":"1","parent_category":"4"}]
+                                }]
+                            }
+                        ]
+
+                    },
+                    {
+                        "id": "2",
+                        "name": "Source 2",
+                        "categories": [
+                            {"id":"6","source":"2","parent_category":null,"children":
+                                [{"id":"3","source":"2","parent_category":"6"}]
+                            }
+                        ]
+                    }
+                ];
+
+
+            SourceManager.createSourcesTree().then(() => {
+                expect(JSON.stringify(SourceManager.data.tree)).toEqual(JSON.stringify(res));
+            });
+
+            DS.verifyNoOutstandingExpectation();
+        });
+    });
 });
+
+
+
+

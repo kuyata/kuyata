@@ -13,11 +13,12 @@ import _ from 'lodash';
  */
 export default class SourceManager {
 
-    constructor($q, Source){
+    constructor($q, Source, CategoryManager){
         this.$q = $q;
         this.Source = Source;
+        this.CategoryManager = CategoryManager;
 
-        this.data = {list:[]};
+        this.data = {list:[], tree:[]};
     }
 
     /**
@@ -48,4 +49,29 @@ export default class SourceManager {
             return item.id === id;
         });
      }
+
+    /**
+     * Creates a multilevel sources array with its category trees
+     * @returns a promise
+     */
+    createSourcesTree(){
+
+        return this.findList().then(() => {
+
+            return this.CategoryManager.getCategoriesTree().then(categoriesTree => {
+
+                let sourcesTree = angular.copy(this.data.list);
+
+                sourcesTree.forEach(node => {
+
+                    node.categories = categoriesTree[node.id];
+
+                });
+
+                this.data.tree = sourcesTree;
+            });
+        });
+
+
+    }
 }
