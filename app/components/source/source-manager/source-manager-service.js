@@ -19,6 +19,7 @@ export default class SourceManager {
         this.CategoryManager = CategoryManager;
 
         this.data = {list:[], tree:[]};
+        this.current = null;
     }
 
     /**
@@ -71,7 +72,23 @@ export default class SourceManager {
                 this.data.tree = sourcesTree;
             });
         });
+    }
 
+    /**
+     * Get the id of the current source item. To control de source selected
+     *
+     * @returns {*}
+     */
+    getCurrentItemId() {
+        return this.current;
+    }
 
+    /**
+     * Set the id of the current source item. To control de source selected
+     *
+     * @param newCurrent. The id of the new current source item selected
+     */
+    setCurrentItemId(newCurrent) {
+        this.current = newCurrent;
     }
 }
