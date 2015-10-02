@@ -17,7 +17,7 @@ export default class CategoryManager {
         this.$q = $q;
         this.Category = Category;
 
-        this.data = {list:[]};
+        this.data = {list:[], tree:[]};
     }
 
     /**
@@ -35,5 +35,35 @@ export default class CategoryManager {
         else {
             return this.$q.when(this.data.list);
         }
+    }
+
+    /**
+     * Creates a multilevel categories array of object, starting with the source
+     *
+     */
+    createCategoriesTree() {
+        let list = angular.copy(this.data.list);
+        let dataMap = {};
+        list.forEach(function(node) {
+            dataMap[node.id] = node;
+        });
+
+        list.forEach((node) => {
+            // add to parent
+            var parent = dataMap[node.parent_category];
+            if (parent) {
+                // create child array if it doesn't exist
+                (parent.children || (parent.children = []))
+                    // add node to child array
+                    .push(node);
+            } else {
+                // parent is null or missing
+                this.data.tree.push(node);
+            }
+        });
+
+        this.data.tree = _.groupBy(this.data.tree, item => {
+            return item.source;
+        });
     }
 }

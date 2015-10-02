@@ -75,15 +75,35 @@ describe("CategoryManager", () => {
         });
     });
 
-    //describe("createCategories()", () => {
-    //
-    //    beforeEach(done => _setup(done));
-    //
-    //    it("should ... createCategories", () => {
-    //
-    //        DS.expectCreate(Category.name, {"name":"Things","slug":"things"}).respond({});
-    //        CategoryManager.createCategories();
-    //        expect(true).toBe(true);
-    //    });
-    //});
+    describe("createCategoriesTree()", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should create a multilevel tree", () => {
+            CategoryManager.data.list = [{"id": "1","source": "1","parent_category": null},{"id": "4","source": "1","parent_category": "1"},{"id": "6","source": "2","parent_category": null},{"id": "2","source": "1","parent_category": "4"},{"id": "3","source": "2","parent_category": "6"}];
+
+            // expexted result
+            let res =
+            {
+                "1":
+                    [
+                        {"id":"1","source":"1","parent_category":null,"children":
+                            [{"id":"4","source":"1","parent_category":"1","children":[
+                                {"id":"2","source":"1","parent_category":"4"}]
+                            }]
+                        }
+                    ],
+                "2":
+                    [
+                        {"id":"6","source":"2","parent_category":null,"children":
+                            [{"id":"3","source":"2","parent_category":"6"}]
+                        }
+                    ]
+            };
+
+            CategoryManager.createCategoriesTree();
+
+            expect(JSON.stringify(CategoryManager.data.tree)).toEqual(JSON.stringify(res));
+        });
+    });
 });
