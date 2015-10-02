@@ -35,9 +35,9 @@ export default function factory($q, DS, utils, Source, Category){
  * Properties: as is all dynamic this is to keep track of what properties we are using within this model
  *
  * {string}     id              id on our local DB
- * {string}     source_id        source id on our DB
- * {string}     category_id      level 1 category id on our DB
- * {string}     subcategory_id   level 2 category id on our DB
+ * {string}     source_id       source id on our DB
+ * {string}     category_id     level 1 category id on our DB
+ * {string}     subcategory_id  level 2 category id on our DB
  * {string}     title           item title
  * {string}     body            item body
  * {string}     author          item author
@@ -67,13 +67,5 @@ class Item {
      */
     category() {
         return this.Category.get(this.category_id);
-    }
-
-    /**
-     * Get Category Object for the item subcategory
-     * @returns {*}
-     */
-    subcategory() {
-        return this.Category.get(this.subcategory_id);
     }
 }
