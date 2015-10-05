@@ -1,0 +1,116 @@
+.app-main-middle-1 {
+  background-color: white;
+  position: absolute;
+  overflow: visible;
+  top: 0;
+  height: @base-col-height / 2;
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  .item-list-order {
+    .pull-right();
+    right: 0;
+
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+      margin-right: 2px;
+      margin-top: -2px;
+      min-width: 120px;
+
+      li > a {
+        padding: 3px 20px 3px 5px;
+      }
+
+      li > a > .fa {
+        .invisible();
+      }
+
+      li > a > .fa {
+        .invisible();
+      }
+
+      li > a.active > .fa {
+        .visible();
+      }
+    }
+  }
+}
+
+.app-main-middle-2 {
+  background-color: white;
+  position: absolute;
+  overflow: hidden;
+  padding: 5px 15px;
+  top: @base-col-height / 2;
+  height: @base-col-height / 2;
+  left: 0;
+  right: 0;
+  .box-shadow(0px 2px 10px gray);
+  z-index: 1;
+
+  border-bottom: 1px solid @line-color;
+
+  .item-list-date-current {
+    font-size: 0.9em;
+    clear: both;
+    color: darken(@link-bg-hover, 40%);
+  }
+}
+
+.app-main-middle-3 {
+  background-color: @col-bg-color;
+  position: absolute;
+  overflow: auto;
+  top: @base-col-height;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .item-list-date {
+    .clearfix();
+    font-size: 0.9em;
+    color: darken(@link-bg-hover, 40%);
+    margin: 0;
+    padding: 30px 15px 0 15px;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+  }
+}
+
+.item-list {
+  background-color: @panel-bg-color;
+
+  .item-list-obj {
+    border-top: 1px solid @line-color;
+
+    .item-list-obj-title {
+      margin-top: 0;
+      padding-right: 5px;
+      .text-overflow();
+      font-size: 1.1em;
+    }
+    .item-list-obj-prize {
+      .pull-right;
+      color: #333333;
+    }
+    .item-list-obj-desc {
+      margin-bottom: 0;
+      line-height: 1.4em;
+      //height: 2.8em;
+      overflow: hidden;
+      color: #333333;
+      font-size: 0.9em;
+    }
+  }
+
+  &.nav > li > a:hover, &.nav > li > a:focus {
+    background-color: @link-bg-hover;
+
+    .ellipsis:after {
+      #gradient > .horizontal-three-colors(@start-color: rgba(125, 186, 255, 0); @mid-color: @link-bg-hover; @color-stop: 50%; @end-color: @link-bg-hover);
+    }
+  }
+}
