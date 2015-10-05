@@ -102,16 +102,21 @@ export default class CategoryManager {
         this.current = newCurrent;
     }
 
+
     /**
      * Auxiliar method to create initial sample data for categories
      * @param data is the categories fixtures
      */
     createSampleData(data){
-
-        console.log('CategoryManager. createSampleData');
-
-        data.forEach(item => {
-            this.Category.create(item);
+        return this.$q((resolve) => {
+            console.log('CategoryManager. createSampleData');
+            let promises = [];
+            data.forEach(item => {
+                promises.push(this.Category.create(item));
+            });
+            this.$q.all(promises).then(() => {
+                resolve();
+            });
         });
     }
 }
