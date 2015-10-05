@@ -91,4 +91,17 @@ export default class SourceManager {
     setCurrentItemId(newCurrent) {
         this.current = newCurrent;
     }
+
+    /**
+     * Auxiliar method to create initial sample data for sources
+     * @param data is the source fixtures
+     */
+    createSampleData(data){
+
+        console.log('SourceManager. createSampleData');
+
+        data.forEach(item => {
+            this.Source.create(item);
+        });
+    }
 }
