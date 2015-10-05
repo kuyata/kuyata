@@ -147,6 +147,71 @@ describe("SourceManager", () => {
             DS.verifyNoOutstandingExpectation();
         });
     });
+
+    describe("getCategoriesTreeBySourceId(sourceId)", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should get a category tree from a created tree", () => {
+            SourceManager.data.tree = [
+                {
+                    "id": "1",
+                    "name": "Source 1",
+                    "categories": [
+                        {"id":"1","source_id":"1","parent_category_id":null,"children":
+                            [{"id":"4","source_id":"1","parent_category_id":"1","children":[
+                                {"id":"2","source_id":"1","parent_category_id":"4"}]
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "id": "2",
+                    "name": "Source 2",
+                    "categories": [
+                        {"id":"6","source_id":"2","parent_category_id":null,"children":
+                            [{"id":"3","source_id":"2","parent_category_id":"6"}]
+                        }
+                    ]
+                }
+            ];
+
+            let res = [
+                {"id":"1","source_id":"1","parent_category_id":null,"children":
+                    [{"id":"4","source_id":"1","parent_category_id":"1","children":[
+                        {"id":"2","source_id":"1","parent_category_id":"4"}]
+                    }]
+                }
+            ];
+
+            SourceManager.getCategoriesTreeBySourceId("1").then((categoryTree) => {
+                expect(categoryTree).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+
+        });
+
+        it("should get a category tree after to create the entire tree", () => {
+            SourceManager.data.list = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
+            CategoryManager.data.list = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
+
+            let res = [
+                {"id":"1","source_id":"1","parent_category_id":null,"children":
+                    [{"id":"4","source_id":"1","parent_category_id":"1","children":[
+                        {"id":"2","source_id":"1","parent_category_id":"4"}]
+                    }]
+                }
+            ];
+
+
+            SourceManager.getCategoriesTreeBySourceId("1").then((categoryTree) => {
+                expect(categoryTree).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+        });
+    });
 });
 
 

@@ -74,6 +74,24 @@ export default class SourceManager {
         });
     }
 
+
+    /**
+     * Get a category tree from a source
+     *
+     * @param sourceId
+     * @returns {Array}
+     */
+    getCategoriesTreeBySourceId(sourceId){
+        if(_.isEmpty(this.data.tree)){
+            return this.createSourcesTree().then(() => {
+                return _.filter(this.data.tree, { 'id': sourceId})[0].categories;
+            });
+        }
+        else {
+            return this.$q.when(_.filter(this.data.tree, { 'id': sourceId})[0].categories);
+        }
+    }
+
     /**
      * Get the id of the current source item. To control de source selected
      *
