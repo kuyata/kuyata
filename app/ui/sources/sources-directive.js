@@ -34,12 +34,13 @@ class SourcesController {
 	constructor(SourceManager, CategoryManager) {
 
 		// Create sample initial data
-		SourceManager.createSampleData(sourcesData);
-		CategoryManager.createSampleData(categoriesData);
-
-		// Get source list
-		SourceManager.findList().then(() => {
-			this.sources = SourceManager.data.list;
+		SourceManager.createSampleData(sourcesData).then(() => {
+			CategoryManager.createSampleData(categoriesData).then(() => {
+				// Get source list
+				SourceManager.findList().then(() => {
+					this.sources = SourceManager.data.list;
+				});
+			});
 		});
 	}
 }
