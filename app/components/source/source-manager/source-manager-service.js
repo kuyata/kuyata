@@ -74,6 +74,24 @@ export default class SourceManager {
         });
     }
 
+
+    /**
+     * Get a category tree from a source
+     *
+     * @param sourceId
+     * @returns {Array}
+     */
+    getCategoriesTreeBySourceId(sourceId){
+        if(_.isEmpty(this.data.tree)){
+            return this.createSourcesTree().then(() => {
+                return _.filter(this.data.tree, { 'id': sourceId})[0].categories;
+            });
+        }
+        else {
+            return this.$q.when(_.filter(this.data.tree, { 'id': sourceId})[0].categories);
+        }
+    }
+
     /**
      * Get the id of the current source item. To control de source selected
      *
@@ -90,5 +108,24 @@ export default class SourceManager {
      */
     setCurrentItemId(newCurrent) {
         this.current = newCurrent;
+    }
+
+    /**
+     * Auxiliar method to create initial sample data for sources
+     * @param data is the source fixtures
+     */
+    createSampleData(data){
+        console.log('SourceManager. createSampleData');
+        return this.$q((resolve) => {
+            let promises = [];
+
+            data.forEach(item => {
+                promises.push(this.Source.create(item));
+            });
+
+            this.$q.all(promises).then(() => {
+                resolve();
+            });
+        });
     }
 }

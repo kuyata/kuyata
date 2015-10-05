@@ -8,15 +8,15 @@ import jsData from 'js-data';
 import DSLocalStorageAdapter from 'js-data-localstorage';
 import jsDataAngular from 'js-data-angular';
 
-import header from './header/header'
-import options from './options/options'
-import categories from './categories/categories'
+import header from './ui/header/header'
+import options from './ui/options/options'
+import sources from './ui/sources/sources'
 
 export default angular.module('app', [
     uiRouter,
     header.name,
     options.name,
-    categories.name
+    sources.name
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {
@@ -27,10 +27,10 @@ export default angular.module('app', [
             abstract: true,
             views: {
                 'header@': {
-                    templateUrl: 'header/header.html'
+                    templateUrl: 'ui/header/header.html'
                 },
                 'options@': {
-                    templateUrl: 'options/options.html'
+                    templateUrl: 'ui/options/options.html'
                 }
             }
         })

@@ -1,0 +1,8 @@
+<ul id="accordion" class="nav-levels">
+	<li ng-repeat="source in vm.sources" class="nav-levels-1 panel panel-category">
+		<a ui-sref=".itemList({source:source.id})" class="" data-toggle="collapse" data-parent="#accordion" data-target="{{ '#' + category.slug }}">
+			<p class="nav-levels-title">{{ source.name }}</p>
+		</a>
+		<categories source-id="{{ source.id }}"></categories>
+	</li>
+</ul>

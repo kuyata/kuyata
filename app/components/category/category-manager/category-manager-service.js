@@ -89,7 +89,7 @@ export default class CategoryManager {
      *
      * @returns {*}
      */
-        getCurrentItemId() {
+    getCurrentItemId() {
         return this.current;
     }
 
@@ -100,5 +100,23 @@ export default class CategoryManager {
      */
         setCurrentItemId(newCurrent) {
         this.current = newCurrent;
+    }
+
+
+    /**
+     * Auxiliar method to create initial sample data for categories
+     * @param data is the categories fixtures
+     */
+    createSampleData(data){
+        return this.$q((resolve) => {
+            console.log('CategoryManager. createSampleData');
+            let promises = [];
+            data.forEach(item => {
+                promises.push(this.Category.create(item));
+            });
+            this.$q.all(promises).then(() => {
+                resolve();
+            });
+        });
     }
 }
