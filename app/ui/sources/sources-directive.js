@@ -5,6 +5,7 @@
  */
 
 import {sourcesData} from './../../components/common/data/sources';
+import {categoriesData} from './../../components/common/data/categories';
 
 /**
  * Sources directive factory
@@ -34,15 +35,11 @@ class SourcesController {
 
 		// Create sample initial data
 		SourceManager.createSampleData(sourcesData);
+		CategoryManager.createSampleData(categoriesData);
 
+		// Get source list
 		SourceManager.findList().then(() => {
 			this.sources = SourceManager.data.list;
-			console.log(SourceManager.data.list);
-		});
-
-		CategoryManager.findList().then(() => {
-			this.categories = CategoryManager.data.list;
-			console.log(CategoryManager.data.list);
 		});
 	}
 }

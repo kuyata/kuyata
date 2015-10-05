@@ -5,6 +5,7 @@ import uiRouter from 'angular-ui-router';
 import SourceManager from './../../components/source/source-manager/source-manager';
 import CategoryManager from './../../components/category/category-manager/category-manager';
 import SourcesDirective from './sources-directive';
+import CategoriesDirective from './categories-directive';
 
 export default angular.module('app.sources', [
 	uiRouter,
@@ -28,4 +29,5 @@ export default angular.module('app.sources', [
 		})
 })
 
-.directive('sources', SourcesDirective);
+.directive('sources', SourcesDirective)
+.directive('categories', CategoriesDirective);

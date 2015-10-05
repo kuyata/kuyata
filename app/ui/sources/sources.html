@@ -3,6 +3,6 @@
 		<a ui-sref=".itemList({source:source.id})" class="" data-toggle="collapse" data-parent="#accordion" data-target="{{ '#' + category.slug }}">
 			<p class="nav-levels-title">{{ source.name }}</p>
 		</a>
-		<categories></categories>
+		<categories source-id="{{ source.id }}"></categories>
 	</li>
 </ul>
