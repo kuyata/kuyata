@@ -49,13 +49,13 @@ class ItemsController {
 
 	gotoItemDetails(id) {
 		if(this.subcategory) {
-			this.state.go("app.categories.itemsSubcategory.details", {id: id});
+			this.state.go("app.sources.itemsSubcategory.details", {id: id});
 		}
 		else if(this.category) {
-			this.state.go("app.categories.itemsCategory.details", {id: id});
+			this.state.go("app.sources.itemsCategory.details", {id: id});
 		}
 		else if(this.source) {
-			this.state.go("app.categories.items.details", {id: id});
+			this.state.go("app.sources.items.details", {id: id});
 		}
 	}
 }
