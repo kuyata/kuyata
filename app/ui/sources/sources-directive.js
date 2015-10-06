@@ -6,6 +6,7 @@
 
 import {sourcesData} from './../../components/common/data/sources';
 import {categoriesData} from './../../components/common/data/categories';
+import {itemsData} from './../../components/common/data/items';
 
 /**
  * Sources directive factory
@@ -31,14 +32,16 @@ export default function SourcesDirective(){
  * @ngInject
  */
 class SourcesController {
-	constructor(SourceManager, CategoryManager) {
+	constructor(SourceManager, CategoryManager, ItemManager) {
 
 		// Create sample initial data
 		SourceManager.createSampleData(sourcesData).then(() => {
 			CategoryManager.createSampleData(categoriesData).then(() => {
-				// Get source list
-				SourceManager.findList().then(() => {
-					this.sources = SourceManager.data.list;
+				ItemManager.createSampleData(itemsData).then(() => {
+					// Get source list
+					SourceManager.findList().then(() => {
+						this.sources = SourceManager.data.list;
+					});
 				});
 			});
 		});
