@@ -4,7 +4,6 @@
  * This file contains the sources directive and controller
  */
 
-import {itemsData} from './../../../components/common/data/items';
 
 /**
  * Items directive factory
@@ -15,8 +14,9 @@ import {itemsData} from './../../../components/common/data/items';
 export default function ItemsDirective(){
 	return {
 		scope: {
-			state: "@",
-			stateParams: "@"
+			source: "@",
+			category: "@",
+			subcategory: "@"
 		},
 		controllerAs: 'vm',
 		controller: ItemsController,
@@ -25,37 +25,36 @@ export default function ItemsDirective(){
 	};
 }
 
-
 class ItemsController {
-	constructor(ItemManager, $filter) {
+	constructor(ItemManager, $state) {
 
-		ItemManager.createSampleData(itemsData).then(() => {
-			if(this.stateParams.subcategory) {
-				ItemManager.findListPage({source: this.stateParams.source, category: this.stateParams.subcategory}).then(() => {
+		this.state = $state;
+
+			if(this.subcategory) {
+				ItemManager.findListPage({source: this.source, category: this.category, subcategory: this.subcategory}).then(() => {
 					this.items = ItemManager.data.list;
 				});
 			}
-			else if (this.stateParams.category) {
-				ItemManager.findListPage({source: this.stateParams.source, category: this.stateParams.category}).then(() => {
+			else if (this.category) {
+				ItemManager.findListPage({source: this.source, category: this.category}).then(() => {
 					this.items = ItemManager.data.list;
 				});
 			}
-			else if(this.stateParams.source) {
-				ItemManager.findListPage({source: this.stateParams.source}).then(() => {
+			else if(this.source) {
+				ItemManager.findListPage({source: this.source}).then(() => {
 					this.items = ItemManager.data.list;
 				});
 			}
-		});
 	}
 
 	gotoItemDetails(id) {
-		if(this.stateParams.subcategory) {
+		if(this.subcategory) {
 			this.state.go("app.categories.itemsSubcategory.details", {id: id});
 		}
-		else if(this.stateParams.category) {
+		else if(this.category) {
 			this.state.go("app.categories.itemsCategory.details", {id: id});
 		}
-		else if(this.stateParams.source) {
+		else if(this.source) {
 			this.state.go("app.categories.items.details", {id: id});
 		}
 	}

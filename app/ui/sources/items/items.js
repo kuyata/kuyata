@@ -20,8 +20,8 @@ export default angular.module('app.sources.items', [
 			url: ":source/",
 			views: {
 				'itemList@': {
-					template: '<items state="vm.state" state-params="vm.stateParams"></items>',
-					controller: ($state, $stateParams) => {this.state = $state; this.stateParams = $stateParams;},
+					template: '<items source="{{ vm.stateParams.source }}"></items>',
+					controller: function ($stateParams) {this.stateParams = $stateParams;},
 					controllerAs: 'vm'
 				}
 			}
@@ -31,8 +31,8 @@ export default angular.module('app.sources.items', [
 			url: ":source/:category/",
 			views: {
 				'itemList@': {
-					template: '<items state="vm.state" state-params="vm.stateParams"></items>',
-					controller: ($state, $stateParams) => {this.state = $state; this.stateParams = $stateParams;},
+					template: '<items source="{{ vm.stateParams.source }}" category="{{ vm.stateParams.category }}"></items>',
+					controller: function ($stateParams) {this.stateParams = $stateParams;},
 					controllerAs: 'vm'
 				}
 			}
@@ -42,8 +42,8 @@ export default angular.module('app.sources.items', [
 			url: ":source/:category/:subcategory/",
 			views: {
 				'itemList@': {
-					template: '<items state="vm.state" state-params="vm.stateParams"></items>',
-					controller: ($state, $stateParams) => {this.state = $state; this.stateParams = $stateParams;},
+					template: '<items source="{{ vm.stateParams.source }}" category="{{ vm.stateParams.category }}" subcategory="{{ vm.stateParams.subcategory }}"></items>',
+					controller: function ($stateParams) {this.stateParams = $stateParams;},
 					controllerAs: 'vm'
 				}
 			}
