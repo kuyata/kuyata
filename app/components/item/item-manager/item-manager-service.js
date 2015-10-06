@@ -181,14 +181,17 @@ function createQuery(params, skip = false, limit = false) {
 
     if(!_.isEmpty(params)){
         _params.where = {};
-        if(params.title){
-            _params.where.title = {'in': params.title};
-        }
+        //if(params.title){
+        //    _params.where.title = {'in': params.title};
+        //}
         if(params.source){
-            _params.where.source = {'==': params.source};
+            _params.where.source_id = {'==': params.source};
         }
         if(params.category){
-            _params.where.category = {'==': params.category};
+            _params.where.category_id = {'==': params.category};
+        }
+        if(params.subcategory){
+            _params.where.subcategory_id = {'==': params.subcategory};
         }
     }
 
