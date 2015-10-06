@@ -134,7 +134,7 @@ export default class ItemManager {
      *
      * @returns {*}
      */
-        getCurrentItemId() {
+    getCurrentItemId() {
         return this.current;
     }
 
@@ -143,8 +143,25 @@ export default class ItemManager {
      *
      * @param newCurrent. The id of the new current item selected
      */
-        setCurrentItemId(newCurrent) {
+    setCurrentItemId(newCurrent) {
         this.current = newCurrent;
+    }
+
+    /**
+     * Auxiliar method to create initial sample data for categories
+     * @param data is the categories fixtures
+     */
+     createSampleData(data){
+        return this.$q((resolve) => {
+            console.log('ItemManager. createSampleData');
+            let promises = [];
+            data.forEach(item => {
+                promises.push(this.Item.create(item));
+            });
+            this.$q.all(promises).then(() => {
+                resolve();
+            });
+        });
     }
 }
 
