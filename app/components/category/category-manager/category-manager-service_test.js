@@ -49,25 +49,15 @@ describe("CategoryManager", () => {
     //Init angular data mocks
     beforeEach(() => angular.mock.module('js-data-mocks'));
 
-    describe("findList()", () => {
+    describe("fetch()", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should get cached data", () => {
-            CategoryManager.data.list = categoriesData;
-            CategoryManager.findList().then(() => {
-                expect(CategoryManager.data.list).toEqual(categoriesData);
-            });
-
-            DS.verifyNoOutstandingExpectation();
-
-        });
-
-        it("should get data from database", () => {
+        it("should get categories data and add to store if necesary", () => {
             DS.expectFindAll(Category.name, {}).respond(categoriesData);
 
-            CategoryManager.findList().then(() => {
-                expect(CategoryManager.data.list).toEqual(categoriesData);
+            CategoryManager.fetch().then((categories) => {
+                expect(categories).toEqual(categoriesData);
             });
 
             DS.verifyNoOutstandingExpectation();
@@ -79,37 +69,9 @@ describe("CategoryManager", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should create a multilevel tree when data is cached", () => {
-            CategoryManager.data.list = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
-
-            // expected result
-            let res =
-            {
-                "1":
-                    [
-                        {"id":"1","source_id":"1","parent_category_id":null,"children":
-                            [{"id":"4","source_id":"1","parent_category_id":"1","children":[
-                                {"id":"2","source_id":"1","parent_category_id":"4"}]
-                            }]
-                        }
-                    ],
-                "2":
-                    [
-                        {"id":"6","source_id":"2","parent_category_id":null,"children":
-                            [{"id":"3","source_id":"2","parent_category_id":"6"}]
-                        }
-                    ]
-            };
-
-            CategoryManager.getCategoriesTree().then((tree) => {
-                expect(JSON.stringify(tree)).toEqual(JSON.stringify(res));
-            });
-
-            DS.verifyNoOutstandingExpectation();
-        });
-
-        it("should create a multilevel tree when data is not cached", () => {
+        it("should create a multilevel tree", () => {
             DS.expectFindAll(Category.name, {}).respond([{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}]);
+            CategoryManager.data.collection = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
 
             // expexted result
             let res =
@@ -137,31 +99,6 @@ describe("CategoryManager", () => {
 
             DS.verifyNoOutstandingExpectation();
             DS.flush();
-        });
-    });
-
-    describe("getCategoryById(id)", () => {
-
-        beforeEach(done => _setup(done));
-
-        it("should get category item by id", () => {
-            CategoryManager.data.list = categoriesData;
-
-            // expexted result
-            let res = {
-                "id": "10",
-                "name": "Internet",
-                "source_id": "1",
-                "parent_category_id": "1",
-                "src_id": "",
-                "status": "",
-                "created_on": "1430847165",
-                "updated_on": "1430847165"
-            };
-
-            let cat = CategoryManager.getCategoryById("10");
-
-            expect(JSON.stringify(cat)).toEqual(JSON.stringify(res));
         });
     });
 });
