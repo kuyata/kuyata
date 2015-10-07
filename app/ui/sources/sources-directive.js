@@ -39,9 +39,9 @@ class SourcesController {
 			CategoryManager.createSampleData(categoriesData).then(() => {
 				ItemManager.createSampleData(itemsData).then(() => {
 					// Get source list
-					SourceManager.findList().then(() => {
-						this.sources = SourceManager.data.list;
-					});
+
+					this.sources = SourceManager.data.collection;
+					SourceManager.fetch();
 				});
 			});
 		});

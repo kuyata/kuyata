@@ -5,6 +5,8 @@
  */
 
 import _ from 'lodash';
+import jsData from 'js-data';
+import jsDataAngular from 'js-data-angular';
 
 /**
  * Manage everything about sources
@@ -13,12 +15,12 @@ import _ from 'lodash';
  */
 export default class SourceManager {
 
-    constructor($q, Source, CategoryManager){
+    constructor($q, DS, Source, CategoryManager){
         this.$q = $q;
         this.Source = Source;
         this.CategoryManager = CategoryManager;
 
-        this.data = {list:[], tree:[]};
+        this.data = {collection: DS.store[Source.name].collection, tree:[]}; // Get the DS store collection
         this.current = null;
     }
 
@@ -26,49 +28,22 @@ export default class SourceManager {
      * Getter method to retrieve data from DB or use cached data if it already exists
      * @returns {*}
      */
-    findList(){
-
-        if(_.isEmpty(this.data.list)){
-            return this.Source.findAll({}).then((sources) => {
-                this.data.list = sources;
-                return this.data.list;
-            });
-        }
-        else {
-            return this.$q.when(this.data.list);
-        }
+    fetch(){
+        this.current = null;
+        return this.Source.findAll({});
     }
-
-    /**
-     * Get the source element by passed id
-     *
-     * @param id
-     * @returns a source element
-     */
-     getSourceById(id){
-        return _.find(this.data.list, item => {
-            return item.id === id;
-        });
-     }
 
     /**
      * Creates a multilevel sources array with its category trees
      * @returns a promise
      */
     createSourcesTree(){
-
-        return this.findList().then(() => {
-
+        return this.fetch().then(() => {
             return this.CategoryManager.getCategoriesTree().then(categoriesTree => {
-
-                let sourcesTree = angular.copy(this.data.list);
-
+                let sourcesTree = angular.copy(this.data.collection);
                 sourcesTree.forEach(node => {
-
                     node.categories = categoriesTree[node.id];
-
                 });
-
                 this.data.tree = sourcesTree;
             });
         });

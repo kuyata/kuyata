@@ -47,32 +47,22 @@ describe("SourceManager", () => {
 
     // Init the module before each test case
     beforeEach(() => {
-        angular.mock.module(sourceManagerModule.name)
+        angular.mock.module(sourceManagerModule.name),
         angular.mock.module(categoryManagerModule.name)
     });
 
     //Init angular data mocks
     beforeEach(() => angular.mock.module('js-data-mocks'));
 
-    describe("findList()", () => {
+    describe("fetch()", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should get cached data", () => {
-            SourceManager.data.list = sourcesData;
-            SourceManager.findList().then(() => {
-                expect(SourceManager.data.list).toEqual(sourcesData);
-            });
-
-            DS.verifyNoOutstandingExpectation();
-
-        });
-
-        it("should get data from database", () => {
+        it("should get data and add to store if necesary", () => {
             DS.expectFindAll(Source.name, {}).respond(sourcesData);
 
-            SourceManager.findList().then(() => {
-                expect(SourceManager.data.list).toEqual(sourcesData);
+            SourceManager.fetch().then((sources) => {
+                expect(sources).toEqual(sourcesData);
             });
 
             DS.verifyNoOutstandingExpectation();
@@ -80,37 +70,14 @@ describe("SourceManager", () => {
         });
     });
 
-    describe("getSourceById(id)", () => {
-
-        beforeEach(done => _setup(done));
-
-        it("should get source item by id", () => {
-            SourceManager.data.list = sourcesData;
-
-            // expexted result
-            let res = {
-                "id": "2",
-                "name": "Eatup",
-                "src_id": "",
-                "status": "",
-                "url": "http://www.eatup.com",
-                "created_on": "1430847165",
-                "updated_on": "1430847165"
-            };
-
-            let sou = SourceManager.getSourceById("2");
-
-            expect(JSON.stringify(sou)).toEqual(JSON.stringify(res));
-        });
-    });
-
     describe("setSourcesTree()", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should create the sources tree when source data is cached", () => {
+        it("should create the sources tree", () => {
+            DS.expectFindAll(Source.name, {}).respond(sourcesData);
 
-            SourceManager.data.list = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
+            SourceManager.data.collection = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
             CategoryManager.data.list = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
 
             // expexted result
@@ -145,6 +112,7 @@ describe("SourceManager", () => {
             });
 
             DS.verifyNoOutstandingExpectation();
+            DS.flush();
         });
     });
 
@@ -193,7 +161,8 @@ describe("SourceManager", () => {
         });
 
         it("should get a category tree after to create the entire tree", () => {
-            SourceManager.data.list = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
+            DS.expectFindAll(Source.name, {}).respond(sourcesData);
+            SourceManager.data.collection = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
             CategoryManager.data.list = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
 
             let res = [
@@ -204,12 +173,12 @@ describe("SourceManager", () => {
                 }
             ];
 
-
             SourceManager.getCategoriesTreeBySourceId("1").then((categoryTree) => {
                 expect(categoryTree).toEqual(res);
             });
 
             DS.verifyNoOutstandingExpectation();
+            DS.flush();
         });
     });
 });
