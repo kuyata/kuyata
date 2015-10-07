@@ -79,22 +79,140 @@ describe("ItemManager", () => {
 
         beforeEach(done => _setup(done));
 
-        it("should get first page of items", () => {
+        it("should get second page of items from the first one", () => {
+            ItemManager.currentPage = 0;
+            ItemManager.lastedPage = false;
             ItemManager.pageLength = 5;
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: "1"}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+            ItemManager.params = {source: "1"};
+
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: "1"}), ['src_date'], [false]).slice(ItemManager.pageLength,ItemManager.pageLength*2);
 
             DS.expectFindAll(Item.name, {
+                "where": {
+                    source_id: {"==":"1"}
+                },
                 "sort":[["src_date","DESC"]],
-                "skip": 0,
+                "skip": ItemManager.pageLength,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
-            ItemManager.initialPage({}).then((items) => {
+            ItemManager.pageUp().then((items) => {
                 expect(items).toEqual(res);
             });
 
             DS.verifyNoOutstandingExpectation();
             DS.flush();
+        });
+
+        it("should get false trying to paging up on a unconfirmed lasted list", () => {
+            ItemManager.currentPage = 1;
+            ItemManager.lastedPage = false;
+            ItemManager.pageLength = 5;
+            ItemManager.params = {source: "1"};
+
+            DS.expectFindAll(Item.name, {
+                "where": {
+                    source_id: {"==":"1"}
+                },
+                "sort":[["src_date","DESC"]],
+                "skip": ItemManager.pageLength*2,
+                "limit": ItemManager.pageLength})
+                .respond([]);
+
+            ItemManager.pageUp().then((items) => {
+                expect(items).toEqual(false);
+                expect(ItemManager.lastedPage).toEqual(true);
+                expect(ItemManager.currentPage).toEqual(1);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should get false trying to paging up on a confirmed lasted list", () => {
+            ItemManager.currentPage = 1;
+            ItemManager.lastedPage = true;
+            ItemManager.pageLength = 5;
+            ItemManager.params = {source: "1"};
+
+            ItemManager.pageUp().then((items) => {
+                expect(items).toEqual(false);
+                expect(ItemManager.lastedPage).toEqual(true);
+                expect(ItemManager.currentPage).toEqual(1);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+        });
+    });
+
+    describe("pageDown()", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should get first page of items from the second", () => {
+            ItemManager.currentPage = 1;
+            ItemManager.lastedPage = false;
+            ItemManager.pageLength = 5;
+            ItemManager.params = {source: "1"};
+
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: "1"}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+
+            DS.expectFindAll(Item.name, {
+                "where": {
+                    source_id: {"==":"1"}
+                },
+                "sort":[["src_date","DESC"]],
+                "skip": 0,
+                "limit": ItemManager.pageLength})
+                .respond(res);
+
+            ItemManager.pageDown().then((items) => {
+                expect(items).toEqual(res);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should get the previous page from a confirmed lasted list", () => {
+            ItemManager.currentPage = 1;
+            ItemManager.lastedPage = true;
+            ItemManager.pageLength = 5;
+            ItemManager.params = {source: "1"};
+
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: "1"}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+
+            DS.expectFindAll(Item.name, {
+                "where": {
+                    source_id: {"==":"1"}
+                },
+                "sort":[["src_date","DESC"]],
+                "skip": 0,
+                "limit": ItemManager.pageLength})
+                .respond(res);
+
+            ItemManager.pageDown().then((items) => {
+                expect(items).toEqual(res);
+                expect(ItemManager.lastedPage).toEqual(false);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
+
+        it("should get false trying to paging down on a confirmed lasted list", () => {
+            ItemManager.currentPage = 0;
+            ItemManager.lastedPage = false;
+            ItemManager.pageLength = 5;
+            ItemManager.params = {source: "1"};
+
+            ItemManager.pageDown().then((items) => {
+                expect(items).toEqual(false);
+                expect(ItemManager.lastedPage).toEqual(false);
+                expect(ItemManager.currentPage).toEqual(0);
+            });
+
+            DS.verifyNoOutstandingExpectation();
         });
     });
 });
