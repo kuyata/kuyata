@@ -25,17 +25,20 @@
 </div>
 
 <div id="item-list" class="app-main-middle-3">
-<ul class="item-list nav">
-	<li ng-repeat="item in vm.items" class="item-list-obj">
+	<ul class="item-list nav">
+		<li ng-repeat="item in vm.items" class="item-list-obj">
 
-		<a ng-click="vm.gotoItemDetails(item.id)">
-			<span class="item-list-obj-prize">{{ item.price }}</span>
-			<h4 class="item-list-obj-title">{{ item.title }}</h4>
+			<a ng-click="vm.gotoItemDetails(item.id)">
+				<span class="item-list-obj-prize">{{ item.price }}</span>
+				<h4 class="item-list-obj-title">{{ item.title }}</h4>
 
-			<div class="ellipsis">
-				<p class="item-list-obj-desc">{{ item.desc }}</p>
-			</div>
-		</a>
-	</li>
-</ul>
+				<div class="ellipsis">
+					<p class="item-list-obj-desc">{{ item.desc }}</p>
+				</div>
+			</a>
+		</li>
+	</ul>
 </div>
+
+<a ng-click="vm.pageDown()">Anterior</a>
+<a ng-click="vm.pageUp()">Siguiente</a>
