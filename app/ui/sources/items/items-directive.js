@@ -29,22 +29,23 @@ class ItemsController {
 	constructor(ItemManager, $state) {
 
 		this.state = $state;
+		this.ItemManager = ItemManager;
 
-			if(this.subcategory) {
-				ItemManager.findListPage({source: this.source, category: this.category, subcategory: this.subcategory}).then(() => {
-					this.items = ItemManager.data.list;
-				});
-			}
-			else if (this.category) {
-				ItemManager.findListPage({source: this.source, category: this.category}).then(() => {
-					this.items = ItemManager.data.list;
-				});
-			}
-			else if(this.source) {
-				ItemManager.findListPage({source: this.source}).then(() => {
-					this.items = ItemManager.data.list;
-				});
-			}
+		if(this.subcategory) {
+			ItemManager.initialPage({source: this.source, category: this.category, subcategory: this.subcategory}).then((items) => {
+				this.items = items;
+			});
+		}
+		else if (this.category) {
+			ItemManager.initialPage({source: this.source, category: this.category}).then((items) => {
+				this.items = items;
+			});
+		}
+		else if(this.source) {
+			ItemManager.initialPage({source: this.source}).then((items) => {
+				this.items = items;
+			});
+		}
 	}
 
 	gotoItemDetails(id) {
@@ -57,5 +58,21 @@ class ItemsController {
 		else if(this.source) {
 			this.state.go("app.sources.items.details", {id: id});
 		}
+	}
+
+	pageDown() {
+		this.ItemManager.pageDown().then((items) => {
+			if(items) {
+				this.items = items;
+			}
+		});
+	}
+
+	pageUp() {
+		this.ItemManager.pageUp().then((items) => {
+			if(items) {
+				this.items = items;
+			}
+		});
 	}
 }

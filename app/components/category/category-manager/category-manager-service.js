@@ -5,6 +5,8 @@
  */
 
 import _ from 'lodash';
+import jsData from 'js-data';
+import jsDataAngular from 'js-data-angular';
 
 /**
  * Manage everything about categories
@@ -13,11 +15,11 @@ import _ from 'lodash';
  */
 export default class CategoryManager {
 
-    constructor($q, Category){
+    constructor($q, DS, Category){
         this.$q = $q;
         this.Category = Category;
 
-        this.data = {list:[]};
+        this.data = {collection: DS.store[Category.name].collection}; // Get the DS store collection
         this.current = null;
     }
 
@@ -25,17 +27,9 @@ export default class CategoryManager {
      * Getter method to retrieve data from DB or use cached data if it already exists
      * @returns {*}
      */
-    findList(){
-
-        if(_.isEmpty(this.data.list)){
-            return this.Category.findAll({}).then((categories) => {
-                this.data.list = categories;
-                return this.data.list;
-            });
-        }
-        else {
-            return this.$q.when(this.data.list);
-        }
+    fetch(){
+        this.current = null;
+        return this.Category.findAll({});
     }
 
     /**
@@ -44,8 +38,8 @@ export default class CategoryManager {
      * @return a promise with the category tree
      */
     getCategoriesTree() {
-        return this.findList().then(() => {
-            let list = angular.copy(this.data.list);
+        return this.fetch().then(() => {
+            let list = angular.copy(this.data.collection);
             let tree = [];
             let dataMap = {};
             list.forEach(node => {
@@ -73,18 +67,6 @@ export default class CategoryManager {
     }
 
     /**
-     * Get the category element by passed id
-     *
-     * @param id
-     * @returns a category element
-     */
-    getCategoryById(id){
-        return _.find(this.data.list, item => {
-            return item.id === id;
-        });
-    }
-
-    /**
      * Get the id of the current category item. To control de category selected
      *
      * @returns {*}
@@ -98,7 +80,7 @@ export default class CategoryManager {
      *
      * @param newCurrent. The id of the new current category item selected
      */
-        setCurrentItemId(newCurrent) {
+    setCurrentItemId(newCurrent) {
         this.current = newCurrent;
     }
 
@@ -108,12 +90,14 @@ export default class CategoryManager {
      * @param data is the categories fixtures
      */
     createSampleData(data){
+        console.log('CategoryManager. createSampleData');
         return this.$q((resolve) => {
-            console.log('CategoryManager. createSampleData');
             let promises = [];
+
             data.forEach(item => {
                 promises.push(this.Category.create(item));
             });
+
             this.$q.all(promises).then(() => {
                 resolve();
             });
