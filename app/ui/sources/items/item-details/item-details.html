@@ -1,19 +1,15 @@
 <div class="item-details well well-small">
-	<h4 class="item-details-title">{{ vm.itemDetailed.title }}</h4>
+	<h4 class="item-details-title">{{ vm.details.title }}</h4>
 
 	<div class="clearfix">
-		<p class="item-details-category">{{ vm.itemDetailed.category }} - {{ vm.itemDetailed.subcat1 }} - {{ vm.itemDetailed.subcat2 }}</p>
+		<p class="item-details-category">{{ vm.details.source }} - {{ vm.details.category }} - {{ vm.details.subcategory }}</p>
 
-		<p class="item-details-prize">{{ vm.itemDetailed.price }}</p>
+		<p class="item-details-prize">{{ vm.details.body }}</p>
 	</div>
-	<p class="item-details-province">{{ vm.itemDetailed.location }}</p>
 
-	<p class="item-details-date">{{ vm.itemDetailed.date }}</p>
+	<p class="item-details-date">{{ vm.details.src_date }}</p>
 
-	<p class="item-details-desc">{{ vm.itemDetailed.desc }}</p>
-
-	<p class="item-details-author">Contacta con: <strong>{{ vm.itemDetailed.author }}</strong></p>
-	<span class="item-details-tlf label label-warning">{{ vm.itemDetailed.phone }}</span>
-	<span class="item-details-mail label label-warning">{{ vm.itemDetailed.email }}</span>
+	<p class="item-details-author">Contacta con: <strong>{{ vm.details.author }}</strong></p>
+	<span class="item-details-mail label label-warning">{{ vm.details.url }}</span>
 
 </div>

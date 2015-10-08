@@ -1,14 +1,14 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
-//import details from './details/details';
+import itemDetails from './item-details/item-details';
 import ItemManager from './../../../components/item/item-manager/item-manager';
 import ItemsDirective from './items-directive';
 
 export default angular.module('app.sources.items', [
 	uiRouter,
 
-	//details.name,
+	itemDetails.name,
 	ItemManager.name
 ])
 
