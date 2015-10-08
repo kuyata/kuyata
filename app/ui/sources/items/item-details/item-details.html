@@ -3,9 +3,9 @@
 
 	<div class="clearfix">
 		<p class="item-details-category">
-			<span>{{ vm.details.source().name }}</span>
-			<span ng-if="vm.details.category()"> - {{ vm.details.category().name }}</span>
-			<span ng-if="vm.details.subcategory()"> - {{ vm.details.subcategory().name }}</span>
+			<span>{{ vm.details.sourceName }}</span>
+			<span ng-if="vm.details.categoryName "> - {{ vm.details.categoryName }}</span>
+			<span ng-if="vm.details.subcategoryName "> - {{ vm.details.subcategoryName }}</span>
 		</p>
 		<p class="item-details-prize">{{ vm.details.body }}</p>
 	</div>

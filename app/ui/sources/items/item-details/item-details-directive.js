@@ -33,6 +33,15 @@ class ItemDetailsController {
 		this.ItemManager.Item.find(this.item).then((item) => {
 			if(item) {
 				this.details = item;
+				this.details.source().then((source) => {
+					this.details.sourceName = source.name;
+				});
+				this.details.category().then((category) => {
+					this.details.categoryName = category.name;
+				});
+				this.details.subcategory().then((subcategory) => {
+					this.details.subcategoryName = subcategory.name;
+				});
 			}
 			else {
 				this.returnToItemList();
