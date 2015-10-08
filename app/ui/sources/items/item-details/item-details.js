@@ -1,45 +1,51 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import items from './../../../components/items/items';
-import ItemDetailsController from './item-details-controller'
 
-export default angular.module('app.categories.itemList.details', [
+import ItemManager from './../../../../components/item/item-manager/item-manager';
+import ItemDetailsDirective from './item-details-directive';
+
+export default angular.module('app.sources.items.details', [
 	uiRouter,
-	items.name
+
+	ItemManager.name
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {
 
 	$stateProvider
 
-		.state("app.categories.itemList.details", {
+		.state("app.sources.items.details", {
 			url: "details/:id/",
 			views: {
-				'itemDetails@': {
-					templateUrl: 'categories/item-list/item-details/item-details.html',
-					controller: 'ItemDetailsController as vm'
+				'details@': {
+					template: '<itemdetails item="{{ vm.stateParams.id }}"></itemdetails>',
+					controller: function ($stateParams) {this.stateParams = $stateParams;},
+					controllerAs: 'vm'
 				}
 			}
 		})
 
-		.state("app.categories.itemListSubcat1.details", {
+		.state("app.sources.itemsCategory.details", {
 			url: "details/:id/",
 			views: {
-				'itemDetails@': {
-					templateUrl: 'categories/item-list/item-details/item-details.html',
-					controller: 'ItemDetailsController as vm'
+				'details@': {
+					template: '<itemdetails item="{{ vm.stateParams.id }}"></itemdetails>',
+					controller: function ($stateParams) {this.stateParams = $stateParams;},
+					controllerAs: 'vm'
 				}
 			}
 		})
 
-		.state("app.categories.itemListSubcat2.details", {
+		.state("app.sources.itemsSubcategory.details", {
 			url: "details/:id/",
 			views: {
-				'itemDetails@': {
-					templateUrl: 'categories/item-list/item-details/item-details.html',
-					controller: 'ItemDetailsController as vm'
+				'details@': {
+					template: '<itemdetails item="{{ vm.stateParams.id }}"></itemdetails>',
+					controller: function ($stateParams) {this.stateParams = $stateParams;},
+					controllerAs: 'vm'
 				}
 			}
 		})
 })
-.controller("ItemDetailsController", ItemDetailsController);
+
+.directive("itemdetails", ItemDetailsDirective);

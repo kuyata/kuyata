@@ -1,7 +1,7 @@
 /**
  * @fileOverview
  *
- * This file contains the sources directive and controller
+ * This file contains the items directive and controller
  */
 
 

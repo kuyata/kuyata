@@ -58,7 +58,7 @@ class Item {
      * @returns {*}
      */
     source() {
-        return this.Source.get(this.source_id);
+        return Item.Source.find(this.source_id);
     }
 
     /**
@@ -66,7 +66,7 @@ class Item {
      * @returns {*}
      */
     category() {
-        return this.Category.get(this.category_id);
+        return Item.Category.find(this.category_id);
     }
 
     /**
@@ -74,6 +74,6 @@ class Item {
      * @returns {*}
      */
     subcategory() {
-        return this.Category.get(this.subcategory_id);
+        return Item.Category.find(this.subcategory_id);
     }
 }
