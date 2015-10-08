@@ -58,7 +58,12 @@ class Item {
      * @returns {*}
      */
     source() {
-        return this.Source.get(this.source_id);
+        if(this.source_id) {
+            return Item.Source.get(this.source_id)
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -66,7 +71,12 @@ class Item {
      * @returns {*}
      */
     category() {
-        return this.Category.get(this.category_id);
+        if(this.category_id) {
+            return Item.Category.get(this.category_id)
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -74,6 +84,11 @@ class Item {
      * @returns {*}
      */
     subcategory() {
-        return this.Category.get(this.subcategory_id);
+        if(this.subcategory_id) {
+            return Item.Category.get(this.subcategory_id)
+        }
+        else {
+            return false;
+        }
     }
 }
