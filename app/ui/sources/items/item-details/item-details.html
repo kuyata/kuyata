@@ -2,14 +2,16 @@
 	<h4 class="item-details-title">{{ vm.details.title }}</h4>
 
 	<div class="clearfix">
-		<p class="item-details-category">{{ vm.details.source }} - {{ vm.details.category }} - {{ vm.details.subcategory }}</p>
-
+		<p class="item-details-category">
+			<span>{{ vm.details.source().name }}</span>
+			<span ng-if="vm.details.category()"> - {{ vm.details.category().name }}</span>
+			<span ng-if="vm.details.subcategory()"> - {{ vm.details.subcategory().name }}</span>
+		</p>
 		<p class="item-details-prize">{{ vm.details.body }}</p>
 	</div>
 
-	<p class="item-details-date">{{ vm.details.src_date }}</p>
-
-	<p class="item-details-author">Contacta con: <strong>{{ vm.details.author }}</strong></p>
-	<span class="item-details-mail label label-warning">{{ vm.details.url }}</span>
+	<p class="item-details-date">{{ vm.details.src_date | date : format : timezone}}</p>
+	<p class="item-details-author">Autor: <strong>{{ vm.details.author }}</strong></p>
+	<a ng-href="{{ vm.details.url }}" class="item-details-mail label label-warning">fuente</a>
 
 </div>

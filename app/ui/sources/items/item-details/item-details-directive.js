@@ -33,7 +33,6 @@ class ItemDetailsController {
 		this.ItemManager.Item.find(this.item).then((item) => {
 			if(item) {
 				this.details = item;
-				//this.details.source = item.source();
 			}
 			else {
 				this.returnToItemList();
