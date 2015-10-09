@@ -18,16 +18,17 @@
 </div>
 
 <div class="app-main-middle-2">
-
 	<div class="item-list-date-current">
-		<span>Lunes 6 de Febrero de 2014</span>
+		<span></span>
 	</div>
 </div>
 
 <div id="item-list" class="app-main-middle-3">
 	<ul class="item-list nav">
 		<li ng-repeat="item in vm.items" class="item-list-obj">
-
+			<div ng-if="(vm.items[$index].src_date | date ) != (vm.items[$index-1].src_date | date )" class="item-list-obj-divider">
+				<span> {{ item.src_date | date : format : timezone}} </span>
+			</div>
 			<a ng-click="vm.gotoItemDetails(item.id)">
 				<span class="item-list-obj-prize">{{ item.price }}</span>
 				<h4 class="item-list-obj-title">{{ item.title }}</h4>
