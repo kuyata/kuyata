@@ -41,7 +41,7 @@ module.exports = {
 
     misc: {
         font: {
-            src: "./fonts/**",
+            src: ["./node_modules/font-awesome/fonts/**", "./node_modules/bootstrap/dist/fonts/**"],
             dest: dest + "/fonts/"
         },
 
