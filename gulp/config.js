@@ -3,6 +3,15 @@ var src = './app';
 
 module.exports = {
 
+    less: {
+        src: src + "/components/common/styles/main.less",
+        watched: src + "/**/*.less",
+        dest: dest + "/styles/",
+        settings: {
+            imagePath: '/images' // Used by the image-url helper
+        }
+    },
+
     sass: {
         src: src + "/app.scss",
         dest: dest + "/styles/",
