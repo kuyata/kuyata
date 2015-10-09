@@ -12,6 +12,6 @@ gulp.task('watch', function () {
 });
 
 gulp.task('_watch', function () {
-    gulp.watch(config.sass.src, ['sass']);
+    gulp.watch(config.less.watched, ['less']);
     gulp.watch(config.markup.src, ['markup']);
 });
