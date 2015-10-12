@@ -1,14 +1,11 @@
-<ul id="{{ vm.sourceId }}" class="collapse_">
-	<li ng-repeat="category in vm.categories" class="nav-levels-1 panel panel-category-sub">
-		<a ui-sref=".itemsCategory({source:vm.sourceId, category:category.id})" class="accordion-toggle" data-toggle="collapse" data-parent="{{ '#' + vm.sourceId }}" data-target="{{ '#' + category.id }}">
-			<p class="nav-levels-title">{{ category.name }}</p>
-		</a>
-		<ul class="nav-levels-2 collapse_" id="{{ category.id }}">
-			<li ng-repeat="subcategory in category.children">
-				<a ui-sref=".itemsSubcategory({source:vm.sourceId, category:category.id, subcategory:subcategory.id})">
-					{{ subcategory.name }}
-				</a>
-			</li>
-		</ul>
-	</li>
-</ul>
+<accordion close-others="true">
+	<accordion-group heading="{{ category.name }}" ng-repeat="category in vm.categories" ng-click="vm.itemListByCategory(vm.sourceId, category.id); $event.stopPropagation();">
+
+		<div class="list-group">
+			<a href class="list-group-item" ng-repeat="subcategory in category.children" ng-click="vm.itemListBySubcategory(vm.sourceId, category.id, subcategory.id); $event.stopPropagation();">
+				{{ subcategory.name }}
+			</a>
+		</div>
+
+	</accordion-group>
+</accordion>

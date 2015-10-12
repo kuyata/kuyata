@@ -31,10 +31,19 @@ export default function CategoriesDirective(){
  * @ngInject
  */
 class CategoriesController {
-	constructor(SourceManager) {
+	constructor(SourceManager, $state) {
+		this.state = $state;
 		// Get category list filtered by source id
 		SourceManager.getCategoriesTreeBySourceId(this.sourceId).then((sourceTree) => {
 			this.categories = sourceTree;
 		});
+	}
+
+	itemListByCategory(source, category) {
+		this.state.go("app.sources.itemsCategory", {source: source, category: category});
+	}
+
+	itemListBySubcategory(source, category, subcategory) {
+		this.state.go("app.sources.itemsSubcategory", {source: source, category: category, subcategory: subcategory});
 	}
 }

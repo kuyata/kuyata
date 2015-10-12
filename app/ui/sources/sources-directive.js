@@ -32,7 +32,8 @@ export default function SourcesDirective(){
  * @ngInject
  */
 class SourcesController {
-	constructor(SourceManager, CategoryManager, ItemManager) {
+	constructor(SourceManager, CategoryManager, ItemManager, $state) {
+		this.state = $state;
 
 		// Create sample initial data
 		SourceManager.createSampleData(sourcesData).then(() => {
@@ -45,5 +46,9 @@ class SourcesController {
 				});
 			});
 		});
+	}
+
+	itemListBySource(source) {
+		this.state.go("app.sources.items", {source: source});
 	}
 }
