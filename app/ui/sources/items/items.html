@@ -1,29 +1,10 @@
 <div class="app-main-middle-1">
-
-	<!--div class="item-list-order btn-group">
-		<button type="button" class="btn btn-badged dropdown-toggle" data-toggle="dropdown">
-			<span id="dropdown-menu-active">Fecha </span><span class="caret"></span>
-		</button>
-		<ul id="dropdown-menu" class="dropdown-menu" role="menu">
-			<li><a id="dropdown-date-order" href="#" class="active"><i class="fa fa-check"></i>
-				<span class="dropdown-menu-text">Fecha</span></a></li>
-
-			<li><a id="dropdown-relevance-order" href="#"><i class="fa fa-check"></i>
-				<span class="dropdown-menu-text">Relevancia</span></a></li>
-
-			<li><a id="dropdown-prize-order" href="#"><i class="fa fa-check"></i>
-				<span class="dropdown-menu-text">Precio</span></a></li>
-		</ul>
-	</div-->
-</div>
-
-<div class="app-main-middle-2">
 	<div class="item-list-date-current">
 		<span></span>
 	</div>
 </div>
 
-<div id="item-list" class="app-main-middle-3">
+<div class="app-main-middle-2">
 	<ul class="item-list nav">
 		<li ng-repeat="item in vm.items" class="item-list-obj">
 			<div ng-if="(vm.items[$index].src_date | date ) != (vm.items[$index-1].src_date | date )" class="item-list-obj-divider">
@@ -39,7 +20,9 @@
 			</a>
 		</li>
 	</ul>
+</div>
 
+<div id="item-list" class="app-main-middle-3">
 	<p class="text-center">
 		<a class="btn btn-default btn-rounded" ng-click="vm.pageDown()">Anterior</a>
 		<a class="btn btn-default btn-rounded" ng-click="vm.pageUp()">Siguiente</a>
