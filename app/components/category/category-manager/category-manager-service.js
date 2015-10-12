@@ -85,6 +85,23 @@ export default class CategoryManager {
         this.current = newCurrent;
     }
 
+    /**
+     * Reset current item
+     *
+     */
+    clearCurrentItemId() {
+        this.current = null;
+    }
+
+    /**
+     * Return true if a category has not subcategories
+     *
+     * @param categoryId
+     * @returns {boolean}
+     */
+    isEmpty(categoryId) {
+        return ! _.some(this.data.collection, 'parent_category_id', categoryId);
+    }
 
     /**
      * Auxiliar method to create initial sample data for categories
