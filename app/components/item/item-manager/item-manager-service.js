@@ -52,10 +52,13 @@ export default class ItemManager {
      */
     initialPage(params = {}) {
         this.Item.ejectAll();
-        this.lastedPage = false;
         this.currentPage = 0;
+        this.lastedPage = false;
         return this.fetch(params).then((items) => {
             this.params = params;
+            if (items.length < this.pageLength) {
+                this.lastedPage = true;
+            }
             return items;
         });
     }
@@ -73,6 +76,11 @@ export default class ItemManager {
                     this.currentPage--;
                     return false;
                 }
+
+                else if (items.length < this.pageLength) {
+                    this.lastedPage = true;
+                }
+
                 return items;
             });
         }
@@ -123,6 +131,24 @@ export default class ItemManager {
      */
     setCurrentItemId(newCurrent) {
         this.current = newCurrent;
+    }
+
+    /**
+     * Get True is list is on the first page
+     *
+     * @returns {boolean}
+     */
+    isFirstPage() {
+        return this.currentPage == 0 ? true : false;
+    }
+
+    /**
+     * Get True is list is on the last page
+     *
+     * @returns {boolean}
+     */
+     isLastPage() {
+        return this.lastedPage ? true : false;
     }
 
     /**
