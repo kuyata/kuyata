@@ -30,7 +30,7 @@ export default class SourceManager {
      */
     fetch(){
         this.current = null;
-        return this.Source.findAll({});
+        return this.Source.findAll({sort: [['created_on', 'DESC']], status: 'enabled'});
     }
 
     /**
@@ -91,6 +91,7 @@ export default class SourceManager {
      */
     createSampleData(data){
         console.log('SourceManager. createSampleData');
+        this.Source.destroyAll();
         return this.$q((resolve) => {
             let promises = [];
 
