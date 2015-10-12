@@ -176,7 +176,7 @@ export default class ItemManager {
  * @returns a DS format params Object
  */
 function createQuery(params, skip = false, limit = false) {
-    let _params = {sort: [['src_date', 'DESC']], status: [['enabled']]};
+    let _params = {sort: [['src_date', 'DESC']], status: 'enabled'};
 
     if(skip !== false) {
         _params.skip = skip;
