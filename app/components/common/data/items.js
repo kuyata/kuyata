@@ -8,7 +8,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-24T18:25:43.511Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
@@ -22,7 +22,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-25T18:25:43.512Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847166"
@@ -36,7 +36,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.512Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847167"
@@ -50,7 +50,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.513Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847168"
@@ -64,7 +64,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.514Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847169"
@@ -78,7 +78,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.515Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847170"
@@ -92,7 +92,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.511Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847171"
@@ -106,7 +106,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.516Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847172"
@@ -120,7 +120,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.517Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847173"
@@ -134,7 +134,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.518Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847174"
@@ -148,7 +148,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.519Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847175"
@@ -162,7 +162,7 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.520Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847176"
@@ -176,10 +176,24 @@ let itemsData = [
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
 		"url":"http://www.google.com",
-		"status": "",
+		"status": "enabled",
 		"src_date": "2012-04-23T18:25:43.521Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847177"
+	},
+	{
+		"id": "14",
+		"source_id": "3",
+		"category_id": null,
+		"subcategory_id": null,
+		"title": "Egypt plane crash",
+		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+		"author":"John Doe",
+		"url":"http://www.google.com",
+		"status": "disabled",
+		"src_date": "2012-04-20T18:22:43.521Z",
+		"created_on": "1430847164",
+		"updated_on": "1430847178"
 	}
 ];
 

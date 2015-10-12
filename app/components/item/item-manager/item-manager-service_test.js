@@ -62,6 +62,7 @@ describe("ItemManager", () => {
                     source_id: {"==":"1"}
                 },
                 "sort":[["src_date","DESC"]],
+                "status": [['enabled']],
                 "skip": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
@@ -92,6 +93,7 @@ describe("ItemManager", () => {
                     source_id: {"==":"1"}
                 },
                 "sort":[["src_date","DESC"]],
+                "status": [['enabled']],
                 "skip": ItemManager.pageLength,
                 "limit": ItemManager.pageLength})
                 .respond(res);
@@ -115,6 +117,7 @@ describe("ItemManager", () => {
                     source_id: {"==":"1"}
                 },
                 "sort":[["src_date","DESC"]],
+                "status": [['enabled']],
                 "skip": ItemManager.pageLength*2,
                 "limit": ItemManager.pageLength})
                 .respond([]);
@@ -162,6 +165,7 @@ describe("ItemManager", () => {
                     source_id: {"==":"1"}
                 },
                 "sort":[["src_date","DESC"]],
+                "status": [['enabled']],
                 "skip": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
@@ -187,6 +191,7 @@ describe("ItemManager", () => {
                     source_id: {"==":"1"}
                 },
                 "sort":[["src_date","DESC"]],
+                "status": [['enabled']],
                 "skip": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
