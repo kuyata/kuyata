@@ -1,9 +1,11 @@
+@middle-col-height: 50px;
+
 .app-main-middle-1 {
   background-color: white;
   position: absolute;
   overflow: visible;
   top: 0;
-  height: @base-col-height / 2;
+  height: @middle-col-height / 2;
   left: 0;
   right: 0;
   z-index: 2;
@@ -43,8 +45,8 @@
   position: absolute;
   overflow: hidden;
   padding: 5px 15px;
-  top: @base-col-height / 2;
-  height: @base-col-height / 2;
+  top: @middle-col-height / 2;
+  height: @middle-col-height / 2;
   left: 0;
   right: 0;
   .box-shadow(0px 2px 10px gray);
@@ -63,7 +65,7 @@
   background-color: @col-bg-color;
   position: absolute;
   overflow: auto;
-  top: @base-col-height;
+  top: @middle-col-height;
   bottom: 0;
   left: 0;
   right: 0;

@@ -3,14 +3,10 @@
   overflow:hidden;
   padding: 0;
 
-  .app-up {
-    background-color: @col-bg-color;
-  }
-
   .app-main {
     position: absolute;
     overflow: hidden;
-    top: @base-col-height;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -28,23 +24,11 @@
       .app-main-left-1 {
         position: absolute;
         top: 0px;
-        bottom: @base-col-height*2 - 20;
+        bottom: 0;
         left: 0;
         right: 0;
         overflow: auto;
         z-index: 1;
-      }
-
-      .app-main-left-2 {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: @base-col-height*2 - 20;
-        background: white;
-        overflow: hidden;
-        z-index: 2;
-        .box-shadow(0px -2px 10px gray);
       }
     }
 

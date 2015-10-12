@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="styles/main.css">
-
     <script src="scripts/app.js"></script>
 </head>
+
 <body ng-app="app">
-
     <div class="container-fluid app-layout">
-        <div ui-view="header" class="app-up"></div>
-
         <div class="app-main">
             <div class="app-main-left">
                 <div ui-view="sources" class="app-main-left-1"></div>
-                <div ui-view="options" class="app-main-left-2"></div>
             </div>
-
             <div id="v-handler" class="app-v-handler">
                 <div ui-view="items" id="app-main-middle" class="app-main-middle"></div>
                 <div ui-view="details" class="app-main-right"></div>
