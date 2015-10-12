@@ -24,8 +24,8 @@
 
 <div id="item-list" class="app-main-middle-3">
 	<p class="text-center">
-		<a class="btn btn-default btn-rounded" ng-click="vm.pageDown()">Anterior</a>
-		<a class="btn btn-default btn-rounded" ng-click="vm.pageUp()">Siguiente</a>
+		<a class="btn btn-default btn-rounded" ng-class="{'disabled': vm.ItemManager.isFirstPage()}" ng-click="vm.pageDown()">Anterior</a>
+		<a class="btn btn-default btn-rounded" ng-class="{'disabled': vm.ItemManager.isLastPage()}" ng-click="vm.pageUp()">Siguiente</a>
 	</p>
 </div>
 
