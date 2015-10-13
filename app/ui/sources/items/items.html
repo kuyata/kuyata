@@ -1,13 +1,13 @@
-<div class="app-main-middle-1">
+<!--div class="app-main-middle-1">
 	<div class="item-list-date-current">
 		<span></span>
 	</div>
-</div>
+</div-->
 
-<div class="app-main-middle-2">
+<div id="item-list-container" class="app-main-middle-2">
 	<ul class="item-list nav">
 		<li ng-repeat="item in vm.items" class="item-list-obj">
-			<div ng-if="(vm.items[$index].src_date | date ) != (vm.items[$index-1].src_date | date )" class="item-list-obj-divider">
+			<div ng-if="(vm.items[$index].src_date | date ) != (vm.items[$index-1].src_date | date )" class="item-list-obj-divider" container="#item-list-container" sticky>
 				<span> {{ item.src_date | date : format : timezone}} </span>
 			</div>
 			<a ng-click="vm.gotoItemDetails(item.id)">
