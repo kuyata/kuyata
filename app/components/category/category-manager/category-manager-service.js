@@ -29,7 +29,8 @@ export default class CategoryManager {
      */
     fetch(){
         this.current = null;
-        return this.Category.findAll({});
+        this.Category.ejectAll();
+        return this.Category.findAll({sort: [['created_on', 'DESC']], status: 'enabled'});
     }
 
     /**
@@ -84,6 +85,23 @@ export default class CategoryManager {
         this.current = newCurrent;
     }
 
+    /**
+     * Reset current item
+     *
+     */
+    clearCurrentItemId() {
+        this.current = null;
+    }
+
+    /**
+     * Return true if a category has not subcategories
+     *
+     * @param categoryId
+     * @returns {boolean}
+     */
+    isEmpty(categoryId) {
+        return ! _.some(this.data.collection, 'parent_category_id', categoryId);
+    }
 
     /**
      * Auxiliar method to create initial sample data for categories
@@ -91,6 +109,7 @@ export default class CategoryManager {
      */
     createSampleData(data){
         console.log('CategoryManager. createSampleData');
+        this.Category.ejectAll();
         return this.$q((resolve) => {
             let promises = [];
 

@@ -30,7 +30,7 @@ export default class SourceManager {
      */
     fetch(){
         this.current = null;
-        return this.Source.findAll({});
+        return this.Source.findAll({sort: [['created_on', 'DESC']], status: 'enabled'});
     }
 
     /**
@@ -86,11 +86,25 @@ export default class SourceManager {
     }
 
     /**
+     * Return true if a source has not categories
+     *
+     * @param sourceId
+     * @returns {boolean}
+     */
+    isEmpty(sourceId) {
+        if(!_.isEmpty(this.data.tree)) {
+            return !this.data.tree[_.findIndex(this.data.tree, { 'id': sourceId })].categories;
+        }
+        return false;
+    }
+
+    /**
      * Auxiliar method to create initial sample data for sources
      * @param data is the source fixtures
      */
     createSampleData(data){
         console.log('SourceManager. createSampleData');
+        this.Source.destroyAll();
         return this.$q((resolve) => {
             let promises = [];
 

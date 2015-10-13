@@ -52,10 +52,13 @@ export default class ItemManager {
      */
     initialPage(params = {}) {
         this.Item.ejectAll();
-        this.lastedPage = false;
         this.currentPage = 0;
+        this.lastedPage = false;
         return this.fetch(params).then((items) => {
             this.params = params;
+            if (items.length < this.pageLength) {
+                this.lastedPage = true;
+            }
             return items;
         });
     }
@@ -73,6 +76,11 @@ export default class ItemManager {
                     this.currentPage--;
                     return false;
                 }
+
+                else if (items.length < this.pageLength) {
+                    this.lastedPage = true;
+                }
+
                 return items;
             });
         }
@@ -126,6 +134,32 @@ export default class ItemManager {
     }
 
     /**
+     * Reset the current item
+     *
+     */
+     resetCurrentItem() {
+        this.current = null;
+    }
+
+    /**
+     * Get True is list is on the first page
+     *
+     * @returns {boolean}
+     */
+    isFirstPage() {
+        return this.currentPage == 0 ? true : false;
+    }
+
+    /**
+     * Get True is list is on the last page
+     *
+     * @returns {boolean}
+     */
+     isLastPage() {
+        return this.lastedPage ? true : false;
+    }
+
+    /**
      * Auxiliar method to create initial sample data for categories
      * @param data is the categories fixtures
      */
@@ -150,7 +184,7 @@ export default class ItemManager {
  * @returns a DS format params Object
  */
 function createQuery(params, skip = false, limit = false) {
-    let _params = {sort: [['src_date', 'DESC']]};
+    let _params = {sort: [['src_date', 'DESC']], status: 'enabled'};
 
     if(skip !== false) {
         _params.skip = skip;

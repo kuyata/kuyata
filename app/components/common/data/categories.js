@@ -5,8 +5,8 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": null,
 		"src_id": "",
-		"status": "",
-		"created_on": "1430847165",
+		"status": "enabled",
+		"created_on": "1430847160",
 		"updated_on": "1430847165"
 	},
 	{
@@ -15,8 +15,8 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "1",
 		"src_id": "",
-		"status": "",
-		"created_on": "1430847165",
+		"status": "enabled",
+		"created_on": "1430847161",
 		"updated_on": "1430847165"
 	},
 	{
@@ -25,8 +25,8 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "1",
 		"src_id": "",
-		"status": "",
-		"created_on": "1430847165",
+		"status": "enabled",
+		"created_on": "1430847162",
 		"updated_on": "1430847165"
 	},
 	{
@@ -35,7 +35,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": null,
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -45,7 +45,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "2",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -55,7 +55,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "2",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -65,7 +65,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": null,
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -75,7 +75,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "3",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -85,7 +85,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "3",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -95,7 +95,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": null,
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -105,7 +105,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "4",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -115,7 +115,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "4",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -125,7 +125,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": null,
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -135,7 +135,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "5",
 		"src_id": "",
-		"status": "",
+		"status": "disabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -145,7 +145,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "5",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -155,7 +155,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": null,
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -165,7 +165,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "6",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -175,7 +175,7 @@ let categoriesData = [
 		"source_ic": "1",
 		"parent_category_id": "6",
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -185,7 +185,7 @@ let categoriesData = [
 		"source_ic": "2",
 		"parent_category_id": null,
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	},
@@ -195,7 +195,7 @@ let categoriesData = [
 		"source_ic": "2",
 		"parent_category_id": null,
 		"src_id": "",
-		"status": "",
+		"status": "enabled",
 		"created_on": "1430847165",
 		"updated_on": "1430847165"
 	}

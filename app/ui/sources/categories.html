@@ -1,14 +1,19 @@
-<ul id="{{ vm.sourceId }}" class="collapse_">
-	<li ng-repeat="category in vm.categories" class="nav-levels-1 panel panel-category-sub">
-		<a ui-sref=".itemsCategory({source:vm.sourceId, category:category.id})" class="accordion-toggle" data-toggle="collapse" data-parent="{{ '#' + vm.sourceId }}" data-target="{{ '#' + category.id }}">
-			<p class="nav-levels-title">{{ category.name }}</p>
-		</a>
-		<ul class="nav-levels-2 collapse_" id="{{ category.id }}">
-			<li ng-repeat="subcategory in category.children">
-				<a ui-sref=".itemsSubcategory({source:vm.sourceId, category:category.id, subcategory:subcategory.id})">
-					{{ subcategory.name }}
-				</a>
-			</li>
-		</ul>
-	</li>
-</ul>
+<accordion close-others="true">
+	<accordion-group
+			is-open="selected"
+			heading="{{ category.name }}"
+			ng-repeat="category in vm.categories"
+			ng-class="{selected: category.id == vm.SourceManager.CategoryManager.getCurrentItemId(), 'force-collapse': vm.SourceManager.CategoryManager.isEmpty(category.id)}"
+			ng-click="selected=true; vm.activeItem(category.id, $event); vm.itemListByCategory(vm.sourceId, category.id);">
+
+		<div class="list-group subcategory-list-group">
+			<a href
+			   class="list-group-item"
+			   ng-class="{active: subcategory.id == vm.SourceManager.CategoryManager.getCurrentItemId()}"
+			   ng-repeat="subcategory in category.children"
+			   ng-click="vm.activeItem(subcategory.id, $event); vm.itemListBySubcategory(vm.sourceId, category.id, subcategory.id);">
+				{{ subcategory.name }}
+			</a>
+		</div>
+	</accordion-group>
+</accordion>
