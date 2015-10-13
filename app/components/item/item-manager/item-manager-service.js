@@ -134,6 +134,14 @@ export default class ItemManager {
     }
 
     /**
+     * Reset the current item
+     *
+     */
+     resetCurrentItem() {
+        this.current = null;
+    }
+
+    /**
      * Get True is list is on the first page
      *
      * @returns {boolean}
