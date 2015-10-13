@@ -10,8 +10,8 @@
 			<div ng-if="(vm.items[$index].src_date | date ) != (vm.items[$index-1].src_date | date )" class="item-list-obj-divider" container="#item-list-container" sticky>
 				<span> {{ item.src_date | date : format : timezone}} </span>
 			</div>
-			<a ng-click="vm.gotoItemDetails(item.id)">
-				<span class="item-list-obj-prize">{{ item.price }}</span>
+			<a ng-click="vm.ItemManager.setCurrentItemId(item.id); vm.gotoItemDetails(item.id)" ng-class="{'active': vm.ItemManager.getCurrentItemId() == item.id}">
+				<!--span class="item-list-obj-prize">{{ item.price }}</span-->
 				<h4 class="item-list-obj-title">{{ item.title }}</h4>
 
 				<div class="ellipsis">
