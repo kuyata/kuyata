@@ -34,6 +34,7 @@ export default function SourcesDirective(){
 class SourcesController {
 	constructor(SourceManager, CategoryManager, ItemManager, $state) {
 		this.state = $state;
+		this.SourceManager = SourceManager;
 
 		// Create sample initial data
 		SourceManager.createSampleData(sourcesData).then(() => {
@@ -46,6 +47,11 @@ class SourcesController {
 				});
 			});
 		});
+	}
+
+	activeItem(sourceId) {
+		this.SourceManager.CategoryManager.clearCurrentItemId();
+		this.SourceManager.setCurrentItemId(sourceId);
 	}
 
 	itemListBySource(source) {
