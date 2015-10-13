@@ -23,7 +23,7 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-25T18:25:43.512Z",
+		"src_date": "2012-04-26T18:25:43.512Z",
 		"created_on": "1430847165",
 		"updated_on": "1430847166"
 	},
@@ -182,6 +182,62 @@ let itemsData = [
 		"updated_on": "1430847177"
 	},
 	{
+		"id": "17",
+		"source_id": "3",
+		"category_id": null,
+		"subcategory_id": null,
+		"title": "NBA match tonight",
+		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+		"author":"John Doe",
+		"url":"http://www.google.com",
+		"status": "enabled",
+		"src_date": "2012-04-23T18:25:43.521Z",
+		"created_on": "1430847165",
+		"updated_on": "1430847177"
+	},
+	{
+		"id": "18",
+		"source_id": "3",
+		"category_id": null,
+		"subcategory_id": null,
+		"title": "F1 race this weekend",
+		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+		"author":"John Doe",
+		"url":"http://www.google.com",
+		"status": "enabled",
+		"src_date": "2012-04-23T18:25:43.521Z",
+		"created_on": "1430847165",
+		"updated_on": "1430847177"
+	},
+	{
+		"id": "15",
+		"source_id": "3",
+		"category_id": null,
+		"subcategory_id": null,
+		"title": "News 1",
+		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+		"author":"John Doe",
+		"url":"http://www.google.com",
+		"status": "enabled",
+		"src_date": "2012-04-25T18:22:43.521Z",
+		"created_on": "1430847164",
+		"updated_on": "1430847178"
+	},
+	{
+		"id": "16",
+		"source_id": "3",
+		"category_id": null,
+		"subcategory_id": null,
+		"title": "News 2",
+		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+		"author":"John Doe",
+		"url":"http://www.google.com",
+		"status": "enabled",
+		"src_date": "2012-04-25T18:22:43.521Z",
+		"created_on": "1430847164",
+		"updated_on": "1430847178"
+	},
+	{
 		"id": "14",
 		"source_id": "3",
 		"category_id": null,
@@ -191,7 +247,7 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "disabled",
-		"src_date": "2012-04-20T18:22:43.521Z",
+		"src_date": "2012-04-25T18:22:43.521Z",
 		"created_on": "1430847164",
 		"updated_on": "1430847178"
 	}
