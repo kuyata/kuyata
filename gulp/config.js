@@ -35,7 +35,7 @@ module.exports = {
     },
 
     markup: {
-        src: src + "/**/*.html",
+        src: [src + "/**/*.html", src + "/package.json", src + "/components/common/icons/**"],
         dest: dest
     },
 

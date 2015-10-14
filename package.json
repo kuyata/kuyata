@@ -56,6 +56,7 @@
     "karma-script-launcher": "^0.1.0",
     "karma-sinon": "^1.0.4",
     "ngsticky": "^1.7.11",
+    "nw-builder": "^2.0.1",
     "pretty-hrtime": "^1.0.0",
     "require-dir": "^0.1.0",
     "requirejs": "^2.1.11",

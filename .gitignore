@@ -4,9 +4,11 @@ dist
 .sass-cache
 app/bower_components
 www/
+cache/
 npm-debug.log
 platforms/
 plugins/
 .allow-devtools-edit
 .idea/
 .DS_Store
+releases/
