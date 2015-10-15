@@ -30,6 +30,7 @@ export default class SourceManager {
      */
     fetch(){
         this.current = null;
+        this.Source.ejectAll();
         return this.Source.findAll({sort: [['created_on', 'DESC']], status: 'enabled'});
     }
 
@@ -59,7 +60,8 @@ export default class SourceManager {
     getCategoriesTreeBySourceId(sourceId){
         if(_.isEmpty(this.data.tree)){
             return this.createSourcesTree().then(() => {
-                return _.filter(this.data.tree, { 'id': sourceId})[0].categories;
+                let r = _.filter(this.data.tree, { 'id': sourceId})[0];
+                return r ? r.categories : false;
             });
         }
         else {
