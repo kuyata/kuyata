@@ -109,16 +109,17 @@ export default class CategoryManager {
      */
     createSampleData(data){
         console.log('CategoryManager. createSampleData');
-        this.Category.ejectAll();
-        return this.$q((resolve) => {
-            let promises = [];
+        return this.Category.destroyAll().then(() => {
+            return this.$q((resolve) => {
+                let promises = [];
 
-            data.forEach(item => {
-                promises.push(this.Category.create(item));
-            });
+                data.forEach(item => {
+                    promises.push(this.Category.create(item));
+                });
 
-            this.$q.all(promises).then(() => {
-                resolve();
+                this.$q.all(promises).then(() => {
+                    resolve();
+                });
             });
         });
     }

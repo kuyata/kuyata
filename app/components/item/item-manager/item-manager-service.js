@@ -164,15 +164,16 @@ export default class ItemManager {
      * @param data is the categories fixtures
      */
      createSampleData(data){
-        this.Item.destroyAll();
-        return this.$q((resolve) => {
-            console.log('ItemManager. createSampleData');
-            let promises = [];
-            data.forEach(item => {
-                promises.push(this.Item.create(item));
-            });
-            this.$q.all(promises).then(() => {
-                resolve();
+        return this.Item.destroyAll().then(() => {
+            return this.$q((resolve) => {
+                console.log('ItemManager. createSampleData');
+                let promises = [];
+                data.forEach(item => {
+                    promises.push(this.Item.create(item));
+                });
+                this.$q.all(promises).then(() => {
+                    resolve();
+                });
             });
         });
     }

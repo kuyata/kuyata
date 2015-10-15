@@ -103,17 +103,18 @@ export default class SourceManager {
      * @param data is the source fixtures
      */
     createSampleData(data){
-        console.log('SourceManager. createSampleData');
-        this.Source.destroyAll();
-        return this.$q((resolve) => {
-            let promises = [];
+        console.log('ItemManager. createSampleData');
+        return this.Source.destroyAll().then(() => {
+            return this.$q((resolve) => {
 
-            data.forEach(item => {
-                promises.push(this.Source.create(item));
-            });
+                let promises = [];
+                data.forEach(item => {
+                    promises.push(this.Source.create(item));
+                });
 
-            this.$q.all(promises).then(() => {
-                resolve();
+                this.$q.all(promises).then(() => {
+                    resolve();
+                });
             });
         });
     }
