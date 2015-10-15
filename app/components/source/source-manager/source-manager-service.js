@@ -105,7 +105,7 @@ export default class SourceManager {
      * @param data is the source fixtures
      */
     createSampleData(data){
-        console.log('ItemManager. createSampleData');
+        console.log('SourceManager. createSampleData');
         return this.Source.destroyAll().then(() => {
             return this.$q((resolve) => {
 
