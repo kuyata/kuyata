@@ -150,6 +150,16 @@ let categoriesData = [
 		"updated_on": "1430847165"
 	},
 	{
+		"id": "21",
+		"name": "Contact",
+		"source_id": "1",
+		"parent_category_id": null,
+		"src_id": "",
+		"status": "disabled",
+		"created_on": "1430847165",
+		"updated_on": "1430847165"
+	},
+	{
 		"id": "6",
 		"name": "Job",
 		"source_ic": "1",
