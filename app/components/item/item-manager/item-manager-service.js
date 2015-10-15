@@ -164,6 +164,7 @@ export default class ItemManager {
      * @param data is the categories fixtures
      */
      createSampleData(data){
+        this.Item.destroyAll();
         return this.$q((resolve) => {
             console.log('ItemManager. createSampleData');
             let promises = [];
