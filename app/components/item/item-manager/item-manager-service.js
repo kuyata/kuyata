@@ -20,7 +20,7 @@ export default class ItemManager {
         this.Item = Item;
 
         this.currentPage = 0;
-        this.pageLength = 5;
+        this.pageLength = 50;
         this.params = {};   // last params set requests
         this.data = {collection: DS.store[Item.name].collection}; // Get the DS store collection
         this.current = null;
