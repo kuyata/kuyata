@@ -1,5 +1,6 @@
 var NwBuilder = require('nw-builder');
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 
 gulp.task('_nw', function () {
@@ -27,5 +28,10 @@ gulp.task('_nw', function () {
     });
 });
 
-gulp.task('nw', ['build', '_nw']);
-gulp.task('nw-release', ['build-release', '_nw']);
+gulp.task('nw', function(cb) {
+    runSequence('build', ['_nw'], cb);
+});
+
+gulp.task('nw-release', function(cb) {
+    runSequence('build-release', ['_nw'], cb);
+});
