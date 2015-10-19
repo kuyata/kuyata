@@ -30,7 +30,7 @@ export default class Utils {
      * @returns {*}
      */
     defineAngularDataResource(DS, resourceClass, resourceDefinition){
-        resourceDefinition.defaultAdapter = resourceDefinition.defaultAdapter || 'localstorage'; // Default adapter
+        resourceDefinition.defaultAdapter = resourceDefinition.defaultAdapter || 'sql'; // Default adapter
         resourceDefinition.methods = {}; // The instance methods goes here
 
         _.assign(resourceDefinition.methods, resourceClass.prototype);  // Pick instance methods from prototype
