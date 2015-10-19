@@ -11,7 +11,9 @@
     "js-data-angular": "3.0.0",
     "js-data-localstorage": "2.1.1",
     "js-data-schema": "1.2.5",
-    "lodash": "latest",
+    "js-data-sql": "^0.10.0",
+    "knex": "^0.8.6",
+    "lodash": "latest"
   },
   "devDependencies": {
     "angular-bootstrap": "^0.12.0",
