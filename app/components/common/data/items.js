@@ -1,6 +1,5 @@
 let itemsData = [
 	{
-		// "id": "1",
 		"source_id": "1",
 		"category_id": "1",
 		"subcategory_id": "9",
@@ -14,7 +13,6 @@ let itemsData = [
 		"updated_on": "1430847165"
 	},
 	{
-		// "id": "2",
 		"source_id": "1",
 		"category_id": "1",
 		"subcategory_id": "9",
@@ -28,7 +26,6 @@ let itemsData = [
 		"updated_on": "1430847166"
 	},
 	{
-		// "id": "13",
 		"source_id": "1",
 		"category_id": "1",
 		"subcategory_id": "10",
@@ -42,7 +39,6 @@ let itemsData = [
 		"updated_on": "1430847167"
 	},
 	{
-		// "id": "3",
 		"source_id": "1",
 		"category_id": "2",
 		"subcategory_id": "12",
@@ -56,7 +52,6 @@ let itemsData = [
 		"updated_on": "1430847168"
 	},
 	{
-		// "id": "4",
 		"source_id": "1",
 		"category_id": "3",
 		"subcategory_id": "13",
@@ -70,7 +65,6 @@ let itemsData = [
 		"updated_on": "1430847169"
 	},
 	{
-		// "id": "5",
 		"source_id": "1",
 		"category_id": "4",
 		"subcategory_id": "15",
@@ -84,7 +78,6 @@ let itemsData = [
 		"updated_on": "1430847170"
 	},
 	{
-		// "id": "6",
 		"source_id": "1",
 		"category_id": "5",
 		"subcategory_id": "17",
@@ -98,7 +91,6 @@ let itemsData = [
 		"updated_on": "1430847171"
 	},
 	{
-		// "id": "7",
 		"source_id": "1",
 		"category_id": "6",
 		"subcategory_id": "19",
@@ -112,7 +104,6 @@ let itemsData = [
 		"updated_on": "1430847172"
 	},
 	{
-		// "id": "8",
 		"source_id": "2",
 		"category_id": "7",
 		"subcategory_id": null,
@@ -126,7 +117,6 @@ let itemsData = [
 		"updated_on": "1430847173"
 	},
 	{
-		// "id": "9",
 		"source_id": "2",
 		"category_id": "8",
 		"subcategory_id": null,
@@ -140,7 +130,6 @@ let itemsData = [
 		"updated_on": "1430847174"
 	},
 	{
-		// "id": "10",
 		"source_id": "3",
 		"category_id": null,
 		"subcategory_id": null,
@@ -154,7 +143,6 @@ let itemsData = [
 		"updated_on": "1430847175"
 	},
 	{
-		// "id": "11",
 		"source_id": "3",
 		"category_id": null,
 		"subcategory_id": null,
@@ -168,7 +156,6 @@ let itemsData = [
 		"updated_on": "1430847176"
 	},
 	{
-		// "id": "12",
 		"source_id": "3",
 		"category_id": null,
 		"subcategory_id": null,
@@ -182,7 +169,6 @@ let itemsData = [
 		"updated_on": "1430847177"
 	},
 	{
-		// "id": "17",
 		"source_id": "3",
 		"category_id": null,
 		"subcategory_id": null,
@@ -196,7 +182,6 @@ let itemsData = [
 		"updated_on": "1430847177"
 	},
 	{
-		// "id": "18",
 		"source_id": "3",
 		"category_id": null,
 		"subcategory_id": null,
@@ -210,7 +195,6 @@ let itemsData = [
 		"updated_on": "1430847177"
 	},
 	{
-		// "id": "15",
 		"source_id": "3",
 		"category_id": null,
 		"subcategory_id": null,
@@ -224,7 +208,6 @@ let itemsData = [
 		"updated_on": "1430847178"
 	},
 	{
-		// "id": "16",
 		"source_id": "3",
 		"category_id": null,
 		"subcategory_id": null,
@@ -238,7 +221,6 @@ let itemsData = [
 		"updated_on": "1430847178"
 	},
 	{
-		// "id": "14",
 		"source_id": "3",
 		"category_id": null,
 		"subcategory_id": null,

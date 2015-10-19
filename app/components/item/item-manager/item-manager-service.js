@@ -165,7 +165,7 @@ export default class ItemManager {
      * Auxiliar method to create initial sample data for categories
      * @param data is the categories fixtures
      */
-     createSampleData(data){
+    createSampleData(data){
         return this.Item.destroyAll().then(() => {
             return this.$q((resolve) => {
                 console.log('ItemManager. createSampleData');
