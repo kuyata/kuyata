@@ -31,7 +31,9 @@ module.exports = {
             entries: '../../app/app.js',
             dest: dest + '/scripts/',
             outputName: 'app.js'
-        }]
+        }],
+        detectGlobals: false,
+        insertGlobalVars: ['__filename','__dirname','Buffer','global']
     },
 
     markup: {
