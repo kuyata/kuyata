@@ -42,6 +42,8 @@ export default class ItemManager {
             this.currentPage = page;
             return items;
         });
+
+        //return this.$q.when(false);
     }
 
     /**
@@ -169,13 +171,15 @@ export default class ItemManager {
                 console.log('ItemManager. createSampleData');
                 let promises = [];
                 data.forEach(item => {
-                    promises.push(this.Item.create(item));
+                    promises.push(this.Item.create(item).catch((e) => {console.log(e);}));
                 });
                 this.$q.all(promises).then(() => {
                     resolve();
                 });
             });
-        });
+        }).catch((e) => {console.log(e);});
+
+        //return this.$q.when(false);
     }
 }
 

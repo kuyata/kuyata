@@ -114,13 +114,15 @@ export default class CategoryManager {
                 let promises = [];
 
                 data.forEach(item => {
-                    promises.push(this.Category.create(item));
+                    promises.push(this.Category.create(item).catch((e) => {console.log(e);}));
                 });
 
                 this.$q.all(promises).then(() => {
                     resolve();
                 });
             });
-        });
+        }).catch((e) => {console.log(e);});
+
+        //return this.$q.when(false);
     }
 }

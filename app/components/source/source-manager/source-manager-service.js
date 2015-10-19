@@ -111,13 +111,15 @@ export default class SourceManager {
 
                 let promises = [];
                 data.forEach(item => {
-                    promises.push(this.Source.create(item));
+                    promises.push(this.Source.create(item).catch((e) => {console.log(e);}));
                 });
 
                 this.$q.all(promises).then(() => {
                     resolve();
                 });
             });
-        });
+        }).catch((e) => {console.log(e);});
+
+        //return this.$q.when(false);
     }
 }
