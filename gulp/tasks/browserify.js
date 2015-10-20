@@ -36,7 +36,6 @@ gulp.task('browserify', function (callback) {
             extensions: config.extensions,
             // Enable source maps!
             debug: false,
-            detectGlobals: config.detectGlobals,
             insertGlobalVars: config.insertGlobalVars
 
         }).transform(es6ify.configure(/^(?!.*node_modules)+.+\.js$/))
