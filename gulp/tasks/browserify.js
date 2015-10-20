@@ -35,7 +35,9 @@ gulp.task('browserify', function (callback) {
             // Add file extentions to make optional in your requires
             extensions: config.extensions,
             // Enable source maps!
-            debug: config.debug
+            debug: false,
+            insertGlobalVars: config.insertGlobalVars
+
         }).transform(es6ify.configure(/^(?!.*node_modules)+.+\.js$/))
           .require(require.resolve(bundleConfig.entries), { entry: true });
 

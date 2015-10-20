@@ -1,12 +1,19 @@
 var NwBuilder = require('nw-builder');
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 
 gulp.task('_nw', function () {
 
     var nw = new NwBuilder({
         version: '0.12.3',
-        files: './www/**',
+        files: [
+            './www/**',
+            './node_modules/knex/**',
+            './node_modules/lodash/**',
+            './node_modules/sqlite3/**',
+            './database.sqlite'
+        ],
         macIcns: './www/icon.icns',
         macPlist: {mac_bundle_id: 'myPkg'},
         //platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
@@ -27,5 +34,10 @@ gulp.task('_nw', function () {
     });
 });
 
-gulp.task('nw', ['build', '_nw']);
-gulp.task('nw-release', ['build-release', '_nw']);
+gulp.task('nw', function(cb) {
+    runSequence('build', ['_nw'], cb);
+});
+
+gulp.task('nw-release', function(cb) {
+    runSequence('build-release', ['_nw'], cb);
+});

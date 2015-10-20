@@ -31,7 +31,10 @@ module.exports = {
             entries: '../../app/app.js',
             dest: dest + '/scripts/',
             outputName: 'app.js'
-        }]
+        }],
+        insertGlobalVars: {
+            process: false
+        }
     },
 
     markup: {

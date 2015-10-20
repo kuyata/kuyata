@@ -44,7 +44,7 @@ export default class CategoryManager {
             let tree = [];
             let dataMap = {};
             list.forEach(node => {
-                dataMap[node.id] = node;
+                dataMap[node.category_id] = node;
             });
 
             list.forEach(node => {
@@ -109,17 +109,20 @@ export default class CategoryManager {
      */
     createSampleData(data){
         console.log('CategoryManager. createSampleData');
-        this.Category.ejectAll();
-        return this.$q((resolve) => {
-            let promises = [];
+        return this.Category.destroyAll().then(() => {
+            return this.$q((resolve) => {
+                let promises = [];
 
-            data.forEach(item => {
-                promises.push(this.Category.create(item));
-            });
+                data.forEach(item => {
+                    promises.push(this.Category.create(item).catch((e) => {console.log(e);}));
+                });
 
-            this.$q.all(promises).then(() => {
-                resolve();
+                this.$q.all(promises).then(() => {
+                    resolve();
+                });
             });
-        });
+        }).catch((e) => {console.log(e);});
+
+        //return this.$q.when(false);
     }
 }

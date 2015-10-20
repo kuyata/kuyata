@@ -20,7 +20,7 @@ export default class ItemManager {
         this.Item = Item;
 
         this.currentPage = 0;
-        this.pageLength = 5;
+        this.pageLength = 50;
         this.params = {};   // last params set requests
         this.data = {collection: DS.store[Item.name].collection}; // Get the DS store collection
         this.current = null;
@@ -42,6 +42,8 @@ export default class ItemManager {
             this.currentPage = page;
             return items;
         });
+
+        //return this.$q.when(false);
     }
 
     /**
@@ -163,17 +165,21 @@ export default class ItemManager {
      * Auxiliar method to create initial sample data for categories
      * @param data is the categories fixtures
      */
-     createSampleData(data){
-        return this.$q((resolve) => {
-            console.log('ItemManager. createSampleData');
-            let promises = [];
-            data.forEach(item => {
-                promises.push(this.Item.create(item));
+    createSampleData(data){
+        return this.Item.destroyAll().then(() => {
+            return this.$q((resolve) => {
+                console.log('ItemManager. createSampleData');
+                let promises = [];
+                data.forEach(item => {
+                    promises.push(this.Item.create(item).catch((e) => {console.log(e);}));
+                });
+                this.$q.all(promises).then(() => {
+                    resolve();
+                });
             });
-            this.$q.all(promises).then(() => {
-                resolve();
-            });
-        });
+        }).catch((e) => {console.log(e);});
+
+        //return this.$q.when(false);
     }
 }
 

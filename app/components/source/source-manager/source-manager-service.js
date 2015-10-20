@@ -30,6 +30,7 @@ export default class SourceManager {
      */
     fetch(){
         this.current = null;
+        this.Source.ejectAll();
         return this.Source.findAll({sort: [['created_on', 'DESC']], status: 'enabled'});
     }
 
@@ -42,7 +43,7 @@ export default class SourceManager {
             return this.CategoryManager.getCategoriesTree().then(categoriesTree => {
                 let sourcesTree = angular.copy(this.data.collection);
                 sourcesTree.forEach(node => {
-                    node.categories = categoriesTree[node.id];
+                    node.categories = categoriesTree[node.source_id];
                 });
                 this.data.tree = sourcesTree;
             });
@@ -59,11 +60,12 @@ export default class SourceManager {
     getCategoriesTreeBySourceId(sourceId){
         if(_.isEmpty(this.data.tree)){
             return this.createSourcesTree().then(() => {
-                return _.filter(this.data.tree, { 'id': sourceId})[0].categories;
+                let r = _.filter(this.data.tree, { 'source_id': sourceId})[0];
+                return r ? r.categories : false;
             });
         }
         else {
-            return this.$q.when(_.filter(this.data.tree, { 'id': sourceId})[0].categories);
+            return this.$q.when(_.filter(this.data.tree, { 'source_id': sourceId})[0].categories);
         }
     }
 
@@ -103,18 +105,19 @@ export default class SourceManager {
      * @param data is the source fixtures
      */
     createSampleData(data){
-        console.log('SourceManager. createSampleData');
-        this.Source.destroyAll();
-        return this.$q((resolve) => {
-            let promises = [];
-
-            data.forEach(item => {
-                promises.push(this.Source.create(item));
+        return this.Source.destroyAll().then(() => {
+            return this.$q((resolve) => {
+                console.log('SourceManager. createSampleData');
+                let promises = [];
+                data.forEach(item => {
+                    promises.push(this.Source.create(item).catch((e) => {console.log(e);}));
+                });
+                this.$q.all(promises).then(() => {
+                    resolve();
+                });
             });
+        }).catch((e) => {console.log(e);});
 
-            this.$q.all(promises).then(() => {
-                resolve();
-            });
-        });
+        //return this.$q.when(false);
     }
 }

@@ -36,10 +36,7 @@ class CategoriesController {
 		this.SourceManager = SourceManager;
 		this.ItemManager = ItemManager;
 
-		// Get category list filtered by source id
-		SourceManager.getCategoriesTreeBySourceId(this.sourceId).then((sourceTree) => {
-			this.categories = sourceTree;
-		});
+		this.generateCategoriesTree(this.sourceId);
 	}
 
 	activeItem(categoryId, ev) {
@@ -55,5 +52,11 @@ class CategoriesController {
 	itemListBySubcategory(source, category, subcategory) {
 		this.ItemManager.resetCurrentItem();
 		this.state.go("app.sources.itemsSubcategory", {source: source, category: category, subcategory: subcategory});
+	}
+
+	generateCategoriesTree(sourceId) {
+		this.SourceManager.getCategoriesTreeBySourceId(sourceId).then((sourceTree) => {
+			this.categories = sourceTree;
+		});
 	}
 }

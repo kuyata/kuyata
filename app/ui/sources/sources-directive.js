@@ -4,9 +4,6 @@
  * This file contains the sources directive and controller
  */
 
-import {sourcesData} from './../../components/common/data/sources';
-import {categoriesData} from './../../components/common/data/categories';
-import {itemsData} from './../../components/common/data/items';
 
 /**
  * Sources directive factory
@@ -32,21 +29,13 @@ export default function SourcesDirective(){
  * @ngInject
  */
 class SourcesController {
-	constructor(SourceManager, CategoryManager, ItemManager, $state) {
+	constructor(SourceManager, ItemManager, $state, $rootScope) {
 		this.state = $state;
 		this.SourceManager = SourceManager;
 		this.ItemManager = ItemManager;
 
-		// Create sample initial data
-		SourceManager.createSampleData(sourcesData).then(() => {
-			CategoryManager.createSampleData(categoriesData).then(() => {
-				ItemManager.createSampleData(itemsData).then(() => {
-					// Get source list
-
-					this.sources = SourceManager.data.collection;
-					SourceManager.fetch();
-				});
-			});
+		$rootScope.$on("adapter:ready", () => {
+			this.sources = SourceManager.data.collection;
 		});
 	}
 

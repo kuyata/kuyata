@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <title>Desktop App</title>
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+    <script>
+        //TODO: only for NWJS context (remove conditional)
+        if(typeof(process) != 'undefined'){
+            var knex = require('knex');
+        }
+    </script>
+
     <script src="scripts/app.js"></script>
 </head>
 
@@ -20,6 +28,6 @@
             </div>
         </div>
     </div>
-
+    <span us-spinner spinner-key="spinner-global" spinner-start-active="true"></span>
 </body>
 </html>

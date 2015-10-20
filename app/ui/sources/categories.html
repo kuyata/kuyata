@@ -3,15 +3,15 @@
 			is-open="selected"
 			heading="{{ category.name }}"
 			ng-repeat="category in vm.categories"
-			ng-class="{selected: category.id == vm.SourceManager.CategoryManager.getCurrentItemId(), 'force-collapse': vm.SourceManager.CategoryManager.isEmpty(category.id)}"
-			ng-click="selected=true; vm.activeItem(category.id, $event); vm.itemListByCategory(vm.sourceId, category.id);">
+			ng-class="{selected: category.id == vm.SourceManager.CategoryManager.getCurrentItemId(), 'force-collapse': vm.SourceManager.CategoryManager.isEmpty(category.category_id)}"
+			ng-click="selected=true; vm.activeItem(category.id, $event); vm.itemListByCategory(vm.sourceId, category.category_id);">
 
 		<div class="list-group subcategory-list-group">
 			<a href
 			   class="list-group-item"
 			   ng-class="{active: subcategory.id == vm.SourceManager.CategoryManager.getCurrentItemId()}"
 			   ng-repeat="subcategory in category.children"
-			   ng-click="vm.activeItem(subcategory.id, $event); vm.itemListBySubcategory(vm.sourceId, category.id, subcategory.id);">
+			   ng-click="vm.activeItem(subcategory.id, $event); vm.itemListBySubcategory(vm.sourceId, category.category_id, subcategory.category_id);">
 				{{ subcategory.name }}
 			</a>
 		</div>
