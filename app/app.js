@@ -6,7 +6,11 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import jsData from 'js-data';
+
+//TODO: using DSSqlAdapter on NWJS & DSLocalStorageAdapter on web (remove localstorage)
 import DSSqlAdapter from 'js-data-sql';
+import DSLocalStorageAdapter from 'js-data-localstorage';
+
 import jsDataAngular from 'js-data-angular';
 import uiBootstrap from 'angular-bootstrap';
 import angularSpinner from 'angular-spinner';
@@ -50,86 +54,105 @@ export default angular.module('app', [
 
 .run(($q, DS, SourceManager, CategoryManager, ItemManager, $rootScope, usSpinnerService) => {
 
-    let adapter = new DSSqlAdapter({
-        client: 'sqlite3', // or "pg" or "sqlite3"
-        connection: {
-            filename: "./database.sqlite"
-        },
-        debug: true
-    });
-
     this.$q = $q;
+    let sourceShema, categoryShema, itemShema;
 
-    let sourceShema = adapter.query.schema.hasTable('source').then((exists) => {
-        if (!exists) {
-            console.log("SOURCE table create");
-            return adapter.query.schema.createTable('source', (t) => {
-                t.increments();
-                t.string('source_id');
-                t.string('name');
-                t.string('src_id');
-                t.string('status');
-                t.string('url');
-                t.string('created_on');
-                t.string('updated_on');
-            });
-        }
-        else {
-            console.log("SOURCE table already exist");
-            return this.$q.when(false);
-        }
-    });
 
-    let categoryShema = adapter.query.schema.hasTable('category').then((exists) => {
-        if (!exists) {
-            console.log("CATEGORY table create");
-            return adapter.query.schema.createTable('category', (t) => {
-                t.increments();
-                t.string('category_id');
-                t.string('name');
-                t.string('source_id');
-                t.string('parent_category_id');
-                t.string('src_id');
-                t.string('status');
-                t.string('created_on');
-                t.string('updated_on');
-            });
-        }
-        else {
-            console.log("CATEGORY table already exist");
-            return this.$q.when(false);
-        }
-    });
+    //TODO: if app context is on NWJS environment (remove conditional)
+    if (typeof(process) != 'undefined') {
+        let adapter = new DSSqlAdapter({
+            client: 'sqlite3', // or "pg" or "sqlite3"
+            connection: {
+                filename: "./database.sqlite"
+            },
+            debug: true
+        });
 
-    let itemShema = adapter.query.schema.hasTable('item').then((exists) => {
-        if (!exists) {
-            console.log("ITEM table create");
-            return adapter.query.schema.createTable('item', (t) => {
-                t.increments();
-                t.string('source_id');
-                t.string('category_id');
-                t.string('subcategory_id');
-                t.string('title');
-                t.string('body');
-                t.string('author');
-                t.string('url');
-                t.string('status');
-                t.string('src_date');
-                t.string('created_on');
-                t.string('updated_on');
-            });
-        }
-        else {
-            console.log("ITEM table already exist");
-            return this.$q.when(false);
-        }
-    });
+        sourceShema = adapter.query.schema.hasTable('source').then((exists) => {
+            if (!exists) {
+                console.log("SOURCE table create");
+                return adapter.query.schema.createTable('source', (t) => {
+                    t.increments();
+                    t.string('source_id');
+                    t.string('name');
+                    t.string('src_id');
+                    t.string('status');
+                    t.string('url');
+                    t.string('created_on');
+                    t.string('updated_on');
+                });
+            }
+            else {
+                console.log("SOURCE table already exist");
+                return this.$q.when(false);
+            }
+        });
+
+        categoryShema = adapter.query.schema.hasTable('category').then((exists) => {
+            if (!exists) {
+                console.log("CATEGORY table create");
+                return adapter.query.schema.createTable('category', (t) => {
+                    t.increments();
+                    t.string('category_id');
+                    t.string('name');
+                    t.string('source_id');
+                    t.string('parent_category_id');
+                    t.string('src_id');
+                    t.string('status');
+                    t.string('created_on');
+                    t.string('updated_on');
+                });
+            }
+            else {
+                console.log("CATEGORY table already exist");
+                return this.$q.when(false);
+            }
+        });
+
+        itemShema = adapter.query.schema.hasTable('item').then((exists) => {
+            if (!exists) {
+                console.log("ITEM table create");
+                return adapter.query.schema.createTable('item', (t) => {
+                    t.increments();
+                    t.string('source_id');
+                    t.string('category_id');
+                    t.string('subcategory_id');
+                    t.string('title');
+                    t.string('body');
+                    t.string('author');
+                    t.string('url');
+                    t.string('status');
+                    t.string('src_date');
+                    t.string('created_on');
+                    t.string('updated_on');
+                });
+            }
+            else {
+                console.log("ITEM table already exist");
+                return this.$q.when(false);
+            }
+        });
+    }
+
+    //TODO: if app context is on WEB environment (remove)
+    else {
+        sourceShema = this.$q.when(false);
+        categoryShema = this.$q.when(false);
+        itemShema = this.$q.when(false);
+    }
+
 
     this.$q.all([sourceShema, categoryShema, itemShema]).then(() => {
         console.log("ALL tables ready!!");
 
-        // register adapter
-        DS.registerAdapter('sql', adapter, { default: true });
+        //TODO: register adapter for NWJS (remove conditional)
+        if (typeof(process) != 'undefined') {
+            DS.registerAdapter('sql', adapter, { default: true });
+        }
+        //TODO: register adapter for WEB (remove)
+        else {
+            DS.registerAdapter('localstorage', new DSLocalStorageAdapter(), { default: true });
+        }
 
         // create sample data
         SourceManager.createSampleData(sourcesData).then(() => {
