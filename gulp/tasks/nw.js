@@ -7,7 +7,13 @@ gulp.task('_nw', function () {
 
     var nw = new NwBuilder({
         version: '0.12.3',
-        files: './www/**',
+        files: [
+            './www/**',
+            './node_modules/knex/**',
+            './node_modules/lodash/**',
+            './node_modules/sqlite3/**',
+            './database.sqlite'
+        ],
         macIcns: './www/icon.icns',
         macPlist: {mac_bundle_id: 'myPkg'},
         //platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
