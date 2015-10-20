@@ -3,16 +3,6 @@
  */
 
 
-/* DATABASE CREATE */
-var db = new sqlite3.Database('database.sqlite');
-db.serialize(function() {
-    db.run("CREATE TABLE source (id TEXT, name TEXT, src_id TEXT, status TEXT, url TEXT, created_on TEXT, updated_on TEXT)");
-    db.run("CREATE TABLE category (id TEXT, name TEXT, source_id TEXT, parent_category_id TEXT, src_id TEXT, status TEXT, created_on TEXT, updated_on TEXT)");
-    db.run("CREATE TABLE item (source_id TEXT, category_id TEXT, subcategory_id TEXT, title TEXT, body TEXT, author TEXT, url TEXT, status TEXT, src_date TEXT, created_on TEXT, updated_on TEXT)");
-});
-db.close();
-
-
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import jsData from 'js-data';
