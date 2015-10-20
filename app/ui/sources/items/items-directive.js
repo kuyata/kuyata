@@ -70,6 +70,7 @@ class ItemsController {
 			if(items) {
 				this.items = items;
 			}
+			document.getElementById("item-list-container").scrollTop = 0;
 			this.usSpinnerService.stop('spinner-list');
 		});
 	}
@@ -80,6 +81,7 @@ class ItemsController {
 			if(items) {
 				this.items = items;
 			}
+			document.getElementById("item-list-container").scrollTop = 0;
 			this.usSpinnerService.stop('spinner-list');
 		});
 	}
