@@ -26,24 +26,28 @@ export default function ItemsDirective(){
 }
 
 class ItemsController {
-	constructor(ItemManager, $state) {
+	constructor(ItemManager, $state, usSpinnerService) {
 
 		this.state = $state;
 		this.ItemManager = ItemManager;
+		this.usSpinnerService = usSpinnerService;
 
 		if(this.subcategory) {
 			ItemManager.initialPage({source: this.source, category: this.category, subcategory: this.subcategory}).then((items) => {
 				this.items = items;
+				this.usSpinnerService.stop('spinner-list');
 			});
 		}
 		else if (this.category) {
 			ItemManager.initialPage({source: this.source, category: this.category}).then((items) => {
 				this.items = items;
+				this.usSpinnerService.stop('spinner-list');
 			});
 		}
 		else if(this.source) {
 			ItemManager.initialPage({source: this.source}).then((items) => {
 				this.items = items;
+				this.usSpinnerService.stop('spinner-list');
 			});
 		}
 	}
@@ -61,18 +65,22 @@ class ItemsController {
 	}
 
 	pageDown() {
+		this.usSpinnerService.spin('spinner-list');
 		this.ItemManager.pageDown().then((items) => {
 			if(items) {
 				this.items = items;
 			}
+			this.usSpinnerService.stop('spinner-list');
 		});
 	}
 
 	pageUp() {
+		this.usSpinnerService.spin('spinner-list');
 		this.ItemManager.pageUp().then((items) => {
 			if(items) {
 				this.items = items;
 			}
+			this.usSpinnerService.stop('spinner-list');
 		});
 	}
 }

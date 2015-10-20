@@ -9,6 +9,7 @@ import jsData from 'js-data';
 import DSSqlAdapter from 'js-data-sql';
 import jsDataAngular from 'js-data-angular';
 import uiBootstrap from 'angular-bootstrap';
+import angularSpinner from 'angular-spinner';
 
 import sources from './ui/sources/sources';
 
@@ -25,6 +26,7 @@ import ItemManager from './components/item/item-manager/item-manager';
 export default angular.module('app', [
     uiRouter,
     'ui.bootstrap',
+    'angularSpinner',
 
     sources.name,
 
@@ -46,9 +48,9 @@ export default angular.module('app', [
 
 })
 
-.run(($q, DS, SourceManager, CategoryManager, ItemManager, $rootScope) => {
+.run(($q, DS, SourceManager, CategoryManager, ItemManager, $rootScope, usSpinnerService) => {
 
-    var adapter = new DSSqlAdapter({
+    let adapter = new DSSqlAdapter({
         client: 'sqlite3', // or "pg" or "sqlite3"
         connection: {
             filename: "./database.sqlite"
@@ -139,6 +141,7 @@ export default angular.module('app', [
                     SourceManager.fetch().then(() => {
                         SourceManager.createSourcesTree().then(() => {
                             $rootScope.$emit("adapter:ready");
+                            usSpinnerService.stop('spinner-global');
                         });
                     });
                 });

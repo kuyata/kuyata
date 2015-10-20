@@ -5,6 +5,7 @@
     "angular": "^1.3.14",
     "angular-animate": "^1.3.14",
     "angular-sanitize": "^1.3.14",
+    "angular-spinner": "^0.7.0",
     "angular-ui-router": "^0.2.11",
     "axios": "0.5.4",
     "js-data": "2.3",
@@ -13,7 +14,8 @@
     "js-data-schema": "1.2.5",
     "js-data-sql": "^0.10.0",
     "knex": "^0.8.6",
-    "lodash": "latest"
+    "lodash": "latest",
+    "spin.js": "^2.3.2"
   },
   "devDependencies": {
     "angular-bootstrap": "^0.12.0",
@@ -74,7 +76,7 @@
     "node": ">=0.8.0"
   },
   "config": {
-    "nw_target":"0.12.3",
+    "nw_target": "0.12.3",
     "nw_target_arch": "x64"
   },
   "scripts": {
