@@ -124,9 +124,10 @@ export default class SourceManager {
     }
 
     /**
+     * Create a source from a Feedparser meta item
      *
      * @param item
-     * @returns {*}
+     * @returns {a promise: The response object has {'isNew' and 'source'}}
      */
     createItem(item) {
         let deferred = this.$q.defer();
@@ -135,15 +136,17 @@ export default class SourceManager {
         newItem.source_id = newItem.created_on.toString();
 
         // check item not exists
-        if(!this.exists(newItem)){
+        let foundedItem = this.exists(newItem);
+
+        if(!foundedItem){
             this.Source.create(newItem).then((res) => {
                 this.addSourceToTree(res);
-                deferred.resolve(true);
+                deferred.resolve({isNew: true, source: res});
             });
         }
 
         else {
-            deferred.resolve(false);
+            deferred.resolve({isNew: false, source: foundedItem});
         }
 
         return deferred.promise;
@@ -191,10 +194,10 @@ export default class SourceManager {
         if(item.link && item.link != '') {
             newSource.url = item.link;
         }
-        else if(item.origlink && item.origlink != '') {
+        else if(item.origlink && item.origlink  != '') {
             newSource.url = item.origlink;
         }
-        else if(item.permalink && item.permalink != '') {
+        else if(item.permalink && item.permalink  != '') {
             newSource.url = item.permalink;
         }
         else {
