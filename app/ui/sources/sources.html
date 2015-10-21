@@ -1,10 +1,14 @@
+<form ng-submit="vm.addSource(text)">
+	<input type="text" ng-model="text" name="text" />
+</form>
+
 <accordion close-others="true">
 	<accordion-group
 			is-open="selected"
 			heading="{{ source.name }}"
 			ng-repeat="source in vm.sources"
 			ng-class="{selected: source.id==vm.SourceManager.getCurrentItemId(), 'force-collapse': vm.SourceManager.isEmpty(source.id)}"
-			ng-click="selected=true; vm.activeItem(source.id); vm.itemListBySource(source.source_id)">
+			ng-click="selected=true; vm.activeItem(source.id); vm.itemListBySource(source.id)">
 
 		<categories source-id="{{ source.source_id }}"></categories>
 
