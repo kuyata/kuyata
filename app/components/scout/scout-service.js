@@ -51,6 +51,37 @@ export default class Scout {
 
 
     /**
+     * Normalize most encoding
+     * https://github.com/ashtuchkin/iconv-lite#supported-encodings
+     *
+     * @param Buffer with url data
+     * @returns {normalized url data}
+     */
+    normalizeEncoding(bodyBuf) {
+        var body = bodyBuf.toString();
+        var encoding;
+
+        var xmlDeclaration = body.match(/^<\?xml .*\?>/);
+        if (xmlDeclaration) {
+            var encodingDeclaration = xmlDeclaration[0].match(/encoding=("|').*?("|')/);
+            if (encodingDeclaration) {
+                encoding = encodingDeclaration[0].substring(10, encodingDeclaration[0].length - 1);
+            }
+        }
+
+        if (encoding && encoding.toLowerCase() !== 'utf-8') {
+            try {
+                body = iconv.decode(bodyBuf, encoding);
+            } catch (err) {
+                // detected encoding is not supported, leave it as it is
+            }
+        }
+
+        return body;
+    }
+
+
+    /**
      * use $http service to get data from a url
      *
      * @param url
