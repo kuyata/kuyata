@@ -5,6 +5,7 @@ import resolveUrl from "resolve-url";
 import FeedParser from 'feedparser';
 import Stream from 'stream';
 
+
 /**
  * Find and manage rss content on a URL
  *
@@ -18,7 +19,6 @@ export default class Scout {
         this.$q = $q;
         this.$http = $http;
     }
-
 
     /**
      *
@@ -48,7 +48,6 @@ export default class Scout {
         }
         return null;
     }
-
 
     /**
      * Normalize most encoding
@@ -80,7 +79,6 @@ export default class Scout {
         return body;
     }
 
-
     /**
      * use $http service to get data from a url
      *
@@ -95,7 +93,6 @@ export default class Scout {
 
         return this.$http.get(this.url);
     }
-
 
     /**
      * Parsing a feed
@@ -133,6 +130,61 @@ export default class Scout {
 
         s.emit('data', this.normalizeEncoding(BufferedData));
         s.emit('end');
+
+        return deferred.promise;
+    }
+    
+    /**
+     * (fetch + parse) Fetch a Feed URL or find a inner feed url, to try parsing feed data
+     *
+     * @param url
+     * @returns {a promise: The response object has {'meta' and 'articles'} or null}
+     */
+        scout(url){
+        this.url = url;
+        let deferred = this.$q.defer();
+
+        // fetching 'url'
+        this.fetch(this.url).then(fetchedUrl => {
+            // 'url' fetched. trying parse
+            this.parse(fetchedUrl.data)
+                .then((res) => {
+                    // 'url' is a feed. parsing success
+                    deferred.resolve(res);
+                })
+                .catch(() => {
+                    // 'url' is NOT a feed. Trying to find inner url feed
+                    let innerFeedUrl = this.findFeedUrlInHtml(fetchedUrl.data, this.url);
+
+                    if(innerFeedUrl) {
+                        // 'innerFeedUrl' founded. Fetching 'innerFeedUrl'
+                        this.fetch(innerFeedUrl).then(innerFetchedUrl => {
+                            // 'innerFeedUrl' fetched. trying parse
+                            this.parse(innerFetchedUrl.data)
+                                .then((res) => {
+                                    // 'innerFeedUrl' is a feed. parsing success
+                                    deferred.resolve(res);
+                                })
+                                .catch(() => {
+                                    // 'innerFeedUrl' is NOT a valid feed.
+                                    deferred.reject(null);
+                                });
+
+                        }).catch(e => {
+                            // fetching 'innerFeedUrl' error
+                            deferred.reject(null);
+                        });
+                    }
+                    else {
+                        // 'innerFeedUrl' NOT founded. 'url' have not feeds
+                        deferred.reject(null);
+                    }
+                });
+
+        }).catch(e => {
+            // fetching 'url' error
+            deferred.reject(null);
+        });
 
         return deferred.promise;
     }
