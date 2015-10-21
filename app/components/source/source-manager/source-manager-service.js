@@ -51,6 +51,12 @@ export default class SourceManager {
     }
 
 
+    addSourceToTree(item){
+        this.data.tree.push(item);
+        this.data.tree[this.data.tree.length - 1].categories = undefined;
+    }
+
+
     /**
      * Get a category tree from a source
      *
@@ -98,6 +104,104 @@ export default class SourceManager {
             return !this.data.tree[_.findIndex(this.data.tree, { 'id': sourceId })].categories;
         }
         return false;
+    }
+
+
+    /**
+     * Determine if a item exist on the Source collection
+     *
+     * @param builded source item
+     * @return Boolean
+     */
+    exists(item) {
+        let res = _.find(this.data.collection, (elem) => {
+            if (elem.src_id == item.src_id || elem.name == item.name ) {
+                return true;
+            }
+        });
+
+        return res || false;
+    }
+
+    /**
+     *
+     * @param item
+     * @returns {*}
+     */
+    createItem(item) {
+        let deferred = this.$q.defer();
+        let newItem = this.buildedItem(item);
+
+        newItem.source_id = newItem.created_on.toString();
+
+        // check item not exists
+        if(!this.exists(newItem)){
+            this.Source.create(newItem).then((res) => {
+                this.addSourceToTree(res);
+                deferred.resolve(true);
+            });
+        }
+
+        else {
+            deferred.resolve(false);
+        }
+
+        return deferred.promise;
+    }
+
+    /**
+     * Build a new Source from a item
+     *
+     * @param item Feedparser element
+     * @returns {Source}
+     */
+    buildedItem(item) {
+        let newSource = {};
+
+        newSource.status = 'enabled';
+
+        //set created_on
+        newSource.created_on = Date.now();
+        newSource.updated_on = Date.now();
+
+        // set name
+        if(item.title && item.title != '') {
+            newSource.name = item.title;
+        }
+        else if(item.description && item.description != '') {
+            newSource.name = item.description;
+        }
+        else if(item.link && item.link != '') {
+            newSource.name = item.link;
+        }
+        else {
+            newSource.name = "s_" + newSource.created_on;
+        }
+
+        // set guid
+        if(item.guid && item.guid != '') {
+            newSource.src_id = item.guid;
+        }
+        else {
+            newSource.src_id = newSource.created_on.toString();
+        }
+
+        // set url
+        newSource.url = '';
+        if(item.link && item.link != '') {
+            newSource.url = item.link;
+        }
+        else if(item.origlink && item.origlink != '') {
+            newSource.url = item.origlink;
+        }
+        else if(item.permalink && item.permalink != '') {
+            newSource.url = item.permalink;
+        }
+        else {
+            newSource.url = '';
+        }
+
+        return newSource;
     }
 
     /**

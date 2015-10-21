@@ -181,6 +181,25 @@ describe("SourceManager", () => {
             DS.flush();
         });
     });
+
+    describe("exists()", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should find Source and return not false", () => {
+            SourceManager.data.collection = [{"src_id": "1", "name": "Source 1"},{"src_id": "2", "name": "Source 2"}];
+
+            let item = {"src_id": "1", "name": "Source 1"};
+            expect(SourceManager.exists(item)).not.toBe(false);
+        });
+
+        it("should find Source and return not false", () => {
+            SourceManager.data.collection = [{"src_id": "1", "name": "Source 1"},{"src_id": "2", "name": "Source 2"}];
+
+            let item = {"src_id": "3", "name": "Source 3"};
+            expect(SourceManager.exists(item)).toBe(false);
+        });
+    });
 });
 
 
