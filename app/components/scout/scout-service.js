@@ -41,7 +41,7 @@ export default class Scout {
             if (feedHref) {
                 //relative path
                 if (!feedHref.match(/^http/)) {
-                    feedHref = resolveUrl(url, href);
+                    feedHref = resolveUrl(url, feedHref);
                 }
                 return feedHref;
             }
@@ -133,7 +133,7 @@ export default class Scout {
 
         return deferred.promise;
     }
-    
+
     /**
      * (fetch + parse) Fetch a Feed URL or find a inner feed url, to try parsing feed data
      *
@@ -147,7 +147,7 @@ export default class Scout {
         // fetching 'url'
         this.fetch(this.url).then(fetchedUrl => {
             // 'url' fetched. trying parse
-            this.parse(fetchedUrl.data)
+            this.parse(new Buffer(fetchedUrl.data))
                 .then((res) => {
                     // 'url' is a feed. parsing success
                     deferred.resolve(res);
@@ -160,7 +160,7 @@ export default class Scout {
                         // 'innerFeedUrl' founded. Fetching 'innerFeedUrl'
                         this.fetch(innerFeedUrl).then(innerFetchedUrl => {
                             // 'innerFeedUrl' fetched. trying parse
-                            this.parse(innerFetchedUrl.data)
+                            this.parse(new Buffer(innerFetchedUrl.data))
                                 .then((res) => {
                                     // 'innerFeedUrl' is a feed. parsing success
                                     deferred.resolve(res);
