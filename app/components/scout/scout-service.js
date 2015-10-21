@@ -95,4 +95,45 @@ export default class Scout {
 
         return this.$http.get(this.url);
     }
+
+
+    /**
+     * Parsing a feed
+     *
+     * @param BufferedData
+     * @returns {a promise. The response object has 'meta' and 'articles'}
+     */
+        parse(BufferedData) {
+        let deferred = this.$q.defer();
+        let meta;
+        let articles = [];
+
+        let s = new Stream();
+        s.readable = true;
+
+        s.pipe(new FeedParser())
+            .on('error', deferred.reject)
+            .on('meta', function (m) {
+                meta = m;
+            })
+            .on('readable', function () {
+                let stream = this;
+                let item = stream.read();
+                while (item) {
+                    articles.push(item);
+                    item = stream.read();
+                }
+            })
+            .on('end', function () {
+                deferred.resolve({
+                    meta: meta,
+                    articles: articles
+                });
+            });
+
+        s.emit('data', this.normalizeEncoding(BufferedData));
+        s.emit('end');
+
+        return deferred.promise;
+    }
 }
