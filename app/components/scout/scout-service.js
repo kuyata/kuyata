@@ -1,4 +1,9 @@
+//TODO: on lib package.json, ser "browser" params to true, for Browserify compatibility
+import iconv from 'iconv-lite';
+
 import resolveUrl from "resolve-url";
+import FeedParser from 'feedparser';
+import Stream from 'stream';
 
 /**
  * Find and manage rss content on a URL
@@ -15,21 +20,31 @@ export default class Scout {
     }
 
 
+    /**
+     *
+     * @param body: data fetched on url
+     * @param url: url string
+     * @returns {Feed URL or null}
+     */
     findFeedUrlInHtml(body, url) {
-        //var dom = cheerio.load(body);
         let html = document.createElement('html');
         html.innerHTML = body;
 
-        let href = html.querySelector('link[type="application/rss+xml"]').getAttribute('href');
-        if (!href) {
-            href = html.querySelector('link[type="application/atom+xml"]').getAttribute('href');
+        let feedLink = html.querySelector('link[type="application/rss+xml"]');
+        if (!feedLink) {
+            feedLink = html.querySelector('link[type="application/atom+xml"]');
         }
-        if (href) {
-            //relative path
-            if (!href.match(/^http/)) {
-                href = resolveUrl(url, href);
+
+        if(feedLink){
+            let feedHref = feedLink.getAttribute('href');
+
+            if (feedHref) {
+                //relative path
+                if (!feedHref.match(/^http/)) {
+                    feedHref = resolveUrl(url, href);
+                }
+                return feedHref;
             }
-            return href;
         }
         return null;
     }
@@ -39,7 +54,7 @@ export default class Scout {
      * use $http service to get data from a url
      *
      * @param url
-     * @returns {a promise with url data}
+     * @returns {a promise. The response object has 'data', 'status', 'headers', 'config', 'statusText'}
      */
     fetch(url) {
         this.url = url;
