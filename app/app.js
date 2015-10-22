@@ -151,17 +151,19 @@ export default angular.module('app', [
             DS.registerAdapter('localstorage', new DSLocalStorageAdapter(), { default: true });
         }
 
-        // create sample data
-        SourceManager.createSampleData(sourcesData).then(() => {
-            CategoryManager.createSampleData(categoriesData).then(() => {
-                ItemManager.createSampleData(itemsData).then(() => {
-                    // Get source list
-                    console.log("DATA INSERTED");
+        // create sample data: first reset increments
+        adapter.query('sqlite_sequence').del().then(() => {
+            SourceManager.createSampleData(sourcesData).then(() => {
+                CategoryManager.createSampleData(categoriesData).then(() => {
+                    ItemManager.createSampleData(itemsData).then(() => {
+                        // Get source list
+                        console.log("DATA INSERTED");
 
-                    SourceManager.fetch().then(() => {
-                        SourceManager.createSourcesTree().then(() => {
-                            $rootScope.$emit("adapter:ready");
-                            usSpinnerService.stop('spinner-global');
+                        SourceManager.fetch().then(() => {
+                            SourceManager.createSourcesTree().then(() => {
+                                $rootScope.$emit("adapter:ready");
+                                usSpinnerService.stop('spinner-global');
+                            });
                         });
                     });
                 });
