@@ -61,7 +61,7 @@ export default angular.module('app', [
     //TODO: if app context is on NWJS environment (remove conditional)
     if (typeof(process) != 'undefined') {
         let adapter = new DSSqlAdapter({
-            client: 'sqlite3', // or "pg" or "sqlite3"
+            client: 'sqlite3', // or "pg" or "mysql"
             connection: {
                 filename: "./database.sqlite"
             },
@@ -78,8 +78,7 @@ export default angular.module('app', [
                     t.string('src_id');
                     t.string('status');
                     t.string('url');
-                    t.string('created_on');
-                    t.string('updated_on');
+                    t.timestamps();
                 });
             }
             else {

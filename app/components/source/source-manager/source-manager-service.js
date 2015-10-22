@@ -31,7 +31,7 @@ export default class SourceManager {
     fetch(){
         this.current = null;
         this.Source.ejectAll();
-        return this.Source.findAll({sort: [['created_on', 'DESC']], status: 'enabled'});
+        return this.Source.findAll({sort: [['created_at', 'DESC']], status: 'enabled'});
     }
 
     /**
@@ -133,7 +133,7 @@ export default class SourceManager {
         let deferred = this.$q.defer();
         let newItem = this.buildedItem(item);
 
-        newItem.source_id = newItem.created_on.toString();
+        newItem.source_id = newItem.created_at;
 
         // check item not exists
         let foundedItem = this.exists(newItem);
@@ -163,9 +163,9 @@ export default class SourceManager {
 
         newSource.status = 'enabled';
 
-        //set created_on
-        newSource.created_on = Date.now();
-        newSource.updated_on = Date.now();
+        //set created_at
+        newSource.created_at = Date.now();
+        newSource.updated_at = Date.now();
 
         // set name
         if(item.title && item.title != '') {
@@ -178,7 +178,7 @@ export default class SourceManager {
             newSource.name = item.link;
         }
         else {
-            newSource.name = "s_" + newSource.created_on;
+            newSource.name = "s_" + newSource.created_at;
         }
 
         // set guid
@@ -186,7 +186,7 @@ export default class SourceManager {
             newSource.src_id = item.guid;
         }
         else {
-            newSource.src_id = newSource.created_on.toString();
+            newSource.src_id = newSource.created_at;
         }
 
         // set url

@@ -5,8 +5,8 @@ let sourcesData = [
 		"src_id": "",
 		"status": "enabled",
 		"url": "www.things.com",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"source_id": "2",
@@ -14,8 +14,8 @@ let sourcesData = [
 		"src_id": "",
 		"status": "enabled",
 		"url": "http://www.eatup.com",
-		"created_on": "1430847166",
-		"updated_on": "1430847165"
+		"created_on": "1430847166000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"source_id": "3",
@@ -23,8 +23,8 @@ let sourcesData = [
 		"src_id": "",
 		"status": "enabled",
 		"url": "www.cnn.com",
-		"created_on": "1430847164",
-		"updated_on": "1430847165"
+		"created_on": "1430847164000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"source_id": "4",
@@ -32,8 +32,8 @@ let sourcesData = [
 		"src_id": "",
 		"status": "disabled",
 		"url": "http://www.pets.com",
-		"created_on": "1430847162",
-		"updated_on": "1430847165"
+		"created_on": "1430847162000",
+		"updated_on": "1430847165000"
 	}
 ];
 
