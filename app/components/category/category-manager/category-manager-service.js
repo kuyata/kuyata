@@ -30,7 +30,7 @@ export default class CategoryManager {
     fetch(){
         this.current = null;
         this.Category.ejectAll();
-        return this.Category.findAll({sort: [['created_on', 'DESC']], status: 'enabled'});
+        return this.Category.findAll({sort: [['created_at', 'DESC']], status: 'enabled'});
     }
 
     /**

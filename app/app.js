@@ -98,8 +98,7 @@ export default angular.module('app', [
                     t.string('parent_category_id');
                     t.string('src_id');
                     t.string('status');
-                    t.string('created_on');
-                    t.string('updated_on');
+                    t.timestamps();
                 });
             }
             else {

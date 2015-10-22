@@ -6,8 +6,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847160",
-		"updated_on": "1430847165"
+		"created_on": "1430847160000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "9",
@@ -16,8 +16,8 @@ let categoriesData = [
 		"parent_category_id": "1",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847161",
-		"updated_on": "1430847165"
+		"created_on": "1430847161000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "10",
@@ -26,8 +26,8 @@ let categoriesData = [
 		"parent_category_id": "1",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847162",
-		"updated_on": "1430847165"
+		"created_on": "1430847162000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "2",
@@ -36,8 +36,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "11",
@@ -46,8 +46,8 @@ let categoriesData = [
 		"parent_category_id": "2",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "12",
@@ -56,8 +56,8 @@ let categoriesData = [
 		"parent_category_id": "2",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "3",
@@ -66,8 +66,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "13",
@@ -76,8 +76,8 @@ let categoriesData = [
 		"parent_category_id": "3",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "14",
@@ -86,8 +86,8 @@ let categoriesData = [
 		"parent_category_id": "3",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "4",
@@ -96,8 +96,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "15",
@@ -106,8 +106,8 @@ let categoriesData = [
 		"parent_category_id": "4",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "16",
@@ -116,8 +116,8 @@ let categoriesData = [
 		"parent_category_id": "4",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "5",
@@ -126,8 +126,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "17",
@@ -136,8 +136,8 @@ let categoriesData = [
 		"parent_category_id": "5",
 		"src_id": "",
 		"status": "disabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "18",
@@ -146,8 +146,8 @@ let categoriesData = [
 		"parent_category_id": "5",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "21",
@@ -156,8 +156,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "disabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "6",
@@ -166,8 +166,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "19",
@@ -176,8 +176,8 @@ let categoriesData = [
 		"parent_category_id": "6",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "20",
@@ -186,8 +186,8 @@ let categoriesData = [
 		"parent_category_id": "6",
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "7",
@@ -196,8 +196,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"category_id": "8",
@@ -206,8 +206,8 @@ let categoriesData = [
 		"parent_category_id": null,
 		"src_id": "",
 		"status": "enabled",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	}
 ];
 

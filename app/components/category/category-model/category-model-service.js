@@ -36,8 +36,8 @@ export default function factory($q, DS, utils){
  * {string}     parent_category parent category model id on local DB. 'null' for root categories
  * {string}     src_id          category id on source. For sync reasons
  * {string}     status          category status
- * {timestamp}  created_on      creation date on our DB
- * {timestamp}  updated_on      last modified date on our DB
+ * {timedate}   created_at      creation date on our DB
+ * {timedate}   updated_at      last modified date on our DB
  *
  */
 class Category {
