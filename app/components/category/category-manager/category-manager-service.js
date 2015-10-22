@@ -44,7 +44,7 @@ export default class CategoryManager {
             let tree = [];
             let dataMap = {};
             list.forEach(node => {
-                dataMap[node.category_id] = node;
+                dataMap[node.id] = node;
             });
 
             list.forEach(node => {

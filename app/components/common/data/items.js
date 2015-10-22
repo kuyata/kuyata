@@ -1,8 +1,8 @@
 let itemsData = [
 	{
 		"source_id": 1,
-		"category_id": "1",
-		"subcategory_id": "9",
+		"category_id": 1,
+		"subcategory_id": 9,
 		"title": "Sell Toshiba",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
@@ -14,8 +14,8 @@ let itemsData = [
 	},
 	{
 		"source_id": 1,
-		"category_id": "1",
-		"subcategory_id": "9",
+		"category_id": 1,
+		"subcategory_id": 9,
 		"title": "Buy broken laptops",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
@@ -27,8 +27,8 @@ let itemsData = [
 	},
 	{
 		"source_id": 1,
-		"category_id": "1",
-		"subcategory_id": "10",
+		"category_id": 1,
+		"subcategory_id": 10,
 		"title": "Internet line",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
@@ -40,8 +40,8 @@ let itemsData = [
 	},
 	{
 		"source_id": 1,
-		"category_id": "2",
-		"subcategory_id": "12",
+		"category_id": 2,
+		"subcategory_id": 12,
 		"title": "I need dolars",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
@@ -53,8 +53,8 @@ let itemsData = [
 	},
 	{
 		"source_id": 1,
-		"category_id": "3",
-		"subcategory_id": "13",
+		"category_id": 3,
+		"subcategory_id": 13,
 		"title": "Sony 16x camera",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
@@ -66,8 +66,8 @@ let itemsData = [
 	},
 	{
 		"source_id": 1,
-		"category_id": "4",
-		"subcategory_id": "15",
+		"category_id": 4,
+		"subcategory_id": 15,
 		"title": "Audi A4",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
@@ -79,8 +79,8 @@ let itemsData = [
 	},
 	{
 		"source_id": 1,
-		"category_id": "5",
-		"subcategory_id": "17",
+		"category_id": 5,
+		"subcategory_id": 17,
 		"title": "Exchange my flat",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
@@ -92,8 +92,8 @@ let itemsData = [
 	},
 	{
 		"source_id": 1,
-		"category_id": "6",
-		"subcategory_id": "19",
+		"category_id": 6,
+		"subcategory_id": 19,
 		"title": "Looking for chef",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 		"author":"John Doe",
@@ -105,7 +105,7 @@ let itemsData = [
 	},
 	{
 		"source_id": 2,
-		"category_id": "7",
+		"category_id": 7,
 		"subcategory_id": null,
 		"title": "Chips with salt",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
@@ -118,7 +118,7 @@ let itemsData = [
 	},
 	{
 		"source_id": 2,
-		"category_id": "8",
+		"category_id": 8,
 		"subcategory_id": null,
 		"title": "Olives",
 		"body": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",

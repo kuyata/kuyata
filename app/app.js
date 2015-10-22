@@ -92,7 +92,7 @@ export default angular.module('app', [
                 console.log("CATEGORY table create");
                 return adapter.query.schema.createTable('category', (t) => {
                     t.increments();
-                    t.string('category_id');
+                    //t.string('category_id');
                     t.string('name');
                     t.string('source_id');
                     t.string('parent_category_id');
