@@ -1,6 +1,6 @@
 let itemsData = [
 	{
-		"source_id": "1",
+		"source_id": 1,
 		"category_id": "1",
 		"subcategory_id": "9",
 		"title": "Sell Toshiba",
@@ -13,7 +13,7 @@ let itemsData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"source_id": "1",
+		"source_id": 1,
 		"category_id": "1",
 		"subcategory_id": "9",
 		"title": "Buy broken laptops",
@@ -26,7 +26,7 @@ let itemsData = [
 		"updated_on": "1430847166000"
 	},
 	{
-		"source_id": "1",
+		"source_id": 1,
 		"category_id": "1",
 		"subcategory_id": "10",
 		"title": "Internet line",
@@ -39,7 +39,7 @@ let itemsData = [
 		"updated_on": "1430847167000"
 	},
 	{
-		"source_id": "1",
+		"source_id": 1,
 		"category_id": "2",
 		"subcategory_id": "12",
 		"title": "I need dolars",
@@ -52,7 +52,7 @@ let itemsData = [
 		"updated_on": "1430847168000"
 	},
 	{
-		"source_id": "1",
+		"source_id": 1,
 		"category_id": "3",
 		"subcategory_id": "13",
 		"title": "Sony 16x camera",
@@ -65,7 +65,7 @@ let itemsData = [
 		"updated_on": "1430847169000"
 	},
 	{
-		"source_id": "1",
+		"source_id": 1,
 		"category_id": "4",
 		"subcategory_id": "15",
 		"title": "Audi A4",
@@ -78,7 +78,7 @@ let itemsData = [
 		"updated_on": "1430847170000"
 	},
 	{
-		"source_id": "1",
+		"source_id": 1,
 		"category_id": "5",
 		"subcategory_id": "17",
 		"title": "Exchange my flat",
@@ -91,7 +91,7 @@ let itemsData = [
 		"updated_on": "1430847171000"
 	},
 	{
-		"source_id": "1",
+		"source_id": 1,
 		"category_id": "6",
 		"subcategory_id": "19",
 		"title": "Looking for chef",
@@ -104,7 +104,7 @@ let itemsData = [
 		"updated_on": "1430847172000"
 	},
 	{
-		"source_id": "2",
+		"source_id": 2,
 		"category_id": "7",
 		"subcategory_id": null,
 		"title": "Chips with salt",
@@ -117,7 +117,7 @@ let itemsData = [
 		"updated_on": "1430847173000"
 	},
 	{
-		"source_id": "2",
+		"source_id": 2,
 		"category_id": "8",
 		"subcategory_id": null,
 		"title": "Olives",
@@ -130,7 +130,7 @@ let itemsData = [
 		"updated_on": "1430847174000"
 	},
 	{
-		"source_id": "3",
+		"source_id": 3,
 		"category_id": null,
 		"subcategory_id": null,
 		"title": "Tennis star reveals grand ambitions",
@@ -143,7 +143,7 @@ let itemsData = [
 		"updated_on": "1430847175000"
 	},
 	{
-		"source_id": "3",
+		"source_id": 3,
 		"category_id": null,
 		"subcategory_id": null,
 		"title": "These photos took 2 years to take",
@@ -156,7 +156,7 @@ let itemsData = [
 		"updated_on": "1430847176000"
 	},
 	{
-		"source_id": "3",
+		"source_id": 3,
 		"category_id": null,
 		"subcategory_id": null,
 		"title": "Mysterious face on ice",
@@ -169,7 +169,7 @@ let itemsData = [
 		"updated_on": "1430847177000"
 	},
 	{
-		"source_id": "3",
+		"source_id": 3,
 		"category_id": null,
 		"subcategory_id": null,
 		"title": "NBA match tonight",
@@ -182,7 +182,7 @@ let itemsData = [
 		"updated_on": "1430847177000"
 	},
 	{
-		"source_id": "3",
+		"source_id": 3,
 		"category_id": null,
 		"subcategory_id": null,
 		"title": "F1 race this weekend",
@@ -195,7 +195,7 @@ let itemsData = [
 		"updated_on": "1430847177000"
 	},
 	{
-		"source_id": "3",
+		"source_id": 3,
 		"category_id": null,
 		"subcategory_id": null,
 		"title": "News 1",
@@ -208,7 +208,7 @@ let itemsData = [
 		"updated_on": "1430847178000"
 	},
 	{
-		"source_id": "3",
+		"source_id": 3,
 		"category_id": null,
 		"subcategory_id": null,
 		"title": "News 2",
@@ -221,7 +221,7 @@ let itemsData = [
 		"updated_on": "1430847178000"
 	},
 	{
-		"source_id": "3",
+		"source_id": 3,
 		"category_id": null,
 		"subcategory_id": null,
 		"title": "Egypt plane crash",

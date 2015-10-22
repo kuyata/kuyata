@@ -1,6 +1,6 @@
 let sourcesData = [
 	{
-		"source_id": "1",
+		"id": 1,
 		"name": "Things",
 		"src_id": "",
 		"status": "enabled",
@@ -9,7 +9,7 @@ let sourcesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"source_id": "2",
+		"id": 2,
 		"name": "Eatup",
 		"src_id": "",
 		"status": "enabled",
@@ -18,7 +18,7 @@ let sourcesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"source_id": "3",
+		"id": 3,
 		"name": "CNN",
 		"src_id": "",
 		"status": "enabled",
@@ -27,7 +27,7 @@ let sourcesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"source_id": "4",
+		"id": 4,
 		"name": "Pets",
 		"src_id": "",
 		"status": "disabled",

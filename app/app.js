@@ -73,7 +73,7 @@ export default angular.module('app', [
                 console.log("SOURCE table create");
                 return adapter.query.schema.createTable('source', (t) => {
                     t.increments();
-                    t.string('source_id');
+                    //t.string('source_id');
                     t.string('name');
                     t.string('src_id');
                     t.string('status');

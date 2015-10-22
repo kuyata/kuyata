@@ -59,7 +59,7 @@ describe("SourceManager", () => {
         beforeEach(done => _setup(done));
 
         it("should get data and add to store if necesary", () => {
-            DS.expectFindAll(Source.name, {sort: [['created_on', 'DESC']], status: 'enabled'}).respond(sourcesData);
+            DS.expectFindAll(Source.name, {sort: [['created_at', 'DESC']], status: 'enabled'}).respond(sourcesData);
 
             SourceManager.fetch().then((sources) => {
                 expect(sources).toEqual(sourcesData);
@@ -75,32 +75,32 @@ describe("SourceManager", () => {
         beforeEach(done => _setup(done));
 
         it("should create the sources tree", () => {
-            DS.expectFindAll(Source.name, {sort: [['created_on', 'DESC']], status: 'enabled'}).respond(sourcesData);
+            DS.expectFindAll(Source.name, {sort: [['created_at', 'DESC']], status: 'enabled'}).respond(sourcesData);
 
-            SourceManager.data.collection = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
-            CategoryManager.data.collection = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
+            SourceManager.data.collection = [{"id": 1, "name": "Source 1"},{"id": 2, "name": "Source 2"}];
+            CategoryManager.data.collection = [{"id": 1,"source_id": 1,"parent_category_id": null},{"id": "4","source_id": 1,"parent_category_id": "1"},{"id": "6","source_id": 2,"parent_category_id": null},{"id": "2","source_id": 1,"parent_category_id": "4"},{"id": "3","source_id": 2,"parent_category_id": "6"}];
 
             // expexted result
             let res =
                 [
                     {
-                        "id": "1",
+                        "id": 1,
                         "name": "Source 1",
                         "categories": [
-                            {"id":"1","source_id":"1","parent_category_id":null,"children":
-                                [{"id":"4","source_id":"1","parent_category_id":"1","children":[
-                                    {"id":"2","source_id":"1","parent_category_id":"4"}]
+                            {"id":"1","source_id":1,"parent_category_id":null,"children":
+                                [{"id":"4","source_id":1,"parent_category_id":"1","children":[
+                                    {"id":"2","source_id":1,"parent_category_id":"4"}]
                                 }]
                             }
                         ]
 
                     },
                     {
-                        "id": "2",
+                        "id": 2,
                         "name": "Source 2",
                         "categories": [
-                            {"id":"6","source_id":"2","parent_category_id":null,"children":
-                                [{"id":"3","source_id":"2","parent_category_id":"6"}]
+                            {"id":"6","source_id":2,"parent_category_id":null,"children":
+                                [{"id":"3","source_id":2,"parent_category_id":"6"}]
                             }
                         ]
                     }
@@ -123,31 +123,31 @@ describe("SourceManager", () => {
         it("should get a category tree from a created tree", () => {
             SourceManager.data.tree = [
                 {
-                    "id": "1",
+                    "id": 1,
                     "name": "Source 1",
                     "categories": [
-                        {"id":"1","source_id":"1","parent_category_id":null,"children":
-                            [{"id":"4","source_id":"1","parent_category_id":"1","children":[
-                                {"id":"2","source_id":"1","parent_category_id":"4"}]
+                        {"id":"1","source_id":1,"parent_category_id":null,"children":
+                            [{"id":"4","source_id":1,"parent_category_id":"1","children":[
+                                {"id":"2","source_id":1,"parent_category_id":"4"}]
                             }]
                         }
                     ]
                 },
                 {
-                    "id": "2",
+                    "id": 2,
                     "name": "Source 2",
                     "categories": [
-                        {"id":"6","source_id":"2","parent_category_id":null,"children":
-                            [{"id":"3","source_id":"2","parent_category_id":"6"}]
+                        {"id":"6","source_id":2,"parent_category_id":null,"children":
+                            [{"id":"3","source_id":2,"parent_category_id":"6"}]
                         }
                     ]
                 }
             ];
 
             let res = [
-                {"id":"1","source_id":"1","parent_category_id":null,"children":
-                    [{"id":"4","source_id":"1","parent_category_id":"1","children":[
-                        {"id":"2","source_id":"1","parent_category_id":"4"}]
+                {"id":"1","source_id":1,"parent_category_id":null,"children":
+                    [{"id":"4","source_id":1,"parent_category_id":"1","children":[
+                        {"id":"2","source_id":1,"parent_category_id":"4"}]
                     }]
                 }
             ];
@@ -161,14 +161,14 @@ describe("SourceManager", () => {
         });
 
         it("should get a category tree after to create the entire tree", () => {
-            DS.expectFindAll(Source.name, {sort: [['created_on', 'DESC']], status: 'enabled'}).respond(sourcesData);
-            SourceManager.data.collection = [{"id": "1", "name": "Source 1"},{"id": "2", "name": "Source 2"}];
-            CategoryManager.data.collection = [{"id": "1","source_id": "1","parent_category_id": null},{"id": "4","source_id": "1","parent_category_id": "1"},{"id": "6","source_id": "2","parent_category_id": null},{"id": "2","source_id": "1","parent_category_id": "4"},{"id": "3","source_id": "2","parent_category_id": "6"}];
+            DS.expectFindAll(Source.name, {sort: [['created_at', 'DESC']], status: 'enabled'}).respond(sourcesData);
+            SourceManager.data.collection = [{"id": 1, "name": "Source 1"},{"id": 2, "name": "Source 2"}];
+            CategoryManager.data.collection = [{"id": "1","source_id": 1,"parent_category_id": null},{"id": "4","source_id": 1,"parent_category_id": "1"},{"id": "6","source_id": 2,"parent_category_id": null},{"id": "2","source_id": 1,"parent_category_id": "4"},{"id": "3","source_id": 2,"parent_category_id": "6"}];
 
             let res = [
-                {"id":"1","source_id":"1","parent_category_id":null,"children":
-                    [{"id":"4","source_id":"1","parent_category_id":"1","children":[
-                        {"id":"2","source_id":"1","parent_category_id":"4"}]
+                {"id":"1","source_id":1,"parent_category_id":null,"children":
+                    [{"id":"4","source_id":1,"parent_category_id":"1","children":[
+                        {"id":"2","source_id":1,"parent_category_id":"4"}]
                     }]
                 }
             ];

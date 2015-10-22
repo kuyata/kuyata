@@ -10,7 +10,7 @@
 			ng-class="{selected: source.id==vm.SourceManager.getCurrentItemId(), 'force-collapse': vm.SourceManager.isEmpty(source.id)}"
 			ng-click="selected=true; vm.activeItem(source.id); vm.itemListBySource(source.id)">
 
-		<categories source-id="{{ source.source_id }}"></categories>
+		<categories source-id="{{ source.id }}"></categories>
 
 	</accordion-group>
 </accordion>

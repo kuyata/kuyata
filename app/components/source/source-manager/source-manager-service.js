@@ -43,7 +43,7 @@ export default class SourceManager {
             return this.CategoryManager.getCategoriesTree().then(categoriesTree => {
                 let sourcesTree = angular.copy(this.data.collection);
                 sourcesTree.forEach(node => {
-                    node.categories = categoriesTree[node.source_id];
+                    node.categories = categoriesTree[node.id];
                 });
                 this.data.tree = sourcesTree;
             });
@@ -66,12 +66,12 @@ export default class SourceManager {
     getCategoriesTreeBySourceId(sourceId){
         if(_.isEmpty(this.data.tree)){
             return this.createSourcesTree().then(() => {
-                let r = _.filter(this.data.tree, { 'source_id': sourceId})[0];
+                let r = _.filter(this.data.tree, { 'id': parseInt(sourceId)})[0];
                 return r ? r.categories : false;
             });
         }
         else {
-            return this.$q.when(_.filter(this.data.tree, { 'source_id': sourceId})[0].categories);
+            return this.$q.when(_.filter(this.data.tree, { 'id': parseInt(sourceId)})[0].categories);
         }
     }
 
@@ -132,8 +132,6 @@ export default class SourceManager {
     createItem(item) {
         let deferred = this.$q.defer();
         let newItem = this.buildedItem(item);
-
-        newItem.source_id = newItem.created_at;
 
         // check item not exists
         let foundedItem = this.exists(newItem);
