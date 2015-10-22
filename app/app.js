@@ -120,9 +120,8 @@ export default angular.module('app', [
                     t.string('author');
                     t.string('url');
                     t.string('status');
-                    t.string('src_date');
-                    t.string('created_on');
-                    t.string('updated_on');
+                    t.timestamp('src_date');
+                    t.timestamps();
                 });
             }
             else {

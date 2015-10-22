@@ -8,9 +8,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-24T18:25:43.511Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847165"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847165000"
 	},
 	{
 		"source_id": "1",
@@ -21,9 +21,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-26T18:25:43.512Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847166"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847166000"
 	},
 	{
 		"source_id": "1",
@@ -34,9 +34,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.512Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847167"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847167000"
 	},
 	{
 		"source_id": "1",
@@ -47,9 +47,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.513Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847168"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847168000"
 	},
 	{
 		"source_id": "1",
@@ -60,9 +60,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.514Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847169"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847169000"
 	},
 	{
 		"source_id": "1",
@@ -73,9 +73,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.515Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847170"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847170000"
 	},
 	{
 		"source_id": "1",
@@ -86,9 +86,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.511Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847171"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847171000"
 	},
 	{
 		"source_id": "1",
@@ -99,9 +99,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.516Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847172"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847172000"
 	},
 	{
 		"source_id": "2",
@@ -112,9 +112,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.517Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847173"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847173000"
 	},
 	{
 		"source_id": "2",
@@ -125,9 +125,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.518Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847174"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847174000"
 	},
 	{
 		"source_id": "3",
@@ -138,9 +138,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.519Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847175"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847175000"
 	},
 	{
 		"source_id": "3",
@@ -151,9 +151,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.520Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847176"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847176000"
 	},
 	{
 		"source_id": "3",
@@ -164,9 +164,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.521Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847177"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847177000"
 	},
 	{
 		"source_id": "3",
@@ -177,9 +177,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.521Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847177"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847177000"
 	},
 	{
 		"source_id": "3",
@@ -190,9 +190,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-23T18:25:43.521Z",
-		"created_on": "1430847165",
-		"updated_on": "1430847177"
+		"src_date": "1430757164000",
+		"created_on": "1430847165000",
+		"updated_on": "1430847177000"
 	},
 	{
 		"source_id": "3",
@@ -203,9 +203,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-25T18:22:43.521Z",
-		"created_on": "1430847164",
-		"updated_on": "1430847178"
+		"src_date": "1430757164000",
+		"created_on": "1430847164000",
+		"updated_on": "1430847178000"
 	},
 	{
 		"source_id": "3",
@@ -216,9 +216,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "2012-04-25T18:22:43.521Z",
-		"created_on": "1430847164",
-		"updated_on": "1430847178"
+		"src_date": "1430757164000",
+		"created_on": "1430847164000",
+		"updated_on": "1430847178000"
 	},
 	{
 		"source_id": "3",
@@ -229,9 +229,9 @@ let itemsData = [
 		"author":"John Doe",
 		"url":"http://www.google.com",
 		"status": "disabled",
-		"src_date": "2012-04-25T18:22:43.521Z",
-		"created_on": "1430847164",
-		"updated_on": "1430847178"
+		"src_date": "1430757164000",
+		"created_on": "1430847164000",
+		"updated_on": "1430847178000"
 	}
 ];
 

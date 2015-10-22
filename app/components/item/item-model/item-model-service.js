@@ -44,8 +44,8 @@ export default function factory($q, DS, utils, Source, Category){
  * {string}     url             item url on source
  * {string}     status          item status
  * {date}       src_date        creation date on source
- * {timestamp}  created_on      creation date on our DB
- * {timestamp}  updated_on      last modified date on our DB
+ * {timedate}   created_at      creation date on our DB
+ * {timedate}   updated_at      last modified date on our DB
  *
  */
 class Item {

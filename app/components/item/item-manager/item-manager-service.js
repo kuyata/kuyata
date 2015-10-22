@@ -163,7 +163,7 @@ export default class ItemManager {
 
     /**
      * Create items from a Feedparser meta and articles list
-     * 
+     *
      * @param meta, articles[]
      * @returns {promise}
      */
@@ -217,16 +217,16 @@ export default class ItemManager {
 
         newItem.status = 'enabled';
 
-        //set created_on
-        newItem.created_on = Date.now();
-        newItem.updated_on = Date.now();
+        //set created_at
+        newItem.created_at = Date.now();
+        newItem.updated_at = Date.now();
 
         // set title
         if(item.title && item.title != '') {
             newItem.title = item.title;
         }
         else {
-            newItem.title = "i_" + newItem.created_on;
+            newItem.title = "i_" + newItem.created_at;
         }
 
         // set body
