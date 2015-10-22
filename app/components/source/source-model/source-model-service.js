@@ -30,7 +30,7 @@ export default function factory($q, DS, utils){
  *
  * Properties: as is all dynamic this is to keep track of what properties we are using within this model
  *
- * {string}     id              id on our local DB
+ * {number}     id              id on our local DB
  * {string}     name            source name
  * {string}     src_id          source id on source. For sync reasons
  * {string}     status          source status

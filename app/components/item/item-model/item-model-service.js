@@ -34,10 +34,10 @@ export default function factory($q, DS, utils, Source, Category){
  *
  * Properties: as is all dynamic this is to keep track of what properties we are using within this model
  *
- * {string}     id              id on our local DB
- * {string}     source_id       source id on our DB
- * {string}     category_id     level 1 category id on our DB
- * {string}     subcategory_id  level 2 category id on our DB
+ * {number}     id              id on our local DB
+ * {number}     source_id       source id on our DB
+ * {number}     category_id     level 1 category id on our DB
+ * {number}     subcategory_id  level 2 category id on our DB
  * {string}     title           item title
  * {string}     body            item body
  * {string}     author          item author

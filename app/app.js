@@ -73,7 +73,6 @@ export default angular.module('app', [
                 console.log("SOURCE table create");
                 return adapter.query.schema.createTable('source', (t) => {
                     t.increments();
-                    //t.string('source_id');
                     t.string('name');
                     t.string('src_id');
                     t.string('status');
@@ -92,10 +91,9 @@ export default angular.module('app', [
                 console.log("CATEGORY table create");
                 return adapter.query.schema.createTable('category', (t) => {
                     t.increments();
-                    //t.string('category_id');
                     t.string('name');
-                    t.string('source_id');
-                    t.string('parent_category_id');
+                    t.integer('source_id');
+                    t.integer('parent_category_id');
                     t.string('src_id');
                     t.string('status');
                     t.timestamps();
@@ -112,9 +110,9 @@ export default angular.module('app', [
                 console.log("ITEM table create");
                 return adapter.query.schema.createTable('item', (t) => {
                     t.increments();
-                    t.string('source_id');
-                    t.string('category_id');
-                    t.string('subcategory_id');
+                    t.integer('source_id');
+                    t.integer('category_id');
+                    t.integer('subcategory_id');
                     t.string('title');
                     t.string('body');
                     t.string('author');

@@ -1,6 +1,8 @@
+//NOTE: for test with localstorage, uncomment ids
+
 let categoriesData = [
 	{
-		"id": 1,
+		// "id": 1,
 		"name": "Computers",
 		"source_ic": 1,
 		"parent_category_id": null,
@@ -10,7 +12,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 2,
+		// "id": 2,
 		"name": "Buy/Sell",
 		"source_ic": 1,
 		"parent_category_id": null,
@@ -20,17 +22,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 9,
-		"name": "Laptop",
-		"source_ic": 1,
-		"parent_category_id": 1,
-		"src_id": "",
-		"status": "enabled",
-		"created_on": "1430847161000",
-		"updated_on": "1430847165000"
-	},
-	{
-		"id": 3,
+		// "id": 3,
 		"name": "Services",
 		"source_ic": 1,
 		"parent_category_id": null,
@@ -40,7 +32,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 4,
+		// "id": 4,
 		"name": "Cars",
 		"source_ic": 1,
 		"parent_category_id": null,
@@ -50,7 +42,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 5,
+		// "id": 5,
 		"name": "Home",
 		"source_ic": 1,
 		"parent_category_id": null,
@@ -60,7 +52,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 6,
+		// "id": 6,
 		"name": "Job",
 		"source_ic": 1,
 		"parent_category_id": null,
@@ -70,7 +62,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 7,
+		// "id": 7,
 		"name": "Starter",
 		"source_ic": 2,
 		"parent_category_id": null,
@@ -80,7 +72,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 8,
+		// "id": 8,
 		"name": "Desserts",
 		"source_ic": 2,
 		"parent_category_id": null,
@@ -90,7 +82,17 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 10,
+		// "id": 9,
+		"name": "Laptop",
+		"source_ic": 1,
+		"parent_category_id": 1,
+		"src_id": "",
+		"status": "enabled",
+		"created_on": "1430847161000",
+		"updated_on": "1430847165000"
+	},
+	{
+		// "id": 10,
 		"name": "Internet",
 		"source_ic": 1,
 		"parent_category_id": 1,
@@ -100,7 +102,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 11,
+		// "id": 11,
 		"name": "TV",
 		"source_ic": 1,
 		"parent_category_id": 2,
@@ -110,7 +112,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 12,
+		// "id": 12,
 		"name": "Currency",
 		"source_ic": 1,
 		"parent_category_id": 2,
@@ -120,7 +122,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 13,
+		// "id": 13,
 		"name": "Photo/Video",
 		"source_ic": 1,
 		"parent_category_id": 3,
@@ -130,7 +132,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 14,
+		// "id": 14,
 		"name": "Others",
 		"source_ic": 1,
 		"parent_category_id": 3,
@@ -140,7 +142,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 15,
+		// "id": 15,
 		"name": "Cars",
 		"source_ic": 1,
 		"parent_category_id": 4,
@@ -150,7 +152,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 16,
+		// "id": 16,
 		"name": "Motorbikes",
 		"source_ic": 1,
 		"parent_category_id": 4,
@@ -160,7 +162,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 17,
+		// "id": 17,
 		"name": "Exchange",
 		"source_ic": 1,
 		"parent_category_id": 5,
@@ -170,7 +172,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 18,
+		// "id": 18,
 		"name": "Rent",
 		"source_ic": 1,
 		"parent_category_id": 5,
@@ -180,7 +182,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 19,
+		// "id": 19,
 		"name": "Job offer",
 		"source_ic": 1,
 		"parent_category_id": 6,
@@ -190,7 +192,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 20,
+		// "id": 20,
 		"name": "Looking for a job",
 		"source_ic": 1,
 		"parent_category_id": 6,
@@ -200,7 +202,7 @@ let categoriesData = [
 		"updated_on": "1430847165000"
 	},
 	{
-		"id": 21,
+		// "id": 21,
 		"name": "Contact",
 		"source_id": 1,
 		"parent_category_id": null,
