@@ -162,6 +162,119 @@ export default class ItemManager {
     }
 
     /**
+     * Create items from a Feedparser meta and articles list
+     * 
+     * @param meta, articles[]
+     * @returns {promise}
+     */
+     createItems(source, items) {
+
+        let promises = [];
+
+        return this.$q((resolve) => {
+
+            if (source.isNew) {
+                items.forEach(item => {
+                    promises.push(this.createItem(source.source, item));
+                });
+                this.$q.all(promises).then(() => {
+                    resolve();
+                });
+            }
+
+            else {
+                //should check data and update
+                return this.$q.when(false);
+            }
+
+        });
+     }
+
+    /**
+     * Create a item from a Feedparser meta and articles list
+     *
+     * @param meta, articles[]
+     * @returns {promise}
+     */
+     createItem(source, item) {
+        let newItem = this.buildedItem(item);
+
+        newItem.source_id = source.id;
+        newItem.category_id = null;
+        newItem.subcategory_id = null;
+
+        return this.Item.create(newItem);
+    }
+
+    /**
+     * Build a new Item from a Feedparser item
+     *
+     * @param item Feedparser element
+     * @returns {Item}
+     */
+     buildedItem(item) {
+        let newItem = {};
+
+        newItem.status = 'enabled';
+
+        //set created_on
+        newItem.created_on = Date.now();
+        newItem.updated_on = Date.now();
+
+        // set title
+        if(item.title && item.title != '') {
+            newItem.title = item.title;
+        }
+        else {
+            newItem.title = "i_" + newItem.created_on;
+        }
+
+        // set body
+        if(item.description && item.description != '') {
+            newItem.body = item.description;
+        }
+        else {
+            newItem.body = '';
+        }
+
+        // set author
+        if(item.author && item.author != '') {
+            newItem.author = item.author;
+        }
+        else {
+            newItem.author = '';
+        }
+
+        // set url
+        newItem.url = '';
+        if(item.link && item.link != '') {
+            newItem.url = item.link;
+        }
+        else if(item.origlink && item.origlink != '') {
+            newItem.url = item.origlink;
+        }
+        else if(item.permalink && item.permalink != '') {
+            newItem.url = item.permalink;
+        }
+        else {
+            newItem.url = '';
+        }
+
+        // set src_date
+        if(item.date && item.date != '') {
+            newItem.src_date = item.date;
+        }
+        else if(item.pubdate && item.pubdate != '') {
+            newItem.src_date = item.pubdate;
+        }
+        else {
+            newItem.src_date = '';
+        }
+
+        return newItem;
+    }
+
+    /**
      * Auxiliar method to create initial sample data for categories
      * @param data is the categories fixtures
      */
