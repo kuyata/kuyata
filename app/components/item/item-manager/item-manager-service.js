@@ -260,15 +260,15 @@ export default class ItemManager {
             newItem.url = '';
         }
 
-        // set src_date
+        // set last_feed_date
         if(item.date && item.date != '') {
-            newItem.src_date = item.date;
+            newItem.last_feed_date = item.date;
         }
         else if(item.pubdate && item.pubdate != '') {
-            newItem.src_date = item.pubdate;
+            newItem.last_feed_date = item.pubdate;
         }
         else {
-            newItem.src_date = '';
+            newItem.last_feed_date = '';
         }
 
         return newItem;
@@ -303,7 +303,7 @@ export default class ItemManager {
  * @returns a DS format params Object
  */
 function createQuery(params, skip = false, limit = false) {
-    let _params = {sort: [['src_date', 'DESC']], status: 'enabled'};
+    let _params = {sort: [['last_feed_date', 'DESC']], status: 'enabled'};
 
     if(skip !== false) {
         _params.skip = skip;

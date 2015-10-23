@@ -9,9 +9,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		"source_id": 1,
@@ -23,9 +23,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847166000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847166000
 	},
 	{
 		"source_id": 1,
@@ -37,9 +37,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847167000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847167000
 	},
 	{
 		"source_id": 1,
@@ -51,9 +51,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847168000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847168000
 	},
 	{
 		"source_id": 1,
@@ -65,9 +65,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847169000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847169000
 	},
 	{
 		"source_id": 1,
@@ -79,9 +79,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847170000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847170000
 	},
 	{
 		"source_id": 1,
@@ -93,9 +93,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847171000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847171000
 	},
 	{
 		"source_id": 1,
@@ -107,9 +107,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847172000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847172000
 	},
 	{
 		"source_id": 2,
@@ -121,9 +121,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847173000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847173000
 	},
 	{
 		"source_id": 2,
@@ -135,9 +135,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847174000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847174000
 	},
 	{
 		"source_id": 3,
@@ -149,9 +149,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847175000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847175000
 	},
 	{
 		"source_id": 3,
@@ -163,9 +163,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847176000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847176000
 	},
 	{
 		"source_id": 3,
@@ -177,9 +177,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847177000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847177000
 	},
 	{
 		"source_id": 3,
@@ -191,9 +191,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847177000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847177000
 	},
 	{
 		"source_id": 3,
@@ -205,9 +205,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847165000",
-		"updated_on": "1430847177000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847177000
 	},
 	{
 		"source_id": 3,
@@ -219,9 +219,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847164000",
-		"updated_on": "1430847178000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847164000,
+		"updated_on": 1430847178000
 	},
 	{
 		"source_id": 3,
@@ -233,9 +233,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "enabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847164000",
-		"updated_on": "1430847178000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847164000,
+		"updated_on": 1430847178000
 	},
 	{
 		"source_id": 3,
@@ -247,9 +247,9 @@ let itemsData = [
 		"guid": "",
 		"url":"http://www.google.com",
 		"status": "disabled",
-		"src_date": "1430757164000",
-		"created_on": "1430847164000",
-		"updated_on": "1430847178000"
+		"last_feed_date": 1430757164000,
+		"created_on": 1430847164000,
+		"updated_on": 1430847178000
 	}
 ];
 

@@ -77,6 +77,7 @@ export default angular.module('app', [
                     t.string('guid');
                     t.string('status');
                     t.string('url');
+                    t.timestamp('last_feed_date');
                     t.timestamps();
                 });
             }
@@ -96,6 +97,7 @@ export default angular.module('app', [
                     t.integer('parent_category_id');
                     t.string('guid');
                     t.string('status');
+                    t.timestamp('last_feed_date');
                     t.timestamps();
                 });
             }
@@ -118,7 +120,8 @@ export default angular.module('app', [
                     t.string('author');
                     t.string('guid');
                     t.string('status');
-                    t.timestamp('src_date');
+                    t.string('url');
+                    t.timestamp('last_feed_date');
                     t.timestamps();
                 });
             }

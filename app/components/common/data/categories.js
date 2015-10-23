@@ -8,8 +8,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847160000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847160000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 2,
@@ -18,8 +19,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 3,
@@ -28,8 +30,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 4,
@@ -38,8 +41,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 5,
@@ -48,8 +52,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 6,
@@ -58,8 +63,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 7,
@@ -68,8 +74,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 8,
@@ -78,8 +85,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 9,
@@ -88,8 +96,9 @@ let categoriesData = [
 		"parent_category_id": 1,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847161000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847161000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 10,
@@ -98,8 +107,9 @@ let categoriesData = [
 		"parent_category_id": 1,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847162000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847162000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 11,
@@ -108,8 +118,9 @@ let categoriesData = [
 		"parent_category_id": 2,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 12,
@@ -118,8 +129,9 @@ let categoriesData = [
 		"parent_category_id": 2,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 13,
@@ -128,8 +140,9 @@ let categoriesData = [
 		"parent_category_id": 3,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 14,
@@ -138,8 +151,9 @@ let categoriesData = [
 		"parent_category_id": 3,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 15,
@@ -148,8 +162,9 @@ let categoriesData = [
 		"parent_category_id": 4,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 16,
@@ -158,8 +173,9 @@ let categoriesData = [
 		"parent_category_id": 4,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 17,
@@ -168,8 +184,9 @@ let categoriesData = [
 		"parent_category_id": 5,
 		"guid": "",
 		"status": "disabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 18,
@@ -178,8 +195,9 @@ let categoriesData = [
 		"parent_category_id": 5,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 19,
@@ -188,8 +206,9 @@ let categoriesData = [
 		"parent_category_id": 6,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 20,
@@ -198,8 +217,9 @@ let categoriesData = [
 		"parent_category_id": 6,
 		"guid": "",
 		"status": "enabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	},
 	{
 		// "id": 21,
@@ -208,8 +228,9 @@ let categoriesData = [
 		"parent_category_id": null,
 		"guid": "",
 		"status": "disabled",
-		"created_on": "1430847165000",
-		"updated_on": "1430847165000"
+		"last_feed_date": 1430847160000,
+		"created_on": 1430847165000,
+		"updated_on": 1430847165000
 	}
 ];
 

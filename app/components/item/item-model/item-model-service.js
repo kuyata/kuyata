@@ -44,7 +44,7 @@ export default function factory($q, DS, utils, Source, Category){
  * {string}     guid            item id from the item on feed. For sync reasons
  * {string}     url             item url on source
  * {string}     status          item status
- * {date}       src_date        creation date on source
+ * {timedate}   last_feed_date  last item update date on feed. For sync reasons
  * {timedate}   created_at      creation date on our DB
  * {timedate}   updated_at      last modified date on our DB
  *

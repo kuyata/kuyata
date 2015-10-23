@@ -55,13 +55,13 @@ describe("ItemManager", () => {
 
         it("should get first page of items", () => {
             ItemManager.pageLength = 5;
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['last_feed_date'], [false]).slice(0,ItemManager.pageLength);
 
             DS.expectFindAll(Item.name, {
                 "where": {
                     source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
                 "skip": 0,
                 "limit": ItemManager.pageLength})
@@ -86,13 +86,13 @@ describe("ItemManager", () => {
             ItemManager.pageLength = 5;
             ItemManager.params = {source: 1};
 
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['src_date'], [false]).slice(ItemManager.pageLength,ItemManager.pageLength*2);
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['last_feed_date'], [false]).slice(ItemManager.pageLength,ItemManager.pageLength*2);
 
             DS.expectFindAll(Item.name, {
                 "where": {
                     source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
                 "skip": ItemManager.pageLength,
                 "limit": ItemManager.pageLength})
@@ -116,7 +116,7 @@ describe("ItemManager", () => {
                 "where": {
                     source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
                 "skip": ItemManager.pageLength*2,
                 "limit": ItemManager.pageLength})
