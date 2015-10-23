@@ -75,6 +75,7 @@ export default angular.module('app', [
                     t.increments();
                     t.string('name');
                     t.string('guid');
+                    t.string('checksum');
                     t.string('status');
                     t.string('url');
                     t.timestamp('last_feed_date');
@@ -96,6 +97,7 @@ export default angular.module('app', [
                     t.integer('source_id');
                     t.integer('parent_category_id');
                     t.string('guid');
+                    t.string('checksum');
                     t.string('status');
                     t.timestamp('last_feed_date');
                     t.timestamps();
@@ -119,6 +121,7 @@ export default angular.module('app', [
                     t.string('body');
                     t.string('author');
                     t.string('guid');
+                    t.string('checksum');
                     t.string('status');
                     t.string('url');
                     t.timestamp('last_feed_date');
