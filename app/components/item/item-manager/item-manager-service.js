@@ -20,7 +20,7 @@ export default class ItemManager {
         this.Item = Item;
 
         this.currentPage = 0;
-        this.pageLength = 50;
+        this.pageLength = 25;
         this.params = {};   // last params set requests
         this.data = {collection: DS.store[Item.name].collection}; // Get the DS store collection
         this.current = null;
@@ -224,16 +224,28 @@ export default class ItemManager {
  * @param params is an Object with any or all these properties: "title, source, category, skip, limit"
  * @returns a DS format params Object
  */
-function createQuery(params, skip = false, limit = false) {
+function createQuery(params, offset = false, limit = false) {
     let _params = {sort: [['last_feed_date', 'DESC']], status: 'enabled'};
 
-    if(skip !== false) {
-        _params.skip = skip;
+    if(offset !== false) {
+        _params.offset = offset;
         _params.limit = limit;
     }
 
     if(!_.isEmpty(params)){
         _params.where = {};
+
+        //TODO: id typeof to INT for NWJS (remove)
+        if (typeof(process) != 'undefined') {
+            params.source = parseInt(params.source);
+            if(params.category) {
+                params.category = parseInt(params.category);
+            }
+            if(params.subcategory) {
+                params.subcategory = parseInt(params.subcategory);
+            }
+
+        }
 
         if(params.source){
             _params.where.source_id = {'==': params.source};
