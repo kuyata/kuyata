@@ -32,7 +32,7 @@ export default function factory($q, DS, utils){
  *
  * {number}     id              id on our local DB
  * {string}     name            source name
- * {string}     src_id          source id on source. For sync reasons
+ * {string}     guid            source id from the source on feed. For sync reasons
  * {string}     status          source status
  * {string}     url             source url on source
  * {timedate}   created_at      creation date on our DB

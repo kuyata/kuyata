@@ -74,7 +74,7 @@ export default angular.module('app', [
                 return adapter.query.schema.createTable('source', (t) => {
                     t.increments();
                     t.string('name');
-                    t.string('src_id');
+                    t.string('guid');
                     t.string('status');
                     t.string('url');
                     t.timestamps();
@@ -94,7 +94,7 @@ export default angular.module('app', [
                     t.string('name');
                     t.integer('source_id');
                     t.integer('parent_category_id');
-                    t.string('src_id');
+                    t.string('guid');
                     t.string('status');
                     t.timestamps();
                 });
@@ -116,7 +116,7 @@ export default angular.module('app', [
                     t.string('title');
                     t.string('body');
                     t.string('author');
-                    t.string('url');
+                    t.string('guid');
                     t.string('status');
                     t.timestamp('src_date');
                     t.timestamps();

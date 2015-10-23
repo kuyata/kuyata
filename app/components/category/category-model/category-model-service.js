@@ -34,7 +34,7 @@ export default function factory($q, DS, utils){
  * {string}     name                category name
  * {number}     source_id           source id on DB
  * {number}     parent_category_id  parent category model id on local DB. 'null' for root categories
- * {string}     src_id              category id on source. For sync reasons
+ * {string}     guid                category id from the category on feed. For sync reasons
  * {string}     status              category status
  * {timedate}   created_at          creation date on our DB
  * {timedate}   updated_at          last modified date on our DB

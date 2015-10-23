@@ -115,7 +115,7 @@ export default class SourceManager {
      */
     exists(item) {
         let res = _.find(this.data.collection, (elem) => {
-            if (elem.src_id == item.src_id || elem.name == item.name ) {
+            if (elem.guid == item.guid || elem.name == item.name ) {
                 return true;
             }
         });
@@ -181,10 +181,10 @@ export default class SourceManager {
 
         // set guid
         if(item.guid && item.guid != '') {
-            newSource.src_id = item.guid;
+            newSource.guid = item.guid;
         }
         else {
-            newSource.src_id = newSource.created_at;
+            newSource.guid = newSource.created_at;
         }
 
         // set url

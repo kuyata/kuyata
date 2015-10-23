@@ -41,6 +41,7 @@ export default function factory($q, DS, utils, Source, Category){
  * {string}     title           item title
  * {string}     body            item body
  * {string}     author          item author
+ * {string}     guid            item id from the item on feed. For sync reasons
  * {string}     url             item url on source
  * {string}     status          item status
  * {date}       src_date        creation date on source

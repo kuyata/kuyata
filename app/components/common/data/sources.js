@@ -4,7 +4,7 @@ let sourcesData = [
 	{
 		// "id": 1,
 		"name": "Things",
-		"src_id": "",
+		"guid": "",
 		"status": "enabled",
 		"url": "www.things.com",
 		"created_on": "1430847165000",
@@ -13,7 +13,7 @@ let sourcesData = [
 	{
 		// "id": 2,
 		"name": "Eatup",
-		"src_id": "",
+		"guid": "",
 		"status": "enabled",
 		"url": "http://www.eatup.com",
 		"created_on": "1430847166000",
@@ -22,7 +22,7 @@ let sourcesData = [
 	{
 		// "id": 3,
 		"name": "CNN",
-		"src_id": "",
+		"guid": "",
 		"status": "enabled",
 		"url": "www.cnn.com",
 		"created_on": "1430847164000",
@@ -31,7 +31,7 @@ let sourcesData = [
 	{
 		// "id": 4,
 		"name": "Pets",
-		"src_id": "",
+		"guid": "",
 		"status": "disabled",
 		"url": "http://www.pets.com",
 		"created_on": "1430847162000",
