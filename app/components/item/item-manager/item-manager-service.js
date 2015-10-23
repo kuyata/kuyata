@@ -162,118 +162,40 @@ export default class ItemManager {
     }
 
     /**
-     * Create items from a Feedparser meta and articles list
+     * Create items from articles list and ids
      *
-     * @param meta, articles[]
+     * @param items, {source_id, category_id, subcategory_id}
      * @returns {promise}
      */
-     createItems(source, items) {
-
+    createItems(items, itemIds) {
         let promises = [];
 
-        return this.$q((resolve) => {
-
-            if (source.isNew) {
-                items.forEach(item => {
-                    promises.push(this.createItem(source.source, item));
-                });
-                this.$q.all(promises).then(() => {
-                    resolve();
-                });
-            }
-
-            else {
-                //should check data and update
-                return this.$q.when(false);
-            }
-
+        return this.$q(resolve => {
+            items.forEach(item => {
+                promises.push(this.createItem(item, itemIds));
+            });
+            this.$q.all(promises).then(() => {
+                resolve();
+            });
         });
-     }
+    }
 
     /**
-     * Create a item from a Feedparser meta and articles list
+     * Create a new DS.Item
      *
-     * @param meta, articles[]
+     * @param item, {reference_ids}
      * @returns {promise}
      */
-     createItem(source, item) {
-        let newItem = this.buildedItem(item);
+    createItem(item, itemIds) {
+        let newItem = item;
 
-        newItem.source_id = source.id;
-        newItem.category_id = null;
-        newItem.subcategory_id = null;
+        newItem.source_id = itemIds.source_id;
+        newItem.category_id = itemIds.category_id || null;
+        newItem.subcategory_id = itemIds.subcategory_id || null;
 
         return this.Item.create(newItem);
     }
-
-    /**
-     * Build a new Item from a Feedparser item
-     *
-     * @param item Feedparser element
-     * @returns {Item}
-     */
-     buildedItem(item) {
-        let newItem = {};
-
-        newItem.status = 'enabled';
-
-        //set created_at
-        newItem.created_at = Date.now();
-        newItem.updated_at = Date.now();
-
-        // set title
-        if(item.title && item.title != '') {
-            newItem.title = item.title;
-        }
-        else {
-            newItem.title = "i_" + newItem.created_at;
-        }
-
-        // set body
-        if(item.description && item.description != '') {
-            newItem.body = item.description;
-        }
-        else {
-            newItem.body = '';
-        }
-
-        // set author
-        if(item.author && item.author != '') {
-            newItem.author = item.author;
-        }
-        else {
-            newItem.author = '';
-        }
-
-        // set url
-        newItem.url = '';
-        if(item.link && item.link != '') {
-            newItem.url = item.link;
-        }
-        else if(item.origlink && item.origlink != '') {
-            newItem.url = item.origlink;
-        }
-        else if(item.permalink && item.permalink != '') {
-            newItem.url = item.permalink;
-        }
-        else {
-            newItem.url = '';
-        }
-
-        // set last_feed_date
-        if(item.date && item.date != '') {
-            newItem.last_feed_date = item.date;
-        }
-        else if(item.pubdate && item.pubdate != '') {
-            newItem.last_feed_date = item.pubdate;
-        }
-        else {
-            newItem.last_feed_date = '';
-        }
-
-        return newItem;
-    }
-
+    
     /**
      * Auxiliar method to create initial sample data for categories
      * @param data is the categories fixtures
