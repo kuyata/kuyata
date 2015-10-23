@@ -50,12 +50,14 @@ export default class SourceManager {
         });
     }
 
-
-    addSourceToTree(item){
-        this.data.tree.push(item);
+    /**
+     *
+     * @param source
+     */
+    addSourceToTree(source){
+        this.data.tree.push(source);
         this.data.tree[this.data.tree.length - 1].categories = undefined;
     }
-
 
     /**
      * Get a category tree from a source
@@ -106,7 +108,6 @@ export default class SourceManager {
         return false;
     }
 
-
     /**
      * Determine if a item exist on the Source collection
      *
@@ -124,85 +125,19 @@ export default class SourceManager {
     }
 
     /**
-     * Create a source from a Feedparser meta item
+     * Create a source
      *
      * @param item
-     * @returns {a promise: The response object has {'isNew' and 'source'}}
+     * @returns {a promise: The response object has the 'source.id'}
      */
-    createItem(item) {
+    createSource(source) {
         let deferred = this.$q.defer();
-        let newItem = this.buildedItem(item);
-
-        // check item not exists
-        let foundedItem = this.exists(newItem);
-
-        if(!foundedItem){
-            this.Source.create(newItem).then((res) => {
-                this.addSourceToTree(res);
-                deferred.resolve({isNew: true, source: res});
-            });
-        }
-
-        else {
-            deferred.resolve({isNew: false, source: foundedItem});
-        }
+        this.Source.create(source).then((res) => {
+            this.addSourceToTree(res);
+            deferred.resolve(res.id);
+        });
 
         return deferred.promise;
-    }
-
-    /**
-     * Build a new Source from a item
-     *
-     * @param item Feedparser element
-     * @returns {Source}
-     */
-    buildedItem(item) {
-        let newSource = {};
-
-        newSource.status = 'enabled';
-
-        //set created_at
-        newSource.created_at = Date.now();
-        newSource.updated_at = Date.now();
-
-        // set name
-        if(item.title && item.title != '') {
-            newSource.name = item.title;
-        }
-        else if(item.description && item.description != '') {
-            newSource.name = item.description;
-        }
-        else if(item.link && item.link != '') {
-            newSource.name = item.link;
-        }
-        else {
-            newSource.name = "s_" + newSource.created_at;
-        }
-
-        // set guid
-        if(item.guid && item.guid != '') {
-            newSource.guid = item.guid;
-        }
-        else {
-            newSource.guid = newSource.created_at;
-        }
-
-        // set url
-        newSource.url = '';
-        if(item.link && item.link != '') {
-            newSource.url = item.link;
-        }
-        else if(item.origlink && item.origlink  != '') {
-            newSource.url = item.origlink;
-        }
-        else if(item.permalink && item.permalink  != '') {
-            newSource.url = item.permalink;
-        }
-        else {
-            newSource.url = '';
-        }
-
-        return newSource;
     }
 
     /**
