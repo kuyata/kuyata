@@ -16,7 +16,7 @@
     "js-data-schema": "1.2.5",
     "js-data-sql": "^0.10.0",
     "knex": "^0.8.6",
-    "lodash": "latest",
+    "lodash": "3.10.1",
     "resolve-url": "^0.2.1",
     "spin.js": "^2.3.2"
   },
