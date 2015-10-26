@@ -198,10 +198,6 @@ export default class RSSImporter {
 
         source.status = 'enabled';
 
-        //set created_at
-        source.created_at = Date.now();
-        source.updated_at = Date.now();
-
         // set name
         if(meta.title && meta.title != '') {
             source.name = meta.title;
@@ -209,11 +205,11 @@ export default class RSSImporter {
         else if(meta.description && meta.description != '') {
             source.name = meta.description;
         }
-        else if(meta.link && meta.link != '') {
+        else if(meta.xmlurl && meta.xmlurl != '') {
             source.name = meta.link;
         }
         else {
-            source.name = "s_" + source.created_at;
+            source.name = this.url;
         }
 
         // set guid
@@ -221,23 +217,25 @@ export default class RSSImporter {
             source.guid = meta.guid;
         }
         else {
-            source.guid = source.created_at;
+            source.guid = this.url;
         }
 
         // set url
-        source.url = '';
-        if(meta.link && meta.link != '') {
+        if(meta.xmlurl && meta.xmlurl != '') {
+            source.url = meta.xmlurl;
+        }
+        else if(meta.link && meta.link  != '') {
             source.url = meta.link;
         }
-        else if(meta.origlink && meta.origlink  != '') {
-            source.url = meta.origlink;
-        }
-        else if(meta.permalink && meta.permalink  != '') {
-            source.url = meta.permalink;
-        }
         else {
-            source.url = '';
+            source.url = this.url;
         }
+
+        // set checksum
+        source.checksum = '';
+
+        // set last_feed_date
+        source.last_feed_date = meta.date;
 
         return source;
     }
@@ -248,53 +246,54 @@ export default class RSSImporter {
      * @param article feedparser
      * @returns {normalizedItem Object}
      */
-    buildItem(article){
+    buildItem(article, orig_source_id){
         let item = {};
+
+        // TODO: not all feeds has guid. Decide what to do with them
+        // TODO: guid is not unique between sources. Keep in mind on imports
 
         item.status = 'enabled';
 
-        //set created_at
-        item.created_at = Date.now();
-        item.updated_at = Date.now();
-
-        // set title
-        if(article.title && article.title != '') {
-            item.title = article.title;
+        // set guid
+        if(article.guid && article.guid != '') {
+            item.guid = article.guid;
         }
         else {
-            item.title = "i_" + item.created_at;
+            item.guid = this.url;
         }
+
+        // set title
+        item.title = article.title;
 
         // set body
         if(article.description && article.description != '') {
             item.body = article.description;
+            //var regex = /(<([^>]+)>)/ig
+            //    ,   body = article.description
+            //    ,   result = body.replace(regex, '');
+            //item.body = result;
         }
         else {
             item.body = '';
         }
 
         // set author
-        if(article.author && article.author != '') {
-            item.author = article.author;
-        }
-        else {
-            item.author = '';
-        }
+        item.author = article.author;
+
+        // set orig_source_id
+        item.orig_source_id = orig_source_id;
 
         // set url
         item.url = '';
         if(article.link && article.link != '') {
             item.url = article.link;
         }
-        else if(article.origlink && article.origlink != '') {
-            item.url = article.origlink;
-        }
-        else if(article.permalink && article.permalink != '') {
-            item.url = article.permalink;
-        }
         else {
-            item.url = '';
+            item.url = this.url;
         }
+
+        // set checksum
+        item.checksum = '';
 
         // set last_feed_date
         if(article.date && article.date != '') {
@@ -303,25 +302,35 @@ export default class RSSImporter {
         else if(article.pubdate && article.pubdate != '') {
             item.last_feed_date = article.pubdate;
         }
-        else {
-            item.last_feed_date = '';
-        }
 
         return item;
-
     }
 
     /**
      * build normalized feed object
      *
+     * @param rssFeed {meta: *, articles: Array}
+     * @returns {{source: *, items: Array}}
      */
     normalize(rssFeed){
-        let normalizedItems = [];
+        //let normalizedItems = [];
+        //rssFeed.articles.forEach((article) => {
+        //    normalizedItems.push(this.buildItem(article));
+        //});
+        //
+        //return {source: this.buildSource(rssFeed.meta), items: normalizedItems};
+        //
+        //
+
+        let feed = {};
+        feed.meta = this.buildSource(rssFeed.meta);
+        feed.content = [];
+
         rssFeed.articles.forEach((article) => {
-            normalizedItems.push(this.buildItem(article));
+            feed.content.push(this.buildItem(article, feed.meta.guid));
         });
 
-        return {source: this.buildSource(rssFeed.meta), items: normalizedItems};
+        return feed;
     }
 
 
