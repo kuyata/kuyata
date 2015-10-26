@@ -140,6 +140,17 @@ export default class SourceManager {
     }
 
     /**
+     * Get Source Id from a origSourceId
+     *
+     * @param origSourceId
+     * @returns {source.id|boolean}
+     */
+    getSourceIdFromOrigin(origSourceId) {
+        let source = _.find(this.data.collection, { 'guid': origSourceId });
+        return source.id || false;
+    }
+
+    /**
      * Return true if a source has not categories
      *
      * @param sourceId
