@@ -57,7 +57,42 @@ export default class SourceManager {
      */
     addSourceToTree(source){
         this.data.tree.push(source);
-        this.data.tree[this.data.tree.length - 1].categories = undefined;
+    }
+
+
+    /**
+     * TODO: need review
+     * 
+     * @param category
+     */
+    addCategoryToTree(category){
+        let sourceIndex = _.findIndex(this.data.tree, { 'id': category.source_id});
+        //let categories = this.data.tree[sourceIndex].categories || [];
+
+        if(!this.data.tree[sourceIndex].categories) {
+            this.data.tree[sourceIndex].categories = [];
+        }
+
+        // if that's a top level category
+        if(!category.parent_category_id) {
+            // insert it, if don't exist
+            if(!_.find(this.data.tree[sourceIndex].categories, { 'id': category.category_id})) {
+                this.data.tree[sourceIndex].categories.push(category);
+            }
+        }
+
+        // if that's NOT a top level category
+        else {
+            let categoryIndex = _.findIndex(this.data.tree[sourceIndex].categories, { 'id': category.parent_category_id});
+            if(!this.data.tree[sourceIndex].categories[categoryIndex].subcategories) {
+                this.data.tree[sourceIndex].categories[categoryIndex].subcategories = [];
+            }
+
+            // insert it, if don't exist
+            if(!_.find(this.data.tree[sourceIndex].categories[categoryIndex].subcategories, { 'id': category.id})) {
+                this.data.tree[sourceIndex].categories[categoryIndex].subcategories.push(category);
+            }
+        }
     }
 
     /**
@@ -67,14 +102,22 @@ export default class SourceManager {
      * @returns {Array}
      */
     getCategoriesTreeBySourceId(sourceId){
+
+        let _sourceId = sourceId;
+
+        //TODO: id typeof to INT for NWJS (remove)
+        if (typeof(process) != 'undefined') {
+            _sourceId = parseInt(sourceId);
+        }
+
         if(_.isEmpty(this.data.tree)){
             return this.createSourcesTree().then(() => {
-                let r = _.filter(this.data.tree, { 'id': parseInt(sourceId)})[0];
+                let r = _.filter(this.data.tree, { 'id': _sourceId})[0];
                 return r ? r.categories : false;
             });
         }
         else {
-            return this.$q.when(_.filter(this.data.tree, { 'id': parseInt(sourceId)})[0].categories);
+            return this.$q.when(_.filter(this.data.tree, { 'id': _sourceId})[0].categories);
         }
     }
 
