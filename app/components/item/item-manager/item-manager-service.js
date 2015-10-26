@@ -162,6 +162,33 @@ export default class ItemManager {
     }
 
     /**
+     * Determine if a item exist on the Item collection
+     *
+     * @param builded source item
+     * @return Boolean
+     */
+    exists(item) {
+        let dataCached = _.find(this.data.collection, {'guid': item.guid});
+
+        if(dataCached) {
+            return this.$q.when(dataCached);
+        }
+        else {
+            return this.Item.findAll({
+                where: {
+                    "guid": {
+                        '==': item.guid
+                    }
+                }
+            },{
+                bypassCache: true
+            }).then((items) => {
+                return items[0] || false;
+            });
+        }
+    }
+
+    /**
      * Create items from articles list and ids
      *
      * @param items, {source_id, category_id, subcategory_id}
@@ -187,13 +214,33 @@ export default class ItemManager {
      * @returns {promise}
      */
     createItem(item, itemIds) {
-        let newItem = item;
+        let _item = item;
+        _item.created_at = Date.now();
+        _item.updated_at = Date.now();
+        _item.source_id = itemIds.sourceId;
+        _item.category_id = itemIds.categoryId || null;
+        _item.subcategory_id = itemIds.subcategoryId || null;
 
-        newItem.source_id = itemIds.source_id;
-        newItem.category_id = itemIds.category_id || null;
-        newItem.subcategory_id = itemIds.subcategory_id || null;
+        if(!item.last_feed_date || item.last_feed_date == "") {
+            item.last_feed_date = _item.updated_at;
+        }
 
-        return this.Item.create(newItem);
+        return this.Item.create(_item);
+    }
+
+
+    /**
+     *
+     *
+     * @param itemOnStore
+     * @param newItem
+     * @returns {*}
+     */
+    updateItem(itemOnStore, newItem) {
+        if(!_.isMatch(itemOnStore, newItem)) {
+            return this.Item.update(itemOnStore.id, newItem);
+        }
+        return this.$q.when(false);
     }
     
     /**
