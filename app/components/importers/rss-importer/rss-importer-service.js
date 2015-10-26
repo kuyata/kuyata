@@ -124,7 +124,7 @@ export default class RSSImporter {
                 });
             });
 
-        s.emit('data', this.normalizeEncoding(BufferedData));
+        s.emit('data', BufferedData);
         s.emit('end');
 
         return deferred.promise;
@@ -143,7 +143,7 @@ export default class RSSImporter {
         // fetching 'url'
         this.fetch(this.url).then(fetchedUrl => {
             // 'url' fetched. trying parse
-            this.parse(new Buffer(fetchedUrl.data))
+            this.parse(this.normalizeEncoding(new Buffer(fetchedUrl.data)))
                 .then((res) => {
                     // 'url' is a feed. parsing success
                     deferred.resolve(res);
