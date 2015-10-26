@@ -116,13 +116,7 @@ export default class SourceManager {
      * @return Boolean
      */
     exists(item) {
-        let res = _.find(this.data.collection, (elem) => {
-            if (elem.guid == item.guid || elem.name == item.name ) {
-                return true;
-            }
-        });
-
-        return res || false;
+        return _.find(this.data.collection, {'guid': item.guid});
     }
 
     /**
@@ -132,13 +126,17 @@ export default class SourceManager {
      * @returns {a promise: The response object has the 'source.id'}
      */
     createSource(source) {
-        let deferred = this.$q.defer();
-        this.Source.create(source).then((res) => {
-            this.addSourceToTree(res);
-            deferred.resolve(res.id);
-        });
+        //let _source = angular.copy(source);
+        source.created_at = Date.now();
+        source.updated_at = Date.now();
 
-        return deferred.promise;
+        if(!source.last_feed_date || source.last_feed_date == "") {
+            source.last_feed_date = source.updated_at;
+        }
+
+        //delete _source.categories;
+
+        return this.Source.create(source);
     }
 
     /**
