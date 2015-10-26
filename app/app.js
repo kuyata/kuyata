@@ -21,6 +21,9 @@ import sources from './ui/sources/sources';
 import {sourcesData} from './components/common/data/sources';
 import {categoriesData} from './components/common/data/categories';
 import {itemsData} from './components/common/data/items';
+import {feedsRssData} from './components/common/data/feeds_rss';
+
+import Importer from './components/importer/importer';
 import SourceManager from './components/source/source-manager/source-manager';
 import CategoryManager from './components/category/category-manager/category-manager';
 import ItemManager from './components/item/item-manager/item-manager';
@@ -34,6 +37,7 @@ export default angular.module('app', [
 
     sources.name,
 
+    Importer.name,
     SourceManager.name,
     CategoryManager.name,
     ItemManager.name
@@ -52,7 +56,7 @@ export default angular.module('app', [
 
 })
 
-.run(($q, DS, SourceManager, CategoryManager, ItemManager, $rootScope, usSpinnerService) => {
+.run(($q, DS, Importer, SourceManager, CategoryManager, ItemManager, $rootScope, usSpinnerService) => {
 
     this.$q = $q;
     let sourceShema, categoryShema, itemShema;
@@ -138,6 +142,8 @@ export default angular.module('app', [
         });
     }
 
+    // TODO: create indexes from knex
+
     //TODO: if app context is on WEB environment (remove)
     else {
         sourceShema = this.$q.when(false);
@@ -159,22 +165,42 @@ export default angular.module('app', [
         }
 
         // create sample data: first reset increments
-        adapter.query('sqlite_sequence').del().then(() => {
-            SourceManager.createSampleData(sourcesData).then(() => {
-                CategoryManager.createSampleData(categoriesData).then(() => {
-                    ItemManager.createSampleData(itemsData).then(() => {
+        //adapter.query('sqlite_sequence').del().then(() => {
+            //SourceManager.createSampleData(sourcesData).then(() => {
+            //    CategoryManager.createSampleData(categoriesData).then(() => {
+            //        ItemManager.createSampleData(itemsData).then(() => {
                         // Get source list
-                        console.log("DATA INSERTED");
+                        //SourceManager.fetch().then(() => {
+                        //    SourceManager.createSourcesTree().then(() => {
+                        //        $rootScope.$emit("adapter:ready");
+                        //        usSpinnerService.stop('spinner-global');
+                        //    });
+                        //});
 
-                        SourceManager.fetch().then(() => {
-                            SourceManager.createSourcesTree().then(() => {
-                                $rootScope.$emit("adapter:ready");
-                                usSpinnerService.stop('spinner-global');
-                            });
-                        });
+            SourceManager.clearAdapter().then(() => {
+                let importPromises = [];
+                console.log("## import example data");
+
+                // TODO: initial sources and categories fetch for populate collections and tree
+
+                feedsRssData.forEach((feed) => {
+                    importPromises.push(Importer.import(feed.meta, feed.content));
+                });
+
+                this.$q.all(importPromises).then(() => {
+                    console.log("## data inserted");
+
+                    SourceManager.fetch().then(() => {
+                        $rootScope.$emit("adapter:ready");
+                        usSpinnerService.stop('spinner-global');
+
                     });
                 });
             });
-        });
+
+            //        });
+            //    });
+            //});
+        //});
     });
 });
