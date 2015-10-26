@@ -11,26 +11,226 @@ export default class Importer {
      * Method to explore ddbb and analize if follow a create or update flow
      * from a normalized feed Object
      *
-     * @param url
+     * @param feed
+     *      * meta {}
+     *          categories[] category{} **
+     *              subcategories[] subcategory{} **
+     *
+     *      ** schema variations:
+     *      ** -----------------------
+     *      ** source{} -> categories[] undefined
+     *      ** source{} -> categories[] -> subcategories[] undefined
+     *      ** source{} -> categories[] -> subcategories[]
+     *
+     *
+     * @param overwrite
+     *      defaults to false
+     *      when 'overwrite' is true, the Importer overwrite all DB information for that source
+     *      without check updates
+     *
+     *
+     * @returns {boolean}
      */
-    import(feed) {
+    import(meta, content) {
 
-        //TODO: manage create and update flows
+        let deferred = this.$q.defer();
+
+        // sync sync source
+        this.importSource(meta).then((sourceId) => {
+            // source is new
+            // source not new and was updated, including last_feed_date
+            // source not new and not changed
+
+            this.importCategories(meta.categories, sourceId).then((c) => {
+                // source without categories
+                // source with new categories
+                // source without new categories, but, with updated categories and new subcategories
+                // source without new categories, but, with updated categories
+                // source without new categories, but, with new subcategories
+                // source without new categories and without changes
+
+                this.importItems(content).then(() => {
+
+                    // new items added
+                    // not new items but changed
+                    // no changes
+
+                    deferred.resolve();
+                });
+            });
+        });
+
+        return deferred.promise;
+    }
+
+    /**
+     *
+     * @param source
+     * @returns {*}
+     */
+    importSource(meta){
+        let deferred = this.$q.defer();
+        let sourceOnStore = this.SourceManager.exists(meta);
+
         //if new source
-        if(!this.SourceManager.exists(feed.source)){
-
-            let itemIds = {};
-
-            this.SourceManager.createSource(feed.source).then((sourceId) => {
-                // separate feed.categories ?? or all on a tree struct
-                // if source already exists, add only new items (check date??)
-                // if items are new
-                itemIds.source_id = sourceId;
-                this.ItemManager.createItems(feed.items, itemIds);
-            }).catch((e) => {console.log(e);});
-
+        if(!sourceOnStore){
+            this.SourceManager.createSource(meta).then((sourceRes) => {
+                this.SourceManager.addSourceToTree(sourceRes);
+                deferred.resolve(sourceRes.id);
+            });
+        }
+        else {
+            deferred.resolve(sourceOnStore.id);
         }
 
-
+        return deferred.promise;
     }
+
+    /**
+     * TODO: need review
+     *
+     */
+    importCategories(categories, sourceId) {
+        let deferred = this.$q.defer();
+
+        if(categories) {
+
+            let promises = [];
+            categories.forEach((category) => {
+                let innerDeferred = this.$q.defer();
+                let categoryOnStore = this.CategoryManager.exists(category);
+
+                // if not exist, create it and addToTree
+                if(!categoryOnStore){
+                    promises.push(this.CategoryManager.createCategory(category, sourceId, null).then((categoryRes) => {
+                        this.SourceManager.addCategoryToTree(categoryRes);
+
+                        //if(category.subcategories) {
+                        //    promises.push(this.importSubcategories(category.subcategories, sourceId, categoryRes.id));
+                        //}
+                        //else {
+                        //    promises.push(this.$q.when());
+                        //}
+                    }));
+                }
+
+                // not new category
+                //else {
+                //    //deferred.resolve(false);
+                //
+                //    // not new category with subcategories
+                //    if(category.subcategories) {
+                //        promises.push(this.importSubcategories(category.subcategories, sourceId, categoryOnStore.id));
+                //    }
+                //    else {
+                //        promises.push(this.$q.when());
+                //    }
+                //}
+            });
+
+            this.$q.all(promises).then(() => {
+                deferred.resolve("All categories added");
+            });
+        }
+
+        else {
+            deferred.resolve("El feed no tiene categorías");
+        }
+
+        return deferred.promise;
+    }
+
+    /**
+     * TODO: need review
+     *
+     */
+    importSubcategories(categories, sourceId, parentCategoryId) {
+        let deferred = this.$q.defer();
+
+        if(categories) {
+
+            let promises = [];
+            categories.forEach((category) => {
+
+                let categoryOnStore = this.CategoryManager.exists(category);
+
+                // if not exist, create it and addToTree
+                if(!categoryOnStore){
+                    this.CategoryManager.createCategory(category, sourceId, parentCategoryId).then((categoryRes) => {
+                        this.SourceManager.addCategoryToTree(categoryRes);
+
+                        promises.push(this.$q.when(false));
+                    });
+                }
+
+                // not new category
+                else {
+                    promises.push(this.$q.when(false));
+                }
+            });
+
+            this.$q.all(promises).then(() => {
+                deferred.resolve("Subcategories added");
+            });
+        }
+
+        else {
+            deferred.resolve("Feed without subcategories");
+        }
+
+        return deferred.promise;
+    }
+
+    /**
+     *
+     * @param content
+     * @param itemNewCheck, defaults true. Allows to check if an item is new or not. Set false to force item create
+     * @param itemUpdateCheck, defaults true. Allows to check if an item was updated or not. Set false to omit this check
+     * @returns {*}
+     */
+    importItems(content, itemNewCheck = true, itemUpdateCheck = true) {
+        return this.$q(resolve => {
+            let promises = [];
+            content.forEach((item) => {
+
+                //config refs
+                let refs = {};
+                refs.sourceId = this.SourceManager.getSourceIdFromOrigin(item.orig_source_id);
+                if(item.orig_category_id) {
+                    refs.categoryId = this.CategoryManager.getCategoryIdFromOrigin(item.orig_category_id);
+                }
+                if(item.orig_subcategory_id) {
+                    refs.subcategoryId = this.CategoryManager.getCategoryIdFromOrigin(item.orig_subcategory_id);
+                }
+
+                // create, update or nop flow
+                this.ItemManager.exists(item).then((itemOnStore) => {
+                    if(!itemOnStore || !itemNewCheck) {
+                        promises.push(this.ItemManager.createItem(item, refs));
+                    }
+                    else if (itemOnStore && itemUpdateCheck) {
+                        promises.push(this.ItemManager.updateItem(itemOnStore, item).then((updated) => {
+                            if(updated) {
+
+                            }
+                            else {
+
+                            }
+                        }));
+                    }
+                    else {
+                        promises.push(this.$q.when());
+                    }
+
+                });
+
+
+            });
+            this.$q.all(promises).then(() => {
+                resolve();
+            });
+        });
+    }
+
+
 }
