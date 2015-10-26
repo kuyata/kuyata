@@ -121,6 +121,9 @@ export default angular.module('app', [
                     t.string('body');
                     t.string('author');
                     t.string('guid');
+                    t.string('orig_source_id');
+                    t.string('orig_category_id');
+                    t.string('orig_subcategory_id');
                     t.string('checksum');
                     t.string('status');
                     t.string('url');
