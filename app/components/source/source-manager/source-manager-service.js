@@ -15,10 +15,11 @@ import jsDataAngular from 'js-data-angular';
  */
 export default class SourceManager {
 
-    constructor($q, DS, Source, CategoryManager){
+    constructor($q, DS, Source, CategoryManager, ItemManager){
         this.$q = $q;
         this.Source = Source;
         this.CategoryManager = CategoryManager;
+        this.ItemManager = ItemManager;
 
         this.data = {collection: DS.store[Source.name].collection, tree:[]}; // Get the DS store collection
         this.current = null;
@@ -159,5 +160,20 @@ export default class SourceManager {
         }).catch((e) => {console.log(e);});
 
         //return this.$q.when(false);
+    }
+
+    clearAdapter() {
+        return this.$q((resolve) => {
+
+            let promises = [];
+
+            promises.push(this.Source.destroyAll());
+            promises.push(this.CategoryManager.Category.destroyAll());
+            promises.push(this.ItemManager.Item.destroyAll());
+
+            this.$q.all(promises).then(() => {
+                resolve();
+            });
+        });
     }
 }
