@@ -339,7 +339,7 @@ export default class RSSImporter {
      * @param url
      */
     import(url) {
-
+        let deferred = this.$q.defer();
         // explore
         this.explore(url).then((rssFeed) => {
 
@@ -347,12 +347,22 @@ export default class RSSImporter {
             let normalizedFeed = this.normalize(rssFeed);
 
             // import
-            this.Importer.import(normalizedFeed);
+
+            // source not exist
+            // source error
+            // merge with import response
+
+            this.Importer.import(normalizedFeed.meta, normalizedFeed.content).then((response) => {
+                deferred.resolve(response);
+            }).catch(() => {
+                deferred.reject(null);
+            });
+
+        }).catch(() => {
+            deferred.reject(null);
         });
 
+        return deferred.promise;
     }
-
-
-
 
 }
