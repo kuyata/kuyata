@@ -5,6 +5,9 @@ import items from './items/items';
 import SourceManager from './../../components/source/source-manager/source-manager';
 import CategoryManager from './../../components/category/category-manager/category-manager';
 import ItemManager from './../../components/item/item-manager/item-manager';
+
+import importer from './../importer/importer';
+
 import SourcesDirective from './sources-directive';
 import CategoriesDirective from './categories-directive';
 
@@ -14,7 +17,8 @@ export default angular.module('app.sources', [
 	items.name,
 	SourceManager.name,
 	CategoryManager.name,
-	ItemManager.name
+	ItemManager.name,
+	importer.name
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {
