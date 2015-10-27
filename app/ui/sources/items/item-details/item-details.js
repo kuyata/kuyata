@@ -1,12 +1,13 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import ngSanitize from 'angular-sanitize';
 
 import ItemManager from './../../../../components/item/item-manager/item-manager';
 import ItemDetailsDirective from './item-details-directive';
 
 export default angular.module('app.sources.items.details', [
 	uiRouter,
-
+	ngSanitize,
 	ItemManager.name
 ])
 

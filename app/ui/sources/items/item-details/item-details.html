@@ -7,11 +7,12 @@
 			<span ng-if="vm.details.categoryName "> - {{ vm.details.categoryName }}</span>
 			<span ng-if="vm.details.subcategoryName "> - {{ vm.details.subcategoryName }}</span>
 		</p>
-		<p class="item-details-prize">{{ vm.details.body }}</p>
 	</div>
+
+	<p class="item-details-body" ng-bind-html="vm.details.body" ng-click="vm.supportExternalLinks($event)"></p>
 
 	<p class="item-details-date">{{ vm.details.last_feed_date | date : format : timezone}}</p>
 	<p class="item-details-author">Autor: <strong>{{ vm.details.author }}</strong></p>
-	<a ng-href="{{ vm.details.url }}" class="item-details-mail label label-warning">fuente</a>
+	<a href ng-click="vm.openExternal(vm.details.url)" class="item-details-mail label label-warning">Ver en el sitio</a>
 
 </div>
