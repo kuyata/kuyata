@@ -85,4 +85,8 @@ class ItemsController {
 			this.usSpinnerService.stop('spinner-list');
 		});
 	}
+
+	plainText(text) {
+		return  text ? String(text).replace(/(&#160;|&nbsp;|<([^>]+)>)/ig, '') : '';
+	}
 }
