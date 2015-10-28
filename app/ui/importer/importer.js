@@ -3,7 +3,7 @@ import angular from 'angular';
 import uiBootstrap from 'angular-bootstrap';
 import ImporterDirective from './importer-directive';
 
-// importer list
+// ui importer list
 import rssImporter from './importers/rss-importer/rss-importer';
 import packageImporter from './importers/package-importer/package-importer';
 
