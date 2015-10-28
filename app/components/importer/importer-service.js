@@ -232,5 +232,33 @@ export default class Importer {
         });
     }
 
+    /**
+     *
+     * @param code
+     *      code: -1 ->  error
+     *      code: 0  ->  source not new without changes
+     *      code: 1  ->  source not new with changes
+     *      code: 2  ->  source is new
+     * @returns {string}
+     */
+    responseMsg(code) {
+        let msg = "";
+
+        if(code == 0) {
+            msg = "Source already up to date";
+        }
+        else if(code == 1) {
+            msg = "Source updated";
+        }
+        else if(code == 2) {
+            msg = "Source added and updated";
+        }
+        else if(code == -1) {
+            msg = "Source error";
+        }
+
+        return msg;
+    }
+
 
 }
