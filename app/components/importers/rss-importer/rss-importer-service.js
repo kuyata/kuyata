@@ -231,8 +231,8 @@ export default class RSSImporter {
         // set checksum
         source.checksum = '';
 
-        // set last_feed_date
-        source.last_feed_date = meta.date;
+        // set last_feed_date<Timestamp> from meta.date<Date>
+        source.last_feed_date = meta.date ? meta.date.getTime() : null;
 
         return source;
     }
@@ -288,12 +288,12 @@ export default class RSSImporter {
         // set checksum
         item.checksum = '';
 
-        // set last_feed_date
+        // set last_feed_date<Timestamp> from article.date<Date> or article.pubdate<Date>
         if(article.date) {
-            item.last_feed_date = article.date;
+            item.last_feed_date = article.date ? article.date.getTime() : null;
         }
         else if(article.pubdate) {
-            item.last_feed_date = article.pubdate;
+            item.last_feed_date = article.pubdate ? article.pubdate.getTime() : null;
         }
 
         return item;
@@ -335,7 +335,7 @@ export default class RSSImporter {
 
             // source not exist
             // source error
-            // merge with import response
+            // merge rss responses with general import response
 
             this.Importer.import(normalizedFeed.meta, normalizedFeed.content).then((response) => {
                 deferred.resolve(response);
