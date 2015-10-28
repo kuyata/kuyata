@@ -64,23 +64,45 @@ export default class Importer {
     }
 
     /**
+     * Import Source from normalized data
      *
      * @param source
-     * @returns {*}
+     * @returns {promise}
+     * data: {code, sourceId}
+     *      code: -1 ->  source response error
+     *      code: 0  ->  source not new and has not new last_feed_date
+     *      code: 1  ->  source not new and has new last_feed_date
+     *      code: 2  ->  source not new and undefined last_feed_date
+     *      code: 3  ->  source is new
      */
     importSource(meta){
         let deferred = this.$q.defer();
         let sourceOnStore = this.SourceManager.exists(meta);
 
-        //if new source
         if(!sourceOnStore){
             this.SourceManager.createSource(meta).then((sourceRes) => {
                 this.SourceManager.addSourceToTree(sourceRes);
-                deferred.resolve(sourceRes.id);
+                deferred.resolve({code: 3, sourceId: sourceRes.id});
+            }).catch(() => {
+                deferred.reject({code: -1, sourceId: null});
             });
         }
         else {
-            deferred.resolve(sourceOnStore.id);
+            this.SourceManager.updateSource(sourceOnStore, meta).then((res) => {
+                if (sourceOnStore.last_feed_date && meta.last_feed_date) {
+                    if(sourceOnStore.last_feed_date == meta.last_feed_date) {
+                        deferred.resolve({code: 0, sourceId: null});
+                    }
+                    else {
+                        deferred.resolve({code: 1, sourceId: sourceOnStore.id});
+                    }
+                }
+                else {
+                    deferred.resolve({code: 2, sourceId: sourceOnStore.id});
+                }
+            }).catch(() => {
+                deferred.reject({code: -1, sourceId: null});
+            });
         }
 
         return deferred.promise;
