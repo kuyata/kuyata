@@ -39,7 +39,6 @@ class SourcesController {
 
 		$rootScope.$on("adapter:ready", () => {
 			this.updateAllSources(SourceManager.data.collection).then(() => {
-				this.usSpinnerService.stop('spinner-sources');
 				this.sources = SourceManager.data.collection;
 			});
 		});
@@ -59,6 +58,8 @@ class SourcesController {
 		let promises = [];
 		let deferred = this.$q.defer();
 
+		this.usSpinnerService.spin('spinner-sources');
+
 		sourceList.forEach(source => {
 			if(source.type == 'rss') {
 				promises.push(this.RSSImporter.import(source.url));
@@ -69,6 +70,7 @@ class SourcesController {
 		});
 		this.$q.all(promises).then(() => {
 			deferred.resolve();
+			this.usSpinnerService.stop('spinner-sources');
 		});
 
 		return deferred.promise;

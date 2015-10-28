@@ -1,5 +1,8 @@
 <importer></importer>
 
+<p class="no-sources" ng-class="{show: vm.sources.length == 0}">Add a new source by clicking on '+' button</p>
+<button type="button" class="btn btn-danger btn-update" ng-click="vm.updateAllSources(vm.sources)" ng-class="{show: vm.sources.length > 0}"> Update All </button>
+
 <accordion close-others="true">
 	<accordion-group
 			is-open="selected"
