@@ -190,7 +190,8 @@ export default class RSSImporter {
     /**
      * Build a source-normalized Object from a feedparser meta
      *
-     * @param meta feedparser
+     * @param meta feedparser (All generic properties are "pre-initialized"
+     * to null (or empty arrays or objects for certain properties). )
      * @returns {normalizedSource Object}
      */
     buildSource(meta){
@@ -203,13 +204,13 @@ export default class RSSImporter {
         source.type = 'rss';
 
         // set name
-        if(meta.title && meta.title != '') {
+        if(meta.title) {
             source.name = meta.title;
         }
-        else if(meta.description && meta.description != '') {
+        else if(meta.description) {
             source.name = meta.description;
         }
-        else if(meta.xmlurl && meta.xmlurl != '') {
+        else if(meta.xmlurl) {
             source.name = meta.link;
         }
         else {
@@ -217,7 +218,7 @@ export default class RSSImporter {
         }
 
         // set guid
-        if(meta.guid && meta.guid != '') {
+        if(meta.guid) {
             source.guid = meta.guid;
         }
         else {
@@ -237,7 +238,8 @@ export default class RSSImporter {
     }
 
     /**
-     * Build a item-normalized Object from a feedparser article
+     * Build a item-normalized Object from a feedparser article. (All generic properties
+     * are "pre-initialized" to null (or empty arrays or objects for certain properties). )
      *
      * @param article feedparser
      * @returns {normalizedItem Object}
@@ -251,7 +253,7 @@ export default class RSSImporter {
         item.status = 'enabled';
 
         // set guid
-        if(article.guid && article.guid != '') {
+        if(article.guid) {
             item.guid = article.guid;
         }
         else {
@@ -262,12 +264,8 @@ export default class RSSImporter {
         item.title = article.title;
 
         // set body
-        if(article.description && article.description != '') {
+        if(article.description) {
             item.body = article.description;
-            //var regex = /(<([^>]+)>)/ig
-            //    ,   body = article.description
-            //    ,   result = body.replace(regex, '');
-            //item.body = result;
         }
         else {
             item.body = '';
@@ -280,8 +278,7 @@ export default class RSSImporter {
         item.orig_source_id = orig_source_id;
 
         // set url
-        item.url = '';
-        if(article.link && article.link != '') {
+        if(article.link) {
             item.url = article.link;
         }
         else {
@@ -292,10 +289,10 @@ export default class RSSImporter {
         item.checksum = '';
 
         // set last_feed_date
-        if(article.date && article.date != '') {
+        if(article.date) {
             item.last_feed_date = article.date;
         }
-        else if(article.pubdate && article.pubdate != '') {
+        else if(article.pubdate) {
             item.last_feed_date = article.pubdate;
         }
 
@@ -309,15 +306,6 @@ export default class RSSImporter {
      * @returns {{source: *, items: Array}}
      */
     normalize(rssFeed){
-        //let normalizedItems = [];
-        //rssFeed.articles.forEach((article) => {
-        //    normalizedItems.push(this.buildItem(article));
-        //});
-        //
-        //return {source: this.buildSource(rssFeed.meta), items: normalizedItems};
-        //
-        //
-
         let feed = {};
         feed.meta = this.buildSource(rssFeed.meta);
         feed.content = [];
