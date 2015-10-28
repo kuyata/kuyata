@@ -13,7 +13,6 @@ import DSLocalStorageAdapter from 'js-data-localstorage';
 
 import jsDataAngular from 'js-data-angular';
 import uiBootstrap from 'angular-bootstrap';
-import angularSpinner from 'angular-spinner';
 
 import sources from './ui/sources/sources';
 
@@ -56,7 +55,7 @@ export default angular.module('app', [
 
 })
 
-.run(($q, DS, Importer, SourceManager, CategoryManager, ItemManager, $rootScope, usSpinnerService) => {
+.run(($q, DS, Importer, SourceManager, CategoryManager, ItemManager, $rootScope) => {
 
     this.$q = $q;
     let sourceShema, categoryShema, itemShema;
@@ -174,7 +173,6 @@ export default angular.module('app', [
                         //SourceManager.fetch().then(() => {
                         //    SourceManager.createSourcesTree().then(() => {
                         //        $rootScope.$emit("adapter:ready");
-                        //        usSpinnerService.stop('spinner-global');
                         //    });
                         //});
 
@@ -193,7 +191,6 @@ export default angular.module('app', [
 
                     SourceManager.createSourcesTree().then(() => {
                         $rootScope.$emit("adapter:ready");
-                        usSpinnerService.stop('spinner-global');
 
                     });
                 //});

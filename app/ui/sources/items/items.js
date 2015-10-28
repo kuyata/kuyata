@@ -1,6 +1,7 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import StickyDirective from 'ngsticky';
+import angularSpinner from 'angular-spinner';
 
 import itemDetails from './item-details/item-details';
 import ItemManager from './../../../components/item/item-manager/item-manager';
