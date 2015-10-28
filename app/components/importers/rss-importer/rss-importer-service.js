@@ -13,7 +13,8 @@ export default class RSSImporter {
         this.$http = $http;
         this.Importer = Importer;
 
-        this.url = null;
+        this.sourceUrl = null;  // typed by user
+        this.url = null;        // final rss url
     }
 
     /**
@@ -221,15 +222,7 @@ export default class RSSImporter {
         }
 
         // set url
-        if(meta.xmlurl && meta.xmlurl != '') {
-            source.url = meta.xmlurl;
-        }
-        else if(meta.link && meta.link  != '') {
-            source.url = meta.link;
-        }
-        else {
-            source.url = this.url;
-        }
+        source.url = this.sourceUrl;
 
         // set checksum
         source.checksum = '';
@@ -339,6 +332,7 @@ export default class RSSImporter {
      * @param url
      */
     import(url) {
+        this.sourceUrl = url;
         let deferred = this.$q.defer();
         // explore
         this.explore(url).then((rssFeed) => {
