@@ -37,6 +37,7 @@ export default function factory($q, DS, utils){
  * {string}     url             source url on source
  * {string}     checksum        to find changes on the same guid elem. For sync reasons
  * {timedate}   last_feed_date  last source update date on feed
+ * {string}     type            type is defined by specific Importer witch it was imported with (e.g. 'rss')
  * {timedate}   created_at      creation date on our DB
  * {timedate}   updated_at      last modified date on our DB
  *

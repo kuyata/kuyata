@@ -199,6 +199,9 @@ export default class RSSImporter {
 
         source.status = 'enabled';
 
+        // importer type. Needed for know from core, what specific Importer use on update
+        source.type = 'rss';
+
         // set name
         if(meta.title && meta.title != '') {
             source.name = meta.title;

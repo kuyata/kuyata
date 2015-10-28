@@ -83,6 +83,7 @@ export default angular.module('app', [
                     t.string('status');
                     t.string('url');
                     t.timestamp('last_feed_date');
+                    t.string('type');
                     t.timestamps();
                 });
             }
