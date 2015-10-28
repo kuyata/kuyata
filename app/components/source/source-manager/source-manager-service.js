@@ -194,6 +194,20 @@ export default class SourceManager {
     }
 
     /**
+     *
+     *
+     * @param sourceOnStore
+     * @param newSource
+     * @returns {*}
+     */
+    updateSource(sourceOnStore, newSource) {
+        if(!_.isMatch(sourceOnStore, newSource)) {
+            return this.Source.update(sourceOnStore.id, newSource);
+        }
+        return this.$q.when(false);
+    }
+
+    /**
      * Auxiliar method to create initial sample data for sources
      * @param data is the source fixtures
      */
