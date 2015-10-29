@@ -33,6 +33,7 @@ export default class Importer {
      *
      * @returns {promise}
      * data: {code}
+     *      code: -2 ->  items response error
      *      code: -1 ->  source response error
      *      code: 0  ->  source not new without changes
      *      code: 1  ->  source not new with changes
@@ -59,7 +60,7 @@ export default class Importer {
                             deferred.resolve({code: 1, msg: this.responseMsg(1)});
                         }
                     }).catch(() => {
-                        deferred.reject({code: -1, msg: this.responseMsg(-1)});
+                        deferred.reject({code: -2, msg: this.responseMsg(-2)});
                     });
                 //});
             }
@@ -325,6 +326,9 @@ export default class Importer {
         }
         else if(code == -1) {
             msg = "Source error";
+        }
+        else if(code == -2) {
+            msg = "Items error";
         }
 
         return msg;
