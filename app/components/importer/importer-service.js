@@ -29,35 +29,36 @@ export default class Importer {
      *      without check updates
      *
      *
-     * @returns {boolean}
+     * @returns {promise}
+     * data: {code}
+     *      code: -1 ->  source response error
+     *      code: 0  ->  source not new without changes
+     *      code: 1  ->  source not new with changes
+     *      code: 2  ->  source is new
      */
     import(meta, content) {
 
         let deferred = this.$q.defer();
 
         // sync sync source
-        this.importSource(meta).then((sourceId) => {
-            // source is new
-            // source not new and was updated, including last_feed_date
-            // source not new and not changed
-
-            this.importCategories(meta.categories, sourceId).then((c) => {
-                // source without categories
-                // source with new categories
-                // source without new categories, but, with updated categories and new subcategories
-                // source without new categories, but, with updated categories
-                // source without new categories, but, with new subcategories
-                // source without new categories and without changes
-
-                this.importItems(content).then(() => {
-
-                    // new items added
-                    // not new items but changed
-                    // no changes
-
-                    deferred.resolve();
+        this.importSource(meta).then((sourceData) => {
+            if(sourceData.code >= 1) {
+                this.importCategories(meta.categories, sourceData.source.id).then((c) => {
+                    this.importItems(content, sourceData).then(() => {
+                        if(sourceData.code == 3) {
+                            deferred.resolve({code: 2, msg: this.responseMsg(2)});
+                        }
+                        else {
+                            deferred.resolve({code: 2, msg: "last_feed_date nuevo o undefined"});
+                        }
+                    });
                 });
-            });
+            }
+            else {
+                deferred.resolve({code: 0, msg: this.responseMsg(0)});
+            }
+        }).catch(() => {
+            deferred.reject({code: -1, msg: this.responseMsg(-1)});
         });
 
         return deferred.promise;
@@ -210,7 +211,7 @@ export default class Importer {
      * @param itemUpdateCheck, defaults true. Allows to check if an item was updated or not. Set false to omit this check
      * @returns {*}
      */
-    importItems(content, itemNewCheck = true, itemUpdateCheck = true) {
+    importItems(content, sourceData, itemNewCheck = true, itemUpdateCheck = true) {
         return this.$q(resolve => {
             let promises = [];
             content.forEach((item) => {
