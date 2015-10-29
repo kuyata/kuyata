@@ -184,7 +184,7 @@ export default class ItemManager {
             },{
                 bypassCache: true
             }).then((item) => {
-                return item || false;
+                return item[0] || false;
             });
         }
     }

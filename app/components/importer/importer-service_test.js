@@ -155,7 +155,7 @@ describe("Importer", () => {
             },{
                 bypassCache: true
             })
-                .respond(ImporterFixtures.contentUndated1[0]);
+                .respond(ImporterFixtures.contentUndated1);
 
             SourceManager.data.collection = [ImporterFixtures.metaUndated1Stored];
             SourceManager.data.tree = [ImporterFixtures.metaUndated1Stored];
