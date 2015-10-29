@@ -210,7 +210,6 @@ export default class Importer {
      * @param content
      * @param sourceData {code, Source}
      * @param itemNewCheck, defaults true. Allows to check if an item is new or not. Set false to force item create
-     * @param itemUpdateCheck, defaults true. Allows to check if an item was updated or not. Set false to omit this check
      * @returns {promise}
      * data: {code}
      *      code: -1 ->  one or more item response errors
@@ -227,7 +226,7 @@ export default class Importer {
                     if(!itemOnStore || !itemNewCheck) {
                         promises.push(this.ItemManager.createItem(item, this.getItemRefs(item)));
                     }
-                    else if (itemOnStore && itemUpdateCheck) {
+                    else if (itemOnStore) {
                         promises.push(this.ItemManager.updateItem(itemOnStore, item).then((updated) => {
                             if(updated) {
 
