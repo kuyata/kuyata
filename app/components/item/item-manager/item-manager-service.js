@@ -179,11 +179,12 @@ export default class ItemManager {
                     "guid": {
                         '==': item.guid
                     }
-                }
+                },
+                limit: 1
             },{
                 bypassCache: true
-            }).then((items) => {
-                return items[0] || false;
+            }).then((item) => {
+                return item || false;
             });
         }
     }
@@ -268,7 +269,7 @@ export default class ItemManager {
 /**
  * Private function to generate JSON of params used on DS finds queries
  *
- * @param params is an Object with any or all these properties: "title, source, category, skip, limit"
+ * @param params is an Object with any or all these properties: "title, source, category, offset, limit"
  * @returns a DS format params Object
  */
 function createQuery(params, offset = false, limit = false) {
