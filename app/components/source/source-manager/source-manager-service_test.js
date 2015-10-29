@@ -190,14 +190,14 @@ describe("SourceManager", () => {
             SourceManager.data.collection = [{"guid": "1", "name": "Source 1"},{"guid": "2", "name": "Source 2"}];
 
             let item = {"guid": "1", "name": "Source 1"};
-            expect(SourceManager.exists(item)).not.toBe(false);
+            expect(SourceManager.exists(item)).toBeTruthy();
         });
 
-        it("should find Source and return not false", () => {
+        it("should not find Source and return false", () => {
             SourceManager.data.collection = [{"guid": "1", "name": "Source 1"},{"guid": "2", "name": "Source 2"}];
 
             let item = {"guid": "3", "name": "Source 3"};
-            expect(SourceManager.exists(item)).toBe(false);
+            expect(SourceManager.exists(item)).toBeFalsy();
         });
     });
 });
