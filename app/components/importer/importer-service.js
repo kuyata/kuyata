@@ -69,12 +69,14 @@ export default class Importer {
      *
      * @param source
      * @returns {promise}
-     * data: {code, Source}
+     * data: {code, Source[, deltaTime]}
      *      code: -1 ->  source response error
      *      code: 0  ->  source not new and has not new last_feed_date
      *      code: 1  ->  source not new and has new last_feed_date
      *      code: 2  ->  source not new and undefined last_feed_date
      *      code: 3  ->  source is new
+     *
+     *      deltaTime: previous last_feed_date
      */
     importSource(meta){
         let deferred = this.$q.defer();
@@ -89,13 +91,14 @@ export default class Importer {
             });
         }
         else {
+            let deltaTime = sourceOnStore.last_feed_date;
             this.SourceManager.updateSource(sourceOnStore, meta).then((res) => {
-                if (sourceOnStore.last_feed_date && meta.last_feed_date) {
-                    if(sourceOnStore.last_feed_date == meta.last_feed_date) {
+                if (meta.last_feed_date) {
+                    if(deltaTime == meta.last_feed_date) {
                         deferred.resolve({code: 0, source: sourceOnStore});
                     }
                     else {
-                        deferred.resolve({code: 1, source: sourceOnStore});
+                        deferred.resolve({code: 1, source: sourceOnStore, deltaTime: deltaTime});
                     }
                 }
                 else {
