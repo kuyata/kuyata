@@ -96,6 +96,8 @@ describe("Importer", () => {
 
             Importer.importSource(ImporterFixtures.metaDated1Updated).then((sourceData) => {
                 expect(sourceData.code).toEqual(1);
+                expect(sourceData.deltaTime).toEqual(metaPrevStored.last_feed_date);
+                expect(metaPrevStored.last_feed_date).toBeLessThan(metaUpdatedStored.last_feed_date);
             });
 
             DS.verifyNoOutstandingExpectation();
@@ -116,7 +118,7 @@ describe("Importer", () => {
     describe("importItems(meta)", () => {
         beforeEach(done => _setup(done));
 
-        xit("should create a new list of Items on a new Source and return promise with data.code = 1", () => {
+        it("should create a new list of Items on a new Source and return promise with data.code = 1", () => {
             ImporterFixtures.contentDated1.forEach((item) => {
                 DS.expectCreate(Item.name, item).respond(item);
             });
@@ -132,7 +134,7 @@ describe("Importer", () => {
             DS.flush();
         });
 
-        xit("should check a list of one Item on a not new undated Source and return promise with data.code = 0, since item was not changed, and cached", () => {
+        it("should check a list of one Item on a not new undated Source and return promise with data.code = 0, since item was not changed, and cached", () => {
             SourceManager.data.collection = [ImporterFixtures.metaUndated1Stored];
             SourceManager.data.tree = [ImporterFixtures.metaUndated1Stored];
             ItemManager.data.collection = [ImporterFixtures.contentUndated1[0]];
@@ -144,7 +146,7 @@ describe("Importer", () => {
             rootScope.$digest();
         });
 
-        xit("should check a list of one Item on a not new undated Source and return promise with data.code = 0, since item was not changed, and not cached", () => {
+        it("should check a list of one Item on a not new undated Source and return promise with data.code = 0, since item was not changed, and not cached", () => {
             DS.expectFindAll(Item.name, {
                 "where": {
                     guid: {"==":ImporterFixtures.contentUndated1[0].guid}
@@ -166,7 +168,7 @@ describe("Importer", () => {
             DS.flush();
         });
 
-        xit("should check a list of one Item on a not new undated Source and return promise with data.code = 1, since item was changed, and cached", () => {
+        it("should check a list of one Item on a not new undated Source and return promise with data.code = 1, since item was changed, and cached", () => {
 
             let contentUpdatedStored = angular.copy(ImporterFixtures.contentUndated1Updated[0]);
             contentUpdatedStored.id = 100;
