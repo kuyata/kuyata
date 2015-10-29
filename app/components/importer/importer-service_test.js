@@ -220,6 +220,35 @@ describe("Importer", () => {
             console.log(DS.verifyNoOutstandingExpectation());
             DS.flush();
         });
+
+        xit("should check only newer dated Items for a not new dated Source and return promise with data.code = 1", () => {
+            //require force ItemManager.exists(args) return this.$q.when(false);
+
+            //DS.expectFindAll(Item.name, {
+            //    "where": {
+            //        guid: {"==":ImporterFixtures.contentDated1[1].guid}
+            //    },
+            //    limit: 1
+            //},{
+            //    bypassCache: true
+            //})
+            //    .respond(false);
+            DS.expectCreate(Item.name, ImporterFixtures.contentDated1[1]).respond(ImporterFixtures.contentDated1[1]);
+
+            SourceManager.data.collection = [ImporterFixtures.metaDated1Stored];
+            SourceManager.data.tree = [ImporterFixtures.metaDated1Stored];
+
+            let contentPrevStored = angular.copy(ImporterFixtures.contentDated1[0]);
+            contentPrevStored.id = 100;
+            ItemManager.data.collection = [contentPrevStored];
+
+            Importer.importItems(ImporterFixtures.contentDated1, {code: 1, source: ImporterFixtures.metaDated1Stored, deltaTime: ImporterFixtures.metaDated1Stored.last_feed_date}).then((itemsData) => {
+                expect(itemsData.code).toEqual(1);
+            });
+
+            DS.verifyNoOutstandingExpectation();
+            DS.flush();
+        });
     });
 
 

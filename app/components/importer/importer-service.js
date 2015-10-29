@@ -248,7 +248,7 @@ export default class Importer {
             if (sourceData.code == 1){
                 contentUpdated = true;
                 content = _.dropWhile(content, function(n) {
-                    return n.last_feed_data < sourceData.deltaTime;
+                    return n.last_feed_date <= sourceData.deltaTime;
                 });
             }
 
