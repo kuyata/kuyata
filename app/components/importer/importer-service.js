@@ -68,7 +68,7 @@ export default class Importer {
      *
      * @param source
      * @returns {promise}
-     * data: {code, sourceId}
+     * data: {code, Source}
      *      code: -1 ->  source response error
      *      code: 0  ->  source not new and has not new last_feed_date
      *      code: 1  ->  source not new and has new last_feed_date
@@ -82,26 +82,26 @@ export default class Importer {
         if(!sourceOnStore){
             this.SourceManager.createSource(meta).then((sourceRes) => {
                 this.SourceManager.addSourceToTree(sourceRes);
-                deferred.resolve({code: 3, sourceId: sourceRes.id});
+                deferred.resolve({code: 3, source: sourceRes});
             }).catch(() => {
-                deferred.reject({code: -1, sourceId: null});
+                deferred.reject({code: -1, source: null});
             });
         }
         else {
             this.SourceManager.updateSource(sourceOnStore, meta).then((res) => {
                 if (sourceOnStore.last_feed_date && meta.last_feed_date) {
                     if(sourceOnStore.last_feed_date == meta.last_feed_date) {
-                        deferred.resolve({code: 0, sourceId: null});
+                        deferred.resolve({code: 0, source: sourceOnStore});
                     }
                     else {
-                        deferred.resolve({code: 1, sourceId: sourceOnStore.id});
+                        deferred.resolve({code: 1, source: sourceOnStore});
                     }
                 }
                 else {
-                    deferred.resolve({code: 2, sourceId: sourceOnStore.id});
+                    deferred.resolve({code: 2, source: sourceOnStore});
                 }
             }).catch(() => {
-                deferred.reject({code: -1, sourceId: null});
+                deferred.reject({code: -1, source: null});
             });
         }
 
