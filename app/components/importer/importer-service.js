@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export default class Importer {
 
     constructor($q, SourceManager, CategoryManager, ItemManager){
@@ -43,16 +45,23 @@ export default class Importer {
         // sync sync source
         this.importSource(meta).then((sourceData) => {
             if(sourceData.code >= 1) {
-                this.importCategories(meta.categories, sourceData.source.id).then((c) => {
-                    this.importItems(content, sourceData).then(() => {
+                //this.importCategories(meta.categories, sourceData.source.id).then((c) => {
+                    this.importItems(content, sourceData).then((itemsData) => {
                         if(sourceData.code == 3) {
                             deferred.resolve({code: 2, msg: this.responseMsg(2)});
                         }
-                        else {
-                            deferred.resolve({code: 2, msg: "last_feed_date nuevo o undefined"});
+                        // no item changes
+                        else if(itemsData.code == 0){
+                            deferred.resolve({code: 0, msg: this.responseMsg(0)});
                         }
+                        // item changes
+                        else if(itemsData.code == 1){
+                            deferred.resolve({code: 1, msg: this.responseMsg(1)});
+                        }
+                    }).catch(() => {
+                        deferred.reject({code: -1, msg: this.responseMsg(-1)});
                     });
-                });
+                //});
             }
             else {
                 deferred.resolve({code: 0, msg: this.responseMsg(0)});
@@ -216,38 +225,62 @@ export default class Importer {
      * @returns {promise}
      * data: {code}
      *      code: -1 ->  one or more item response errors
-     *      code: 0  ->  all items not new and not changes
-     *      code: 1  ->  all items not new, but one or more items changed
-     *      code: 2  ->  one or more items created
+     *      code: 0  ->  no changes
+     *      code: 1  ->  one or more items created or updated
      */
     importItems(content, sourceData, itemNewCheck = true, itemUpdateCheck = true) {
-        return this.$q(resolve => {
-            let promises = [];
+
+        let deferred = this.$q.defer();
+
+        let promises = [];
+        let contentUpdated = false;
+
+        // import items flow
+        // if source is new or itemNewCheck is false
+        if(sourceData.code == 3 || !itemNewCheck){
+            contentUpdated = true;
+            content.forEach((item) => {
+                promises.push(this.ItemManager.createItem(item, this.getItemRefs(item)));
+            });
+        }
+        else {
+            // if we know dates, check new date content
+            if (sourceData.code == 1){
+                contentUpdated = true;
+                content = _.dropWhile(content, function(n) {
+                    return n.last_feed_data < sourceData.deltaTime;
+                });
+            }
+
+            //some will be new, some will be updated
             content.forEach((item) => {
                 // create, update or nop flow
-                this.ItemManager.exists(item).then((itemOnStore) => {
-                    if(!itemOnStore || !itemNewCheck) {
-                        promises.push(this.ItemManager.createItem(item, this.getItemRefs(item)));
-                    }
-                    else if (itemOnStore) {
-                        promises.push(this.ItemManager.updateItem(itemOnStore, item).then((updated) => {
-                            if(updated) {
 
-                            }
-                            else {
+                promises.push(this.ItemManager.exists(item).then((itemOnStore) => {
 
-                            }
-                        }));
+                    if(!itemOnStore) {
+                        return this.ItemManager.createItem(item, this.getItemRefs(item)).then(() => {
+                            contentUpdated = true;
+                        });
                     }
                     else {
-                        promises.push(this.$q.when());
+                        return this.ItemManager.updateItem(itemOnStore, item).then((updated) => {
+                            if(updated) {
+                                contentUpdated = true;
+                            }
+                        });
                     }
-                });
+                }));
             });
-            this.$q.all(promises).then(() => {
-                resolve();
-            });
+        }
+
+        this.$q.all(promises).then(() => {
+            deferred.resolve({code: contentUpdated ? 1 : 0});
+        }).catch(() => {
+            deferred.reject({code: -1});
         });
+
+        return deferred.promise;
     }
 
     /**
@@ -296,6 +329,4 @@ export default class Importer {
 
         return msg;
     }
-
-
 }
