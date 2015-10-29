@@ -205,31 +205,27 @@ export default class Importer {
     }
 
     /**
+     * Import Items from normalized content Array
      *
      * @param content
+     * @param sourceData {code, Source}
      * @param itemNewCheck, defaults true. Allows to check if an item is new or not. Set false to force item create
      * @param itemUpdateCheck, defaults true. Allows to check if an item was updated or not. Set false to omit this check
-     * @returns {*}
+     * @returns {promise}
+     * data: {code}
+     *      code: -1 ->  one or more item response errors
+     *      code: 0  ->  all items not new and not changes
+     *      code: 1  ->  all items not new, but one or more items changed
+     *      code: 2  ->  one or more items created
      */
     importItems(content, sourceData, itemNewCheck = true, itemUpdateCheck = true) {
         return this.$q(resolve => {
             let promises = [];
             content.forEach((item) => {
-
-                //config refs
-                let refs = {};
-                refs.sourceId = this.SourceManager.getSourceIdFromOrigin(item.orig_source_id);
-                if(item.orig_category_id) {
-                    refs.categoryId = this.CategoryManager.getCategoryIdFromOrigin(item.orig_category_id);
-                }
-                if(item.orig_subcategory_id) {
-                    refs.subcategoryId = this.CategoryManager.getCategoryIdFromOrigin(item.orig_subcategory_id);
-                }
-
                 // create, update or nop flow
                 this.ItemManager.exists(item).then((itemOnStore) => {
                     if(!itemOnStore || !itemNewCheck) {
-                        promises.push(this.ItemManager.createItem(item, refs));
+                        promises.push(this.ItemManager.createItem(item, this.getItemRefs(item)));
                     }
                     else if (itemOnStore && itemUpdateCheck) {
                         promises.push(this.ItemManager.updateItem(itemOnStore, item).then((updated) => {
@@ -244,15 +240,31 @@ export default class Importer {
                     else {
                         promises.push(this.$q.when());
                     }
-
                 });
-
-
             });
             this.$q.all(promises).then(() => {
                 resolve();
             });
         });
+    }
+
+    /**
+     * Get the source, category and subcategory ids from a normalized item
+     *
+     * @param item
+     * @returns {sourceId, categoryId, subcategoryId}
+     */
+    getItemRefs(item) {
+        let refs = {};
+        refs.sourceId = this.SourceManager.getSourceIdFromOrigin(item.orig_source_id);
+        if(item.orig_category_id) {
+            refs.categoryId = this.CategoryManager.getCategoryIdFromOrigin(item.orig_category_id);
+        }
+        if(item.orig_subcategory_id) {
+            refs.subcategoryId = this.CategoryManager.getCategoryIdFromOrigin(item.orig_subcategory_id);
+        }
+
+        return refs;
     }
 
     /**
