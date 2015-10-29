@@ -63,7 +63,7 @@ describe("ItemManager", () => {
                 },
                 "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": 0,
+                "offset": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
@@ -94,7 +94,7 @@ describe("ItemManager", () => {
                 },
                 "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": ItemManager.pageLength,
+                "offset": ItemManager.pageLength,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
@@ -118,7 +118,7 @@ describe("ItemManager", () => {
                 },
                 "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": ItemManager.pageLength*2,
+                "offset": ItemManager.pageLength*2,
                 "limit": ItemManager.pageLength})
                 .respond([]);
 
@@ -158,15 +158,15 @@ describe("ItemManager", () => {
             ItemManager.pageLength = 5;
             ItemManager.params = {source: 1};
 
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['last_feed_date'], [false]).slice(0,ItemManager.pageLength);
 
             DS.expectFindAll(Item.name, {
                 "where": {
                     source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": 0,
+                "offset": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
@@ -184,15 +184,15 @@ describe("ItemManager", () => {
             ItemManager.pageLength = 5;
             ItemManager.params = {source: 1};
 
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['last_feed_date'], [false]).slice(0,ItemManager.pageLength);
 
             DS.expectFindAll(Item.name, {
                 "where": {
                     source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": 0,
+                "offset": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
