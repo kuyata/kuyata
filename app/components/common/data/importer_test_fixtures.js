@@ -5,7 +5,7 @@ let ImporterFixtures = {
 			"checksum": "",
 			"status": "enabled",
 			"url": "http://www.sd1.com",
-			"last_feed_date": 1430847160000
+			"last_feed_date": 1430847150000
 		},
 		metaDated1Stored: {
 			"id": 1,
@@ -14,7 +14,7 @@ let ImporterFixtures = {
 			"checksum": "",
 			"status": "enabled",
 			"url": "http://www.sd1.com",
-			"last_feed_date": 1430847160000
+			"last_feed_date": 1430847150000
 		},
 		metaDated1Updated: {
 			"name": "source dated 1",
@@ -22,7 +22,7 @@ let ImporterFixtures = {
 			"checksum": "",
 			"status": "enabled",
 			"url": "http://www.sd1.com",
-			"last_feed_date": 1430847160001
+			"last_feed_date": 1430847160000
 		},
 		metaDated2: {
 			"name": "source dated 2",
@@ -60,7 +60,7 @@ let ImporterFixtures = {
 				"checksum": "",
 				"url":"",
 				"status": "enabled",
-				"last_feed_date": 1430847160000
+				"last_feed_date": 1430847150000
 			},
 			{
 				"orig_source_id": "100",
@@ -71,7 +71,7 @@ let ImporterFixtures = {
 				"checksum": "",
 				"url":"",
 				"status": "enabled",
-				"last_feed_date": 1430847150000
+				"last_feed_date": 1430847160000
 			}
 		],
 
