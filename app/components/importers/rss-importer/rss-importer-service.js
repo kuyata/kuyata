@@ -12,9 +12,6 @@ export default class RSSImporter {
         this.$q = $q;
         this.$http = $http;
         this.Importer = Importer;
-
-        this.sourceUrl = null;  // typed by user
-        this.url = null;        // final rss url
     }
 
     /**
@@ -83,12 +80,17 @@ export default class RSSImporter {
      * @returns {a promise. The response object has 'data', 'status', 'headers', 'config', 'statusText'}
      */
      fetch(url) {
-        this.url = url;
+        let deferred = this.$q.defer();
+        let _url = url;
         if (!url.match(/^http/)) {
-            this.url = 'http://' + this.url;
+            _url = 'http://' + _url;
         }
 
-        return this.$http.get(this.url);
+        this.$http.get(_url).then((dataFetched) => {
+            deferred.resolve({data: dataFetched.data, url: _url});
+        });
+
+        return deferred.promise;
     }
 
     /**
@@ -138,20 +140,19 @@ export default class RSSImporter {
      * @returns {a promise: The response object has {'meta' and 'articles'} or null}
      */
      explore(url){
-        this.url = url;
         let deferred = this.$q.defer();
 
         // fetching 'url'
-        this.fetch(this.url).then(fetchedUrl => {
+        this.fetch(url).then((fetchedUrl) => {
             // 'url' fetched. trying parse
             this.parse(this.normalizeEncoding(new Buffer(fetchedUrl.data)))
                 .then((res) => {
                     // 'url' is a feed. parsing success
-                    deferred.resolve(res);
+                    deferred.resolve({data: res, url: fetchedUrl.url});
                 })
                 .catch(() => {
                     // 'url' is NOT a feed. Trying to find inner url feed
-                    let innerFeedUrl = this.findFeedUrlInHtml(fetchedUrl.data, this.url);
+                    let innerFeedUrl = this.findFeedUrlInHtml(fetchedUrl.data, url);
 
                     if(innerFeedUrl) {
                         // 'innerFeedUrl' founded. Fetching 'innerFeedUrl'
@@ -160,7 +161,7 @@ export default class RSSImporter {
                             this.parse(new Buffer(innerFetchedUrl.data))
                                 .then((res) => {
                                     // 'innerFeedUrl' is a feed. parsing success
-                                    deferred.resolve(res);
+                                    deferred.resolve({data: res, url: innerFetchedUrl.url});
                                 })
                                 .catch(() => {
                                     // 'innerFeedUrl' is NOT a valid feed.
@@ -194,8 +195,7 @@ export default class RSSImporter {
      * to null (or empty arrays or objects for certain properties). )
      * @returns {normalizedSource Object}
      */
-    buildSource(meta){
-
+    buildSource(sourceUrl, feedUrl, meta){
         let source = {};
 
         source.status = 'enabled';
@@ -214,7 +214,7 @@ export default class RSSImporter {
             source.name = meta.link;
         }
         else {
-            source.name = this.url;
+            source.name = sourceUrl;
         }
 
         // set guid
@@ -222,11 +222,11 @@ export default class RSSImporter {
             source.guid = meta.guid;
         }
         else {
-            source.guid = this.url;
+            source.guid = feedUrl;
         }
 
         // set url
-        source.url = this.sourceUrl;
+        source.url = sourceUrl;
 
         // set checksum
         source.checksum = '';
@@ -257,7 +257,7 @@ export default class RSSImporter {
             item.guid = article.guid;
         }
         else {
-            item.guid = this.url;
+            item.guid = orig_source_id;
         }
 
         // set title
@@ -282,7 +282,7 @@ export default class RSSImporter {
             item.url = article.link;
         }
         else {
-            item.url = this.url;
+            item.url = orig_source_id;
         }
 
         // set checksum
@@ -305,12 +305,12 @@ export default class RSSImporter {
      * @param rssFeed {meta: *, articles: Array}
      * @returns {{source: *, items: Array}}
      */
-    normalize(rssFeed){
+    normalize(sourceUrl, rssFeed){
         let feed = {};
-        feed.meta = this.buildSource(rssFeed.meta);
+        feed.meta = this.buildSource(sourceUrl, rssFeed.url, rssFeed.data.meta);
         feed.content = [];
 
-        rssFeed.articles.forEach((article) => {
+        rssFeed.data.articles.forEach((article) => {
             feed.content.push(this.buildItem(article, feed.meta.guid));
         });
 
@@ -323,13 +323,12 @@ export default class RSSImporter {
      * @param url
      */
     import(url) {
-        this.sourceUrl = url;
         let deferred = this.$q.defer();
         // explore
         this.explore(url).then((rssFeed) => {
 
             // normalize
-            let normalizedFeed = this.normalize(rssFeed);
+            let normalizedFeed = this.normalize(url, rssFeed);
 
             // import
 
