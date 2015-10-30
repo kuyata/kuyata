@@ -101,6 +101,12 @@ accordion {
 
   .panel-heading {
     cursor: pointer;
+
+    a span {
+      display: block;
+      font-size: .9em;
+      .text-overflow();
+    }
   }
 
   .force-collapse > .collapse.in {
@@ -134,5 +140,23 @@ accordion {
       border-top-right-radius: 0;
       border-top-left-radius: 0;
     }
+  }
+}
+
+sources {
+  .btn-update {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border-left: none;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    outline: none !important;
+    display: none;
+  }
+
+  .no-sources {
+    display: none;
+    text-align: center;
+    margin-top: 15px
   }
 }

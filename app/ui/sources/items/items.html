@@ -7,15 +7,15 @@
 <div id="item-list-container" class="app-main-middle-2">
 	<ul class="item-list nav">
 		<li ng-repeat="item in vm.items" class="item-list-obj">
-			<div ng-if="(vm.items[$index].src_date | date ) != (vm.items[$index-1].src_date | date )" class="item-list-obj-divider">
-				<div class="item-list-obj-divider-el" container="#item-list-container" sticky> {{ item.src_date | date : format : timezone}} </div>
+			<div ng-if="(vm.items[$index].last_feed_date | date ) != (vm.items[$index-1].last_feed_date | date )" class="item-list-obj-divider">
+				<div class="item-list-obj-divider-el" container="#item-list-container" sticky> {{ item.last_feed_date | date : format : timezone}} </div>
 			</div>
 			<a ng-click="vm.ItemManager.setCurrentItemId(item.id); vm.gotoItemDetails(item.id)" ng-class="{'active': vm.ItemManager.getCurrentItemId() == item.id}">
 				<!--span class="item-list-obj-prize">{{ item.price }}</span-->
 				<h4 class="item-list-obj-title">{{ item.title }}</h4>
 
 				<div class="ellipsis">
-					<p class="item-list-obj-desc">{{ item.body }}</p>
+					<p class="item-list-obj-desc">{{ vm.plainText(item.body) }}</p>
 				</div>
 			</a>
 		</li>

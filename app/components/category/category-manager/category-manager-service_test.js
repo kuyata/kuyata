@@ -54,7 +54,7 @@ describe("CategoryManager", () => {
         beforeEach(done => _setup(done));
 
         it("should get categories data and add to store if necesary", () => {
-            DS.expectFindAll(Category.name, {sort: [['created_on', 'DESC']], status: 'enabled'}).respond(categoriesData);
+            DS.expectFindAll(Category.name, {sort: [['created_at', 'DESC']], status: 'enabled'}).respond(categoriesData);
 
             CategoryManager.fetch().then((categories) => {
                 expect(categories).toEqual(categoriesData);
@@ -70,24 +70,24 @@ describe("CategoryManager", () => {
         beforeEach(done => _setup(done));
 
         it("should create a multilevel tree", () => {
-            DS.expectFindAll(Category.name, {sort: [['created_on', 'DESC']], status: 'enabled'}).respond([{"category_id": "1","source_id": "1","parent_category_id": null},{"category_id": "4","source_id": "1","parent_category_id": "1"},{"category_id": "6","source_id": "2","parent_category_id": null},{"category_id": "2","source_id": "1","parent_category_id": "4"},{"category_id": "3","source_id": "2","parent_category_id": "6"}]);
-            CategoryManager.data.collection = [{"category_id": "1","source_id": "1","parent_category_id": null},{"category_id": "4","source_id": "1","parent_category_id": "1"},{"category_id": "6","source_id": "2","parent_category_id": null},{"category_id": "2","source_id": "1","parent_category_id": "4"},{"category_id": "3","source_id": "2","parent_category_id": "6"}];
+            DS.expectFindAll(Category.name, {sort: [['created_at', 'DESC']], status: 'enabled'}).respond([{"id": 1,"source_id":1,"parent_category_id": null},{"id": 4,"source_id":1,"parent_category_id": 1},{"id": 6,"source_id":2,"parent_category_id": null},{"id": 2,"source_id":1,"parent_category_id": 4},{"id": 3,"source_id":2,"parent_category_id": 6}]);
+            CategoryManager.data.collection = [{"id": 1,"source_id": 1,"parent_category_id": null},{"id": 4,"source_id":1,"parent_category_id": 1},{"id": 6,"source_id":2,"parent_category_id": null},{"id": 2,"source_id":1,"parent_category_id": 4},{"id": 3,"source_id":2,"parent_category_id": 6}];
 
             // expexted result
             let res =
             {
-                "1":
+                1:
                     [
-                        {"category_id":"1","source_id":"1","parent_category_id":null,"children":
-                            [{"category_id":"4","source_id":"1","parent_category_id":"1","children":[
-                                {"category_id":"2","source_id":"1","parent_category_id":"4"}]
+                        {"id":1,"source_id":1,"parent_category_id":null,"children":
+                            [{"id":4,"source_id":1,"parent_category_id":1,"children":[
+                                {"id":2,"source_id":1,"parent_category_id":4}]
                             }]
                         }
                     ],
-                "2":
+                2:
                     [
-                        {"category_id":"6","source_id":"2","parent_category_id":null,"children":
-                            [{"category_id":"3","source_id":"2","parent_category_id":"6"}]
+                        {"id":6,"source_id":2,"parent_category_id":null,"children":
+                            [{"id":3,"source_id":2,"parent_category_id":6}]
                         }
                     ]
             };

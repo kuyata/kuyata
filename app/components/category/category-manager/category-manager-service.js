@@ -30,7 +30,7 @@ export default class CategoryManager {
     fetch(){
         this.current = null;
         this.Category.ejectAll();
-        return this.Category.findAll({sort: [['created_on', 'DESC']], status: 'enabled'});
+        return this.Category.findAll({sort: [['created_at', 'DESC']], status: 'enabled'});
     }
 
     /**
@@ -44,7 +44,7 @@ export default class CategoryManager {
             let tree = [];
             let dataMap = {};
             list.forEach(node => {
-                dataMap[node.category_id] = node;
+                dataMap[node.id] = node;
             });
 
             list.forEach(node => {
@@ -94,6 +94,17 @@ export default class CategoryManager {
     }
 
     /**
+     * Get Category Id from a origCategoryId
+     *
+     * @param origCategoryId
+     * @returns {category.id|boolean}
+     */
+    getCategoryIdFromOrigin(origCategoryId) {
+        let category = _.find(this.data.collection, { 'guid': origCategoryId });
+        return category.id || false;
+    }
+
+    /**
      * Return true if a category has not subcategories
      *
      * @param categoryId
@@ -101,6 +112,34 @@ export default class CategoryManager {
      */
     isEmpty(categoryId) {
         return ! _.some(this.data.collection, 'parent_category_id', categoryId);
+    }
+
+    /**
+     * Determine if a item exist on the Category collection
+     *
+     * @param builded category item
+     * @return Boolean
+     */
+    exists(item) {
+        return _.find(this.data.collection, {'guid': item.guid});
+    }
+
+    /**
+     * Create a category
+     *
+     * @param item
+     * @returns {a promise: The response object has the 'source.id'}
+     */
+    createCategory(category, source_id, parent_category_id = null) {
+        let _category = angular.copy(category);
+        _category.source_id = source_id;
+        _category.parent_category_id = parent_category_id;
+        _category.created_at = Date.now();
+        _category.updated_at = Date.now();
+
+        delete _category.subcategories;
+
+        return this.Category.create(_category);
     }
 
     /**

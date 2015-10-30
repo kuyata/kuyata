@@ -55,19 +55,19 @@ describe("ItemManager", () => {
 
         it("should get first page of items", () => {
             ItemManager.pageLength = 5;
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: "1"}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['last_feed_date'], [false]).slice(0,ItemManager.pageLength);
 
             DS.expectFindAll(Item.name, {
                 "where": {
-                    source_id: {"==":"1"}
+                    source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": 0,
+                "offset": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
-            ItemManager.initialPage({source: "1"}).then((items) => {
+            ItemManager.initialPage({source: 1}).then((items) => {
                 expect(items).toEqual(res);
             });
 
@@ -84,17 +84,17 @@ describe("ItemManager", () => {
             ItemManager.currentPage = 0;
             ItemManager.lastedPage = false;
             ItemManager.pageLength = 5;
-            ItemManager.params = {source: "1"};
+            ItemManager.params = {source: 1};
 
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: "1"}), ['src_date'], [false]).slice(ItemManager.pageLength,ItemManager.pageLength*2);
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['last_feed_date'], [false]).slice(ItemManager.pageLength,ItemManager.pageLength*2);
 
             DS.expectFindAll(Item.name, {
                 "where": {
-                    source_id: {"==":"1"}
+                    source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": ItemManager.pageLength,
+                "offset": ItemManager.pageLength,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
@@ -110,15 +110,15 @@ describe("ItemManager", () => {
             ItemManager.currentPage = 1;
             ItemManager.lastedPage = false;
             ItemManager.pageLength = 5;
-            ItemManager.params = {source: "1"};
+            ItemManager.params = {source: 1};
 
             DS.expectFindAll(Item.name, {
                 "where": {
-                    source_id: {"==":"1"}
+                    source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": ItemManager.pageLength*2,
+                "offset": ItemManager.pageLength*2,
                 "limit": ItemManager.pageLength})
                 .respond([]);
 
@@ -136,7 +136,7 @@ describe("ItemManager", () => {
             ItemManager.currentPage = 1;
             ItemManager.lastedPage = true;
             ItemManager.pageLength = 5;
-            ItemManager.params = {source: "1"};
+            ItemManager.params = {source: 1};
 
             ItemManager.pageUp().then((items) => {
                 expect(items).toEqual(false);
@@ -156,17 +156,17 @@ describe("ItemManager", () => {
             ItemManager.currentPage = 1;
             ItemManager.lastedPage = false;
             ItemManager.pageLength = 5;
-            ItemManager.params = {source: "1"};
+            ItemManager.params = {source: 1};
 
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: "1"}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['last_feed_date'], [false]).slice(0,ItemManager.pageLength);
 
             DS.expectFindAll(Item.name, {
                 "where": {
-                    source_id: {"==":"1"}
+                    source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": 0,
+                "offset": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
@@ -182,17 +182,17 @@ describe("ItemManager", () => {
             ItemManager.currentPage = 1;
             ItemManager.lastedPage = true;
             ItemManager.pageLength = 5;
-            ItemManager.params = {source: "1"};
+            ItemManager.params = {source: 1};
 
-            let res = _.sortByOrder(_.filter(itemsData, {source_id: "1"}), ['src_date'], [false]).slice(0,ItemManager.pageLength);
+            let res = _.sortByOrder(_.filter(itemsData, {source_id: 1}), ['last_feed_date'], [false]).slice(0,ItemManager.pageLength);
 
             DS.expectFindAll(Item.name, {
                 "where": {
-                    source_id: {"==":"1"}
+                    source_id: {"==":1}
                 },
-                "sort":[["src_date","DESC"]],
+                "sort":[["last_feed_date","DESC"]],
                 "status": 'enabled',
-                "skip": 0,
+                "offset": 0,
                 "limit": ItemManager.pageLength})
                 .respond(res);
 
@@ -209,7 +209,7 @@ describe("ItemManager", () => {
             ItemManager.currentPage = 0;
             ItemManager.lastedPage = false;
             ItemManager.pageLength = 5;
-            ItemManager.params = {source: "1"};
+            ItemManager.params = {source: 1};
 
             ItemManager.pageDown().then((items) => {
                 expect(items).toEqual(false);

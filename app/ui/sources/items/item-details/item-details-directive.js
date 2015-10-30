@@ -52,4 +52,19 @@ class ItemDetailsController {
 	returnToItemList () {
 		this.$state.go("app.sources");
 	}
+
+	openExternal(url){
+		gui.Shell.openExternal(url);
+	}
+
+	supportExternalLinks(e){
+		e.preventDefault();
+		console.log(e);
+		if(e.target.nodeName === "A"){
+			this.openExternal(e.target.href);
+		}
+		else if(e.toElement.parentElement.nodeName === "A") {
+			this.openExternal(e.toElement.parentElement.href);
+		}
+	}
 }

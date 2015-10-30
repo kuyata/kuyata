@@ -30,13 +30,16 @@ export default function factory($q, DS, utils){
  *
  * Properties: as is all dynamic this is to keep track of what properties we are using within this model
  *
- * {string}     id              id on our local DB
+ * {number}     id              id on our local DB
  * {string}     name            source name
- * {string}     src_id          source id on source. For sync reasons
+ * {string}     guid            source id from the source on feed. For sync reasons
  * {string}     status          source status
- * {string}     url             source url on source
- * {timestamp}  created_on      creation date on our DB
- * {timestamp}  updated_on      last modified date on our DB
+ * {string}     url             orig source url parsed successfully, from url typed by user
+ * {string}     checksum        to find changes on the same guid elem. For sync reasons
+ * {timedate}   last_feed_date  last source update date on feed
+ * {string}     type            type is defined by specific Importer witch it was imported with (e.g. 'rss')
+ * {timedate}   created_at      creation date on our DB
+ * {timedate}   updated_at      last modified date on our DB
  *
  */
 class Source {

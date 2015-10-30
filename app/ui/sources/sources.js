@@ -1,12 +1,20 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import angularSpinner from 'angular-spinner';
 
 import items from './items/items';
 import SourceManager from './../../components/source/source-manager/source-manager';
 import CategoryManager from './../../components/category/category-manager/category-manager';
 import ItemManager from './../../components/item/item-manager/item-manager';
+
+import importer from './../importer/importer';
+
 import SourcesDirective from './sources-directive';
 import CategoriesDirective from './categories-directive';
+
+// service importers list
+import RSSImporter from './../../components/importers/rss-importer/rss-importer';
+import PackageImporter from './../../components/importers/package-importer/package-importer';
 
 export default angular.module('app.sources', [
 	uiRouter,
@@ -14,7 +22,11 @@ export default angular.module('app.sources', [
 	items.name,
 	SourceManager.name,
 	CategoryManager.name,
-	ItemManager.name
+	ItemManager.name,
+	importer.name,
+
+	RSSImporter.name,
+	PackageImporter.name
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {

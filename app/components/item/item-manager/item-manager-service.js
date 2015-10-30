@@ -20,7 +20,7 @@ export default class ItemManager {
         this.Item = Item;
 
         this.currentPage = 0;
-        this.pageLength = 50;
+        this.pageLength = 25;
         this.params = {};   // last params set requests
         this.data = {collection: DS.store[Item.name].collection}; // Get the DS store collection
         this.current = null;
@@ -162,6 +162,95 @@ export default class ItemManager {
     }
 
     /**
+     * Determine if a item exist on the Item collection
+     *
+     * @param builded source item
+     * @return Boolean
+     */
+    exists(item, key) {
+        let dataCached, whereKey;
+
+        if (key == 'guid') {
+            dataCached = _.find(this.data.collection, {'guid': item.guid});
+            whereKey = {'guid': {'==': item.guid}};
+
+        }
+        else if (key == 'checksum') {
+            dataCached = _.find(this.data.collection, {'checksum': item.checksum});
+            whereKey = {'checksum': {'==': item.checksum}};
+        }
+
+        if(dataCached) {
+            return this.$q.when(dataCached);
+        }
+        else {
+            return this.Item.findAll({
+                where: whereKey,
+                limit: 1
+            },{
+                bypassCache: true
+            }).then((item) => {
+                return item[0] || false;
+            });
+        }
+    }
+
+    /**
+     * Create items from articles list and ids
+     *
+     * @param items, {source_id, category_id, subcategory_id}
+     * @returns {promise}
+     */
+    createItems(items, itemIds) {
+        let promises = [];
+
+        return this.$q(resolve => {
+            items.forEach(item => {
+                promises.push(this.createItem(item, itemIds));
+            });
+            this.$q.all(promises).then(() => {
+                resolve();
+            });
+        });
+    }
+
+    /**
+     * Create a new DS.Item
+     *
+     * @param item, {reference_ids}
+     * @returns {promise}
+     */
+    createItem(item, itemIds) {
+        let _item = item;
+        _item.created_at = Date.now();
+        _item.updated_at = _item.created_at;
+        _item.source_id = itemIds.sourceId;
+        _item.category_id = itemIds.categoryId || null;
+        _item.subcategory_id = itemIds.subcategoryId || null;
+
+        if(!item.last_feed_date || item.last_feed_date == "") {
+            item.last_feed_date = _item.updated_at;
+        }
+
+        return this.Item.create(_item);
+    }
+
+
+    /**
+     *
+     *
+     * @param itemOnStore
+     * @param newItem
+     * @returns {*}
+     */
+    updateItem(itemOnStore, newItem) {
+        if(!_.isMatch(itemOnStore, newItem)) {
+            return this.Item.update(itemOnStore.id, newItem);
+        }
+        return this.$q.when(false);
+    }
+    
+    /**
      * Auxiliar method to create initial sample data for categories
      * @param data is the categories fixtures
      */
@@ -186,19 +275,31 @@ export default class ItemManager {
 /**
  * Private function to generate JSON of params used on DS finds queries
  *
- * @param params is an Object with any or all these properties: "title, source, category, skip, limit"
+ * @param params is an Object with any or all these properties: "title, source, category, offset, limit"
  * @returns a DS format params Object
  */
-function createQuery(params, skip = false, limit = false) {
-    let _params = {sort: [['src_date', 'DESC']], status: 'enabled'};
+function createQuery(params, offset = false, limit = false) {
+    let _params = {sort: [['last_feed_date', 'DESC']], status: 'enabled'};
 
-    if(skip !== false) {
-        _params.skip = skip;
+    if(offset !== false) {
+        _params.offset = offset;
         _params.limit = limit;
     }
 
     if(!_.isEmpty(params)){
         _params.where = {};
+
+        //TODO: id typeof to INT for NWJS (remove)
+        if (typeof(process) != 'undefined') {
+            params.source = parseInt(params.source);
+            if(params.category) {
+                params.category = parseInt(params.category);
+            }
+            if(params.subcategory) {
+                params.subcategory = parseInt(params.subcategory);
+            }
+
+        }
 
         if(params.source){
             _params.where.source_id = {'==': params.source};

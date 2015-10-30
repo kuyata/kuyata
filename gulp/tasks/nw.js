@@ -12,7 +12,7 @@ gulp.task('_nw', function () {
             './node_modules/knex/**',
             './node_modules/lodash/**',
             './node_modules/sqlite3/**',
-            './database.sqlite'
+            //'./database.sqlite'
         ],
         macIcns: './www/icon.icns',
         macPlist: {mac_bundle_id: 'myPkg'},

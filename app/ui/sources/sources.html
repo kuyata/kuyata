@@ -1,12 +1,19 @@
+<importer></importer>
+
+<p class="no-sources" ng-class="{show: vm.sources.length == 0}">Add a new source by clicking on '+' button</p>
+<button type="button" class="btn btn-danger btn-update" ng-click="vm.updateAllSources(vm.sources)" ng-class="{show: vm.sources.length > 0}"> Update All </button>
+
 <accordion close-others="true">
 	<accordion-group
 			is-open="selected"
 			heading="{{ source.name }}"
 			ng-repeat="source in vm.sources"
 			ng-class="{selected: source.id==vm.SourceManager.getCurrentItemId(), 'force-collapse': vm.SourceManager.isEmpty(source.id)}"
-			ng-click="selected=true; vm.activeItem(source.id); vm.itemListBySource(source.source_id)">
+			ng-click="selected=true; vm.activeItem(source.id); vm.itemListBySource(source.id)">
 
-		<categories source-id="{{ source.source_id }}"></categories>
+		<categories source-id="{{ source.id }}"></categories>
 
 	</accordion-group>
 </accordion>
+
+<span us-spinner spinner-key="spinner-sources" spinner-start-active="true"></span>

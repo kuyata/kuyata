@@ -13,7 +13,6 @@ import DSLocalStorageAdapter from 'js-data-localstorage';
 
 import jsDataAngular from 'js-data-angular';
 import uiBootstrap from 'angular-bootstrap';
-import angularSpinner from 'angular-spinner';
 
 import sources from './ui/sources/sources';
 
@@ -21,6 +20,9 @@ import sources from './ui/sources/sources';
 import {sourcesData} from './components/common/data/sources';
 import {categoriesData} from './components/common/data/categories';
 import {itemsData} from './components/common/data/items';
+import {feedsRssData} from './components/common/data/feeds_rss';
+
+import Importer from './components/importer/importer';
 import SourceManager from './components/source/source-manager/source-manager';
 import CategoryManager from './components/category/category-manager/category-manager';
 import ItemManager from './components/item/item-manager/item-manager';
@@ -34,6 +36,7 @@ export default angular.module('app', [
 
     sources.name,
 
+    Importer.name,
     SourceManager.name,
     CategoryManager.name,
     ItemManager.name
@@ -52,7 +55,7 @@ export default angular.module('app', [
 
 })
 
-.run(($q, DS, SourceManager, CategoryManager, ItemManager, $rootScope, usSpinnerService) => {
+.run(($q, DS, Importer, SourceManager, CategoryManager, ItemManager, $rootScope) => {
 
     this.$q = $q;
     let sourceShema, categoryShema, itemShema;
@@ -61,7 +64,7 @@ export default angular.module('app', [
     //TODO: if app context is on NWJS environment (remove conditional)
     if (typeof(process) != 'undefined') {
         let adapter = new DSSqlAdapter({
-            client: 'sqlite3', // or "pg" or "sqlite3"
+            client: 'sqlite3', // or "pg" or "mysql"
             connection: {
                 filename: "./database.sqlite"
             },
@@ -73,13 +76,14 @@ export default angular.module('app', [
                 console.log("SOURCE table create");
                 return adapter.query.schema.createTable('source', (t) => {
                     t.increments();
-                    t.string('source_id');
                     t.string('name');
-                    t.string('src_id');
+                    t.string('guid');
+                    t.string('checksum');
                     t.string('status');
                     t.string('url');
-                    t.string('created_on');
-                    t.string('updated_on');
+                    t.timestamp('last_feed_date');
+                    t.string('type');
+                    t.timestamps();
                 });
             }
             else {
@@ -93,14 +97,14 @@ export default angular.module('app', [
                 console.log("CATEGORY table create");
                 return adapter.query.schema.createTable('category', (t) => {
                     t.increments();
-                    t.string('category_id');
                     t.string('name');
-                    t.string('source_id');
-                    t.string('parent_category_id');
-                    t.string('src_id');
+                    t.integer('source_id');
+                    t.integer('parent_category_id');
+                    t.string('guid');
+                    t.string('checksum');
                     t.string('status');
-                    t.string('created_on');
-                    t.string('updated_on');
+                    t.timestamp('last_feed_date');
+                    t.timestamps();
                 });
             }
             else {
@@ -114,17 +118,21 @@ export default angular.module('app', [
                 console.log("ITEM table create");
                 return adapter.query.schema.createTable('item', (t) => {
                     t.increments();
-                    t.string('source_id');
-                    t.string('category_id');
-                    t.string('subcategory_id');
+                    t.integer('source_id');
+                    t.integer('category_id');
+                    t.integer('subcategory_id');
                     t.string('title');
                     t.string('body');
                     t.string('author');
-                    t.string('url');
+                    t.string('guid');
+                    t.string('orig_source_id');
+                    t.string('orig_category_id');
+                    t.string('orig_subcategory_id');
+                    t.string('checksum');
                     t.string('status');
-                    t.string('src_date');
-                    t.string('created_on');
-                    t.string('updated_on');
+                    t.string('url');
+                    t.timestamp('last_feed_date');
+                    t.timestamps();
                 });
             }
             else {
@@ -133,6 +141,8 @@ export default angular.module('app', [
             }
         });
     }
+
+    // TODO: create indexes from knex
 
     //TODO: if app context is on WEB environment (remove)
     else {
@@ -154,21 +164,41 @@ export default angular.module('app', [
             DS.registerAdapter('localstorage', new DSLocalStorageAdapter(), { default: true });
         }
 
-        // create sample data
-        SourceManager.createSampleData(sourcesData).then(() => {
-            CategoryManager.createSampleData(categoriesData).then(() => {
-                ItemManager.createSampleData(itemsData).then(() => {
-                    // Get source list
-                    console.log("DATA INSERTED");
+        // create sample data: first reset increments
+        adapter.query('sqlite_sequence').del().then(() => {
+            //SourceManager.createSampleData(sourcesData).then(() => {
+            //    CategoryManager.createSampleData(categoriesData).then(() => {
+            //        ItemManager.createSampleData(itemsData).then(() => {
+                        // Get source list
+                        //SourceManager.fetch().then(() => {
+                        //    SourceManager.createSourcesTree().then(() => {
+                        //        $rootScope.$emit("adapter:ready");
+                        //    });
+                        //});
 
-                    SourceManager.fetch().then(() => {
-                        SourceManager.createSourcesTree().then(() => {
-                            $rootScope.$emit("adapter:ready");
-                            usSpinnerService.stop('spinner-global');
-                        });
+            //SourceManager.clearAdapter().then(() => {
+            //    let importPromises = [];
+            //    console.log("## import example data");
+
+                // TODO: initial sources and categories fetch for populate collections and tree
+
+                //feedsRssData.forEach((feed) => {
+                //    importPromises.push(Importer.import(feed.meta, feed.content));
+                //});
+
+                //this.$q.all(importPromises).then(() => {
+                //    console.log("## data inserted");
+
+                    SourceManager.createSourcesTree().then(() => {
+                        $rootScope.$emit("adapter:ready");
+
                     });
-                });
-            });
+                //});
+            //});
+
+            //        });
+            //    });
+            //});
         });
     });
 });
