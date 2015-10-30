@@ -30,8 +30,12 @@ export default class RSSImporter {
             let feedHref = feedLink.getAttribute('href');
 
             if (feedHref) {
+                //feed path
+                if(feedHref.match(/^feed:\/\//)) {
+                    feedHref = feedHref.replace("feed", "http");
+                }
                 //relative path
-                if (!feedHref.match(/^http/)) {
+                else if (!feedHref.match(/^http/)) {
                     feedHref = resolveUrl(url, feedHref);
                 }
                 return feedHref;
