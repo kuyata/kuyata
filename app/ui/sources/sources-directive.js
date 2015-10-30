@@ -65,7 +65,7 @@ class SourcesController {
 				promises.push(this.RSSImporter.import(source.url));
 			}
 			else if(source.type == 'package') {
-				promises.push(PackageImporter.import(source.url));
+				promises.push(this.PackageImporter.import(source));
 			}
 		});
 		this.$q.all(promises).then(() => {
