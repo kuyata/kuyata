@@ -42,7 +42,7 @@ export default function factory($q, DS, utils, Source, Category){
  * {string}     body                item body
  * {string}     author              item author
  * {string}     guid                id from the item on origin. For sync reasons
- ?* {string}    orig_source_id      source id from the item on origin. For sync reasons
+ * {string}     orig_source_id      source id from the item on origin. For sync reasons
  * {string}     orig_category_id    category id from the item on origin. For sync reasons
  * {string}     orig_subcategory_id subcategory id from the item on origin. For sync reasons
  * {string}     url                 item url on source

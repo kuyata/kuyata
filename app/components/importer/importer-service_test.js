@@ -217,7 +217,7 @@ describe("Importer", () => {
                 expect(itemsData.code).toEqual(1);
             });
 
-            console.log(DS.verifyNoOutstandingExpectation());
+            DS.verifyNoOutstandingExpectation();
             DS.flush();
         });
 
@@ -251,6 +251,38 @@ describe("Importer", () => {
         });
     });
 
+    describe("makeItemChecksum(obj)", () => {
+
+        beforeEach(done => _setup(done));
+
+        it("should not consider differences between object bodies with childs", () => {
+            let obj1 = {
+                "orig_source_id": "100",
+                "title": "content Dated 1.1",
+                "body": "<h1>Lorem ipsum</h1> consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+                "author":"John Doe",
+                "guid": "1001",
+                "checksum": "",
+                "url":"",
+                "status": "enabled",
+                "last_feed_date": 1430847150000
+            };
+
+            let obj2 = {
+                "orig_source_id": "100",
+                "title": "content Dated 1.1",
+                "body": " consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+                "author":"John Doe",
+                "guid": "1001",
+                "checksum": "",
+                "url":"",
+                "status": "enabled",
+                "last_feed_date": 1430847150000
+            };
+
+            expect(Importer.makeItemChecksum(obj1)).toEqual(Importer.makeItemChecksum(obj2));
+        });
+    });
 
     describe("responseMsg(code)", () => {
 

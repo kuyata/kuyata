@@ -249,9 +249,6 @@ export default class RSSImporter {
             item.url = orig_source_id;
         }
 
-        // set checksum
-        item.checksum = '';
-
         // set last_feed_date<Timestamp> from article.date<Date> or article.pubdate<Date>
         if(article.date) {
             item.last_feed_date = article.date.getTime();
@@ -262,6 +259,12 @@ export default class RSSImporter {
         else {
             item.last_feed_date = null;
         }
+
+        item.orig_category_id = null;
+        item.orig_subcategory_id = null;
+
+        // set checksum
+        item.checksum = this.Importer.makeItemChecksum(item);
 
         return item;
     }
@@ -283,7 +286,6 @@ export default class RSSImporter {
 
         return feed;
     }
-
 
     /**
      *
@@ -319,5 +321,4 @@ export default class RSSImporter {
 
         return deferred.promise;
     }
-
 }

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import checksum from 'json-checksum';
 
 export default class Importer {
 
@@ -257,11 +258,16 @@ export default class Importer {
             content.forEach((item) => {
                 // create, update or nop flow
 
-                promises.push(this.ItemManager.exists(item).then((itemOnStore) => {
-
+                promises.push(this.ItemManager.exists(item, "guid").then((itemOnStore) => {
                     if(!itemOnStore) {
-                        return this.ItemManager.createItem(item, this.getItemRefs(item)).then(() => {
-                            contentUpdated = true;
+                        this.ItemManager.exists(item, "checksum").then((itemChecksum) => {
+                            if(!itemChecksum) {
+                                return this.ItemManager.createItem(item, this.getItemRefs(item)).then(() => {
+                                    contentUpdated = true;
+                                });
+
+                                return this.$q.when();
+                            }
                         });
                     }
                     else {
@@ -332,5 +338,31 @@ export default class Importer {
         }
 
         return msg;
+    }
+
+    /**
+     *
+     * @param obj
+     * @returns {*}
+     */
+    makeItemChecksum(obj) {
+        let htmlObject = document.createElement('div');
+        let _obj = _.pick(obj, [
+            'orig_source_id',
+            'title',
+            'body',
+            'author',
+            'orig_source_id',
+            'orig_category_id',
+            'orig_subcategory_id',
+            'url'
+        ]);
+        htmlObject.innerHTML = _obj.body;
+        while(htmlObject.children.length > 0){
+            htmlObject.removeChild(htmlObject.children[0]);
+        }
+        _obj.body = htmlObject.innerHTML;
+
+        return checksum(_obj);
     }
 }

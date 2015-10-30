@@ -167,19 +167,25 @@ export default class ItemManager {
      * @param builded source item
      * @return Boolean
      */
-    exists(item) {
-        let dataCached = _.find(this.data.collection, {'guid': item.guid});
+    exists(item, key) {
+        let dataCached, whereKey;
+
+        if (key == 'guid') {
+            dataCached = _.find(this.data.collection, {'guid': item.guid});
+            whereKey = {'guid': {'==': item.guid}};
+
+        }
+        else if (key == 'checksum') {
+            dataCached = _.find(this.data.collection, {'checksum': item.checksum});
+            whereKey = {'checksum': {'==': item.checksum}};
+        }
 
         if(dataCached) {
             return this.$q.when(dataCached);
         }
         else {
             return this.Item.findAll({
-                where: {
-                    "guid": {
-                        '==': item.guid
-                    }
-                },
+                where: whereKey,
                 limit: 1
             },{
                 bypassCache: true
@@ -217,7 +223,7 @@ export default class ItemManager {
     createItem(item, itemIds) {
         let _item = item;
         _item.created_at = Date.now();
-        _item.updated_at = Date.now();
+        _item.updated_at = _item.created_at;
         _item.source_id = itemIds.sourceId;
         _item.category_id = itemIds.categoryId || null;
         _item.subcategory_id = itemIds.subcategoryId || null;
