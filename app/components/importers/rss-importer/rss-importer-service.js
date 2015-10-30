@@ -1,6 +1,3 @@
-//TODO: on lib package.json, set "browser" params to true, for Browserify compatibility
-import iconv from 'iconv-lite';
-
 import resolveUrl from "resolve-url";
 import FeedParser from 'feedparser';
 import Stream from 'stream';
@@ -41,36 +38,6 @@ export default class RSSImporter {
             }
         }
         return null;
-    }
-
-    /**
-     * Normalize most encoding
-     * https://github.com/ashtuchkin/iconv-lite#supported-encodings
-     *
-     * @param Buffer with url data
-     * @returns {normalized url data}
-     */
-     normalizeEncoding(bodyBuf) {
-        var body = bodyBuf.toString();
-        var encoding;
-
-        var xmlDeclaration = body.match(/^<\?xml .*\?>/);
-        if (xmlDeclaration) {
-            var encodingDeclaration = xmlDeclaration[0].match(/encoding=("|').*?("|')/);
-            if (encodingDeclaration) {
-                encoding = encodingDeclaration[0].substring(10, encodingDeclaration[0].length - 1);
-            }
-        }
-
-        if (encoding && encoding.toLowerCase() !== 'utf-8') {
-            try {
-                body = iconv.decode(bodyBuf, encoding);
-            } catch (err) {
-                // detected encoding is not supported, leave it as it is
-            }
-        }
-
-        return body;
     }
 
     /**
@@ -147,7 +114,7 @@ export default class RSSImporter {
         // fetching 'url'
         this.fetch(url).then((fetchedUrl) => {
             // 'url' fetched. trying parse
-            this.parse(this.normalizeEncoding(new Buffer(fetchedUrl.data)))
+            this.parse(new Buffer(fetchedUrl.data))
                 .then((res) => {
                     // 'url' is a feed. parsing success
                     deferred.resolve({data: res, url: fetchedUrl.url});
