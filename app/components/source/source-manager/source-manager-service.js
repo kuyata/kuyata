@@ -184,10 +184,6 @@ export default class SourceManager {
         source.created_at = Date.now();
         source.updated_at = Date.now();
 
-        if(!source.last_feed_date || source.last_feed_date == "") {
-            source.last_feed_date = source.updated_at;
-        }
-
         //delete _source.categories;
 
         return this.Source.create(source);
