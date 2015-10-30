@@ -1,6 +1,7 @@
 <form ng-submit="vm.importRSS(url)">
 	<label>Type url and push ENTER:</label>
-	<input type="text" ng-model="url" name="url" ng-class="{'suc': vm.state == 1, 'err': vm.state == 2}" />
+	<input type="text" ng-model="url" name="url" ng-class="{'suc': vm.state == 1, 'err': vm.state == 2}" autofocus="autofocus" />
+	<p class="text-small">{{ vm.msg }}</p>
 </form>
 
 
