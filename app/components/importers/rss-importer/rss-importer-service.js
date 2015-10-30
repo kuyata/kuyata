@@ -88,6 +88,8 @@ export default class RSSImporter {
 
         this.$http.get(_url).then((dataFetched) => {
             deferred.resolve({data: dataFetched.data, url: _url});
+        }).catch(() => {
+            deferred.reject();
         });
 
         return deferred.promise;
@@ -152,7 +154,7 @@ export default class RSSImporter {
                 })
                 .catch(() => {
                     // 'url' is NOT a feed. Trying to find inner url feed
-                    let innerFeedUrl = this.findFeedUrlInHtml(fetchedUrl.data, url);
+                    let innerFeedUrl = this.findFeedUrlInHtml(fetchedUrl.data, fetchedUrl.url);
 
                     if(innerFeedUrl) {
                         // 'innerFeedUrl' founded. Fetching 'innerFeedUrl'
@@ -337,13 +339,17 @@ export default class RSSImporter {
             // merge rss responses with general import response
 
             this.Importer.import(normalizedFeed.meta, normalizedFeed.content).then((response) => {
+                console.log("response!");
+                console.log(response);
                 deferred.resolve(response);
-            }).catch(() => {
-                deferred.reject(null);
+            }).catch((response) => {
+                console.log("response! error");
+                console.log(response);
+                deferred.reject(response);
             });
 
         }).catch(() => {
-            deferred.reject(null);
+            deferred.reject({msg: "rss error"});
         });
 
         return deferred.promise;
