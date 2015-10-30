@@ -164,7 +164,7 @@ export default class RSSImporter {
      * to null (or empty arrays or objects for certain properties). )
      * @returns {normalizedSource Object}
      */
-    buildSource(sourceUrl, feedUrl, meta){
+    buildSource(feedUrl, meta){
         let source = {};
 
         source.status = 'enabled';
@@ -183,19 +183,14 @@ export default class RSSImporter {
             source.name = meta.link;
         }
         else {
-            source.name = sourceUrl;
+            source.name = feedUrl;
         }
 
         // set guid
-        if(meta.guid) {
-            source.guid = meta.guid;
-        }
-        else {
-            source.guid = feedUrl;
-        }
+        source.guid = feedUrl;
 
         // set url
-        source.url = sourceUrl;
+        source.url = feedUrl;
 
         // set checksum
         source.checksum = '';
@@ -259,10 +254,13 @@ export default class RSSImporter {
 
         // set last_feed_date<Timestamp> from article.date<Date> or article.pubdate<Date>
         if(article.date) {
-            item.last_feed_date = article.date ? article.date.getTime() : null;
+            item.last_feed_date = article.date.getTime();
         }
         else if(article.pubdate) {
-            item.last_feed_date = article.pubdate ? article.pubdate.getTime() : null;
+            item.last_feed_date = article.pubdate.getTime();
+        }
+        else {
+            item.last_feed_date = null;
         }
 
         return item;
@@ -274,9 +272,9 @@ export default class RSSImporter {
      * @param rssFeed {meta: *, articles: Array}
      * @returns {{source: *, items: Array}}
      */
-    normalize(sourceUrl, rssFeed){
+    normalize(rssFeed){
         let feed = {};
-        feed.meta = this.buildSource(sourceUrl, rssFeed.url, rssFeed.data.meta);
+        feed.meta = this.buildSource(rssFeed.url, rssFeed.data.meta);
         feed.content = [];
 
         rssFeed.data.articles.forEach((article) => {
@@ -297,7 +295,7 @@ export default class RSSImporter {
         this.explore(url).then((rssFeed) => {
 
             // normalize
-            let normalizedFeed = this.normalize(url, rssFeed);
+            let normalizedFeed = this.normalize(rssFeed);
 
             // import
 
