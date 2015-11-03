@@ -5,9 +5,10 @@
 
 export default class DefaultExporter {
 
-    constructor($q, Exporter){
+    constructor($q, Exporter, Settings){
         this.$q = $q;
         this.Exporter = Exporter;
+        this.Settings = Settings;
         this.writableStream;
         this.sourceRefs;
     }
@@ -27,7 +28,7 @@ export default class DefaultExporter {
         let sep = '';
         let chunk;
 
-        this.writableStream = fs.createWriteStream(filename + '.json');
+        this.writableStream = fs.createWriteStream(filename + "." + this.Settings.appExporterExt);
         this.writableStream.write('{"sources":[');
 
         sourcesStream.on('readable', () => {
