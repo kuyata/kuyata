@@ -22,24 +22,39 @@ export default class Exporter {
 
     /**
      * Get a expose readable stream from adapter with requested sources data
+     * 'id', 'checksum', 'created_at', 'updated_at' are omitted on the query.select
      *
      * @param sourceIds, an array of source db ids requested
      * @returns an stream from adapter
      */
     getSourcesStream(sourceIds) {
-        let readableStream = this.adapter.query.select('name', 'guid', 'url', 'last_feed_date', 'type')
+        let attr = ['name', 'guid', 'status', 'url', 'last_feed_date', 'type'];
+        let readableStream = this.adapter.query.select(attr)
             .from('source').whereIn('id', sourceIds).stream();
         return readableStream;
     }
 
-    /**
+     /**
      * Get a expose readable stream from adapter with requested items data
+     * 'id', 'source_id', 'category_id', 'subcategory_id', 'checksum', 'created_at', 'updated_at' are omitted on the query.select
      *
      * @param sourceGuid, an array of source db guid requested
      * @returns an stream from adapter
      */
     getItemsStream(sourceGuid) {
-        let readableStream = this.adapter.query.select('title', 'body', 'author', 'guid', 'url', 'last_feed_date')
+        let attr = [
+            'title',
+            'body',
+            'author',
+            'guid',
+            'orig_source_id',
+            'orig_category_id',
+            'orig_subcategory_id',
+            'url',
+            'status',
+            'last_feed_date'
+        ];
+        let readableStream = this.adapter.query.select(attr)
             .from('item').whereIn('orig_source_id', sourceGuid).stream();
         return readableStream;
     }
