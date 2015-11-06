@@ -29,6 +29,7 @@ export default class DefaultExporter {
 
         let sep = '';
         let chunk;
+        this.itemListCounter = 0;
 
         this.writableStream = fs.createWriteStream(filename + "." + this.Settings.appExporterExt);
 
@@ -72,7 +73,7 @@ export default class DefaultExporter {
             let sep = '';
             let chunk;
 
-            this.writableStream.write(',"' + guid + '":[');
+            this.writableStream.write(',"i' + this.itemListCounter + '":[');
 
             itemsStream.on('error', () => {
                 deferred.reject();
@@ -87,6 +88,7 @@ export default class DefaultExporter {
 
             itemsStream.on('end', () => {
                 this.writableStream.write("]");
+                this.itemListCounter++;
                 this.exportItems(this.sourceRefs.guids.shift());
             });
         }
