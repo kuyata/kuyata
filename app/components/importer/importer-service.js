@@ -341,6 +341,43 @@ export default class Importer {
     }
 
     /**
+     * Calculate a final response from a group of responses
+     *
+     * @param responseCollection. An array of responses as {msg: string, code: int}
+     * @returns {msg: string, code: int}
+     */
+    responseGroup(responseCollection) {
+        let code;
+        let msg = "";
+        if(responseCollection.length == 1) {
+            code = responseCollection[0].code;
+            msg = responseCollection[0].msg;
+        }
+        else if(_.find(responseCollection, {'code': 2})){
+            code = 2;
+            msg = "Sources added and updated";
+        }
+        else if(_.find(responseCollection, {'code': 1})){
+            code = 1;
+            msg = "Sources updated";
+        }
+        else if(_.find(responseCollection, {'code': 0})){
+            code = 0;
+            msg = "Sources already up to date";
+        }
+        else if(_.find(responseCollection, {'code': -1})){
+            code = -1;
+            msg = "Source error";
+        }
+        else if(_.find(responseCollection, {'code': -2})){
+            code = -2;
+            msg = "Items error";
+        }
+
+        return {msg: msg, code: code};
+    }
+
+    /**
      *
      * @param obj
      * @returns {*}
