@@ -101,7 +101,7 @@ export default class CategoryManager {
      */
     getCategoryIdFromOrigin(origCategoryId) {
         let category = _.find(this.data.collection, { 'guid': origCategoryId });
-        return category.id || false;
+        return category ? category.id : false;
     }
 
     /**
