@@ -115,12 +115,10 @@ export default class DefaultImporter {
     }
 
 
-    import(meta) {
+    import(meta, itemKey) {
         let deferred = this.$q.defer();
-        let itemKey = this.itemListCounter;
         let _meta = this.buildSource(meta);
 
-        this.itemListCounter++;
         this.getItemList("i"+itemKey).then((content) => {
             this.Importer.import(_meta, content).then((response) => {
                 deferred.resolve(response);
@@ -138,11 +136,10 @@ export default class DefaultImporter {
      */
     importList(file, sourceList) {
         this.file = file;
-        this.itemListCounter = 0;
         return this.$q((resolve) => {
             let promises = [];
-            sourceList.forEach(source => {
-                promises.push(this.import(source));
+            sourceList.forEach((source, i) => {
+                if(source){promises.push(this.import(source, i));};
             });
             this.$q.all(promises).then((responses) => {
                 resolve(this.Importer.responseGroup(responses));
