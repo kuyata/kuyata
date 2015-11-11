@@ -30,23 +30,53 @@ class DefaultImporterController {
 		this.state = 0;
 		this.msg = "";
 		this.sourceList = [];
-		this.file = "file2.daf";
-		this.getSourceList(this.file);
+		this.sourceListConfirmed = [];
+		this.file = "";
+
+		let chooser = document.querySelector("#fileDialog");
+		chooser.addEventListener("change", (e) => {
+			this.sourceList = [];
+			this.sourceListConfirmed = [];
+			this.file = "";
+			if(this.DefaultImporter.isValidFile(e.target.value)) {
+				this.file = e.target.value;
+				this.getSourceList();
+			}
+		}, false);
+
 	}
 
-	getSourceList(file) {
+	setSources(confirmed, index) {
+		this.sourceListConfirmed[index] = confirmed;
+	}
+
+	getSourceList() {
 		this.usSpinnerService.spin('spinner-global');
-		this.DefaultImporter.getSourceList(file).then(sourceList => {
+		this.DefaultImporter.getSourceList(this.file).then(sourceList => {
 			this.sourceList = sourceList;
 			this.usSpinnerService.stop('spinner-global');
 		});
+
+		this.sourceListConfirmed = Array(this.sourceList.length);
+	}
+
+	notConfirmedSources() {
+		if(this.sourceListConfirmed.indexOf(true) == -1) {
+			return true;
+		}
+		return false;
 	}
 
 	importDefaults() {
 		this.state = 0;
 		this.msg = "";
 
-		this.DefaultImporter.importList(this.file, this.sourceList).then((response) => {
+		let importList = [];
+		this.sourceList.forEach((source, i) => {
+			this.sourceListConfirmed[i] ? importList.push(source) : importList.push(false);
+		});
+
+		this.DefaultImporter.importList(this.file, importList).then((response) => {
 			this.usSpinnerService.stop('spinner-global');
 			this.state = 1;
 			this.msg = response.msg;
