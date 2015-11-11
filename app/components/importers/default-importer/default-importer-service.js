@@ -2,9 +2,10 @@ import oboe from "oboe";
 
 export default class DefaultImporter {
 
-    constructor($q, Importer){
+    constructor($q, Importer, Settings){
         this.$q = $q;
         this.Importer = Importer;
+        this.Settings = Settings;
         this.file;
     }
 
@@ -74,6 +75,13 @@ export default class DefaultImporter {
 
     }
 
+    isValidFile(file) {
+        let ext = file.slice(file.length-(this.Settings.appExporterExt.length + 1), file.length);
+        if(ext == "." + this.Settings.appExporterExt) {
+            return true;
+        }
+        return false;
+    }
 
     getSourceList(file) {
         let deferred = this.$q.defer();
