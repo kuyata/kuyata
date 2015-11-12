@@ -14,8 +14,52 @@ export default class DefaultExporter {
     }
 
     /**
+     * Check the param and remove the supported extension substring if was included on the filename
+     *
+     * @param filename
+     * @returns normalized filename
+     */
+    normalizeExtension(filename) {
+        let ext = filename.slice(filename.length-(this.Settings.appExporterExt.length + 1), filename.length);
+        if(ext == "." + this.Settings.appExporterExt) {
+            return filename.slice(0, filename.length-(this.Settings.appExporterExt.length + 1));
+        }
+        return filename;
+    }
+
+    /**
+     * Get, on the promise, the entire source list.
+     * Mainly to be used on DefaultExporter-UI, for to list sources
+     *
+     * @returns a promise with the extracted source list
+     */
+    getSourceList() {
+        let deferred = this.$q.defer();
+        let sourcesStream = this.Exporter.getSourcesStream();
+        let sources = [];
+        let chunk;
+
+        sourcesStream.on('error', () => {
+            deferred.reject();
+        });
+
+        sourcesStream.on('readable', () => {
+            while ((chunk=sourcesStream.read()) != null) {
+                sources.push(chunk);
+            }
+        });
+
+        sourcesStream.on('end', () => {
+            deferred.resolve(sources);
+        });
+
+        return deferred.promise;
+    }
+
+    /**
      * Main method to export selected sources to a file
      *
+     * @param filename
      * @param sourceRefs
      * @param sourceRefs.ids - Array of source db ids to export
      * @param sourceRefs.guid - Array of source guids to export
