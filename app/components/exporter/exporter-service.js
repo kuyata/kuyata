@@ -27,10 +27,19 @@ export default class Exporter {
      * @param sourceIds, an array of source db ids requested
      * @returns an stream from adapter
      */
-    getSourcesStream(sourceIds) {
-        let attr = ['name', 'guid', 'status', 'url', 'last_feed_date', 'type'];
-        let readableStream = this.adapter.query.select(attr)
-            .from('source').whereIn('id', sourceIds).stream();
+    getSourcesStream(sourceIds = null) {
+        let attr = ['id', 'name', 'guid', 'status', 'url', 'last_feed_date', 'type'];
+        let readableStream;
+        if(sourceIds) {
+            console.log("sourceIdssourceIds");
+            readableStream = this.adapter.query.select(attr)
+                .from('source').whereIn('id', sourceIds).stream();
+        }
+        else {
+            readableStream = this.adapter.query.select(attr)
+                .from('source').stream();
+        }
+
         return readableStream;
     }
 
