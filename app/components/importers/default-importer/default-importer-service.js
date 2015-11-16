@@ -50,6 +50,7 @@ export default class DefaultImporter {
      */
     buildSource(meta){
         let source = JSON.parse(angular.toJson(meta));
+        delete source.id;
         source.checksum = "";
         return source;
     }
@@ -123,11 +124,11 @@ export default class DefaultImporter {
     }
 
 
-    import(meta, itemKey) {
+    import(meta) {
         let deferred = this.$q.defer();
         let _meta = this.buildSource(meta);
 
-        this.getItemList("i"+itemKey).then((content) => {
+        this.getItemList("i" + meta.id).then((content) => {
             this.Importer.import(_meta, content).then((response) => {
                 deferred.resolve(response);
             }).catch((response) => {
@@ -146,8 +147,8 @@ export default class DefaultImporter {
         this.file = file;
         return this.$q((resolve) => {
             let promises = [];
-            sourceList.forEach((source, i) => {
-                if(source){promises.push(this.import(source, i));};
+            sourceList.forEach((source) => {
+                if(source){promises.push(this.import(source));};
             });
             this.$q.all(promises).then((responses) => {
                 resolve(this.Importer.responseGroup(responses));
