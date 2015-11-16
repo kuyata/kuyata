@@ -50,7 +50,7 @@ export default class Exporter {
      * @param sourceGuid, an array of source db guid requested
      * @returns an stream from adapter
      */
-    getItemsStream(sourceGuid) {
+    getItemsStream(sourceId) {
         let attr = [
             'title',
             'body',
@@ -64,7 +64,7 @@ export default class Exporter {
             'last_feed_date'
         ];
         let readableStream = this.adapter.query.select(attr)
-            .from('item').whereIn('orig_source_id', sourceGuid).stream();
+            .from('item').whereIn('source_id', sourceId).stream();
         return readableStream;
     }
 

@@ -63,9 +63,8 @@ export default class DefaultExporter {
      * @param sourceRefs
      * @param sourceRefs.ids - Array of source db ids to export
      * @param sourceRefs.guid - Array of source guids to export
-     * @param filename
      */
-    export(sourceRefs, filename) {
+    export(filename, sourceRefs) {
         let deferred = this.$q.defer();
 
         this.sourceRefs = sourceRefs;
@@ -73,7 +72,6 @@ export default class DefaultExporter {
 
         let sep = '';
         let chunk;
-        this.itemListCounter = 0;
 
         this.writableStream = fs.createWriteStream(filename + "." + this.Settings.appExporterExt);
 
@@ -99,7 +97,7 @@ export default class DefaultExporter {
 
         sourcesStream.on('end', () => {
             this.writableStream.write("]");
-            this.exportItems(this.sourceRefs.guids.shift());
+            this.exportItems(this.sourceRefs.ids.shift());
         });
 
         return deferred.promise;
@@ -108,16 +106,16 @@ export default class DefaultExporter {
     /**
      *
      *
-     * @param guid
+     * @param sourceId
      */
-    exportItems(guid) {
+    exportItems(sourceId) {
         let deferred = this.$q.defer();
-        if(guid) {
-            let itemsStream = this.Exporter.getItemsStream(guid);
+        if(sourceId) {
+            let itemsStream = this.Exporter.getItemsStream(sourceId);
             let sep = '';
             let chunk;
 
-            this.writableStream.write(',"i' + this.itemListCounter + '":[');
+            this.writableStream.write(',"i' + sourceId + '":[');
 
             itemsStream.on('error', () => {
                 deferred.reject();
@@ -132,8 +130,7 @@ export default class DefaultExporter {
 
             itemsStream.on('end', () => {
                 this.writableStream.write("]");
-                this.itemListCounter++;
-                this.exportItems(this.sourceRefs.guids.shift());
+                this.exportItems(this.sourceRefs.ids.shift());
             });
         }
 
