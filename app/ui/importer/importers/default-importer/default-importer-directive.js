@@ -24,7 +24,7 @@ export default function DefaultImporterDirective(){
 }
 
 class DefaultImporterController {
-	constructor(DefaultImporter, usSpinnerService) {
+	constructor(DefaultImporter, usSpinnerService, $rootScope) {
 		this.DefaultImporter = DefaultImporter;
 		this.usSpinnerService = usSpinnerService;
 		this.state = 0;
@@ -42,8 +42,8 @@ class DefaultImporterController {
 				this.file = e.target.value;
 				this.getSourceList();
 			}
+			$rootScope.$digest();
 		}, false);
-
 	}
 
 	setSources(confirmed, index) {
