@@ -1,4 +1,4 @@
-<input id="fileDialog" type="file" />
+<input id="fileDialog" type="file" nwworkingdir />
 
 <div ng-repeat="source in vm.sourceList">
     <input type="checkbox" checkbox-group ng-model="confirmed" ng-change="vm.setSources(confirmed, $index)" />
