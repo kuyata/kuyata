@@ -8,6 +8,7 @@ import CategoryManager from './../../components/category/category-manager/catego
 import ItemManager from './../../components/item/item-manager/item-manager';
 
 import importer from './../importer/importer';
+import exporter from './../exporter/exporter';
 
 import SourcesDirective from './sources-directive';
 import CategoriesDirective from './categories-directive';
@@ -23,7 +24,9 @@ export default angular.module('app.sources', [
 	SourceManager.name,
 	CategoryManager.name,
 	ItemManager.name,
+
 	importer.name,
+	exporter.name,
 
 	RSSImporter.name,
 	PackageImporter.name
