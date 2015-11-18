@@ -63,15 +63,15 @@ class DefaultExporterController {
 
 	exportDefaults() {
 		this.msg = "";
-
 		let sourceRefs = {'ids': [], 'guids': []};
+		this.usSpinnerService.spin('spinner-global');
+
 		this.sourceList.forEach((source, i) => {
 			if(this.sourceListConfirmed[i]) {
 				sourceRefs.ids.push(source.id);
 				sourceRefs.guids.push(source.guid);
 			}
 		});
-
 		this.DefaultExporter.export(this.file, sourceRefs).then((response) => {
 			this.usSpinnerService.stop('spinner-global');
 			this.msg = "Exported successfully";
