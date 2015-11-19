@@ -31,7 +31,6 @@ export default class Exporter {
         let attr = ['id', 'name', 'guid', 'status', 'url', 'last_feed_date', 'type'];
         let readableStream;
         if(sourceIds) {
-            console.log("sourceIdssourceIds");
             readableStream = this.adapter.query.select(attr)
                 .from('source').whereIn('id', sourceIds).stream();
         }
