@@ -70,12 +70,12 @@ class DefaultImporterController {
 	importDefaults() {
 		this.state = 0;
 		this.msg = "";
-
 		let importList = [];
+
+		this.usSpinnerService.spin('spinner-global');
 		this.sourceList.forEach((source, i) => {
 			this.sourceListConfirmed[i] ? importList.push(source) : importList.push(false);
 		});
-
 		this.DefaultImporter.importList(this.file, importList).then((response) => {
 			this.usSpinnerService.stop('spinner-global');
 			this.state = 1;
