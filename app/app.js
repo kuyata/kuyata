@@ -23,6 +23,8 @@ import {itemsData} from './components/common/data/items';
 import {feedsRssData} from './components/common/data/feeds_rss';
 
 import Importer from './components/importer/importer';
+import Exporter from './components/exporter/exporter';
+
 import SourceManager from './components/source/source-manager/source-manager';
 import CategoryManager from './components/category/category-manager/category-manager';
 import ItemManager from './components/item/item-manager/item-manager';
@@ -37,6 +39,7 @@ export default angular.module('app', [
     sources.name,
 
     Importer.name,
+    Exporter.name,
     SourceManager.name,
     CategoryManager.name,
     ItemManager.name
@@ -55,7 +58,7 @@ export default angular.module('app', [
 
 })
 
-.run(($q, DS, Importer, SourceManager, CategoryManager, ItemManager, $rootScope) => {
+.run(($q, DS, Importer, Exporter, SourceManager, CategoryManager, ItemManager, $rootScope) => {
 
     this.$q = $q;
     let sourceShema, categoryShema, itemShema;

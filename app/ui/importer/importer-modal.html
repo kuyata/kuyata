@@ -2,6 +2,7 @@
     <h3 class="modal-title">Add {{ modal.type }}</h3>
 </div>
 <div class="modal-body">
+    <defaultimporter ng-if="modal.type == 'default'"></defaultimporter>
     <rssimporter ng-if="modal.type == 'rss/atom'"></rssimporter>
     <packageimporter ng-if="modal.type == 'package'"></packageimporter>
 </div>

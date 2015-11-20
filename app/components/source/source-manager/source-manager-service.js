@@ -147,7 +147,7 @@ export default class SourceManager {
      */
     getSourceIdFromOrigin(origSourceId) {
         let source = _.find(this.data.collection, { 'guid': origSourceId });
-        return source.id || false;
+        return source ? source.id : false;
     }
 
     /**
