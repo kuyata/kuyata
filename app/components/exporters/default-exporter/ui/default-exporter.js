@@ -1,7 +1,7 @@
 import angular from 'angular';
 import angularSpinner from 'angular-spinner';
 
-import DefaultExporter from './../../../../components/exporters/default-exporter/default-exporter';
+import DefaultExporter from './../default-exporter';
 import DefaultExporterDirective from './default-exporter-directive';
 
 
