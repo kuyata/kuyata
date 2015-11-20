@@ -1,0 +1,10 @@
+{
+  "name": "package-importer",
+  "type": "package",
+  "ui": {
+    "main": "./ui/package-importer",
+    "module": "importer.package",
+    "directive": "packageimporter",
+    "style": "package-importer"
+  }
+}

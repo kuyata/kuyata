@@ -1,0 +1,10 @@
+{
+  "name": "default-importer",
+  "type": "default",
+  "ui": {
+    "main": "./ui/default-importer",
+    "module": "importer.default",
+    "directive": "defaultimporter",
+    "style": "default-importer"
+  }
+}

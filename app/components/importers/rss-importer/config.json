@@ -1,0 +1,10 @@
+{
+  "name": "rss-importer",
+  "type": "rss",
+  "ui": {
+    "main": "./ui/rss-importer",
+    "module": "importer.rss",
+    "directive": "rssimporter",
+    "style": "rss-importer"
+  }
+}

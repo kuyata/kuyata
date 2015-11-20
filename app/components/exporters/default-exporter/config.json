@@ -1,0 +1,10 @@
+{
+  "name": "default-exporter",
+  "type": "default",
+  "ui": {
+    "main": "./ui/default-exporter",
+    "module": "exporter.default",
+    "directive": "defaultexporter",
+    "style": "default-exporter"
+  }
+}
