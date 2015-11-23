@@ -1,5 +1,6 @@
 {
   "name": "default-exporter",
+  "base": "exporter",
   "type": "default",
   "ui": {
     "main": "./ui/default-exporter",

@@ -1,5 +1,6 @@
 {
   "name": "package-importer",
+  "base": "importer",
   "type": "package",
   "ui": {
     "main": "./ui/package-importer",

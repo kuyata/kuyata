@@ -1,5 +1,6 @@
 {
   "name": "rss-importer",
+  "base": "importer",
   "type": "rss",
   "ui": {
     "main": "./ui/rss-importer",

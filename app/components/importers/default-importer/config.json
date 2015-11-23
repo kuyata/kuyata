@@ -1,5 +1,6 @@
 {
   "name": "default-importer",
+  "base": "importer",
   "type": "default",
   "ui": {
     "main": "./ui/default-importer",
