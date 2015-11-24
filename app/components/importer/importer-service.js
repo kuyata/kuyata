@@ -1,3 +1,10 @@
+/**
+ * Importer is a middleware between Core and Importers.
+ * Read data from Core and and send to specific-importers who request it through specific-importers-ui
+ *
+ * @class
+ */
+
 import _ from 'lodash';
 import checksum from 'json-checksum';
 
