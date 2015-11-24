@@ -3,8 +3,9 @@ import checksum from 'json-checksum';
 
 export default class Importer {
 
-    constructor($q, SourceManager, CategoryManager, ItemManager){
+    constructor($q, SourceManager, CategoryManager, ItemManager, $window){
         this.$q = $q;
+        this.$window = $window;
         this.SourceManager = SourceManager;
         this.CategoryManager = CategoryManager;
         this.ItemManager = ItemManager;
@@ -401,5 +402,14 @@ export default class Importer {
         _obj.body = htmlObject.innerHTML;
 
         return checksum(_obj);
+    }
+
+    /**
+     * Get list of plugin importers configs
+     *
+     * @returns {Array} list of importer config objects
+     */
+    getImporters() {
+        return _.filter(this.$window.pluginConfigs, { 'base': "importer" });
     }
 }
