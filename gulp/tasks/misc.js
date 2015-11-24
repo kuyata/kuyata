@@ -11,6 +11,15 @@ gulp.task('fonts', function (callback) {
     callback();
 });
 
+gulp.task('pluginConfigs', function (callback) {
+    config.plugins.forEach(function(plugin) {
+        gulp.src(plugin.src)
+            .pipe(changed(plugin.dest)) // Ignore unchanged files
+            .pipe(gulp.dest(plugin.dest));
+    });
+    callback();
+});
+
 gulp.task('clean', function (callback) {
     del([config.distDir + '/**/*'], callback)
 });

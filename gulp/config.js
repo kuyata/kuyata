@@ -47,6 +47,25 @@ module.exports = {
             src: ["./node_modules/font-awesome/fonts/**", "./node_modules/bootstrap/dist/fonts/**"],
             dest: dest + "/fonts/"
         },
+        // Add here your plugin config json, if you want compile your plugin
+        plugins: [
+            {
+                src: [src + "/components/importers/default-importer/config.json"],
+                dest: dest + '/scripts/importers/default-importer/'
+            },
+            {
+                src: [src + "/components/importers/package-importer/config.json"],
+                dest: dest + '/scripts/importers/package-importer/'
+            },
+            {
+                src: [src + "/components/importers/rss-importer/config.json"],
+                dest: dest + '/scripts/importers/rss-importer/'
+            },
+            {
+                src: [src + "/components/exporters/default-exporter/config.json"],
+                dest: dest + '/scripts/exporters/default-exporter/'
+            }
+        ],
 
         distDir: dest
     },
