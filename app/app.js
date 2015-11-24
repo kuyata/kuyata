@@ -16,7 +16,6 @@ import uiBootstrap from 'angular-bootstrap';
 
 import sources from './ui/sources/sources';
 
-
 import {sourcesData} from './components/common/data/sources';
 import {categoriesData} from './components/common/data/categories';
 import {itemsData} from './components/common/data/items';
@@ -30,8 +29,7 @@ import CategoryManager from './components/category/category-manager/category-man
 import ItemManager from './components/item/item-manager/item-manager';
 
 
-
-export default angular.module('app', [
+var appModules = [
     uiRouter,
     'ui.bootstrap',
     'angularSpinner',
@@ -43,7 +41,13 @@ export default angular.module('app', [
     SourceManager.name,
     CategoryManager.name,
     ItemManager.name
-])
+];
+
+window.pluginConfigs.forEach(plugin => {
+    appModules.push(plugin.ui.module);
+});
+
+export default angular.module('app', appModules)
 
 .config(($stateProvider, $urlRouterProvider, DSProvider) => {
 
