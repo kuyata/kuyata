@@ -2,10 +2,12 @@
   "name": "default-exporter",
   "base": "exporter",
   "type": "default",
+  "text": "Default",
   "ui": {
-    "main": "./ui/default-exporter",
+    "path": "ui/",
     "module": "exporter.default",
     "directive": "defaultexporter",
-    "style": "default-exporter"
+    "style": "default-exporter",
+    "template": "template.html"
   }
 }

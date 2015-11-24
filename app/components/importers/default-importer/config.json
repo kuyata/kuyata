@@ -2,10 +2,12 @@
   "name": "default-importer",
   "base": "importer",
   "type": "default",
+  "text": "Default",
   "ui": {
-    "main": "./ui/default-importer",
+    "path": "ui/",
     "module": "importer.default",
     "directive": "defaultimporter",
-    "style": "default-importer"
+    "style": "default-importer",
+    "template": "template.html"
   }
 }

@@ -2,10 +2,12 @@
   "name": "package-importer",
   "base": "importer",
   "type": "package",
+  "text": "Package",
   "ui": {
-    "main": "./ui/package-importer",
+    "path": "ui/",
     "module": "importer.package",
     "directive": "packageimporter",
-    "style": "package-importer"
+    "style": "package-importer",
+    "template": "template.html"
   }
 }
