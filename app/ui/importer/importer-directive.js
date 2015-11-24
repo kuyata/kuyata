@@ -29,11 +29,12 @@ export default function ImporterDirective(){
  * @ngInject
  */
 class ImporterController {
-	constructor($modal) {
+	constructor(Importer, $modal) {
 		this.modal = $modal;
+		this.importers = Importer.getImporters();
 	}
 
-	open (type) {
+	open (importer) {
 		var modalInstance = this.modal.open({
 			templateUrl: 'ui/importer/importer-modal.html',
 			controller: ImporterModalController,
@@ -41,8 +42,8 @@ class ImporterController {
 			bindToController: true,
 			size: "sm",
 			resolve: {
-				importType: function () {
-					return type;
+				importer: function () {
+					return importer;
 				}
 			}
 		});
@@ -53,14 +54,18 @@ class ImporterController {
 		//	console.log('Modal dismissed at: ' + new Date());
 		//});
 	}
-
-
 }
 
 class ImporterModalController {
-	constructor($modalInstance, importType) {
+	constructor($modalInstance, importer) {
 		this.modalInstance = $modalInstance;
-		this.type = importType;
+		this.importer = importer;
+		this.templateSrc =
+			"components/" +
+			this.importer.base + "s/" +
+			this.importer.name + "/" +
+			this.importer.ui.path +
+			this.importer.ui.template;
 	}
 
 	cancel() {
