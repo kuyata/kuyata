@@ -1,6 +1,8 @@
 <div class="btn-group" dropdown>
     <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle> Export </button>
     <ul class="dropdown-menu" role="menu">
-        <!--<li><a href="#" ng-click="vm.open('default')">Default</a></li>-->
+        <li ng-repeat="exporter in vm.exporters">
+            <a href="#" ng-click="vm.open(exporter)">{{ exporter.text }}</a>
+        </li>
     </ul>
 </div>

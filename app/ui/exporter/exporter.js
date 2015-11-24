@@ -1,14 +1,12 @@
 import angular from 'angular';
 
 import uiBootstrap from 'angular-bootstrap';
+import Exporter from './../../components/exporter/exporter';
 import ExporterDirective from './exporter-directive';
 
-// ui exporter list
-//import defaultExporter from './exporters/default-exporter/default-exporter';
-
 export default angular.module('exporter', [
-	'ui.bootstrap'
-	//defaultExporter.name
+	'ui.bootstrap',
+	Exporter.name
 ])
 
 .directive('exporter', ExporterDirective);
