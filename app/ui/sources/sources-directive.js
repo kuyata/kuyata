@@ -44,15 +44,13 @@ class SourcesController {
 		});
 
 		$rootScope.$on("import:done", () => {
-			this.count++;
+			this.count--;
 
-			if(this.count == this.sources.length) {
-				this.count = 0;
+			if(this.count == 0) {
 				this.usSpinnerService.stop('spinner-sources');
 			}
 		});
 		$rootScope.$on("import:failed", () => {
-			this.count = 0;
 			this.usSpinnerService.stop('spinner-sources');
 		});
 	}
@@ -69,6 +67,7 @@ class SourcesController {
 
 	updateAllSources(sourceList) {
 		if(sourceList.length > 0) {
+			this.count = sourceList.length;
 			this.usSpinnerService.spin('spinner-sources');
 
 			sourceList.forEach(source => {
