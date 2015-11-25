@@ -13,10 +13,6 @@ import exporter from './../exporter/exporter';
 import SourcesDirective from './sources-directive';
 import CategoriesDirective from './categories-directive';
 
-// service importers list
-import RSSImporter from './../../components/importers/rss-importer/rss-importer';
-import PackageImporter from './../../components/importers/package-importer/package-importer';
-
 export default angular.module('app.sources', [
 	uiRouter,
 
@@ -26,10 +22,7 @@ export default angular.module('app.sources', [
 	ItemManager.name,
 
 	importer.name,
-	exporter.name,
-
-	RSSImporter.name,
-	PackageImporter.name
+	exporter.name
 ])
 
 .config(($stateProvider, $urlRouterProvider) => {

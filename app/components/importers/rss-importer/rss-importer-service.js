@@ -5,10 +5,18 @@ import Stream from 'stream';
 
 export default class RSSImporter {
 
-    constructor($q, $http, Importer){
+    constructor($q, $http, Importer, $rootScope){
         this.$q = $q;
         this.$http = $http;
         this.Importer = Importer;
+
+        $rootScope.$on("import:type:rss", (e, source) => {
+            this.import(source.url).then(() => {
+                $rootScope.$emit("import:done");
+            }).catch(() => {
+                $rootScope.$emit("import:failed");
+            });
+        });
     }
 
     /**
