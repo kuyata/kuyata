@@ -3,6 +3,30 @@ var src = './app';
 
 module.exports = {
 
+    // Add here your plugin config json, if you want compile your plugin
+    plugins: [
+        {
+            json: [src + "/components/importers/default-importer/config.json"],
+            styles: [src + "/components/importers/default-importer/ui/default-importer.less"],
+            dest: dest + '/scripts/importers/default-importer/'
+        },
+        {
+            json: [src + "/components/importers/package-importer/config.json"],
+            styles: [src + "/components/importers/package-importer/ui/package-importer.less"],
+            dest: dest + '/scripts/importers/package-importer/'
+        },
+        {
+            json: [src + "/components/importers/rss-importer/config.json"],
+            styles: [src + "/components/importers/rss-importer/ui/rss-importer.less"],
+            dest: dest + '/scripts/importers/rss-importer/'
+        },
+        {
+            json: [src + "/components/exporters/default-exporter/config.json"],
+            styles: [src + "/components/exporters/default-exporter/ui/default-exporter.less"],
+            dest: dest + '/scripts/exporters/default-exporter/'
+        }
+    ],
+
     less: {
         src: src + "/components/common/styles/main.less",
         watched: src + "/**/*.less",
