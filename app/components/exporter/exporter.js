@@ -8,7 +8,7 @@ import ItemManager from '../item/item-manager/item-manager.js'
 
 import Settings from './../../settings'
 
-module.exports = angular.module('app.exporter', [
+export default angular.module('app.exporter', [
     SourceManager.name,
     CategoryManager.name,
     ItemManager.name,

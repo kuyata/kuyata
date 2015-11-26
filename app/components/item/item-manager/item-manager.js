@@ -9,7 +9,7 @@ import angular from 'angular';
 import Item from '../item-model/item-model.js';
 import ItemManager from './item-manager-service.js'
 
-module.exports = angular.module('app.managers.item', [
+export default angular.module('app.managers.item', [
     Item.name
 ])
 
