@@ -19,7 +19,7 @@ export default function DefaultImporterDirective(){
 		controllerAs: 'vm',
 		controller: DefaultImporterController,
 		bindToController: true,
-		templateUrl: 'components/importers/default-importer/ui/default-importer.html'
+		templateUrl: 'scripts/importers/default-importer/ui/default-importer.html'
 	};
 }
 

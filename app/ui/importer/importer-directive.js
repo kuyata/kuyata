@@ -61,7 +61,7 @@ class ImporterModalController {
 		this.modalInstance = $modalInstance;
 		this.importer = importer;
 		this.templateSrc =
-			"components/" +
+			"scripts/" +
 			this.importer.base + "s/" +
 			this.importer.name + "/" +
 			this.importer.ui.path +

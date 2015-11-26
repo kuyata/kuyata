@@ -61,7 +61,7 @@ class ExporterModalController {
 		this.modalInstance = $modalInstance;
 		this.exporter = exporter;
 		this.templateSrc =
-			"components/" +
+			"scripts/" +
 			this.exporter.base + "s/" +
 			this.exporter.name + "/" +
 			this.exporter.ui.path +

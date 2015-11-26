@@ -17,7 +17,7 @@ export default function PackageImporterDirective(){
 		controllerAs: 'vm',
 		controller: PackageImporterController,
 		bindToController: true,
-		templateUrl: 'components/importers/package-importer/ui/package-importer.html'
+		templateUrl: 'scripts/importers/package-importer/ui/package-importer.html'
 	};
 }
 

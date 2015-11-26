@@ -19,7 +19,7 @@ export default function DefaultExporterDirective(){
 		controllerAs: 'vm',
 		controller: DefaultExporterController,
 		bindToController: true,
-		templateUrl: 'components/exporters/default-exporter/ui/default-exporter.html'
+		templateUrl: 'scripts/exporters/default-exporter/ui/default-exporter.html'
 	};
 }
 

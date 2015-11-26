@@ -7,22 +7,26 @@ module.exports = {
     plugins: [
         {
             json: [src + "/components/importers/default-importer/config.json"],
-            styles: [src + "/components/importers/default-importer/ui/default-importer.less"],
+            styles: [src + "/components/importers/default-importer/**/*.less"],
+            html: [src + "/components/importers/default-importer/**/*.html"],
             dest: dest + '/scripts/importers/default-importer/'
         },
         {
             json: [src + "/components/importers/package-importer/config.json"],
-            styles: [src + "/components/importers/package-importer/ui/package-importer.less"],
+            styles: [src + "/components/importers/package-importer/**/*.less"],
+            html: [src + "/components/importers/package-importer/**/*.html"],
             dest: dest + '/scripts/importers/package-importer/'
         },
         {
             json: [src + "/components/importers/rss-importer/config.json"],
-            styles: [src + "/components/importers/rss-importer/ui/rss-importer.less"],
+            styles: [src + "/components/importers/rss-importer/**/*.less"],
+            html: [src + "/components/importers/rss-importer/**/*.html"],
             dest: dest + '/scripts/importers/rss-importer/'
         },
         {
             json: [src + "/components/exporters/default-exporter/config.json"],
-            styles: [src + "/components/exporters/default-exporter/ui/default-exporter.less"],
+            styles: [src + "/components/exporters/default-exporter/**/*.less"],
+            html: [src + "/components/exporters/default-exporter/**/*.html"],
             dest: dest + '/scripts/exporters/default-exporter/'
         }
     ],
@@ -86,7 +90,10 @@ module.exports = {
     },
 
     markup: {
-        src: [src + "/**/*.html", src + "/package.json", src + "/components/common/icons/**"],
+        src: [
+            src + "/**/*.html", src + "/package.json", src + "/components/common/icons/**",
+            '!' + src + '/components/exporters/**/*.html', '!' + src + '/components/importers/**/*.html'
+        ],
         dest: dest
     },
 

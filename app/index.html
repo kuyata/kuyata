@@ -34,7 +34,7 @@
             // dynamically loading all plugins from 'pluginConfigs' global var
             window.pluginConfigs.forEach(function (plugin) {
                 var scriptSrc = "scripts/" + plugin.base + "s/" + plugin.name + "/" + plugin.name + ".js";
-                var cssSrc = "scripts/" + plugin.base + "s/" + plugin.name + "/" + plugin.ui.style + ".css";
+                var cssSrc = "scripts/" + plugin.base + "s/" + plugin.name + "/" + plugin.ui.path + plugin.ui.style + ".css";
                 document.write('<script type="text/javascript" src=' + scriptSrc + '><\/script>');
                 document.write('<link rel="stylesheet" type="text/css" href=' + cssSrc + '>');
             });
