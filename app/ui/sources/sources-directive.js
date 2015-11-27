@@ -37,6 +37,9 @@ class SourcesController {
 		this.ItemManager = ItemManager;
 		this.usSpinnerService = usSpinnerService;
 		this.count = 0;
+		if(SourceManager.data) {
+			this.sources = SourceManager.data.collection;
+		}
 
 		$rootScope.$on("adapter:ready", () => {
 			this.sources = SourceManager.data.collection;
@@ -44,10 +47,13 @@ class SourcesController {
 		});
 
 		$rootScope.$on("import:done", () => {
-			this.count--;
+			if(this.count > 0) this.count--;
 
 			if(this.count == 0) {
 				this.usSpinnerService.stop('spinner-sources');
+				if(this.SourceManager.getCurrentItemId()){
+					this.itemListBySource(this.SourceManager.getCurrentItemId(), true);
+				}
 			}
 		});
 		$rootScope.$on("import:failed", () => {
@@ -60,8 +66,8 @@ class SourcesController {
 		this.SourceManager.setCurrentItemId(sourceId);
 	}
 
-	itemListBySource(source) {
-		this.state.go("app.sources.items", {source: source});
+	itemListBySource(source, reload=false) {
+		this.state.go("app.sources.items", {source: source}, {reload: reload});
 		this.ItemManager.resetCurrentItem();
 	}
 
