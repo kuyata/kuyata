@@ -43,6 +43,7 @@ var appModules = [
     ItemManager.name
 ];
 
+// import directive module names
 window.pluginConfigs.forEach(plugin => {
     appModules.push(plugin.ui.module);
 });
@@ -62,7 +63,12 @@ export default angular.module('app', appModules)
 
 })
 
-.run(($q, DS, Importer, Exporter, SourceManager, CategoryManager, ItemManager, $rootScope) => {
+.run(($q, DS, Importer, Exporter, SourceManager, CategoryManager, ItemManager, $rootScope, $window, $injector) => {
+
+    // inject service names
+    window.pluginConfigs.forEach(plugin => {
+        $injector.get(plugin.service);
+    });
 
     this.$q = $q;
     let sourceShema, categoryShema, itemShema;
