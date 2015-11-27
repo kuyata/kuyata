@@ -265,27 +265,33 @@ export default class Importer {
             //some will be new, some will be updated
             content.forEach((item) => {
                 // create, update or nop flow
-
-                promises.push(this.ItemManager.exists(item, "guid").then((itemOnStore) => {
-                    if(!itemOnStore) {
-                        this.ItemManager.exists(item, "checksum").then((itemChecksum) => {
-                            if(!itemChecksum) {
-                                return this.ItemManager.createItem(item, this.getItemRefs(item)).then(() => {
-                                    contentUpdated = true;
+                promises.push(
+                    this.$q(resolve => {
+                        this.ItemManager.exists(item, "guid").then((itemOnStore) => {
+                            if(!itemOnStore) {
+                                this.ItemManager.exists(item, "checksum").then((itemChecksum) => {
+                                    if(!itemChecksum) {
+                                        this.ItemManager.createItem(item, this.getItemRefs(item)).then(() => {
+                                            contentUpdated = true;
+                                            resolve();
+                                        });
+                                    }
+                                    else {
+                                        resolve();
+                                    }
                                 });
-
-                                return this.$q.when();
                             }
-                        });
-                    }
-                    else {
-                        return this.ItemManager.updateItem(itemOnStore, item).then((updated) => {
-                            if(updated) {
-                                contentUpdated = true;
+                            else {
+                                this.ItemManager.updateItem(itemOnStore, item).then((updated) => {
+                                    if(updated) {
+                                        contentUpdated = true;
+                                    }
+                                    resolve();
+                                });
                             }
-                        });
-                    }
-                }));
+                        })
+                    })
+                );
             });
         }
 
