@@ -244,10 +244,16 @@ export default class ItemManager {
      * @returns {*}
      */
     updateItem(itemOnStore, newItem) {
-        if(!_.isMatch(itemOnStore, newItem)) {
-            return this.Item.update(itemOnStore.id, newItem);
-        }
-        return this.$q.when(false);
+        return this.$q(resolve => {
+            if(!_.isMatch(itemOnStore, newItem)) {
+                this.Item.update(itemOnStore.id, newItem).then(() =>  {
+                    resolve(true);
+                });
+            }
+            else {
+                resolve(false);
+            }
+        });
     }
     
     /**
