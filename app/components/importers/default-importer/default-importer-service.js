@@ -2,10 +2,11 @@ import oboe from "oboe";
 
 export default class DefaultImporter {
 
-    constructor($q, Importer, Settings){
+    constructor($q, Importer, Settings, $rootScope){
         this.$q = $q;
         this.Importer = Importer;
         this.Settings = Settings;
+        this.$rootScope = $rootScope;
         this.file;
     }
 
@@ -145,13 +146,16 @@ export default class DefaultImporter {
      */
     importList(file, sourceList) {
         this.file = file;
-        return this.$q((resolve) => {
+        return this.$q((resolve, reject) => {
             let promises = [];
             sourceList.forEach((source) => {
                 if(source){promises.push(this.import(source));};
             });
             this.$q.all(promises).then((responses) => {
+                this.$rootScope.$emit("import:done");
                 resolve(this.Importer.responseGroup(responses));
+            }).catch(() => {
+                this.$rootScope.$emit("import:failed");
             });
         });
     }
