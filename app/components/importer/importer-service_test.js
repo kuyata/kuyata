@@ -200,9 +200,19 @@ describe("Importer", () => {
             contentPrevStored.id = 100;
             ItemManager.data.collection = [contentPrevStored];
 
+            DS.expectFindAll(Item.name, {
+                "where": {
+                    guid: {"==":ImporterFixtures.contentUndated1Added[1].guid}
+                },
+                limit: 1
+            },{
+                bypassCache: true
+            })
+                .respond(false);
+
             //DS.expectFindAll(Item.name, {
             //    "where": {
-            //        guid: {"==":ImporterFixtures.contentUndated1Added[1].guid}
+            //        checksum: {"==":ImporterFixtures.contentUndated1Added[1].checksum}
             //    },
             //    limit: 1
             //},{
@@ -217,22 +227,22 @@ describe("Importer", () => {
                 expect(itemsData.code).toEqual(1);
             });
 
-            DS.verifyNoOutstandingExpectation();
+            DS.digest();
             DS.flush();
         });
 
-        xit("should check only newer dated Items for a not new dated Source and return promise with data.code = 1", () => {
-            //require force ItemManager.exists(args) return this.$q.when(false);
+        it("should check only newer dated Items for a not new dated Source and return promise with data.code = 1", () => {
 
-            //DS.expectFindAll(Item.name, {
-            //    "where": {
-            //        guid: {"==":ImporterFixtures.contentDated1[1].guid}
-            //    },
-            //    limit: 1
-            //},{
-            //    bypassCache: true
-            //})
-            //    .respond(false);
+            DS.expectFindAll(Item.name, {
+                "where": {
+                    guid: {"==":ImporterFixtures.contentDated1[1].guid}
+                },
+                limit: 1
+            },{
+                bypassCache: true
+            })
+                .respond(false);
+
             DS.expectCreate(Item.name, ImporterFixtures.contentDated1[1]).respond(ImporterFixtures.contentDated1[1]);
 
             SourceManager.data.collection = [ImporterFixtures.metaDated1Stored];
@@ -246,7 +256,7 @@ describe("Importer", () => {
                 expect(itemsData.code).toEqual(1);
             });
 
-            DS.verifyNoOutstandingExpectation();
+            DS.digest();
             DS.flush();
         });
     });

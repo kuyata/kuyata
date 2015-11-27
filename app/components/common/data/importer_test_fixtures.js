@@ -110,7 +110,7 @@ let ImporterFixtures = {
 				"body": "<h1>Lorem ipsum</h1> consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 				"author":"John Doe",
 				"guid": "1021",
-				"checksum": "",
+				"checksum": "1111",
 				"url":"",
 				"status": "enabled",
 				"last_feed_date": null
@@ -121,12 +121,12 @@ let ImporterFixtures = {
 				"body": "<h1>Lorem ipsum</h1> consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
 				"author":"John Doe",
 				"guid": "1022",
-				"checksum": "",
+				"checksum": "2222",
 				"url":"",
 				"status": "enabled",
 				"last_feed_date": null
 			}
-		],
+		]
 
 	}
 ;
