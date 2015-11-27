@@ -29,18 +29,29 @@ export default function SourcesDirective(){
  * @ngInject
  */
 class SourcesController {
-	constructor($q, SourceManager, ItemManager, RSSImporter, PackageImporter, $state, $rootScope, usSpinnerService) {
+	constructor($q, SourceManager, ItemManager, $state, $rootScope, usSpinnerService) {
 		this.$q = $q;
 		this.state = $state;
+		this.$rootScope = $rootScope;
 		this.SourceManager = SourceManager;
 		this.ItemManager = ItemManager;
-		this.RSSImporter = RSSImporter;
 		this.usSpinnerService = usSpinnerService;
+		this.count = 0;
 
 		$rootScope.$on("adapter:ready", () => {
-			this.updateAllSources(SourceManager.data.collection).then(() => {
-				this.sources = SourceManager.data.collection;
-			});
+			this.sources = SourceManager.data.collection;
+			this.updateAllSources(this.sources);
+		});
+
+		$rootScope.$on("import:done", () => {
+			this.count--;
+
+			if(this.count == 0) {
+				this.usSpinnerService.stop('spinner-sources');
+			}
+		});
+		$rootScope.$on("import:failed", () => {
+			this.usSpinnerService.stop('spinner-sources');
 		});
 	}
 
@@ -55,24 +66,16 @@ class SourcesController {
 	}
 
 	updateAllSources(sourceList) {
-		let promises = [];
-		let deferred = this.$q.defer();
+		if(sourceList.length > 0) {
+			this.count = sourceList.length;
+			this.usSpinnerService.spin('spinner-sources');
 
-		this.usSpinnerService.spin('spinner-sources');
-
-		sourceList.forEach(source => {
-			if(source.type == 'rss') {
-				promises.push(this.RSSImporter.import(source.url));
-			}
-			else if(source.type == 'package') {
-				promises.push(this.PackageImporter.import(source));
-			}
-		});
-		this.$q.all(promises).then(() => {
-			deferred.resolve();
+			sourceList.forEach(source => {
+				this.$rootScope.$emit("import:type:" + source.type, source);
+			});
+		}
+		else {
 			this.usSpinnerService.stop('spinner-sources');
-		});
-
-		return deferred.promise;
+		}
 	}
 }

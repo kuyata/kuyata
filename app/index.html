@@ -12,10 +12,34 @@
             var knex = require('knex');
             var gui = require('nw.gui');
             var fs = require('fs');
+
+            // dynamically create 'pluginConfigs' global var
+            window.pluginConfigs = [];
+            fs.readdirSync("./scripts/importers/").forEach(function(imp) {
+                var cfg = fs.readFileSync('./scripts/importers/' + imp + '/config.json');
+                pluginConfigs.push(JSON.parse(cfg));
+            });
+            fs.readdirSync("./scripts/exporters/").forEach(function(exp) {
+                var cfg = fs.readFileSync('./scripts/exporters/' + exp + '/config.json');
+                pluginConfigs.push(JSON.parse(cfg));
+            });
         }
     </script>
 
     <script src="scripts/app.js"></script>
+
+    <script type="text/javascript">
+        //TODO: only for NWJS context (remove conditional)
+        if(typeof(process) != 'undefined') {
+            // dynamically loading all plugins from 'pluginConfigs' global var
+            window.pluginConfigs.forEach(function (plugin) {
+                var scriptSrc = "scripts/" + plugin.base + "s/" + plugin.name + "/" + plugin.name + ".js";
+                var cssSrc = "scripts/" + plugin.base + "s/" + plugin.name + "/" + plugin.ui.path + plugin.ui.style + ".css";
+                document.write('<script type="text/javascript" src=' + scriptSrc + '><\/script>');
+                document.write('<link rel="stylesheet" type="text/css" href=' + cssSrc + '>');
+            });
+        }
+    </script>
 </head>
 
 <body ng-app="app">

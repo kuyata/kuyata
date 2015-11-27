@@ -1,0 +1,13 @@
+{
+  "name": "default-exporter",
+  "base": "exporter",
+  "type": "default",
+  "text": "Default",
+  "ui": {
+    "path": "ui/",
+    "module": "exporter.default",
+    "directive": "defaultexporter",
+    "style": "default-exporter",
+    "template": "template.html"
+  }
+}

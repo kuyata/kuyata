@@ -19,7 +19,7 @@ export default function RSSImporterDirective(){
 		controllerAs: 'vm',
 		controller: RSSImporterController,
 		bindToController: true,
-		templateUrl: 'ui/importer/importers/rss-importer/rss-importer.html'
+		templateUrl: 'scripts/importers/rss-importer/ui/rss-importer.html'
 	};
 }
 

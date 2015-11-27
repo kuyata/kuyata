@@ -27,7 +27,7 @@ gulp.task('browserify', function (callback) {
 
     var browserifyThis = function (bundleConfig) {
 
-        var bundler = browserify(es6ify.runtime, {
+        var bundler = browserify(bundleConfig.runtime ? es6ify.runtime : [], {
             // Required watchify args
             cache: {}, packageCache: {}, fullPaths: true,
             // Specify the entry point of your app

@@ -1,8 +1,8 @@
 <div class="btn-group" dropdown>
     <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle> Import </button>
     <ul class="dropdown-menu" role="menu">
-        <li><a href="#" ng-click="vm.open('default')">Default</a></li>
-        <li><a href="#" ng-click="vm.open('rss/atom')">RSS / Atom</a></li>
-        <li><a href="#" ng-click="vm.open('package')">Package</a></li>
+        <li ng-repeat="importer in vm.importers">
+            <a href="#" ng-click="vm.open(importer)">{{ importer.text }}</a>
+        </li>
     </ul>
 </div>

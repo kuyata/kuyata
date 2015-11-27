@@ -29,11 +29,12 @@ export default function ExporterDirective(){
  * @ngInject
  */
 class ExporterController {
-	constructor($modal) {
+	constructor(Exporter, $modal) {
 		this.modal = $modal;
+		this.exporters = Exporter.getExporters();
 	}
 
-	open (type) {
+	open (exporter) {
 		var modalInstance = this.modal.open({
 			templateUrl: 'ui/exporter/exporter-modal.html',
 			controller: ExporterModalController,
@@ -41,8 +42,8 @@ class ExporterController {
 			bindToController: true,
 			size: "sm",
 			resolve: {
-				importType: function () {
-					return type;
+				exporter: function () {
+					return exporter;
 				}
 			}
 		});
@@ -53,14 +54,18 @@ class ExporterController {
 		//	console.log('Modal dismissed at: ' + new Date());
 		//});
 	}
-
-
 }
 
 class ExporterModalController {
-	constructor($modalInstance, importType) {
+	constructor($modalInstance, exporter) {
 		this.modalInstance = $modalInstance;
-		this.type = importType;
+		this.exporter = exporter;
+		this.templateSrc =
+			"scripts/" +
+			this.exporter.base + "s/" +
+			this.exporter.name + "/" +
+			this.exporter.ui.path +
+			this.exporter.ui.template;
 	}
 
 	cancel() {

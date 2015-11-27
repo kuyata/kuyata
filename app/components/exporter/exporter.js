@@ -6,10 +6,13 @@ import SourceManager from '../source/source-manager/source-manager.js'
 import CategoryManager from '../category/category-manager/category-manager.js'
 import ItemManager from '../item/item-manager/item-manager.js'
 
-module.exports = angular.module('app.exporter', [
+import Settings from './../../settings'
+
+export default angular.module('app.exporter', [
     SourceManager.name,
     CategoryManager.name,
-    ItemManager.name
+    ItemManager.name,
+    Settings.name
 ])
 
 .service('Exporter', Exporter);

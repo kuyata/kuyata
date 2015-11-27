@@ -4,13 +4,18 @@
  *
  * @class
  */
+
+import _ from 'lodash';
+
 export default class Exporter {
 
-    constructor($q, $rootScope, DS, SourceManager, CategoryManager, ItemManager){
+    constructor($q, $rootScope, DS, Settings, SourceManager, CategoryManager, ItemManager, $window){
         this.$q = $q;
+        this.$window = $window;
         this.SourceManager = SourceManager;
         this.CategoryManager = CategoryManager;
         this.ItemManager = ItemManager;
+        this.Settings = Settings;
         this.adapter;
         this.redableStream;
 
@@ -67,4 +72,16 @@ export default class Exporter {
         return readableStream;
     }
 
+    getExporterExt() {
+        return this.Settings.appExporterExt;
+    }
+
+    /**
+     * Get list of plugin exporters configs
+     *
+     * @returns {Array} list of exporter config objects
+     */
+    getExporters() {
+        return _.filter(this.$window.pluginConfigs, { 'base': "exporter" });
+    }
 }

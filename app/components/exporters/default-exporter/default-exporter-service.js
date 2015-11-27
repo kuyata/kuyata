@@ -5,10 +5,9 @@
 
 export default class DefaultExporter {
 
-    constructor($q, Exporter, Settings){
+    constructor($q, Exporter){
         this.$q = $q;
         this.Exporter = Exporter;
-        this.Settings = Settings;
         this.writableStream;
         this.sourceRefs;
     }
@@ -20,9 +19,9 @@ export default class DefaultExporter {
      * @returns normalized filename
      */
     normalizeExtension(filename) {
-        let ext = filename.slice(filename.length-(this.Settings.appExporterExt.length + 1), filename.length);
-        if(ext == "." + this.Settings.appExporterExt) {
-            return filename.slice(0, filename.length-(this.Settings.appExporterExt.length + 1));
+        let ext = filename.slice(filename.length-(this.Exporter.getExporterExt().length + 1), filename.length);
+        if(ext == "." + this.Exporter.getExporterExt()) {
+            return filename.slice(0, filename.length-(this.Exporter.getExporterExt().length + 1));
         }
         return filename;
     }
@@ -73,7 +72,7 @@ export default class DefaultExporter {
         let sep = '';
         let chunk;
 
-        this.writableStream = fs.createWriteStream(filename + "." + this.Settings.appExporterExt);
+        this.writableStream = fs.createWriteStream(filename + "." + this.Exporter.getExporterExt());
 
         this.writableStream.on('error', () => {
             deferred.reject();

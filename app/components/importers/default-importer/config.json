@@ -1,0 +1,13 @@
+{
+  "name": "default-importer",
+  "base": "importer",
+  "type": "default",
+  "text": "Default",
+  "ui": {
+    "path": "ui/",
+    "module": "importer.default",
+    "directive": "defaultimporter",
+    "style": "default-importer",
+    "template": "template.html"
+  }
+}

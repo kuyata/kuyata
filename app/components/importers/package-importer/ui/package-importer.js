@@ -1,7 +1,7 @@
 import angular from 'angular';
 import angularSpinner from 'angular-spinner';
 
-import PackageImporter from './../../../../components/importers/package-importer/package-importer';
+import PackageImporter from './../package-importer';
 import PackageImporterDirective from './package-importer-directive';
 
 

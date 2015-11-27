@@ -4,7 +4,7 @@ import DefaultImporter from './default-importer-service.js';
 import Importer from './../../importer/importer.js';
 import Settings from './../../../settings';
 
-module.exports = angular.module('app.importers.default', [
+export default angular.module('app.importers.default', [
     Importer.name,
     Settings.name
 ])

@@ -1,0 +1,13 @@
+{
+  "name": "rss-importer",
+  "base": "importer",
+  "type": "rss",
+  "text": "RSS / Atom",
+  "ui": {
+    "path": "ui/",
+    "module": "importer.rss",
+    "directive": "rssimporter",
+    "style": "rss-importer",
+    "template": "template.html"
+  }
+}

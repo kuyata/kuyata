@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-module.exports = angular.module('app.settings', [])
+export default angular.module('app.settings', [])
 
 	.factory('Settings', () => {
 		return {
