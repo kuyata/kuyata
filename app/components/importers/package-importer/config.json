@@ -3,6 +3,7 @@
   "base": "importer",
   "type": "package",
   "text": "Package",
+  "service": "PackageImporter",
   "ui": {
     "path": "ui/",
     "module": "importer.package",

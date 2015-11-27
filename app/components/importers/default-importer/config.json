@@ -3,6 +3,7 @@
   "base": "importer",
   "type": "default",
   "text": "Default",
+  "service": "DefaultImporter",
   "ui": {
     "path": "ui/",
     "module": "importer.default",

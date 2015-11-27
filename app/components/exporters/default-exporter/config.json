@@ -3,6 +3,7 @@
   "base": "exporter",
   "type": "default",
   "text": "Default",
+  "service": "DefaultExporter",
   "ui": {
     "path": "ui/",
     "module": "exporter.default",

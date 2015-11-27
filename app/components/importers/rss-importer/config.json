@@ -3,6 +3,7 @@
   "base": "importer",
   "type": "rss",
   "text": "RSS / Atom",
+  "service": "RSSImporter",
   "ui": {
     "path": "ui/",
     "module": "importer.rss",
