@@ -9,13 +9,10 @@ export default class RSSImporter {
         this.$q = $q;
         this.$http = $http;
         this.Importer = Importer;
+        this.$rootScope = $rootScope;
 
         $rootScope.$on("import:type:rss", (e, source) => {
-            this.import(source.url).then(() => {
-                $rootScope.$emit("import:done");
-            }).catch(() => {
-                $rootScope.$emit("import:failed");
-            });
+            this.import(source.url);
         });
     }
 
@@ -320,10 +317,12 @@ export default class RSSImporter {
             this.Importer.import(normalizedFeed.meta, normalizedFeed.content).then((response) => {
                 console.log("response!");
                 console.log(response);
+                this.$rootScope.$emit("import:done");
                 deferred.resolve(response);
             }).catch((response) => {
                 console.log("response! error");
                 console.log(response);
+                this.$rootScope.$emit("import:failed");
                 deferred.reject(response);
             });
 
