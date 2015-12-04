@@ -14,6 +14,7 @@ import DSLocalStorageAdapter from 'js-data-localstorage';
 import jsDataAngular from 'js-data-angular';
 import uiBootstrap from 'angular-bootstrap';
 
+import gettext from 'angular-gettext';
 import sources from './ui/sources/sources';
 
 import {sourcesData} from './components/common/data/sources';
@@ -28,12 +29,11 @@ import SourceManager from './components/source/source-manager/source-manager';
 import CategoryManager from './components/category/category-manager/category-manager';
 import ItemManager from './components/item/item-manager/item-manager';
 
-
 var appModules = [
     uiRouter,
     'ui.bootstrap',
+    'gettext',
     'angularSpinner',
-
     sources.name,
 
     Importer.name,
@@ -63,7 +63,7 @@ export default angular.module('app', appModules)
 
 })
 
-.run(($q, DS, Importer, Exporter, SourceManager, CategoryManager, ItemManager, $rootScope, $window, $injector) => {
+.run(($q, DS, gettextCatalog, Importer, Exporter, SourceManager, CategoryManager, ItemManager, $rootScope, $window, $injector) => {
 
     // inject service names
     window.pluginConfigs.forEach(plugin => {
