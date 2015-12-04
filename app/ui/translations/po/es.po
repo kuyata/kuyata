@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ui/importer/importer-modal.html:2
+msgid "Add"
+msgstr "Añadir"
+
+#: ui/sources/sources.html:4
+msgid "Add a new source by clicking on 'Import'"
+msgstr "Añade nuevas fuentes haciendo click en ‘Importar’"
+
+#: ui/sources/items/item-details/item-details.html:15
+msgid "Author"
+msgstr "Autor"
+
+#: ui/exporter/exporter-modal.html:8 ui/importer/importer-modal.html:8
+msgid "Close"
+msgstr "Cerrar"
+
+#: ui/exporter/exporter.html:2
+msgid "Export"
+msgstr "Exportar"
+
+#: ui/importer/importer.html:2
+msgid "Import"
+msgstr "Importar"
+
+#: components/importer/importer-service.js:352
+#: components/importer/importer-service.js:390
+msgid "Items error"
+msgstr "Error al importar items"
+
+#: ui/sources/items/items.html:28
+msgid "Next"
+msgstr "Siguente"
+
+#: ui/sources/items/items.html:27
+msgid "Prev"
+msgstr "Anterior"
+
+#: ui/sources/items/item-details/item-details.html:16
+msgid "See on Website"
+msgstr "Ver en el sitio"
+
+#: components/importer/importer-service.js:346
+msgid "Source added and updated"
+msgstr "Fuente añadida y actualizada"
+
+#: components/importer/importer-service.js:340
+msgid "Source already up to date"
+msgstr "La fuente ya está actualizada"
+
+#: components/importer/importer-service.js:349
+#: components/importer/importer-service.js:386
+msgid "Source error"
+msgstr "Error al importar la fuente"
+
+#: components/importer/importer-service.js:343
+msgid "Source updated"
+msgstr "Fuente actualizada"
+
+#: components/importer/importer-service.js:374
+msgid "Sources added and updated"
+msgstr "Fuentes añadidas y actualizadas"
+
+#: components/importer/importer-service.js:382
+msgid "Sources already up to date"
+msgstr "Las fuentes ya están actualizadas"
+
+#: components/importer/importer-service.js:378
+msgid "Sources updated"
+msgstr "Fuentes actualizadas"
+
+#: ui/sources/sources.html:5
+msgid "Update All"
+msgstr "Actualizar todo"
