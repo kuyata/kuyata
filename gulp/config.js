@@ -150,6 +150,42 @@ module.exports = {
         dest: {
             po: src + '/ui/translations/po/',
             translations: src + '/ui/translations/'
-        }
+        },
+
+        // Add here your plugin config json, if you want compile your plugin
+        plugins: [
+            {
+                src: [src + "/components/importers/default-importer/**/*.html"],
+                pofiles: src + '/components/importers/default-importer/ui/translations/po/**/*.po',
+                dest: {
+                    po: src + '/components/importers/default-importer/ui/translations/po/',
+                    translations: src + '/components/importers/default-importer/ui/translations/'
+                }
+            },
+            {
+                src: [src + "/components/importers/package-importer/**/*.html"],
+                pofiles: src + '/components/importers/package-importer/ui/translations/po/**/*.po',
+                dest: {
+                    po: src + '/components/importers/package-importer/ui/translations/po/',
+                    translations: src + '/components/importers/package-importer/ui/translations/'
+                }
+            },
+            {
+                src: [src + "/components/importers/rss-importer/**/*.html"],
+                pofiles: src + '/components/importers/rss-importer/ui/translations/po/**/*.po',
+                dest: {
+                    po: src + '/components/importers/rss-importer/ui/translations/po/',
+                    translations: src + '/components/importers/rss-importer/ui/translations/'
+                }
+            },
+            {
+                src: [src + "/components/exporters/default-exporter/**/*.html"],
+                pofiles: src + '/components/exporters/default-exporter/ui/translations/po/**/*.po',
+                dest: {
+                    po: src + '/components/exporters/default-exporter/ui/translations/po/',
+                    translations: src + '/components/exporters/default-exporter/ui/translations/'
+                }
+            }
+        ]
     }
 };
