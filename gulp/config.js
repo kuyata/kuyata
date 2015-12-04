@@ -139,5 +139,17 @@ module.exports = {
 
     serve: {
         watchDir: './www/**/*'
+    },
+
+    gettext: {
+        src: [
+            src + "/**/*.html", src + '/**/*.js',
+            '!' + src + '/components/exporters/**/*.html', '!' + src + '/components/importers/**/*.html'
+        ],
+        pofiles: src + '/ui/translations/po/**/*.po',
+        dest: {
+            po: src + '/ui/translations/po/',
+            translations: src + '/ui/translations/'
+        }
     }
 };
