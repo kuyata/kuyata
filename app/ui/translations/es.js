@@ -1,0 +1,5 @@
+angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
+/* jshint -W100 */
+    gettextCatalog.setStrings('es', {"Add":"Añadir","Add a new source by clicking on 'Import'":"Añade nuevas fuentes haciendo click en ‘Importar’","Author":"Autor","Close":"Cerrar","Export":"Exportar","Import":"Importar","Items error":"Error al importar items","Next":"Siguente","Prev":"Anterior","See on Website":"Ver en el sitio","Source added and updated":"Fuente añadida y actualizada","Source already up to date":"La fuente ya está actualizada","Source error":"Error al importar la fuente","Source updated":"Fuente actualizada","Sources added and updated":"Fuentes añadidas y actualizadas","Sources already up to date":"Las fuentes ya están actualizadas","Sources updated":"Fuentes actualizadas","Update All":"Actualizar todo"});
+/* jshint +W100 */
+}]);
