@@ -10,9 +10,10 @@ import checksum from 'json-checksum';
 
 export default class Importer {
 
-    constructor($q, SourceManager, CategoryManager, ItemManager, $window){
+    constructor($q, SourceManager, CategoryManager, ItemManager, gettextCatalog, $window){
         this.$q = $q;
         this.$window = $window;
+        this.gettextCatalog = gettextCatalog;
         this.SourceManager = SourceManager;
         this.CategoryManager = CategoryManager;
         this.ItemManager = ItemManager;
@@ -336,19 +337,19 @@ export default class Importer {
         let msg = "";
 
         if(code == 0) {
-            msg = "Source already up to date";
+            msg = this.gettextCatalog.getString("Source already up to date");
         }
         else if(code == 1) {
-            msg = "Source updated";
+            msg = this.gettextCatalog.getString("Source updated");
         }
         else if(code == 2) {
-            msg = "Source added and updated";
+            msg = this.gettextCatalog.getString("Source added and updated");
         }
         else if(code == -1) {
-            msg = "Source error";
+            msg = this.gettextCatalog.getString("Source error");
         }
         else if(code == -2) {
-            msg = "Items error";
+            msg = this.gettextCatalog.getString("Items error");
         }
 
         return msg;
@@ -369,23 +370,24 @@ export default class Importer {
         }
         else if(_.find(responseCollection, {'code': 2})){
             code = 2;
-            msg = "Sources added and updated";
+
+            msg = this.gettextCatalog.getString("Sources added and updated");
         }
         else if(_.find(responseCollection, {'code': 1})){
             code = 1;
-            msg = "Sources updated";
+            msg = this.gettextCatalog.getString("Sources updated");
         }
         else if(_.find(responseCollection, {'code': 0})){
             code = 0;
-            msg = "Sources already up to date";
+            msg = this.gettextCatalog.getString("Sources already up to date");
         }
         else if(_.find(responseCollection, {'code': -1})){
             code = -1;
-            msg = "Source error";
+            msg = this.gettextCatalog.getString("Source error");
         }
         else if(_.find(responseCollection, {'code': -2})){
             code = -2;
-            msg = "Items error";
+            msg = this.gettextCatalog.getString("Items error");
         }
 
         return {msg: msg, code: code};
