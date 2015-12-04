@@ -1,5 +1,5 @@
 <form ng-submit="vm.importRSS(url)">
-	<label>Type url and push ENTER:</label>
+	<label><span translate>Type url and push ENTER</span>:</label>
 	<input type="text" ng-model="url" name="url" ng-class="{'suc': vm.state == 1, 'err': vm.state == 2}" autofocus="autofocus" />
 	<p class="text-small">{{ vm.msg }}</p>
 </form>
