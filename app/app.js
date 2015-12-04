@@ -75,6 +75,9 @@ export default angular.module('app', appModules)
     this.$q = $q;
     let sourceShema, categoryShema, itemShema;
 
+    // default language to "en"
+    if($window.navigator.language == "es" || $window.navigator.userLanguage == "es")
+        gettextCatalog.setCurrentLanguage('es');
 
     //TODO: if app context is on NWJS environment (remove conditional)
     if (typeof(process) != 'undefined') {
