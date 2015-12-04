@@ -15,6 +15,8 @@ import jsDataAngular from 'js-data-angular';
 import uiBootstrap from 'angular-bootstrap';
 
 import gettext from 'angular-gettext';
+import es from './ui/translations/es';
+
 import sources from './ui/sources/sources';
 
 import {sourcesData} from './components/common/data/sources';
