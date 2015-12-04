@@ -12,7 +12,7 @@
 	<p class="item-details-body" ng-bind-html="vm.details.body" ng-click="vm.supportExternalLinks($event)"></p>
 
 	<p class="item-details-date">{{ vm.details.last_feed_date | date : format : timezone}}</p>
-	<p class="item-details-author">Autor: <strong>{{ vm.details.author }}</strong></p>
-	<a href ng-click="vm.openExternal(vm.details.url)" class="item-details-mail label label-warning">Ver en el sitio</a>
+	<p class="item-details-author"><span translate>Author</span>:<strong>{{ vm.details.author }}</strong></p>
+	<a href ng-click="vm.openExternal(vm.details.url)" class="item-details-mail label label-warning" translate>See on Website</a>
 
 </div>

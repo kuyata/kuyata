@@ -1,12 +1,13 @@
 <importer></importer>
 <exporter></exporter>
 
-<p class="no-sources" ng-class="{show: vm.sources.length == 0}">Add a new source by clicking on '+' button</p>
+<p class="no-sources" ng-class="{show: vm.sources.length == 0}" translate>Add a new source by clicking on 'Import'</p>
 <button type="button"
 		class="btn btn-danger btn-update"
 		ng-click="vm.updateAllSources(vm.sources)"
 		ng-disabled="vm.count > 0"
-		ng-class="{show: vm.sources.length > 0}"> Update All
+		ng-class="{show: vm.sources.length > 0}"
+		translate> Update All
 </button>
 
 <accordion close-others="true">
