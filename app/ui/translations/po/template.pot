@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: ui/importer/importer-modal.html:2
+msgid "Add"
+msgstr ""
+
+#: ui/sources/sources.html:4
+msgid "Add a new source by clicking on 'Import'"
+msgstr ""
+
+#: ui/sources/items/item-details/item-details.html:15
+msgid "Author"
+msgstr ""
+
+#: ui/exporter/exporter-modal.html:8
+#: ui/importer/importer-modal.html:8
+msgid "Close"
+msgstr ""
+
+#: ui/exporter/exporter.html:2
+msgid "Export"
+msgstr ""
+
+#: ui/importer/importer.html:2
+msgid "Import"
+msgstr ""
+
+#: components/importer/importer-service.js:352
+#: components/importer/importer-service.js:390
+msgid "Items error"
+msgstr ""
+
+#: ui/sources/items/items.html:28
+msgid "Next"
+msgstr ""
+
+#: ui/sources/items/items.html:27
+msgid "Prev"
+msgstr ""
+
+#: ui/sources/items/item-details/item-details.html:16
+msgid "See on Website"
+msgstr ""
+
+#: components/importer/importer-service.js:346
+msgid "Source added and updated"
+msgstr ""
+
+#: components/importer/importer-service.js:340
+msgid "Source already up to date"
+msgstr ""
+
+#: components/importer/importer-service.js:349
+#: components/importer/importer-service.js:386
+msgid "Source error"
+msgstr ""
+
+#: components/importer/importer-service.js:343
+msgid "Source updated"
+msgstr ""
+
+#: components/importer/importer-service.js:374
+msgid "Sources added and updated"
+msgstr ""
+
+#: components/importer/importer-service.js:382
+msgid "Sources already up to date"
+msgstr ""
+
+#: components/importer/importer-service.js:378
+msgid "Sources updated"
+msgstr ""
+
+#: ui/sources/sources.html:5
+msgid "Update All"
+msgstr ""
