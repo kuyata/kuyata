@@ -9,7 +9,8 @@ import ItemManager from '../item/item-manager/item-manager.js'
 export default angular.module('app.importer', [
     SourceManager.name,
     CategoryManager.name,
-    ItemManager.name
+    ItemManager.name,
+    'gettext'
 ])
 
 .service('Importer', Importer);

@@ -13,6 +13,9 @@ import jsData from 'js-data';
 import jsDataNg from 'js-data-angular';
 import jsDataNgMocks from 'js-data-angular-mocks';
 
+import gettext from 'angular-gettext';
+import es from './../../ui/translations/es';
+
 import utilsModule from '../utils/utils'
 import sourceModelModule from '../source/source-model/source-model';
 import sourceManagerModule from './../source/source-manager/source-manager';
@@ -24,17 +27,18 @@ import {ImporterFixtures} from './../common/data/importer_test_fixtures';
 
 
 describe("Importer", () => {
-    let rootScope, utils, Source, SourceManager, Item, ItemManager, q, Importer, DS;
+    let rootScope, utils, Source, SourceManager, Item, ItemManager, gettextCatalog, q, Importer, DS;
 
     // Use to inject the code under test
     function _inject(done) {
-        inject((_$rootScope_, _utils_, _Source_, _SourceManager_, _Item_, _ItemManager_, _$q_, _Importer_, _DS_) => {
+        inject((_$rootScope_, _utils_, _Source_, _SourceManager_, _Item_, _ItemManager_, _gettextCatalog_, _$q_, _Importer_, _DS_) => {
             rootScope = _$rootScope_;
             utils = _utils_;
             Source = _Source_;
             SourceManager = _SourceManager_;
             Item = _Item_;
             ItemManager = _ItemManager_;
+            gettextCatalog = _gettextCatalog_;
             q = _$q_;
             Importer = _Importer_;
             DS = _DS_;
