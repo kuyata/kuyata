@@ -77,11 +77,28 @@ class SourcesController {
 			this.usSpinnerService.spin('spinner-sources');
 
 			sourceList.forEach(source => {
-				this.$rootScope.$emit("import:type:" + source.type, source);
+				this.importSourceByType(source);
 			});
 		}
 		else {
 			this.usSpinnerService.stop('spinner-sources');
 		}
+	}
+
+	updateSource(source, ev) {
+		if(this.count == 0) {
+			this.count++;
+			this.importSourceByType(source);
+		}
+		ev.stopPropagation();
+	}
+
+	importSourceByType(source){
+		this.$rootScope.$emit("import:type:" + source.type, source);
+	}
+
+	deleteSource(source, ev) {
+		//deleteSource
+		ev.stopPropagation();
 	}
 }

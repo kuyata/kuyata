@@ -13,11 +13,19 @@
 <accordion close-others="true">
 	<accordion-group
 			is-open="selected"
-			heading="{{ source.name }}"
+			heading=""
 			ng-repeat="source in vm.sources"
 			ng-class="{selected: source.id==vm.SourceManager.getCurrentItemId(), 'force-collapse': vm.SourceManager.isEmpty(source.id)}"
 			ng-click="selected=true; vm.activeItem(source.id); vm.itemListBySource(source.id)">
 
+		<accordion-heading>
+			<div class="pull-right">
+				<a type="button" class="btn btn-link btn-xs fa fa-refresh" ng-disabled="vm.count > 0" ng-click="vm.updateSource(source, $event)"></a>
+				<a type="button" href class="btn btn-link btn-xs fa fa-trash" ng-disabled="vm.count > 0" ng-click="vm.deleteSource(source, $event)"></a>
+			</div>
+			{{ source.name }}
+			<div class="clearfix"></div>
+		</accordion-heading>
 		<categories source-id="{{ source.id }}"></categories>
 
 	</accordion-group>
