@@ -255,6 +255,54 @@ export default class ItemManager {
             }
         });
     }
+
+    /**
+     * Recusive method to find and delete all items for a source
+     *
+     * @param source
+     * @param pageNumber
+     * @returns {*}
+     */
+    deletePages(source, pageNumber) {
+        return this.$q((resolve) => {
+            let currentPage = pageNumber + 1;
+
+            this.fetch({source: source}, pageNumber).then((items) => {
+                //deleting items
+
+                items.forEach((item) => {
+                    this.Item.destroy(item);
+                });
+
+                //no items or last page
+                if (items.length == 0 || items.length < this.pageLength) {
+                    resolve();
+                }
+                else {
+                    this.deletePages(source, currentPage).then(() => {
+                        resolve();
+                    });
+                }
+            });
+
+        });
+    }
+
+    /**
+     * Delete all items for a source
+     *
+     * @param source
+     * @returns {*}
+     */
+    deleteItems(source) {
+        return this.$q((resolve) => {
+            let initialPage = 0;
+
+            this.deletePages(source, initialPage).then(() => {
+                resolve();
+            });
+        });
+    }
     
     /**
      * Auxiliar method to create initial sample data for categories
