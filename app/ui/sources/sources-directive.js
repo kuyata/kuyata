@@ -98,7 +98,12 @@ class SourcesController {
 	}
 
 	deleteSource(source, ev) {
-		//deleteSource
+		if(this.count == 0) {
+			this.count++;
+			this.SourceManager.deleteSource(source).then(() => {
+				this.count--;
+			});
+		}
 		ev.stopPropagation();
 	}
 }
