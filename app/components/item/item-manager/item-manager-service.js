@@ -284,7 +284,6 @@ export default class ItemManager {
                     });
                 }
             });
-
         });
     }
 

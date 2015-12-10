@@ -27,7 +27,7 @@ class RSSImporterController {
 	constructor(RSSImporter, usSpinnerService) {
 		this.RSSImporter = RSSImporter;
 		this.usSpinnerService = usSpinnerService;
-		this.state = 0;
+		this.state = 1;
 		this.msg = "";
 	}
 
