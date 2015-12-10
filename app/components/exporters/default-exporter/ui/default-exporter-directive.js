@@ -27,7 +27,7 @@ class DefaultExporterController {
 	constructor(DefaultExporter, usSpinnerService, $rootScope) {
 		this.DefaultExporter = DefaultExporter;
 		this.usSpinnerService = usSpinnerService;
-		this.state = 0;
+		this.state = 1;
 		this.msg = "";
 		this.sourceList = [];
 		this.sourceListConfirmed = [];
@@ -62,6 +62,7 @@ class DefaultExporterController {
 	}
 
 	exportDefaults() {
+		this.state = 0;
 		this.msg = "";
 		let sourceRefs = {'ids': [], 'guids': []};
 		this.usSpinnerService.spin('spinner-global');
@@ -75,9 +76,11 @@ class DefaultExporterController {
 		this.DefaultExporter.export(this.file, sourceRefs).then((response) => {
 			this.usSpinnerService.stop('spinner-global');
 			this.msg = "Exported successfully";
+			this.state = 1;
 		}).catch((err) => {
 			this.usSpinnerService.stop('spinner-global');
 			this.msg = "Error on export";
+			this.state = 2;
 		});
 	}
 }

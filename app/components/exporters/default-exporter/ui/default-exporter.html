@@ -7,7 +7,7 @@
 
 
 <button
-    class="btn btn-primary"
-    ng-class="{disabled: (vm.file == '' || vm.notConfirmedSources() )}"
-    ng-click="vm.exportDefaults()" translate>Export</button>
+        class="btn btn-primary"
+        ng-disabled="vm.file == '' || vm.state == 0 || vm.notConfirmedSources()"
+        ng-click="vm.exportDefaults()" translate>Export</button>
 <p class="text-small">{{ vm.msg }}</p>
