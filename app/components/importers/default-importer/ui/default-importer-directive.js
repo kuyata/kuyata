@@ -27,7 +27,7 @@ class DefaultImporterController {
 	constructor(DefaultImporter, usSpinnerService, $rootScope) {
 		this.DefaultImporter = DefaultImporter;
 		this.usSpinnerService = usSpinnerService;
-		this.state = 0;
+		this.state = 1;
 		this.msg = "";
 		this.sourceList = [];
 		this.sourceListConfirmed = [];

@@ -8,6 +8,7 @@
 
 <button
         class="btn btn-primary"
+        ng-disabled="vm.state == 0"
         ng-class="{disabled: (vm.file == '' || vm.notConfirmedSources() )}"
         ng-click="vm.importDefaults()" translate>Import</button>
 <p class="text-small">{{ vm.msg }}</p>
