@@ -204,6 +204,22 @@ export default class SourceManager {
     }
 
     /**
+     * Delete a source
+     *
+     * @param item
+     * @returns {a promise}
+     */
+    deleteSource(source) {
+        return this.$q((resolve) => {
+            this.Source.destroy(source).then((source) => {
+                this.ItemManager.deleteItems(source).then(() => {
+                    resolve();
+                });
+            });
+        });
+    }
+
+    /**
      * Auxiliar method to create initial sample data for sources
      * @param data is the source fixtures
      */
