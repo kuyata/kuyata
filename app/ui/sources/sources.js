@@ -7,6 +7,7 @@ import SourceManager from './../../components/source/source-manager/source-manag
 import CategoryManager from './../../components/category/category-manager/category-manager';
 import ItemManager from './../../components/item/item-manager/item-manager';
 
+import language from './../language/language';
 import importer from './../importer/importer';
 import exporter from './../exporter/exporter';
 
@@ -21,6 +22,7 @@ export default angular.module('app.sources', [
 	CategoryManager.name,
 	ItemManager.name,
 
+	language.name,
 	importer.name,
 	exporter.name
 ])
