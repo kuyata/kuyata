@@ -5,6 +5,7 @@
 
 export default class DefaultExporter {
 
+    /*@ngInject*/
     constructor($q, Exporter){
         this.$q = $q;
         this.Exporter = Exporter;

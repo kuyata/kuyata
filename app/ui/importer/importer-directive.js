@@ -29,6 +29,8 @@ export default function ImporterDirective(){
  * @ngInject
  */
 class ImporterController {
+	
+	/*@ngInject*/
 	constructor(Importer, $modal) {
 		this.modal = $modal;
 		this.importers = Importer.getImporters();
@@ -57,6 +59,8 @@ class ImporterController {
 }
 
 class ImporterModalController {
+	
+	/*@ngInject*/
 	constructor($modalInstance, importer) {
 		this.modalInstance = $modalInstance;
 		this.importer = importer;

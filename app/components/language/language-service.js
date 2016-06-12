@@ -7,6 +7,7 @@ import _ from 'lodash';
 
 export default class Language {
 
+    /*@ngInject*/
     constructor($q, Settings, gettextCatalog, $window){
         this.$q = $q;
         this.Settings = Settings;

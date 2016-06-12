@@ -26,9 +26,10 @@ export default function LanguageDirective(){
  * Language directive controller
  *
  * @constructor
- * @ngInject
  */
 class LanguageController {
+
+	/*@ngInject*/
 	constructor(Language) {
 		this.Language = Language;
 		this.languages = Language.getLanguages();

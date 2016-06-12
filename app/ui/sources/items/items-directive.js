@@ -26,6 +26,8 @@ export default function ItemsDirective(){
 }
 
 class ItemsController {
+	
+	/*@ngInject*/
 	constructor(ItemManager, $state, usSpinnerService) {
 
 		this.state = $state;

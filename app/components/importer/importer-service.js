@@ -10,6 +10,7 @@ import checksum from 'json-checksum';
 
 export default class Importer {
 
+    /*@ngInject*/
     constructor($q, SourceManager, CategoryManager, ItemManager, gettextCatalog, $window){
         this.$q = $q;
         this.$window = $window;

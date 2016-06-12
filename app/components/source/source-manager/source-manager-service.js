@@ -15,6 +15,7 @@ import jsDataAngular from 'js-data-angular';
  */
 export default class SourceManager {
 
+    /*@ngInject*/
     constructor($q, DS, Source, CategoryManager, ItemManager){
         this.$q = $q;
         this.Source = Source;

@@ -53,6 +53,7 @@ window.pluginConfigs.forEach(plugin => {
 export default angular.module('app', appModules)
 
 .config(($stateProvider, $urlRouterProvider, DSProvider) => {
+    "ngInject";
 
     $stateProvider
 
@@ -66,6 +67,7 @@ export default angular.module('app', appModules)
 })
 
 .run(($q, DS, gettextCatalog, Importer, Exporter, SourceManager, CategoryManager, ItemManager, $rootScope, $window, $injector) => {
+    "ngInject";
 
     // inject service names
     window.pluginConfigs.forEach(plugin => {

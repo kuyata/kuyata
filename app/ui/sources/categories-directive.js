@@ -28,9 +28,10 @@ export default function CategoriesDirective(){
  * Categories directive controller
  *
  * @constructor
- * @ngInject
  */
 class CategoriesController {
+
+	/*@ngInject*/
 	constructor(SourceManager, ItemManager, $state) {
 		this.state = $state;
 		this.SourceManager = SourceManager;

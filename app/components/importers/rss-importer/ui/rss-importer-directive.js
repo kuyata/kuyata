@@ -24,6 +24,8 @@ export default function RSSImporterDirective(){
 }
 
 class RSSImporterController {
+	
+	/*@ngInject*/
 	constructor(RSSImporter, usSpinnerService) {
 		this.RSSImporter = RSSImporter;
 		this.usSpinnerService = usSpinnerService;

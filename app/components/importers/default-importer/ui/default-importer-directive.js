@@ -24,6 +24,8 @@ export default function DefaultImporterDirective(){
 }
 
 class DefaultImporterController {
+	
+	/*@ngInject*/
 	constructor(DefaultImporter, usSpinnerService, $rootScope) {
 		this.DefaultImporter = DefaultImporter;
 		this.usSpinnerService = usSpinnerService;

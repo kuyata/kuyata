@@ -22,6 +22,8 @@ export default function PackageImporterDirective(){
 }
 
 class PackageImporterController {
+	
+	/*@ngInject*/
 	constructor(PackageImporter) {
 		this.PackageImporter = PackageImporter;
 	}

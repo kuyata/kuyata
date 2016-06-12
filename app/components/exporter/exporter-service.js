@@ -9,6 +9,7 @@ import _ from 'lodash';
 
 export default class Exporter {
 
+    /*@ngInject*/
     constructor($q, $rootScope, DS, Settings, SourceManager, CategoryManager, ItemManager, $window){
         this.$q = $q;
         this.$window = $window;
