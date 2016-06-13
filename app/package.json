@@ -1,11 +1,11 @@
 {
   "main": "index.html",
-  "name": "desktop-app",
-  "description": "Desktop App",
-  "version": "0.0.1",
-  "keywords": [ "desktop-app", "node-webkit" ],
+  "name": "kuyata",
+  "description": "kuyata reader",
+  "version": "0.8.5",
+  "keywords": [ "kuyata", "node-webkit" ],
   "window": {
-    "title": "Desktop App",
+    "title": "kuyata",
     "icon": "link.png",
     "toolbar": false,
     "frame": true,
