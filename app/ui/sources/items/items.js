@@ -13,10 +13,10 @@ export default angular.module('app.sources.items', [
 	'sticky',
 
 	itemDetails.name,
-	ItemManager.name,
+	ItemManager.name
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(['$stateProvider', ($stateProvider) => {
 
 	$stateProvider
 
@@ -52,6 +52,6 @@ export default angular.module('app.sources.items', [
 				}
 			}
 		})
-})
+}])
 
 .directive('items', ItemsDirective);

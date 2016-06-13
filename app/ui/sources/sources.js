@@ -27,7 +27,7 @@ export default angular.module('app.sources', [
 	exporter.name
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(['$stateProvider', ($stateProvider) => {
 
 	$stateProvider
 
@@ -39,7 +39,7 @@ export default angular.module('app.sources', [
 				}
 			}
 		})
-})
+}])
 
 .directive('sources', SourcesDirective)
 .directive('categories', CategoriesDirective);
