@@ -11,7 +11,7 @@ export default angular.module('app.sources.items.details', [
 	ItemManager.name
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(['$stateProvider', ($stateProvider) => {
 
 	$stateProvider
 
@@ -47,6 +47,6 @@ export default angular.module('app.sources.items.details', [
 				}
 			}
 		})
-})
+}])
 
 .directive("itemdetails", ItemDetailsDirective);

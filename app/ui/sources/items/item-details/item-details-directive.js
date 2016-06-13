@@ -25,6 +25,8 @@ export default function ItemDetailsDirective(){
 
 
 class ItemDetailsController {
+	
+	/*@ngInject*/
 	constructor(ItemManager, $state) {
 
 		this.state = $state;

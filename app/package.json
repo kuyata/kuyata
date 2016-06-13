@@ -7,15 +7,13 @@
   "window": {
     "title": "Desktop App",
     "icon": "link.png",
-    "toolbar": true,
+    "toolbar": false,
     "frame": true,
-    "width": 800,
-    "height": 500,
+    "width": 1024,
+    "height": 768,
     "position": "mouse",
     "min_width": 400,
-    "min_height": 200,
-    "max_width": 800,
-    "max_height": 600
+    "min_height": 200
   },
   "webkit": {
     "plugin": true

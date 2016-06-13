@@ -5,6 +5,7 @@ import Stream from 'stream';
 
 export default class RSSImporter {
 
+    /*@ngInject*/
     constructor($q, $http, Importer, $rootScope){
         this.$q = $q;
         this.$http = $http;

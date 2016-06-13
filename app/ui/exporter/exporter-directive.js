@@ -26,9 +26,10 @@ export default function ExporterDirective(){
  * Exporter directive controller
  *
  * @constructor
- * @ngInject
  */
 class ExporterController {
+	
+	/*@ngInject*/
 	constructor(Exporter, $modal) {
 		this.modal = $modal;
 		this.exporters = Exporter.getExporters();
@@ -57,6 +58,8 @@ class ExporterController {
 }
 
 class ExporterModalController {
+	
+	/*@ngInject*/
 	constructor($modalInstance, exporter) {
 		this.modalInstance = $modalInstance;
 		this.exporter = exporter;

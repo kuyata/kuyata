@@ -14,7 +14,8 @@ import jsDataAngular from 'js-data-angular';
  * @class
  */
 export default class CategoryManager {
-
+    
+    /*@ngInject*/
     constructor($q, DS, Category){
         this.$q = $q;
         this.Category = Category;

@@ -15,6 +15,7 @@ import jsDataAngular from 'js-data-angular';
  */
 export default class ItemManager {
 
+    /*@ngInject*/
     constructor($q, DS, Item){
         this.$q = $q;
         this.Item = Item;

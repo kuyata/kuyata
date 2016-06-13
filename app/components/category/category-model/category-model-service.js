@@ -43,7 +43,7 @@ export default function factory($q, DS, utils){
  *
  */
 class Category {
-
+    
     constructor() {
     }
 

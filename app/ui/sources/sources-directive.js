@@ -26,9 +26,10 @@ export default function SourcesDirective(){
  * Sources directive controller
  *
  * @constructor
- * @ngInject
  */
 class SourcesController {
+	
+	/*@ngInject*/
 	constructor($q, SourceManager, ItemManager, $state, $rootScope, usSpinnerService) {
 		this.$q = $q;
 		this.state = $state;

@@ -2,6 +2,7 @@ import oboe from "oboe";
 
 export default class DefaultImporter {
 
+    /*@ngInject*/
     constructor($q, Importer, Settings, $rootScope){
         this.$q = $q;
         this.Importer = Importer;
