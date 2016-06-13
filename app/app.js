@@ -52,8 +52,8 @@ window.pluginConfigs.forEach(plugin => {
 
 export default angular.module('app', appModules)
 
-.config(($stateProvider, $urlRouterProvider, DSProvider) => {
-    "ngInject";
+.config(['$stateProvider', '$urlRouterProvider', 'DSProvider',
+        ($stateProvider, $urlRouterProvider, DSProvider) => {
 
     $stateProvider
 
@@ -64,10 +64,10 @@ export default angular.module('app', appModules)
     $urlRouterProvider.otherwise("/");
     DSProvider.defaults.debug = true;
 
-})
+}])
 
-.run(($q, DS, gettextCatalog, Importer, Exporter, SourceManager, CategoryManager, ItemManager, $rootScope, $window, $injector) => {
-    "ngInject";
+.run(['$q', 'DS', 'gettextCatalog', 'Importer', 'Exporter', 'SourceManager', 'CategoryManager', 'ItemManager', '$rootScope', '$window', '$injector',
+    ($q, DS, gettextCatalog, Importer, Exporter, SourceManager, CategoryManager, ItemManager, $rootScope, $window, $injector) => {
 
     // inject service names
     window.pluginConfigs.forEach(plugin => {
@@ -221,4 +221,4 @@ export default angular.module('app', appModules)
             //});
         });
     });
-});
+}]);
