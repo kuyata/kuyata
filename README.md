@@ -1,5 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/kuyata/kuyata.png?label=ready&title=Ready)](https://waffle.io/kuyata/kuyata)
-#Desktop App
+#Kuyata
 
 ###Development environment setup
 
