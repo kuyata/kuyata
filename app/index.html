@@ -13,6 +13,15 @@
             var gui = require('nw.gui');
             var fs = require('fs');
 
+            // Enable copy/paste/cut on mac
+            if (process.platform === "darwin") {
+                var mb = new gui.Menu({type: 'menubar'});
+                mb.createMacBuiltin('kuyata', {
+                    hideEdit: false,
+                });
+                gui.Window.get().menu = mb;
+            }
+
             // dynamically create 'pluginConfigs' global var
             window.pluginConfigs = [];
             fs.readdirSync("./scripts/importers/").forEach(function(imp) {
